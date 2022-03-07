@@ -1,0 +1,35 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Part 1
+    </h3>
+<br><br>
+    <p>
+        Before the experiment started everyone drew an envelope which contained either a Yellow or a Blue slip.
+        You have been assigned to the Blue group if you received a Blue slip, and the Yellow group if you received a Yellow slip.
+        There are 3 people in each group.
+        Your group assignment will remain the same throughout the experiment.
+        That is, if you drew a Blue slip, you will be in the Blue group for the rest of the experiment, and if you drew a Yellow slip, you will be in the Yellow group for the rest of the experiment.
+        In Part 1 everyone will be shown 5 pairs of paintings by two artists.
+        You will have 5 minutes to study these paintings on your own.
+        Then everyone will be asked to answer questions about two other paintings.
+        Correct answers are rewarded with 1 additional token that adds to your group account.
+        The group who collects more tokens will win a monetary reward of XX€.
+        The other group will receive no monetary reward.
+        Whether your group achieved more or less points than the other group will be disclosed at the end of this study.
+        </p>
+    <p>
+        <strong>When you are ready, please press “next” to start with the first part.</strong>
+    </p>
+   </div>
+</div>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{% endblock %}

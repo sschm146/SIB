@@ -1,0 +1,31 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Part 1
+    </h3>
+<br><br>
+    <p>
+       On this page you see another pair of paintings.
+        Please state your guess on who made each of the painting - Paul Klee or Wassily Kandinsky.
+        Note that the paintings might be drawn by the same or by two different artists.
+        Correct answers are rewarded with 1 additional token that adds to your group account and increase your chances to win the prize.
+        The group who achieved most tokens will win a monetary reward of XX€.
+        Ties will be split at random.
+        </p>
+    <p>
+        <strong>[2 Paintings here]</strong>
+        <strong>[Timer with 2 minutes here]</strong>
+
+    </p>
+   </div>
+</div>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{% endblock %}

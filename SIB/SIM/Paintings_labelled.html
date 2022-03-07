@@ -1,0 +1,28 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Part 1
+    </h3>
+<br><br>
+    <p>
+        On this page you see 5 paintings labeled with the respective artist’s name - Paul Klee or Wassily Kandinsky.
+        You have 5 minutes to study all the paintings.
+        Please remember that communication is not allowed.
+        </p>
+    <p>
+        <strong>[5 Paintings here]</strong>
+        <strong>[Timer with 5 minutes here]</strong>
+
+    </p>
+   </div>
+</div>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Payout Page
+    </h3>
+<br><br>
+    <p>
+        Thank you! Your Payoff:
+    </p>
+    </div>
+</div>
+{% endblock %}

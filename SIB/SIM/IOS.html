@@ -1,0 +1,31 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Part 1
+    </h3>
+<br><br>
+    <p>
+        In the following figure we ask you to consider which of these pairs of circles best describes your relationship with your group (referred to as X).
+        In the figure "X" serves as a placeholder for your group, that is, you should think of "X" being the Yellow/Blue Group.
+        By selecting the appropriate number please indicate to what extent you and {X} are connected.
+
+        </p>
+    <p>
+        <p>
+        <img src="{{ static 'IOS.png' }}" style="height: 100%; width:100%"/>
+</p>
+        <strong>[ordinal formfield with scale 1-7]</strong>
+
+    </p>
+   </div>
+</div>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{% endblock %}
