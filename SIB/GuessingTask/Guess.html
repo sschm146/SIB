@@ -1,0 +1,19 @@
+{% load otree %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+You are the {{ player.role }}.
+
+Received signals: {{ received_signals_s }}.
+
+
+{{ formfields }}
+
+
+    {% next_button %}
+
+{% endblock %}
