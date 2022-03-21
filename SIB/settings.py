@@ -15,12 +15,10 @@ SESSION_CONFIGS = [
 
 
 
-PARTICIPANT_FIELDS = ['treatment']
 
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=4.00, doc=""
 )
-
 
 
 SESSION_CONFIGS = [
@@ -28,25 +26,17 @@ SESSION_CONFIGS = [
         name="control",
         display_name="SIB_control",
         num_demo_participants=5,
-        app_sequence=['Intro_all',
-            'SIM',
-            "GuessingTask",
-            'Payout'
-        ],
+        app_sequence=["Intro_all", "SIM", "GuessingTask", "Payout"],
     ),
     dict(
         name="SI",
         display_name="SIB_SI",
         num_demo_participants=5,
-        app_sequence=["Intro_all",
-                      "SIM",
-                      "GuessingTask_treatment",
-                      "Payout"
-        ],
+        app_sequence=["Intro_all", "SIM", "GuessingTask_treatment", "Payout"],
     ),
 ]
 
-PARTICIPANT_FIELDS = []
+PARTICIPANT_FIELDS = ["treatment"]
 SESSION_FIELDS = []
 
 # ISO-639 code
