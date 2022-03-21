@@ -22,7 +22,22 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-   pass
+    treatment = models.StringField()
+
+
+
+#FUNCTIONS
+def creating_session(subsession: Subsession):
+    import itertools
+    if subsession.round_number == 1:
+        treat = itertools.cycle(["Blue", "Yellow"])
+        for player in subsession.get_players():
+            #player.treatment = next(treat)
+            participant = player.participant
+            participant.treatment = next(treat)
+            player.treatment = participant.treatment
+            print(participant.treatment)
+
 
 
 # PAGES

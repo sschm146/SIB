@@ -12,26 +12,37 @@ SESSION_CONFIGS = [
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
+
+
+
+PARTICIPANT_FIELDS = ['treatment']
+
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=4.00, doc=""
 )
+
+
 
 SESSION_CONFIGS = [
     dict(
         name="control",
         display_name="SIB_control",
         num_demo_participants=5,
-        app_sequence=[  #'Intro_all',
-            #'SIM',
+        app_sequence=['Intro_all',
+            'SIM',
             "GuessingTask",
-            #'Payout'
+            'Payout'
         ],
     ),
     dict(
         name="SI",
         display_name="SIB_SI",
-        num_demo_participants=10,
-        app_sequence=["Intro_all", "SIM", "GuessingTask", "Payout"],
+        num_demo_participants=5,
+        app_sequence=["Intro_all",
+                      "SIM",
+                      "GuessingTask_treatment",
+                      "Payout"
+        ],
     ),
 ]
 
