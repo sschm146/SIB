@@ -1,0 +1,23 @@
+{% load otree %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+You are the {{ player.Role }}. Your group is {{player.treatment}}.
+
+Received signals from Yellow group: {{ yellow }}.
+
+Received signals from Blue group: {{ blue }}.
+
+
+
+
+{{ formfields }}
+
+
+    {% next_button %}
+
+{% endblock %}

@@ -11,7 +11,7 @@ GuessingTask
 
 
 class Constants(BaseConstants):
-    name_in_url = "GuessingTask"
+    name_in_url = "GuessingTask_SI"
     num_rounds = 2
     players_per_group = None
 
@@ -81,10 +81,12 @@ class Guess(Page):
     def vars_for_template(player: Player):
         group = player.group
         players = group.get_players()
-        all_signals =  ", ".join(str(p.signal_s) for p in players if p.Role == 'sender')
+        yellow = ", ".join(str(p.signal_s) for p in players if p.Role=='sender' and p.treatment=='Yellow')
+        blue = ", ".join(str(p.signal_s) for p in players if p.Role=='sender' and p.treatment=='Blue')
         if player.Role == "receiver":
             return dict(
-                all_signals = all_signals,
+                yellow=yellow,
+                blue=blue,
             )
 
     form_model = "group"
