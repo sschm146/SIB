@@ -34,16 +34,18 @@ class Player(BasePlayer):
     )
 
 
-
-
 # PAGES
 class Instructions(Page):
     pass
+
+
 class Paintings_labelled(Page):
     form_model = 'player'
+
 
 class Paintings_guess(Page):
     form_model = 'player'
     form_fields = ['choice1', 'choice2']
+
 
 page_sequence = [Instructions, Paintings_labelled, Paintings_guess]

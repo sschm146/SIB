@@ -1,19 +1,10 @@
 from os import environ
 
-SESSION_CONFIGS = [
-    # dict(
-    #     name='public_goods',
-    #     app_sequence=['public_goods'],
-    #     num_demo_participants=3,
-    # ),
-]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
-
-
 
 
 SESSION_CONFIG_DEFAULTS = dict(
@@ -25,18 +16,18 @@ SESSION_CONFIGS = [
     dict(
         name="control",
         display_name="SIB_control",
-        num_demo_participants=5,
-        app_sequence=["Intro_all", "SIM", "GuessingTask", "Payout"],
+        num_demo_participants=10,
+        app_sequence=["Intro_noSI_all", "SIM", "GuessingTask_noSI", "Payout"],
     ),
     dict(
         name="SI",
         display_name="SIB_SI",
-        num_demo_participants=5,
-        app_sequence=["Intro_all", "SIM", "GuessingTask_treatment", "Payout"],
+        num_demo_participants=10,
+        app_sequence=["Intro_SI_all", "SIM", "GuessingTask_SI", "Payout"],
     ),
 ]
 
-PARTICIPANT_FIELDS = ["treatment"]
+PARTICIPANT_FIELDS = ["identity"]
 SESSION_FIELDS = []
 
 # ISO-639 code

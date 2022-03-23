@@ -1,19 +1,18 @@
 from otree.api import *
-import yaml
 import random
-import pandas as pd
 
 c = Currency
 
 doc = """
-GuessingTask
+GuessingTask_noSI
 """
 
 
 class Constants(BaseConstants):
-    name_in_url = "GuessingTask"
+    name_in_url = "GuessingTask_noSI"
     num_rounds = 2
     players_per_group = None
+    num_senders = 6
 
 
 class Subsession(BaseSubsession):
@@ -21,14 +20,14 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    posterior_belief = models.IntegerField()  # the posterior belief of the receiver
+    pass
 
 
 class Player(BasePlayer):
+    Role = models.StringField()
     signal_s = models.IntegerField()  # signal observed by the sender
     signal_mu = models.IntegerField()  # the simulated "true" signal observed by senders
-    Role = models.StringField()
-    treatment = models.StringField() #the treatment group from the previous apps
+    posterior_belief = models.IntegerField()  # the posterior belief of the receiver
 
 
 # FUNCTIONS
@@ -37,21 +36,25 @@ class Player(BasePlayer):
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
     for p in players:
-        if p.id_in_group in [1, 2, 3, 4]:
+        if p.id_in_group in list(range(1, Constants.num_senders + 1)):
             p.Role = 'sender'
             p.signal_mu = random.randint(1, 10)
         else:
             p.Role = 'receiver'
 
-        participant = p.participant
-        p.treatment = participant.treatment
-
-
 
 
 # PAGES
-class Instructions(Page):
-    pass
+class Instructions_sender(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.Role == "sender"
+
+
+class Instructions_receiver(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.Role == "receiver"
 
 
 # senders see signal_mu and send signal_s
@@ -71,7 +74,7 @@ class Signals(Page):
 
 
 # wait for all senders to send a signal
-class MyWaitPage(WaitPage):
+class WaitPage(WaitPage):
     pass
 
 
@@ -81,13 +84,20 @@ class Guess(Page):
     def vars_for_template(player: Player):
         group = player.group
         players = group.get_players()
-        all_signals =  ", ".join(str(p.signal_s) for p in players if p.Role == 'sender')
+        signals = [p.signal_s for p in players if p.Role =='sender']
+        #yellow = ", ".join(str(p.signal_s) for p in players if p.Role=='sender' and p.identity=='Yellow')
+        #blue = ", ".join(str(p.signal_s) for p in players if p.Role=='sender' and p.identity=='Blue')
         if player.Role == "receiver":
             return dict(
-                all_signals = all_signals,
+                signal_1=signals[0],
+                signal_2=signals[1],
+                signal_3=signals[2],
+                signal_4=signals[3],
+                signal_5=signals[4],
+                signal_6=signals[5],
             )
 
-    form_model = "group"
+    form_model = "player"
     form_fields = ["posterior_belief"]
 
     @staticmethod
@@ -95,4 +105,4 @@ class Guess(Page):
         return player.Role == "receiver"
 
 
-page_sequence = [Instructions, Signals, MyWaitPage, Guess]
+page_sequence = [Instructions_sender, Instructions_receiver, WaitPage, Signals, WaitPage, Guess, WaitPage]
