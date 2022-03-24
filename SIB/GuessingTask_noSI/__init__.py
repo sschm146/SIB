@@ -48,13 +48,13 @@ def creating_session(subsession: Subsession):
 class Instructions_sender(Page):
     @staticmethod
     def is_displayed(player):
-        return player.Role == "sender"
+        return player.Role == "sender" and player.round == 1
 
 
 class Instructions_receiver(Page):
     @staticmethod
     def is_displayed(player):
-        return player.Role == "receiver"
+        return player.Role == "receiver" and player.round == 1
 
 
 # senders see signal_mu and send signal_s
@@ -74,7 +74,7 @@ class Signals(Page):
 
 
 # wait for all senders to send a signal
-class WaitPage(WaitPage):
+class MyWaitPage(WaitPage):
     pass
 
 
@@ -105,4 +105,4 @@ class Guess(Page):
         return player.Role == "receiver"
 
 
-page_sequence = [Instructions_sender, Instructions_receiver, WaitPage, Signals, WaitPage, Guess, WaitPage]
+page_sequence = [Instructions_sender, Instructions_receiver, MyWaitPage, Signals, MyWaitPage, Guess, MyWaitPage]

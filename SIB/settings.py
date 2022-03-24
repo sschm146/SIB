@@ -17,17 +17,17 @@ SESSION_CONFIGS = [
         name="control",
         display_name="SIB_control",
         num_demo_participants=10,
-        app_sequence=["Intro_noSI_all", "SIM", "GuessingTask_noSI", "Payout"],
+        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI", "Payout"],
     ),
     dict(
         name="SI",
         display_name="SIB_SI",
         num_demo_participants=10,
-        app_sequence=["Intro_SI_all", "SIM", "GuessingTask_SI", "Payout"],
+        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI", "Payout"],
     ),
 ]
 
-PARTICIPANT_FIELDS = ["identity"]
+PARTICIPANT_FIELDS = ['identity']
 SESSION_FIELDS = []
 
 # ISO-639 code
