@@ -1,3 +1,5 @@
+import random
+
 from otree.api import *
 
 c = Currency
@@ -27,7 +29,20 @@ class Player(BasePlayer):
 
 # PAGES
 class Payout(Page):
-    pass
+    @staticmethod
+    def vars_for_template(player: Player):
+        part_fee = player.session.config['participation_fee']
+        participant = player.participant
+        SIM_payoff = participant.SIM_payoff
+        GuessingTask_payoff = participant.GuessingTask_payoff
+        participant.payoff = participant.SIM_payoff + participant.GuessingTask_payoff
+        total_payoff = participant.payoff_plus_participation_fee()
+        return dict(
+            part_fee=part_fee,
+            SIM_payoff=SIM_payoff,
+            GuessingTask_payoff=GuessingTask_payoff,
+            total_payoff=total_payoff,
+        )
 
 
 

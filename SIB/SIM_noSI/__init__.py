@@ -61,14 +61,25 @@ def artist_winner(subsession: Subsession):
     for p in players:
         others = [g.artist_points for g in players if g != p]
         if p.artist_points > max(others):
-            p.payoff += Constants.artist_payoff
+            p.payoff = Constants.artist_payoff
+            participant = p.participant
+            participant.SIM_payoff = p.payoff
+        if p.artist_points < max(others):
+            p.payoff = 0
+            participant = p.participant
+            participant.SIM_payoff = p.payoff
         if p.artist_points == max(others):
             winner_list.append(p.id_in_group)
     if winner_list:
         winner = random.choice(winner_list)
         for p in players:
+            participant = p.participant
             if p.id_in_group == winner:
-                p.payoff += Constants.artist_payoff
+                p.payoff = Constants.artist_payoff
+                participant.SIM_payoff = p.payoff
+            else:
+                p.payoff = 0
+                participant.SIM_payoff = p.payoff
 
 
 class Paintings_labelled(Page):

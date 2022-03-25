@@ -70,14 +70,24 @@ def artist_winner(subsession: Subsession):
             correct_blue += p.artist_points
     for p in players:
         if correct_yellow > correct_blue and p.identity == "Yellow":
-            p.payoff += Constants.artist_payoff
+            p.payoff = Constants.artist_payoff
+            participant = p.participant
+            participant.SIM_payoff = p.payoff
         if correct_yellow < correct_blue and p.identity == "Blue":
-            p.payoff += Constants.artist_payoff
+            p.payoff = Constants.artist_payoff
+            participant = p.participant
+            participant.SIM_payoff = p.payoff
     if correct_yellow == correct_blue:
         winner = random.choice(["Yellow", "Blue"])
         for p in players:
+            participant = p.participant
             if p.identity == winner:
-                p.payoff += Constants.artist_payoff
+                p.payoff = Constants.artist_payoff
+                participant.SIM_payoff = p.payoff
+            else:
+                p.payoff = 0
+                participant.SIM_payoff = p.payoff
+
 
 
 class Paintings_labelled(Page):

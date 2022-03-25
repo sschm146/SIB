@@ -2,16 +2,38 @@
 {{block styles }}
     <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
 {{ endblock }}
-{{ block content }}
-<div class="card bg-light instructions">
-    <div class="card-body">
-    <h3>
-        Payout Page
-    </h3>
-<br><br>
-    <p>
-        Thank you! Your Payoff:
-    </p>
-    </div>
-</div>
+{% block title %}
+    Auszahlungsseite
 {% endblock %}
+
+{% block content %}
+
+
+ <div class="card bg-light instructions">
+    <div class="card-body">
+ <h5>Vielen Dank für die Teilnahme an der heutigen Studie.
+     Unten finden Sie die Berechnung Ihrer finalen Auszahlung.
+     Bitte bleiben Sie noch einen Moment sitzen.
+     Wenn Ihre Platznummer aufgerufen wird, gehen Sie bitte zum Ausgang.
+     Dort erhalten Sie Ihre Auszahlung.</h5>
+     <br><hr>
+        <br>
+        <h5>Ihre Auszahlung beträgt: <b>{{ total_payoff }}</b>.</h5>
+     <br><br>
+
+    <p>Darin enthalten sind {{ part_fee }} als Aufwandsentschädigung für Ihr heutiges Erscheinen und weitere Auszahlungen,
+        die abhängig von Ihren Entscheidungen in den einzelnen Teilen dieser Studie sind.</p>
+
+        <p> <u>Ergebnis des Wettbewerbs aus Teil 1.):</u>
+            {{ if SIM_payoff > 0 }}
+            Sie haben den Wettbewerb aus Teil 1.) <u>gewonnen</u>. Dadurch haben Sie zudem den Preis von 3€ gewonnen. Dieser wurde Ihrer Auszahlung gutgeschrieben
+            {{ endif }}
+            {{ if SIM_payoff == 0 }}
+            Sie haben den Wettbewerb aus Teil 1.) <u>nicht gewonnen</u>.
+            {{ endif }}
+        </p>
+ </div>
+ </div>
+
+
+{{ endblock }}
