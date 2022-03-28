@@ -1,0 +1,52 @@
+{% load otree %}
+
+{% block title %}
+Guessing Task
+{% endblock %}
+
+{% block content %}
+
+You are a {{ player.Role }} and a member of the {{player.identity}} Group.
+Below you see the received signal provided by the experimenter.
+Please read through the signal and report your guess.
+
+
+<br>
+<br>
+<br>
+
+
+
+    <div class="row" align="center">
+  <div class="col">
+<div class="card" style="width: 18rem">
+  <div class="card-header" style="font-weight: bold">
+    Signal
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ estimate }}</li>
+  </ul>
+</div>
+      </div>
+    </div>
+
+
+
+
+<br>
+<br>
+
+
+
+
+<div align="center">
+    What is your Guess on X? Please answer below and confirm with "Next":
+    <br>
+    {{ formfield 'prior' label=""}}
+</div>
+
+<div align="center">
+    {{ next_button }}
+</div>
+
+{% endblock %}
