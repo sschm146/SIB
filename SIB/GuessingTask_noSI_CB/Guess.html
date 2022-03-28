@@ -1,0 +1,100 @@
+{% load otree %}
+
+{% block title %}
+Guessing Task
+{% endblock %}
+
+{% block content %}
+
+You are a {{ player.Role }}.
+Below you see all received signals.
+Please read through all signals and report your guess.
+
+
+
+<br>
+<br>
+<br>
+
+
+<div class="row row-cols-1 row-cols-md-6 g-2" align="center">
+  <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header" style="font-weight: bold">
+    Sender A
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ signal_1 }}</li>
+  </ul>
+</div>
+    </div>
+
+    <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header" style="font-weight: bold">
+    Sender B
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ signal_2 }}</li>
+  </ul>
+</div>
+    </div>
+
+    <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header" style="font-weight: bold">
+    Sender C
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ signal_3 }}</li>
+  </ul>
+</div>
+    </div>
+
+    <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header" style="font-weight: bold">
+    Sender D
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ signal_4 }}</li>
+  </ul>
+</div>
+    </div>
+        <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header" style="font-weight: bold">
+    Sender E
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ signal_5 }}</li>
+  </ul>
+</div>
+    </div>
+        <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header" style="font-weight: bold">
+    Sender F
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ signal_6 }}</li>
+  </ul>
+</div>
+    </div>
+</div>
+
+<br>
+<br>
+
+
+<div align="center">
+    What is your Guess on X? Please answer below and confirm with "Next":
+    <br>
+    {{ formfield 'posterior' label=""}}
+</div>
+
+<div align="center">
+    {{ next_button }}
+</div>
+
+{% endblock %}

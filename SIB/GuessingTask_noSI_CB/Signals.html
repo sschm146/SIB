@@ -1,0 +1,35 @@
+{% load otree %}
+
+{% block title %}
+Part 2
+{% endblock %}
+
+{% block content %}
+
+You are a {{ player.Role }}.
+Below you find an estimate of a randomly drawn estimation device.
+<br>
+<br>
+<div class="row" align="center">
+  <div class="col">
+<div class="card" style="width: 18rem   ">
+  <div class="card-header" style="font-weight: bold">
+    Estimate
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ estimate }}</li>
+  </ul>
+</div>
+    </div>
+</div>
+<br>
+<br>
+<div align="center">
+    Please submit your guess below and confirm with "Next":
+{{ formfield 'sent_signal' label=""}}
+
+</div>
+<div align="center">
+    {% next_button %}
+</div>
+{% endblock %}
