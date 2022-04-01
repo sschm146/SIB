@@ -1,0 +1,397 @@
+{% load otree %}
+
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+<style type="text/css">
+td, th {
+  text-align: center;
+}
+</style>
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Part 4 - Second additional Task
+    </h3>
+<br>
+<br>
+      For each time you have stated a sender has not reported the number equal to what his/her assigned estimation device has stated, please do the following:
+      1) choose the the exact estimation task by indicating its number from the dropdown menu, and 2) type in which number you believe the estimation device has actually stated to the sender.
+      To see which estimation task corresponds to which number and to remind yourself what the senders have stated across the 10 estimation tasks, you can find a table at the bottom.
+      Note that the tasks are ordered in the same way as you have faced them in Part 3.
+
+      {{ if trust_sender_1 < 10}}
+      <br>
+      <br>
+       <div class="card">
+        <h5 class="card-header bg-primary" align="center">
+            <b>Sender A</b>
+        </h5>
+           <div class="card-body">
+        <br>
+      <p class="card-text">You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_1}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Round</th>
+          <th scope="col">Actual Statement of estimation device</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_1 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select required id=\"sender_1_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_1_correction_", i, "_inround\" id=\"sender_1_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_1_correction_", i, "_actually\" id=\"sender_1_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+
+            function update() {
+                for(var i = 1; i < js_vars.mistrust_sender_1 + 1 ; i++) {
+                    for(var j = 1; i < 6 + 1 ; i++) {
+                    document.getElementById(["sender_", j, "_correction_", i, "_inround"].join('')).value = document.getElementById(["sender_", j , "_correction_", i, "_inround_select"].join('')).value
+            }}}
+
+          </script>
+          </table>
+       </div>
+           </div>
+
+      {{ endif }}
+
+
+      {{ if trust_sender_2 < 10}}
+      <br>
+      <br>
+             <div class="card">
+        <h5 class="card-header bg-warning" align="center">
+            <b>Sender B</b>
+        </h5>
+           <div class="card-body">
+        <br>
+      <p class="card-text">You have stated that sender B has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_2}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Round</th>
+          <th scope="col">Actual Statement of estimation device</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_2 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select required id=\"sender_2_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_2_correction_", i, "_inround\" id=\"sender_2_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_2_correction_", i, "_actually\" id=\"sender_2_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+          </script>
+          </table>
+           </div></div>
+      {{ endif }}
+
+
+      {{ if trust_sender_3 < 10}}
+      <br>
+      <br>
+             <div class="card">
+        <h5 class="card-header bg-primary" align="center">
+            <b>Sender C</b>
+        </h5>
+           <div class="card-body">
+        <br>
+      <p class="card-text">
+      You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_3}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Round</th>
+          <th scope="col">Actual Statement of estimation device</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_3 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select required id=\"sender_3_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_3_correction_", i, "_inround\" id=\"sender_3_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_3_correction_", i, "_actually\" id=\"sender_3_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+          </script>
+          </table>
+           </div></div>
+      {{ endif }}
+
+
+      {{ if trust_sender_4 < 10}}
+      <br>
+      <br>
+             <div class="card">
+        <h5 class="card-header bg-warning" align="center">
+            <b>Sender D</b>
+        </h5>
+           <div class="card-body">
+        <br>
+      <p class="card-text">
+      You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_4}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Round</th>
+          <th scope="col">Actual Statement of estimation device</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_4 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select required id=\"sender_4_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_4_correction_", i, "_inround\" id=\"sender_4_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_4_correction_", i, "_actually\" id=\"sender_4_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+          </script>
+          </table>
+           </div></div>
+      {{ endif }}
+
+
+      {{ if trust_sender_5 < 10}}
+      <br>
+      <br>
+             <div class="card">
+        <h5 class="card-header bg-primary" align="center">
+            <b>Sender E</b>
+        </h5>
+           <div class="card-body">
+        <br>
+      <p class="card-text">
+      You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_5}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Round</th>
+          <th scope="col">Actual Statement of estimation device</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_5 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select required id=\"sender_5_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_5_correction_", i, "_inround\" id=\"sender_5_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_5_correction_", i, "_actually\" id=\"sender_5_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+          </script>
+          </table>
+           </div>
+             </div>
+      {{ endif }}
+
+      {{ if trust_sender_6 < 10}}
+      <br>
+      <br>
+             <div class="card">
+        <h5 class="card-header bg-warning" align="center">
+            <b>Sender A</b>
+        </h5>
+           <div class="card-body">
+        <br>
+      <p class="card-text">
+      You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_6}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Round</th>
+          <th scope="col">Actual Statement of estimation device</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_6 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select required id=\"sender_6_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_6_correction_", i, "_inround\" id=\"sender_6_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_6_correction_", i, "_actually\" id=\"sender_6_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+          </script>
+          </table>
+           </div></div>
+      {{ endif }}
+
+      <br>
+      <br>
+      <hr>
+<table class="table table-hover table-striped ">
+  <thead>
+    <tr>
+      <th scope="col">Round</th>
+      <th scope="col">Sender A</th>
+      <th scope="col">Sender B</th>
+      <th scope="col">Sender C</th>
+      <th scope="col">Sender D</th>
+      <th scope="col">Sender E</th>
+      <th scope="col">Sender F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td> {{round_1_sender_1}} </td>
+      <td> {{round_1_sender_2}} </td>
+      <td> {{round_1_sender_3}} </td>
+      <td> {{round_1_sender_4}} </td>
+      <td> {{round_1_sender_5}} </td>
+      <td> {{round_1_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">2</th>
+      <td> {{round_2_sender_1}} </td>
+      <td> {{round_2_sender_2}} </td>
+      <td> {{round_2_sender_3}} </td>
+      <td> {{round_2_sender_4}} </td>
+      <td> {{round_2_sender_5}} </td>
+      <td> {{round_2_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">3</th>
+      <td> {{round_3_sender_1}} </td>
+      <td> {{round_3_sender_2}} </td>
+      <td> {{round_3_sender_3}} </td>
+      <td> {{round_3_sender_4}} </td>
+      <td> {{round_3_sender_5}} </td>
+      <td> {{round_3_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">4</th>
+      <td> {{round_4_sender_1}} </td>
+      <td> {{round_4_sender_2}} </td>
+      <td> {{round_4_sender_3}} </td>
+      <td> {{round_4_sender_4}} </td>
+      <td> {{round_4_sender_5}} </td>
+      <td> {{round_4_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">5</th>
+      <td> {{round_5_sender_1}} </td>
+      <td> {{round_5_sender_2}} </td>
+      <td> {{round_5_sender_3}} </td>
+      <td> {{round_5_sender_4}} </td>
+      <td> {{round_5_sender_5}} </td>
+      <td> {{round_5_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">6</th>
+      <td> {{round_6_sender_1}} </td>
+      <td> {{round_6_sender_2}} </td>
+      <td> {{round_6_sender_3}} </td>
+      <td> {{round_6_sender_4}} </td>
+      <td> {{round_6_sender_5}} </td>
+      <td> {{round_6_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">7</th>
+      <td> {{round_7_sender_1}} </td>
+      <td> {{round_7_sender_2}} </td>
+      <td> {{round_7_sender_3}} </td>
+      <td> {{round_7_sender_4}} </td>
+      <td> {{round_7_sender_5}} </td>
+      <td> {{round_7_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">8</th>
+      <td> {{round_8_sender_1}} </td>
+      <td> {{round_8_sender_2}} </td>
+      <td> {{round_8_sender_3}} </td>
+      <td> {{round_8_sender_4}} </td>
+      <td> {{round_8_sender_5}} </td>
+      <td> {{round_8_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">9</th>
+      <td> {{round_9_sender_1}} </td>
+      <td> {{round_9_sender_2}} </td>
+      <td> {{round_9_sender_3}} </td>
+      <td> {{round_9_sender_4}} </td>
+      <td> {{round_9_sender_5}} </td>
+      <td> {{round_9_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">10</th>
+      <td> {{round_10_sender_1}} </td>
+      <td> {{round_10_sender_2}} </td>
+      <td> {{round_10_sender_3}} </td>
+      <td> {{round_10_sender_4}} </td>
+      <td> {{round_10_sender_5}} </td>
+      <td> {{round_10_sender_6}} </td>
+    </tr>
+  </tbody>
+</table>
+      <br>
+      <br>
+When you have answered all the questions, please press “Next”.
+
+    <br>
+      <br>
+<div align="center">
+    {{ next_button }}
+</div>
+          </div>
+</div>
+
+
+{% endblock %}

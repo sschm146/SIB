@@ -1,0 +1,209 @@
+{% load otree %}
+
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Part 4
+    </h3>
+<br>
+<br>
+
+        Please state for each sender, how many times out of the 10 estimation tasks has the sender stated the same number as the estimation device that was randomly assigned to him/her.
+        In case you want to remind yourself of what the senders were stating across the 10 estimation tasks, you can look at the table at the bottom of the screen.
+
+      <br>
+      <br>
+
+<div class="row row-cols-1 row-cols-md-6 g-2" align="center">
+  <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header  bg-primary" style="font-weight: bold">
+    Sender A
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ formfield 'trust_sender_1' label=''}}</li>
+  </ul>
+</div>
+    </div>
+
+    <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header  bg-warning" style="font-weight: bold">
+    Sender B
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ formfield 'trust_sender_2' label=''}}</li>
+  </ul>
+</div>
+    </div>
+
+    <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header bg-primary" style="font-weight: bold">
+    Sender C
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ formfield 'trust_sender_3' label=''}}</li>
+  </ul>
+</div>
+    </div>
+
+    <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header bg-warning" style="font-weight: bold">
+    Sender D
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ formfield 'trust_sender_4' label=''}}</li>
+  </ul>
+</div>
+    </div>
+        <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header bg-primary" style="font-weight: bold">
+    Sender E
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ formfield 'trust_sender_5' label=''}}</li>
+  </ul>
+</div>
+    </div>
+        <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header bg-warning" style="font-weight: bold">
+    Sender F
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ formfield 'trust_sender_6' label=''}}</li>
+  </ul>
+</div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<hr>
+
+
+<table class="table table-hover table-striped ">
+  <thead>
+    <tr>
+      <th scope="col">Round</th>
+      <th scope="col">Sender A</th>
+      <th scope="col">Sender B</th>
+      <th scope="col">Sender C</th>
+      <th scope="col">Sender D</th>
+      <th scope="col">Sender E</th>
+      <th scope="col">Sender F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td> {{round_1_sender_1}} </td>
+      <td> {{round_1_sender_2}} </td>
+      <td> {{round_1_sender_3}} </td>
+      <td> {{round_1_sender_4}} </td>
+      <td> {{round_1_sender_5}} </td>
+      <td> {{round_1_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">2</th>
+      <td> {{round_2_sender_1}} </td>
+      <td> {{round_2_sender_2}} </td>
+      <td> {{round_2_sender_3}} </td>
+      <td> {{round_2_sender_4}} </td>
+      <td> {{round_2_sender_5}} </td>
+      <td> {{round_2_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">3</th>
+      <td> {{round_3_sender_1}} </td>
+      <td> {{round_3_sender_2}} </td>
+      <td> {{round_3_sender_3}} </td>
+      <td> {{round_3_sender_4}} </td>
+      <td> {{round_3_sender_5}} </td>
+      <td> {{round_3_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">4</th>
+      <td> {{round_4_sender_1}} </td>
+      <td> {{round_4_sender_2}} </td>
+      <td> {{round_4_sender_3}} </td>
+      <td> {{round_4_sender_4}} </td>
+      <td> {{round_4_sender_5}} </td>
+      <td> {{round_4_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">5</th>
+      <td> {{round_5_sender_1}} </td>
+      <td> {{round_5_sender_2}} </td>
+      <td> {{round_5_sender_3}} </td>
+      <td> {{round_5_sender_4}} </td>
+      <td> {{round_5_sender_5}} </td>
+      <td> {{round_5_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">6</th>
+      <td> {{round_6_sender_1}} </td>
+      <td> {{round_6_sender_2}} </td>
+      <td> {{round_6_sender_3}} </td>
+      <td> {{round_6_sender_4}} </td>
+      <td> {{round_6_sender_5}} </td>
+      <td> {{round_6_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">7</th>
+      <td> {{round_7_sender_1}} </td>
+      <td> {{round_7_sender_2}} </td>
+      <td> {{round_7_sender_3}} </td>
+      <td> {{round_7_sender_4}} </td>
+      <td> {{round_7_sender_5}} </td>
+      <td> {{round_7_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">8</th>
+      <td> {{round_8_sender_1}} </td>
+      <td> {{round_8_sender_2}} </td>
+      <td> {{round_8_sender_3}} </td>
+      <td> {{round_8_sender_4}} </td>
+      <td> {{round_8_sender_5}} </td>
+      <td> {{round_8_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">9</th>
+      <td> {{round_9_sender_1}} </td>
+      <td> {{round_9_sender_2}} </td>
+      <td> {{round_9_sender_3}} </td>
+      <td> {{round_9_sender_4}} </td>
+      <td> {{round_9_sender_5}} </td>
+      <td> {{round_9_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">10</th>
+      <td> {{round_10_sender_1}} </td>
+      <td> {{round_10_sender_2}} </td>
+      <td> {{round_10_sender_3}} </td>
+      <td> {{round_10_sender_4}} </td>
+      <td> {{round_10_sender_5}} </td>
+      <td> {{round_10_sender_6}} </td>
+    </tr>
+  </tbody>
+</table>
+
+      <br>
+      <br>
+When you have finished with the task, please press “Next”.
+    <br>
+      <br>
+<div align="center">
+    {% next_button %}
+</div>
+          </div>
+</div>
+{% endblock %}
