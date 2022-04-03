@@ -234,7 +234,7 @@ class Signals(Page):
 class Prior(Page):
     @staticmethod
     def is_displayed(player):
-        return player.Role == "receiver" and player.round_number == 1
+        return player.Role == "receiver" and player.round_number > Constants.num_rounds/2
 
     def vars_for_template(player: Player):
         estimate = player.estimate

@@ -224,7 +224,7 @@ class Prior(Page):
 
     @staticmethod
     def is_displayed(player):
-        return player.Role == "receiver" and player.round_number == 1
+        return player.Role == "receiver" and player.round_number > Constants.num_rounds/2
 
     def vars_for_template(player: Player):
         estimate = player.estimate
@@ -716,5 +716,5 @@ def payout_calc(subsession: Subsession):
             participant = p.participant
             participant.GuessingTask_payoff = prev_player.payoff
 
-page_sequence = [FirstWaitPage,Prior, Signals, Guess, SecondWaitPage,
+page_sequence = [FirstWaitPage, Signals, Prior, Guess, SecondWaitPage,
                  Instructions_Trust_in_Senders, Trust_in_Senders, Confidence_1_all10, Confidence_1_notall10, Confidence_2, Confidence_3, Confidence_4, ThirdWaitPage, Payout_calc]
