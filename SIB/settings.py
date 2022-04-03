@@ -37,6 +37,18 @@ SESSION_CONFIGS = [
         num_demo_participants=10,
         app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_CB", "Payout"],
     ),
+    dict(
+        name="SI_selection",
+        display_name="SIB_SI_SB",
+        num_demo_participants=10,
+        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_noSI_SB", "Payout"],
+    ),
+    dict(
+        name="control_selection",
+        display_name="SIB_control_SB",
+        num_demo_participants=10,
+        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_SB", "Payout"],
+    ),
 ]
 
 PARTICIPANT_FIELDS = ["identity", "SIM_payoff", "GuessingTask_payoff"]

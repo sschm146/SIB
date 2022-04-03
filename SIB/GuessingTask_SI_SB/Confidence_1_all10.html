@@ -1,0 +1,26 @@
+{% load otree %}
+
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Part 4
+    </h3>
+        <br>
+        <br>
+
+        Before proceeding with part 5, we will present you with one additional task.
+        The task is connected to the previous task which you have just answered.
+        You will receive a fixed additional sum of (M+C) euros for the additional task, in case Part 4 is chosen for payment.
+        This means that, if part 4 is chosen for payment, the earnings of (M+C) euros from the additional task will be added to any earnings you might have made on the previous task (task in which you indicated the number of times senders have stated exactly what their assigned estimation device has stated).
+
+   </div>
+</div>
+<div align="center">
+    {{ next_button }}
+</div>
+
+{% endblock %}
