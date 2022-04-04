@@ -1,0 +1,55 @@
+{{ load otree}}
+
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+
+{{ block title }}
+    Verständnisfragen
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+<br>
+    <div class="alert alert-primary" role="alert">
+ <strong> Before proceeding with the task, we would ask you to please answer the following control questions.
+     In case you have any questions, please raise your hand and an experimenter will come to you.</strong>
+</div>
+<p style="font-weight: bold">
+    1.) Please indicate which statement is true.</p>
+{{ formfield 'comprq1' }}
+<br><hr>
+        <p style="font-weight: bold">
+    2.) Please indicate which statement is true.</p>
+{{ formfield 'comprq2' }}
+<br><hr>
+        <p style="font-weight: bold">
+    3.) For each estimation task, what information will you observe to help you make an estimate of the number x?</p>
+{{ formfield 'comprq3' }}
+<br><hr>
+        <p style="font-weight: bold">
+    4.) Let’s assume that in one estimation task, number x is 541. Which of the following statements can be true?</p>
+{{ formfield 'comprq4' }}
+<br><hr>
+        <p style="font-weight: bold">
+    5.) Let’s say that in one estimation task, the estimation device you observe states an estimate of 19.
+        Given this information, which number should you state to maximize your chances of earning the additional payment of Z euros?</p>
+{{ formfield 'comprq5' }}
+<br><hr>
+<p style="font-weight: bold">
+    6.) The experiment consists of altogether 4 parts.
+    You can earn additional payment in part 1 and part 2.
+    The 10 estimation tasks are part 2 of the experiment.
+    Please indicate which statement concerning the payment procedure is correct.</p>
+{{ formfield 'comprq6' }}
+<br><hr>
+    </div>
+    </div>
+
+
+<div align="center">
+    {{ next_button }}
+</div>
+
+{{ endblock }}

@@ -1,0 +1,63 @@
+{% load otree %}
+
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block title }}
+    Verständnisfragen
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+<br>
+    <div class="alert alert-primary" role="alert">
+ <strong> Before proceeding with the task, we would ask you to please answer the following control questions.
+     In case you have any questions, please raise your hand and an experimenter will come to you.</strong>
+</div>
+<p style="font-weight: bold">
+    1.) For each estimation task, what information did the senders observe to help them make an estimate of the number x?</p>
+{{ formfield 'comprq7' }}
+<br><hr>
+        <p style="font-weight: bold">
+    2.) For each estimation task, what information will you observe to help you make an estimate of the number x?</p>
+{{ formfield 'comprq8' }}
+<br><hr>
+        <p style="font-weight: bold">
+    3.) Please indicate which statement is true concerning the estimates of the estimation devices.</p>
+{{ formfield 'comprq9' }}
+<br><hr>
+        <p style="font-weight: bold">
+    4.) Please indicate which statement is true concerning the estimates of the estimation devices.</p>
+{{ formfield 'comprq10' }}
+<br><hr>
+        <p style="font-weight: bold">
+    5.) Let’s assume that in one estimation task, number x is 541. Which of the following statements can be true?</p>
+{{ formfield 'comprq11' }}
+<br><hr>
+<p style="font-weight: bold">
+    6.) Let’s say that in one estimation task, the estimation device a sender observed stated an estimate of 19.
+    Given this information, which number should the sender have stated to maximize his/her chances of earning the additional payment?</p>
+{{ formfield 'comprq12' }}
+<br><hr>
+        <p style="font-weight: bold">
+    6.) Let’s say that in one estimation task, number x is 1520.
+            You are not aware what number x is, but you come to a correct conclusion and form an opinion that number x is 1520.
+            Which number should you state as your estimate of x in order to maximize your chances of earning the additional payment?</p>
+{{ formfield 'comprq13' }}
+<br><hr>
+        <p style="font-weight: bold">
+    6.) The experiment consists of altogether 5 parts.
+            You can earn additional payment in part 1, part 3, and part 4.
+            The 10 estimation tasks are part 3 of the experiment.
+            Please indicate which statement concerning the payment procedure is correct.</p>
+{{ formfield 'comprq14' }}
+<br><hr>
+
+    </div>
+</div>
+<div align="center">
+    {{ next_button }}
+</div>
+
+{% endblock %}

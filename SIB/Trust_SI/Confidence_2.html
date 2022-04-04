@@ -117,7 +117,7 @@ input[type=range]:focus::-ms-fill-upper {
 <div class="row row-cols-1 row-cols-md-6 g-2" align="center">
   <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
+  <div class="card-header bg-primary" style="font-weight: bold">
     Sender A
   </div>
   <ul class="list-group list-group-flush">
@@ -128,7 +128,7 @@ input[type=range]:focus::-ms-fill-upper {
 
     <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
+  <div class="card-header bg-warning" style="font-weight: bold">
     Sender B
   </div>
   <ul class="list-group list-group-flush">
@@ -139,7 +139,7 @@ input[type=range]:focus::-ms-fill-upper {
 
     <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
+  <div class="card-header bg-primary" style="font-weight: bold">
     Sender C
   </div>
   <ul class="list-group list-group-flush">
@@ -150,7 +150,7 @@ input[type=range]:focus::-ms-fill-upper {
 
     <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
+  <div class="card-header bg-warning" style="font-weight: bold">
     Sender D
   </div>
   <ul class="list-group list-group-flush">
@@ -160,7 +160,7 @@ input[type=range]:focus::-ms-fill-upper {
     </div>
         <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
+  <div class="card-header bg-primary" style="font-weight: bold">
     Sender E
   </div>
   <ul class="list-group list-group-flush">
@@ -170,7 +170,7 @@ input[type=range]:focus::-ms-fill-upper {
     </div>
         <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
+  <div class="card-header bg-warning" style="font-weight: bold">
     Sender F
   </div>
   <ul class="list-group list-group-flush">
@@ -267,94 +267,40 @@ input[type=range]:focus::-ms-fill-upper {
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td> {{round_1_sender_1}} </td>
-      <td> {{round_1_sender_2}} </td>
-      <td> {{round_1_sender_3}} </td>
-      <td> {{round_1_sender_4}} </td>
-      <td> {{round_1_sender_5}} </td>
-      <td> {{round_1_sender_6}} </td>
-    </tr>
+    {{ for p in signals_round_1 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
       <tr>
       <th scope="row">2</th>
-      <td> {{round_2_sender_1}} </td>
-      <td> {{round_2_sender_2}} </td>
-      <td> {{round_2_sender_3}} </td>
-      <td> {{round_2_sender_4}} </td>
-      <td> {{round_2_sender_5}} </td>
-      <td> {{round_2_sender_6}} </td>
-    </tr>
-      <tr>
+    {{ for p in signals_round_2 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
       <th scope="row">3</th>
-      <td> {{round_3_sender_1}} </td>
-      <td> {{round_3_sender_2}} </td>
-      <td> {{round_3_sender_3}} </td>
-      <td> {{round_3_sender_4}} </td>
-      <td> {{round_3_sender_5}} </td>
-      <td> {{round_3_sender_6}} </td>
-    </tr>
-      <tr>
+    {{ for p in signals_round_3 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
       <th scope="row">4</th>
-      <td> {{round_4_sender_1}} </td>
-      <td> {{round_4_sender_2}} </td>
-      <td> {{round_4_sender_3}} </td>
-      <td> {{round_4_sender_4}} </td>
-      <td> {{round_4_sender_5}} </td>
-      <td> {{round_4_sender_6}} </td>
-    </tr>
-      <tr>
+    {{ for p in signals_round_4 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
       <th scope="row">5</th>
-      <td> {{round_5_sender_1}} </td>
-      <td> {{round_5_sender_2}} </td>
-      <td> {{round_5_sender_3}} </td>
-      <td> {{round_5_sender_4}} </td>
-      <td> {{round_5_sender_5}} </td>
-      <td> {{round_5_sender_6}} </td>
-    </tr>
-      <tr>
+    {{ for p in signals_round_5 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
       <th scope="row">6</th>
-      <td> {{round_6_sender_1}} </td>
-      <td> {{round_6_sender_2}} </td>
-      <td> {{round_6_sender_3}} </td>
-      <td> {{round_6_sender_4}} </td>
-      <td> {{round_6_sender_5}} </td>
-      <td> {{round_6_sender_6}} </td>
-    </tr>
-      <tr>
-      <th scope="row">7</th>
-      <td> {{round_7_sender_1}} </td>
-      <td> {{round_7_sender_2}} </td>
-      <td> {{round_7_sender_3}} </td>
-      <td> {{round_7_sender_4}} </td>
-      <td> {{round_7_sender_5}} </td>
-      <td> {{round_7_sender_6}} </td>
-    </tr>
-      <tr>
-      <th scope="row">8</th>
-      <td> {{round_8_sender_1}} </td>
-      <td> {{round_8_sender_2}} </td>
-      <td> {{round_8_sender_3}} </td>
-      <td> {{round_8_sender_4}} </td>
-      <td> {{round_8_sender_5}} </td>
-      <td> {{round_8_sender_6}} </td>
-    </tr>
-      <tr>
-      <th scope="row">9</th>
-      <td> {{round_9_sender_1}} </td>
-      <td> {{round_9_sender_2}} </td>
-      <td> {{round_9_sender_3}} </td>
-      <td> {{round_9_sender_4}} </td>
-      <td> {{round_9_sender_5}} </td>
-      <td> {{round_9_sender_6}} </td>
-    </tr>
-      <tr>
-      <th scope="row">10</th>
-      <td> {{round_10_sender_1}} </td>
-      <td> {{round_10_sender_2}} </td>
-      <td> {{round_10_sender_3}} </td>
-      <td> {{round_10_sender_4}} </td>
-      <td> {{round_10_sender_5}} </td>
-      <td> {{round_10_sender_6}} </td>
-    </tr>
+    {{ for p in signals_round_6 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
   </tbody>
 </table>
       <br>
