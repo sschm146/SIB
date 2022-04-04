@@ -1,0 +1,48 @@
+{% load otree %}
+
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Part 4
+    </h3>
+
+In this part, your task is to state your opinion regarding how often, out of the 10 estimation tasks, did the senders state the same number as their assigned estimation devices.
+You will be paid according to the precision of your estimates as described below.
+<br>
+        <br>
+<h4>
+    Task
+</h4>
+        Your task is to guess how often, out of the 10 estimation tasks, did a sender state the exact number which was stated by an estimation device that was randomly assigned to him/her.
+        You should make this guess for each of the 6 senders separately.
+        To remind you, in part 3, the senders had to estimate the number x for each of the 10 estimation tasks you had faced.
+        They were paid according to the precision of their estimate. For each estimation task, one estimation device was randomly drawn for each sender, and the sender observed the estimate of only that one device.
+        The senders were aware that the estimate of a randomly drawn estimation device was more likely to be the correct number x than any other number, and the further away one went from number x, the less likely it was that an estimation device stated such a number.
+        They were made explicitly aware that to maximize their chances of correctly guessing x, they should have reported exactly the number the estimation device has stated in each task.
+        In case you will want to remind yourself what the senders were reporting, you will also be able to look at the stated estimates of the 6 senders across the 10 estimation tasks, when stating your belief.
+        <br>
+        <br>
+<h4>
+    Payment
+</h4>
+        If this part of the study (part 3) is chosen for payment, then 1 out of the 6 senders will be randomly chosen, and you will be paid according to the precision of your guess for that particular sender.
+        Since any of the guesses for the 6 senders can determine your payment, you should take each guess seriously.
+        The following rule will be used to determine your payment: You will receive a bonus of C Euros if you guess the exact number of times the sender has stated the same number as the estimation device assigned to him/her.
+        If your guess is wrong, you will receive 0 euros.
+        Thus, you should guess the correct number to earn the additional payment.
+        Any other number will bring you no payment.
+        If you have any questions, please raise your hand and an experimenter will come to you.
+        If you are ready to proceed, please press “next”.
+<br>
+        <br>
+   </div>
+</div>
+<div align="center">
+    {{ next_button }}
+</div>
+
+{% endblock %}
