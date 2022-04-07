@@ -24,14 +24,9 @@ td, th {
       {{ if trust_sender_1 < 10}}
       <br>
       <br>
-       <div class="card">
-        <h5 class="card-header bg-primary" align="center">
-            <b>Sender A</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_1}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+      <h4> Sender A </h4>
+      You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_1}} times.
+      Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -40,7 +35,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_1 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender1\" id=\"sender_1_correction_", i, "_inround_select\" onchange=\"dis_option1(this); update()\">" +
+              document.write(["<td><select required id=\"sender_1_correction_", i, "_inround_select\" onchange=\"update()\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -56,49 +51,23 @@ td, th {
               document.write(["<td><input required name=\"sender_1_correction_", i, "_actually\" id=\"sender_1_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
 
-            $('body').on('propertychange input', 'input', function() {
-            var inputVal = $(this).val();
-            if( isNaN(Number(inputVal)) ) {
-                  this.value = this.hasOwnProperty("oldValue") ? this.oldValue : '';
-            } else {
-                  this.oldValue = inputVal;
-            }
-            });
-
             function update() {
                 for(var i = 1; i < js_vars.mistrust_sender_1 + 1 ; i++) {
                     for(var j = 1; i < 6 + 1 ; i++) {
                     document.getElementById(["sender_", j, "_correction_", i, "_inround"].join('')).value = document.getElementById(["sender_", j , "_correction_", i, "_inround_select"].join('')).value
             }}}
-            function dis_option1(selectElement) {
-                var arraySelects = document.getElementsByClassName('Sender1');
-                console.log(arraySelects)
-                var selectedOption = selectElement.selectedIndex;
-                for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === selectElement)
-                      continue;
-                    arraySelects[m].options[selectedOption].disabled = true;
-                  }
-                }
+
           </script>
           </table>
-       </div>
-           </div>
-
       {{ endif }}
 
 
       {{ if trust_sender_2 < 10}}
       <br>
       <br>
-             <div class="card">
-        <h5 class="card-header bg-warning" align="center">
-            <b>Sender B</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">You have stated that sender B has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_2}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+      <h4> Sender B </h4>
+      You have stated that sender B has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_2}} times.
+      Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -107,7 +76,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_2 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select class=\"Sender2\" required id=\"sender_2_correction_", i, "_inround_select\" onchange=\"dis_option2(this); update()\">" +
+              document.write(["<td><select required id=\"sender_2_correction_", i, "_inround_select\" onchange=\"update()\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -122,35 +91,17 @@ td, th {
               document.write(["<input required name=\"sender_2_correction_", i, "_inround\" id=\"sender_2_correction_", i,"_inround\" type=\"hidden\">"].join(''));
               document.write(["<td><input required name=\"sender_2_correction_", i, "_actually\" id=\"sender_2_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
-
-            function dis_option2(selectElement) {
-                var arraySelects = document.getElementsByClassName('Sender2');
-                var selectedOption = selectElement.selectedIndex;
-                for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === selectElement)
-                      continue;
-                    arraySelects[m].options[selectedOption].disabled = true;
-                  }
-                }
-
           </script>
           </table>
-           </div></div>
       {{ endif }}
 
 
       {{ if trust_sender_3 < 10}}
       <br>
       <br>
-             <div class="card">
-        <h5 class="card-header bg-primary" align="center">
-            <b>Sender C</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">
+      <h4> Sender C </h4>
       You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_3}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+      Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -159,7 +110,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_3 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender3\" id=\"sender_3_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required id=\"sender_3_correction_", i, "_inround_select\" onchange=\"update()\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -174,35 +125,17 @@ td, th {
               document.write(["<input required name=\"sender_3_correction_", i, "_inround\" id=\"sender_3_correction_", i,"_inround\" type=\"hidden\">"].join(''));
               document.write(["<td><input required name=\"sender_3_correction_", i, "_actually\" id=\"sender_3_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
-
-            function dis_option3(selectElement) {
-                var arraySelects = document.getElementsByClassName('Sender3');
-                var selectedOption = selectElement.selectedIndex;
-                for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === selectElement)
-                      continue;
-                    arraySelects[m].options[selectedOption].disabled = true;
-                  }
-                }
-
           </script>
           </table>
-           </div></div>
       {{ endif }}
 
 
       {{ if trust_sender_4 < 10}}
       <br>
       <br>
-             <div class="card">
-        <h5 class="card-header bg-warning" align="center">
-            <b>Sender D</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">
+      <h4> Sender D </h4>
       You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_4}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+      Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -211,7 +144,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_4 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender4\" id=\"sender_4_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required id=\"sender_4_correction_", i, "_inround_select\" onchange=\"update()\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -226,35 +159,17 @@ td, th {
               document.write(["<input required name=\"sender_4_correction_", i, "_inround\" id=\"sender_4_correction_", i,"_inround\" type=\"hidden\">"].join(''));
               document.write(["<td><input required name=\"sender_4_correction_", i, "_actually\" id=\"sender_4_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
-
-            function dis_option4(selectElement) {
-                var arraySelects = document.getElementsByClassName('Sender4');
-                var selectedOption = selectElement.selectedIndex;
-                for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === selectElement)
-                      continue;
-                    arraySelects[m].options[selectedOption].disabled = true;
-                  }
-                }
-
           </script>
           </table>
-           </div></div>
       {{ endif }}
 
 
       {{ if trust_sender_5 < 10}}
       <br>
       <br>
-             <div class="card">
-        <h5 class="card-header bg-primary" align="center">
-            <b>Sender E</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">
+      <h4> Sender E </h4>
       You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_5}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+      Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -263,7 +178,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_5 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender5\" id=\"sender_5_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required id=\"sender_5_correction_", i, "_inround_select\" onchange=\"update()\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -278,35 +193,16 @@ td, th {
               document.write(["<input required name=\"sender_5_correction_", i, "_inround\" id=\"sender_5_correction_", i,"_inround\" type=\"hidden\">"].join(''));
               document.write(["<td><input required name=\"sender_5_correction_", i, "_actually\" id=\"sender_5_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
-            function dis_option5(selectElement) {
-                var arraySelects = document.getElementsByClassName('Sender5');
-                var selectedOption = selectElement.selectedIndex;
-                for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === selectElement)
-                      continue;
-                    arraySelects[m].options[selectedOption].disabled = true;
-                  }
-                }
-
-
           </script>
           </table>
-           </div>
-             </div>
       {{ endif }}
 
       {{ if trust_sender_6 < 10}}
       <br>
       <br>
-             <div class="card">
-        <h5 class="card-header bg-warning" align="center">
-            <b>Sender A</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">
+      <h4> Sender F </h4>
       You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_6}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+      Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -315,7 +211,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_6 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender6\" id=\"sender_6_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required id=\"sender_6_correction_", i, "_inround_select\" onchange=\"update()\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -330,20 +226,8 @@ td, th {
               document.write(["<input required name=\"sender_6_correction_", i, "_inround\" id=\"sender_6_correction_", i,"_inround\" type=\"hidden\">"].join(''));
               document.write(["<td><input required name=\"sender_6_correction_", i, "_actually\" id=\"sender_6_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
-
-            function dis_option6(selectElement) {
-                var arraySelects = document.getElementsByClassName('Sender6');
-                var selectedOption = selectElement.selectedIndex;
-                for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === selectElement)
-                      continue;
-                    arraySelects[m].options[selectedOption].disabled = true;
-                  }
-                }
-
           </script>
           </table>
-           </div></div>
       {{ endif }}
 
       <br>
@@ -364,40 +248,94 @@ td, th {
   <tbody>
     <tr>
       <th scope="row">1</th>
-    {{ for p in signals_round_1 }}
-              <td> {{ p  }}</td>
-            {{ endfor }}
-          </tr>
+      <td> {{round_1_sender_1}} </td>
+      <td> {{round_1_sender_2}} </td>
+      <td> {{round_1_sender_3}} </td>
+      <td> {{round_1_sender_4}} </td>
+      <td> {{round_1_sender_5}} </td>
+      <td> {{round_1_sender_6}} </td>
+    </tr>
       <tr>
       <th scope="row">2</th>
-    {{ for p in signals_round_2 }}
-              <td> {{ p  }}</td>
-            {{ endfor }}
-          </tr>
-        <tr>
+      <td> {{round_2_sender_1}} </td>
+      <td> {{round_2_sender_2}} </td>
+      <td> {{round_2_sender_3}} </td>
+      <td> {{round_2_sender_4}} </td>
+      <td> {{round_2_sender_5}} </td>
+      <td> {{round_2_sender_6}} </td>
+    </tr>
+      <tr>
       <th scope="row">3</th>
-    {{ for p in signals_round_3 }}
-              <td> {{ p  }}</td>
-            {{ endfor }}
-          </tr>
-        <tr>
+      <td> {{round_3_sender_1}} </td>
+      <td> {{round_3_sender_2}} </td>
+      <td> {{round_3_sender_3}} </td>
+      <td> {{round_3_sender_4}} </td>
+      <td> {{round_3_sender_5}} </td>
+      <td> {{round_3_sender_6}} </td>
+    </tr>
+      <tr>
       <th scope="row">4</th>
-    {{ for p in signals_round_4 }}
-              <td> {{ p  }}</td>
-            {{ endfor }}
-          </tr>
-        <tr>
+      <td> {{round_4_sender_1}} </td>
+      <td> {{round_4_sender_2}} </td>
+      <td> {{round_4_sender_3}} </td>
+      <td> {{round_4_sender_4}} </td>
+      <td> {{round_4_sender_5}} </td>
+      <td> {{round_4_sender_6}} </td>
+    </tr>
+      <tr>
       <th scope="row">5</th>
-    {{ for p in signals_round_5 }}
-              <td> {{ p  }}</td>
-            {{ endfor }}
-          </tr>
-        <tr>
+      <td> {{round_5_sender_1}} </td>
+      <td> {{round_5_sender_2}} </td>
+      <td> {{round_5_sender_3}} </td>
+      <td> {{round_5_sender_4}} </td>
+      <td> {{round_5_sender_5}} </td>
+      <td> {{round_5_sender_6}} </td>
+    </tr>
+      <tr>
       <th scope="row">6</th>
-    {{ for p in signals_round_6 }}
-              <td> {{ p  }}</td>
-            {{ endfor }}
-          </tr>
+      <td> {{round_6_sender_1}} </td>
+      <td> {{round_6_sender_2}} </td>
+      <td> {{round_6_sender_3}} </td>
+      <td> {{round_6_sender_4}} </td>
+      <td> {{round_6_sender_5}} </td>
+      <td> {{round_6_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">7</th>
+      <td> {{round_7_sender_1}} </td>
+      <td> {{round_7_sender_2}} </td>
+      <td> {{round_7_sender_3}} </td>
+      <td> {{round_7_sender_4}} </td>
+      <td> {{round_7_sender_5}} </td>
+      <td> {{round_7_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">8</th>
+      <td> {{round_8_sender_1}} </td>
+      <td> {{round_8_sender_2}} </td>
+      <td> {{round_8_sender_3}} </td>
+      <td> {{round_8_sender_4}} </td>
+      <td> {{round_8_sender_5}} </td>
+      <td> {{round_8_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">9</th>
+      <td> {{round_9_sender_1}} </td>
+      <td> {{round_9_sender_2}} </td>
+      <td> {{round_9_sender_3}} </td>
+      <td> {{round_9_sender_4}} </td>
+      <td> {{round_9_sender_5}} </td>
+      <td> {{round_9_sender_6}} </td>
+    </tr>
+      <tr>
+      <th scope="row">10</th>
+      <td> {{round_10_sender_1}} </td>
+      <td> {{round_10_sender_2}} </td>
+      <td> {{round_10_sender_3}} </td>
+      <td> {{round_10_sender_4}} </td>
+      <td> {{round_10_sender_5}} </td>
+      <td> {{round_10_sender_6}} </td>
+    </tr>
   </tbody>
 </table>
       <br>
@@ -411,5 +349,6 @@ When you have answered all the questions, please press “Next”.
 </div>
           </div>
 </div>
+
 
 {% endblock %}

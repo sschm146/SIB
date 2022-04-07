@@ -57,9 +57,9 @@ def artist_winner(subsession: Subsession):
         participant = p.participant
         p.identity = participant.identity
     for p in players:
-        if p.artist1 == "Kandinsky":
+        if p.artist1 == "Klee":
             p.artist_points += 1
-        if p.artist2 == "Klee":
+        if p.artist2 == "Kandinsky":
             p.artist_points += 1
     correct_yellow = 0
     correct_blue = 0

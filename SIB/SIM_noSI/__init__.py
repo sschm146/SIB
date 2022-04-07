@@ -54,9 +54,9 @@ def artist_winner(subsession: Subsession):
     players = subsession.get_players()
     winner_list = []
     for p in players:
-        if p.artist1 == "Kandinsky":
+        if p.artist1 == "Klee":
             p.artist_points += 1
-        if p.artist2 == "Klee":
+        if p.artist2 == "Kandinsky":
             p.artist_points += 1
     for p in players:
         others = [g.artist_points for g in players if g != p]

@@ -350,6 +350,7 @@ class Confidence_4(Page):
             mistrust_sender_4=10 - player.trust_sender_4,
             mistrust_sender_5=10 - player.trust_sender_5,
             mistrust_sender_6=10 - player.trust_sender_6,
+            num_senders=Constants.num_senders
         )
     form_model = "player"
     form_fields = ["sender_1_correction_1_inround", "sender_1_correction_2_inround", "sender_1_correction_3_inround",

@@ -269,6 +269,12 @@ class Signals(Page):
             estimate=estimate,
         )
 
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(
+            round=player.round_number ,
+        )
+
 
 class Prior(Page):
 
@@ -378,6 +384,11 @@ class Guess(Page):
     def is_displayed(player):
         return player.Role == "receiver" and player.round_number > Constants.num_rounds/2
 
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(
+            round=player.round_number - Constants.num_rounds / 2,
+        )
 
 page_sequence = [Instructions_GT_senders, Comprehension_GT_senders, StartWaitPage, Signals, Instructions_GT_receivers,
                  Comprehension_GT_receivers, Prior, Guess, SecondWaitPage]

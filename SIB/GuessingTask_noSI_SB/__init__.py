@@ -221,6 +221,13 @@ class Signals(Page):
             estimate=estimate,
         )
 
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(
+            round=player.round_number - Constants.num_rounds / 2,
+        )
+
+
 class Instructions_GT_senders(Page):
     @staticmethod
     def is_displayed(player):

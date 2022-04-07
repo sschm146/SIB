@@ -35,7 +35,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_1 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required id=\"sender_1_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select class=\"Sender1\" required id=\"sender_1_correction_", i, "_inround_select\" onchange=\"dis_option1(this); update();\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -51,11 +51,31 @@ td, th {
               document.write(["<td><input required name=\"sender_1_correction_", i, "_actually\" id=\"sender_1_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
 
+            $('body').on('propertychange input', 'input', function() {
+            var inputVal = $(this).val();
+            if( isNaN(Number(inputVal)) ) {
+                  this.value = this.hasOwnProperty("oldValue") ? this.oldValue : '';
+            } else {
+                  this.oldValue = inputVal;
+            }
+            });
+
+
+            function dis_option1(selectElement) {
+                var arraySelects = document.getElementsByClassName('Sender1');
+                var selectedOption = selectElement.selectedIndex;
+                for (var m = 0; m < arraySelects.length; m++) {
+                    if (arraySelects[m] === selectElement)
+                      continue;
+                    arraySelects[m].options[selectedOption].disabled = true;
+                  }
+                }
+
             function update() {
                 for(var i = 1; i < js_vars.mistrust_sender_1 + 1 ; i++) {
-                    for(var j = 1; i < 6 + 1 ; i++) {
-                    document.getElementById(["sender_", j, "_correction_", i, "_inround"].join('')).value = document.getElementById(["sender_", j , "_correction_", i, "_inround_select"].join('')).value
-            }}}
+                    for(var j = 1; j < js_vars.num_senders + 1 ; j++) {
+                        document.getElementById(["sender_", j, "_correction_", i, "_inround"].join('')).value = document.getElementById(["sender_", j, "_correction_", i, "_inround_select"].join('')).value
+                    }}}
 
           </script>
           </table>
@@ -76,7 +96,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_2 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required id=\"sender_2_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required class=\"Sender2\" id=\"sender_2_correction_", i, "_inround_select\" onchange=\"dis_option2(this); update();\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -91,6 +111,16 @@ td, th {
               document.write(["<input required name=\"sender_2_correction_", i, "_inround\" id=\"sender_2_correction_", i,"_inround\" type=\"hidden\">"].join(''));
               document.write(["<td><input required name=\"sender_2_correction_", i, "_actually\" id=\"sender_2_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
+
+            function dis_option2(selectElement) {
+                var arraySelects = document.getElementsByClassName('Sender2');
+                var selectedOption = selectElement.selectedIndex;
+                for (var m = 0; m < arraySelects.length; m++) {
+                    if (arraySelects[m] === selectElement)
+                      continue;
+                    arraySelects[m].options[selectedOption].disabled = true;
+                  }
+                }
           </script>
           </table>
       {{ endif }}
@@ -110,7 +140,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_3 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required id=\"sender_3_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required class=\"Sender3\" id=\"sender_3_correction_", i, "_inround_select\" onchange=\"dis_option3(this); update();\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -125,6 +155,16 @@ td, th {
               document.write(["<input required name=\"sender_3_correction_", i, "_inround\" id=\"sender_3_correction_", i,"_inround\" type=\"hidden\">"].join(''));
               document.write(["<td><input required name=\"sender_3_correction_", i, "_actually\" id=\"sender_3_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
+
+            function dis_option3(selectElement) {
+                var arraySelects = document.getElementsByClassName('Sender3');
+                var selectedOption = selectElement.selectedIndex;
+                for (var m = 0; m < arraySelects.length; m++) {
+                    if (arraySelects[m] === selectElement)
+                      continue;
+                    arraySelects[m].options[selectedOption].disabled = true;
+                  }
+                }
           </script>
           </table>
       {{ endif }}
@@ -144,7 +184,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_4 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required id=\"sender_4_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required class=\"Sender4\" id=\"sender_4_correction_", i, "_inround_select\" onchange=\"dis_option4(this); update();\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -159,6 +199,16 @@ td, th {
               document.write(["<input required name=\"sender_4_correction_", i, "_inround\" id=\"sender_4_correction_", i,"_inround\" type=\"hidden\">"].join(''));
               document.write(["<td><input required name=\"sender_4_correction_", i, "_actually\" id=\"sender_4_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
+
+            function dis_option4(selectElement) {
+                var arraySelects = document.getElementsByClassName('Sender4');
+                var selectedOption = selectElement.selectedIndex;
+                for (var m = 0; m < arraySelects.length; m++) {
+                    if (arraySelects[m] === selectElement)
+                      continue;
+                    arraySelects[m].options[selectedOption].disabled = true;
+                  }
+                }
           </script>
           </table>
       {{ endif }}
@@ -178,7 +228,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_5 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required id=\"sender_5_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required class=\"Sender5\" id=\"sender_5_correction_", i, "_inround_select\" onchange=\"dis_option5(this); update();\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -193,6 +243,16 @@ td, th {
               document.write(["<input required name=\"sender_5_correction_", i, "_inround\" id=\"sender_5_correction_", i,"_inround\" type=\"hidden\">"].join(''));
               document.write(["<td><input required name=\"sender_5_correction_", i, "_actually\" id=\"sender_5_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
+
+            function dis_option5(selectElement) {
+                var arraySelects = document.getElementsByClassName('Sender5');
+                var selectedOption = selectElement.selectedIndex;
+                for (var m = 0; m < arraySelects.length; m++) {
+                    if (arraySelects[m] === selectElement)
+                      continue;
+                    arraySelects[m].options[selectedOption].disabled = true;
+                  }
+                }
           </script>
           </table>
       {{ endif }}
@@ -211,7 +271,7 @@ td, th {
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_6 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required id=\"sender_6_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required class=\"Sender6\" id=\"sender_6_correction_", i, "_inround_select\" onchange=\"dis_option6(this); update();\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -226,6 +286,16 @@ td, th {
               document.write(["<input required name=\"sender_6_correction_", i, "_inround\" id=\"sender_6_correction_", i,"_inround\" type=\"hidden\">"].join(''));
               document.write(["<td><input required name=\"sender_6_correction_", i, "_actually\" id=\"sender_6_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
+
+            function dis_option6(selectElement) {
+                var arraySelects = document.getElementsByClassName('Sender6');
+                var selectedOption = selectElement.selectedIndex;
+                for (var m = 0; m < arraySelects.length; m++) {
+                    if (arraySelects[m] === selectElement)
+                      continue;
+                    arraySelects[m].options[selectedOption].disabled = true;
+                  }
+                }
           </script>
           </table>
       {{ endif }}
@@ -295,6 +365,5 @@ When you have answered all the questions, please press “Next”.
 </div>
           </div>
 </div>
-
 
 {% endblock %}
