@@ -15,6 +15,7 @@ class Constants(BaseConstants):
     num_rounds = 1
     players_per_group = None
     num_senders = 6
+    payoff_trust = 1
 
 
 
@@ -215,12 +216,13 @@ class Trust_in_Senders(Page):
     def vars_for_template(player: Player):
         participant = player.participant
         return dict(
-            signals_round_1=participant.signals_round_1,
-            signals_round_2=participant.signals_round_2,
-            signals_round_3=participant.signals_round_3,
-            signals_round_4=participant.signals_round_4,
-            signals_round_5=participant.signals_round_5,
-            signals_round_6=participant.signals_round_6,)
+            signals_round_1=participant.signals_all_rounds[0:6],
+            signals_round_2=participant.signals_all_rounds[6:12],
+            signals_round_3=participant.signals_all_rounds[12:18],
+            signals_round_4=participant.signals_all_rounds[18:24],
+            signals_round_5=participant.signals_all_rounds[24:30],
+            signals_round_6=participant.signals_all_rounds[30:36],
+        )
 
     form_model = "player"
     form_fields = ["trust_sender_1", "trust_sender_2", "trust_sender_3", "trust_sender_4", "trust_sender_5", "trust_sender_6"]
@@ -230,8 +232,8 @@ class Confidence_1_all10(Page):
     @staticmethod
     def is_displayed(player):
         return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
-               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_2 + player.trust_sender_2 +\
-               player.trust_sender_2 + player.trust_sender_2 == 100
+               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_3 + player.trust_sender_4 +\
+               player.trust_sender_5 + player.trust_sender_6 == 60
 
 
 class Confidence_1_notall10(Page):
@@ -239,8 +241,8 @@ class Confidence_1_notall10(Page):
     @staticmethod
     def is_displayed(player):
         return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
-               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_2 + player.trust_sender_2 +\
-               player.trust_sender_2 + player.trust_sender_2 < 100
+               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_3 + player.trust_sender_4 + \
+               player.trust_sender_5 + player.trust_sender_6 < 60
 
 
 class Confidence_2(Page):
@@ -253,12 +255,12 @@ class Confidence_2(Page):
     def vars_for_template(player: Player):
         participant = player.participant
         return dict(
-            signals_round_1=participant.signals_round_1,
-            signals_round_2=participant.signals_round_2,
-            signals_round_3=participant.signals_round_3,
-            signals_round_4=participant.signals_round_4,
-            signals_round_5=participant.signals_round_5,
-            signals_round_6=participant.signals_round_6,
+            signals_round_1=participant.signals_all_rounds[0:6],
+            signals_round_2=participant.signals_all_rounds[6:12],
+            signals_round_3=participant.signals_all_rounds[12:18],
+            signals_round_4=participant.signals_all_rounds[18:24],
+            signals_round_5=participant.signals_all_rounds[24:30],
+            signals_round_6=participant.signals_all_rounds[30:36],
             trust_sender_1=player.trust_sender_1,
             trust_sender_2=player.trust_sender_2,
             trust_sender_3=player.trust_sender_3,
@@ -287,8 +289,8 @@ class Confidence_3(Page):
     @staticmethod
     def is_displayed(player):
         return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
-               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_2 + player.trust_sender_2 +\
-               player.trust_sender_2 + player.trust_sender_2 < 100
+               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_3 + player.trust_sender_4 + \
+               player.trust_sender_5 + player.trust_sender_6 < 60
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -312,19 +314,19 @@ class Confidence_4(Page):
     @staticmethod
     def is_displayed(player):
         return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
-               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_2 + player.trust_sender_2 +\
-               player.trust_sender_2 + player.trust_sender_2 < 100
+               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_3 + player.trust_sender_4 + \
+               player.trust_sender_5 + player.trust_sender_6 < 60
 
     @staticmethod
     def vars_for_template(player: Player):
         participant = player.participant
         return dict(
-            signals_round_1=participant.signals_round_1,
-            signals_round_2=participant.signals_round_2,
-            signals_round_3=participant.signals_round_3,
-            signals_round_4=participant.signals_round_4,
-            signals_round_5=participant.signals_round_5,
-            signals_round_6=participant.signals_round_6,
+            signals_round_1=participant.signals_all_rounds[0:6],
+            signals_round_2=participant.signals_all_rounds[6:12],
+            signals_round_3=participant.signals_all_rounds[12:18],
+            signals_round_4=participant.signals_all_rounds[18:24],
+            signals_round_5=participant.signals_all_rounds[24:30],
+            signals_round_6=participant.signals_all_rounds[30:36],
             trust_sender_1=player.trust_sender_1,
             trust_sender_2=player.trust_sender_2,
             trust_sender_3=player.trust_sender_3,
@@ -406,11 +408,6 @@ class Payout_calc(WaitPage):
     wait_for_all_groups = True
     after_all_players_arrive = 'payout_calc'
 
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver"
-
-
 
 def payout_calc(subsession: Subsession):
     players = subsession.get_players()
@@ -418,9 +415,24 @@ def payout_calc(subsession: Subsession):
     for p in players:
         participant = p.participant
         if p.Role == "sender":
-            participant.Trust_payoff = 1
+            participant.Trust_payoff = 0
         if p.Role == "receiver":
-            participant.Trust_payoff = 1
+            participant = p.participant
+            congruent_report = [0, 0, 0, 0, 0, 0]
+            temp = [0, 0, 0, 0, 0, 0]
+            trust_sender = [p.trust_sender_1, p.trust_sender_2, p.trust_sender_3, p.trust_sender_4, p.trust_sender_5, p.trust_sender_6]
+            signals_all_rounds = participant.signals_all_rounds
+            estimates_all_rounds = participant.estimates_all_rounds
+            for i in list(range(Constants.num_rounds)):
+                for j in list(range(0, 6)):
+                    temp_signal = signals_all_rounds[i + j]
+                    temp_estimate = estimates_all_rounds[i + j]
+                    if temp_signal == temp_estimate:
+                        congruent_report[j] += 1
+                    if congruent_report[j] == trust_sender[j]:
+                        temp[j] = Constants.payoff_trust
+            p.payoff = random.choice(temp)
+        participant.Trust_payoff = p.payoff
 
 
 page_sequence = [StartWaitPage, Instructions_Trust_in_Senders, Trust_in_Senders, Confidence_1_all10,

@@ -2,15 +2,72 @@
 
 {{block styles }}
     <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
-{{ endblock }}
-{{ block content }}
-<div class="card bg-light instructions">
-    <div class="card-body">
-    <h3>
-        Part 2
-    </h3>
 
-This part is composed of 10 separate estimation tasks. In each task, you will estimate an unknown number x, and you will be paid according to the precision of your estimates as described below.
+<style type="text/css">
+.next {
+    float: right;
+    margin: 40px auto;
+    }
+
+ .back{
+    float: left;
+    margin: 40px auto;
+    }
+
+    .page-header {
+    margin: 0px 0 5px;
+    padding: 0;
+    border-bottom: none;
+    text-align: center;
+}
+
+p{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.nav {
+    visibility: hidden;
+}
+</style>
+
+{{ endblock }}
+{% block scripts %}
+
+<script src="{% static 'prev_next_button.js' %}"></script>
+
+{% endblock %}
+{{ block content }}
+
+<!-- Tab navigation -->
+<ul class="nav nav-tabs fixed-top navbar-light bg-light justify-content-center " id="myTab" role="tablist">
+  <li class="nav-item" >
+    <a class="nav-link active" id="part1-tab" data-toggle="tab" href="#part1" role="tab" aria-controls="part1" onclick="topFunction()"> Tab 1
+</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="part2-tab" data-toggle="tab" href="#part2" role="tab" aria-controls="part2" onclick="topFunction()">Tab 2</a>
+  </li>
+
+</ul>
+<br>
+<br>
+
+
+<!-- Tab content -->
+<div class="tab-content" id="myTabContent">
+
+  <div class="tab-pane show active" id="part1" role="tabpanel" aria-labelledby="part1-tab">
+
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Part 2 - Instructions
+ </h3>
+        </div>
+    <div class="card-body">
+
+        This part is composed of 10 separate estimation tasks.
+        In each task, you will estimate an unknown number x, and you will be paid according to the precision of your estimates as described below.
 <br>
         <br>
 <h4>
@@ -19,15 +76,18 @@ This part is composed of 10 separate estimation tasks. In each task, you will es
         In each of the 10 tasks, you will need to estimate a new number x.
         While all 10 estimation tasks have the same structure, they are fully independent from each other.
         This means that the numbers are not in any way connected across the tasks.
+
         You will never be informed of the exact number x.
         Instead, you will receive computer-generated information which will help you estimate x.
         For each task, you will see this information and then report your own estimate of x.
         We explain the computer-generated information and how it will be presented to you in the following.
-        An algorithm will simulate devices which are also solving the same task as you.
+
+        An algorithm will simulate devices which are solving the same task as you.
         We will call these devices “estimation devices”.
         For each task, 5000 estimation devices will make their estimate of x.
         These estimation devices are independent from each other and their estimates are all of the same quality.
-        The estimation devices are good at solving their task and have the following properties:<br>
+        The estimation devices are good at solving their task and have the following properties:
+<br>
         <ul>
             <li>The estimate of a randomly drawn estimation device is more likely to be the correct number x than any other number.</li>
             <li>The further away one goes from the number x, the less likely it is that an estimating device will state that number.
@@ -46,24 +106,26 @@ This part is composed of 10 separate estimation tasks. In each task, you will es
             </div>
         <br>
         <br>
-        As you can see, the estimate with the highest frequency is exactly 280, and the frequency decreases when going further away from 280.
+        As you can see, the estimates form a typical bell-shaped curve.
+        The highest frequency is exactly 280, and the frequency then decreases when going further away from 280.
         Thus, it is more likely that the estimate of a randomly drawn estimation device corresponds to the correct number x than any other number.
         Moreover, the further one moves away from 280, the less likely it is that the number is stated as the estimate, and numbers larger than 290 and smaller than 270 are never stated.
-        Finally, the average of all 5000 estimates is exactly 280.
+        Finally, the average of all 5000 estimates, which is represented with the blue dashed line, is 280.
+        Thus, the average is correct.
         <br>
         <br>
         To help you estimate the number x, the following procedure will be implemented.
         For each estimation task, one estimation device will be randomly drawn.
         You will observe the estimate of that estimation device.
         This means that for your own estimate, you will rely on the estimate of a single estimation device.
-        To use the information from the estimation device in a best way, remember that the estimate of a randomly drawn estimation device is more likely to be the correct number x than any other number.
+        To use the information from the estimation device in the best way, remember that the estimate of a randomly drawn estimation device is more likely to be the correct number x than any other number.
         Hence, in order to maximize your chances of correctly estimating x, you should report exactly the number stated by the estimation device for each estimation task.
         <br>
         <br>
         <h4>
         Payment
         </h4>
-        If this part of the study (part 2) is chosen for payment, then 1 of the 10 estimation tasks will be randomly chosen, and you will be paid according to the precision of your estimate in that task.
+        IIf this part of the study (part 2) is chosen for payment, then 1 of the 10 estimation tasks will be randomly chosen, and you will be paid according to the precision of your estimate in that task.
         Since any task can determine your payment, you should take each task seriously.
         <br>
         The following rule will be used to determine your payment:
@@ -75,26 +137,31 @@ This part is composed of 10 separate estimation tasks. In each task, you will es
         Below you can find a description of the technical details of the payment rule.
         <br>
         <br>
-        The computer will draw a random number y between 0 and 100. Each number between 0 and 100 is equally likely to be drawn.
+        The computer will draw a random number y between 0 and 100.
+        Each number between 0 and 100 is equally likely to be drawn.
         You will receive Z euros if the quadratic distance between your estimate and the actual number is smaller or equal than y.
-        Otherwise, you will receive 0 euros.
-        This is the exact formula for the calculation of your payoff:
+        Otherwise, you will receive 0 euros. This is the exact formula for the calculation of your payoff:
         <br>
          <ul>
-          <li>Your payoff = Y, if (x - estimate)&#178; &#8924;y </li>
+          <li>Your payoff = Z, if (x - estimate)&#178; &#8924;y </li>
           <li>Your payoff = 0, if (x - estimate)&#178; &#62;y </li>
       </ul>
 
         Consider the following examples.
+
         Suppose the actual number x is 150 and a randomly drawn number y is 50.
         If your estimate is 130, the quadratic distance is (130-150)2= 400, which is larger than 50.
         This means you would earn 0 euros.
+
         If you estimate 145, the quadratic distance is (145-150)2= 25, which is smaller than 50.
         This means you would earn Z euros.
+
         If you estimate 155, the quadratic distance is (155-150)2= 25, which is larger than 50.
         This means you would earn Z euros.
+
         If you estimate 165, the quadratic distance is (165-150)2= 225 which is larger than 50.
         This means you would earn 0 euros.
+
         Notice that your chances of winning depend on the absolute distance from the actual number Z, so there is no difference if you underestimate or overestimate.
         The important thing is that your estimate is close enough to the actual number x.
         The closer it is, the higher your chances are of winning Z euros.
@@ -111,10 +178,65 @@ This part is composed of 10 separate estimation tasks. In each task, you will es
         In case of any questions, please raise your hand and an experimenter will come to you.
         If you have understood the instructions and are ready to proceed, please click “Next”.
         <br>
-   </div>
+ </div>
 </div>
-<div align="center">
-    {{ next_button }}
+<button onclick="topFunction()" type="button" class="nexttab btn-primary btn next">Next</button>
+ </div>
+
+
+
+       <div class="tab-pane" id="part2" role="tabpanel" aria-labelledby="part2-tab">
+
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Part 2 - Comprehension Questions
+ </h3>
+        </div>
+    <div class="card-body">
+
+
+
+
+<br>
+    <div class="alert alert-primary" role="alert">
+ <strong> Before proceeding with the task, we would ask you to please answer the following control questions.
+     In case you have any questions, please raise your hand and an experimenter will come to you.</strong>
 </div>
+<p style="font-weight: bold">
+    1.) Please indicate which statement is true.</p>
+{{ formfield 'comprq1' }}
+<br><hr>
+        <p style="font-weight: bold">
+    2.) Please indicate which statement is true.</p>
+{{ formfield 'comprq2' }}
+<br><hr>
+        <p style="font-weight: bold">
+    3.) For each estimation task, what information will you observe to help you make an estimate of the number x?</p>
+{{ formfield 'comprq3' }}
+<br><hr>
+        <p style="font-weight: bold">
+    4.) Let’s assume that in one estimation task, number x is 541. Which of the following statements can be true?</p>
+{{ formfield 'comprq4' }}
+<br><hr>
+        <p style="font-weight: bold">
+    5.) Let’s say that in one estimation task, the estimation device you observe states an estimate of 19.
+        Given this information, which number should you state to maximize your chances of earning the additional payment of Z euros?</p>
+{{ formfield 'comprq5' }}
+<br><hr>
+<p style="font-weight: bold">
+    6.) The experiment consists of altogether 4 parts.
+    You can earn additional payment in part 1 and part 2.
+    The 10 estimation tasks are part 2 of the experiment.
+    Please indicate which statement concerning the payment procedure is correct.</p>
+{{ formfield 'comprq6' }}
+<br><hr>
+    </div>
+</div>
+  <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
+<button class="nexttab btn-primary btn next">Next</button>
+  </div>
+</div>
+
+
 
 {% endblock %}

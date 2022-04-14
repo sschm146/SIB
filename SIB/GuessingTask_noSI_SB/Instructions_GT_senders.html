@@ -2,13 +2,69 @@
 
 {{block styles }}
     <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+
+<style type="text/css">
+.next {
+    float: right;
+    margin: 40px auto;
+    }
+
+ .back{
+    float: left;
+    margin: 40px auto;
+    }
+
+    .page-header {
+    margin: 0px 0 5px;
+    padding: 0;
+    border-bottom: none;
+    text-align: center;
+}
+
+p{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.nav {
+    visibility: hidden;
+}
+</style>
+
 {{ endblock }}
+{% block scripts %}
+
+<script src="{% static 'prev_next_button.js' %}"></script>
+
+{% endblock %}
 {{ block content }}
+
+<!-- Tab navigation -->
+<ul class="nav nav-tabs fixed-top navbar-light bg-light justify-content-center " id="myTab" role="tablist">
+  <li class="nav-item" >
+    <a class="nav-link active" id="part1-tab" data-toggle="tab" href="#part1" role="tab" aria-controls="part1" onclick="topFunction()"> Tab 1
+</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="part2-tab" data-toggle="tab" href="#part2" role="tab" aria-controls="part2" onclick="topFunction()">Tab 2</a>
+  </li>
+
+</ul>
+<br>
+<br>
+
+
+<!-- Tab content -->
+<div class="tab-content" id="myTabContent">
+
+  <div class="tab-pane show active" id="part1" role="tabpanel" aria-labelledby="part1-tab">
+
 <div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Part 2 - Instructions
+ </h3>
+    </div>
     <div class="card-body">
-    <h3>
-        Part 2
-    </h3>
 
 This part is composed of 10 separate estimation tasks. In each task, you will estimate an unknown number x, and you will be paid according to the precision of your estimates as described below.
 <br>
@@ -111,10 +167,61 @@ This part is composed of 10 separate estimation tasks. In each task, you will es
         In case of any questions, please raise your hand and an experimenter will come to you.
         If you have understood the instructions and are ready to proceed, please click “Next”.
         <br>
-   </div>
+  </div>
 </div>
-<div align="center">
-    {{ next_button }}
+<button onclick="topFunction()" type="button" class="nexttab btn-primary btn next">Next</button>
+ </div>
+
+
+
+       <div class="tab-pane" id="part2" role="tabpanel" aria-labelledby="part2-tab">
+
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Part 2 - Comprehension Questions
+ </h3>
+        </div>
+    <div class="card-body">
+
+<br>
+    <div class="alert alert-primary" role="alert">
+ <strong> Before proceeding with the task, we would ask you to please answer the following control questions.
+     In case you have any questions, please raise your hand and an experimenter will come to you.</strong>
 </div>
+<p style="font-weight: bold">
+    1.) Please indicate which statement is true.</p>
+{{ formfield 'comprq1' }}
+<br><hr>
+        <p style="font-weight: bold">
+    2.) Please indicate which statement is true.</p>
+{{ formfield 'comprq2' }}
+<br><hr>
+        <p style="font-weight: bold">
+    3.) For each estimation task, what information will you observe to help you make an estimate of the number x?</p>
+{{ formfield 'comprq3' }}
+<br><hr>
+        <p style="font-weight: bold">
+    4.) Let’s assume that in one estimation task, number x is 541. Which of the following statements can be true?</p>
+{{ formfield 'comprq4' }}
+<br><hr>
+        <p style="font-weight: bold">
+    5.) Let’s say that in one estimation task, the estimation device you observe states an estimate of 19.
+        Given this information, which number should you state to maximize your chances of earning the additional payment of Z euros?</p>
+{{ formfield 'comprq5' }}
+<br><hr>
+<p style="font-weight: bold">
+    6.) The experiment consists of altogether 4 parts.
+    You can earn additional payment in part 1 and part 2.
+    The 10 estimation tasks are part 2 of the experiment.
+    Please indicate which statement concerning the payment procedure is correct.</p>
+{{ formfield 'comprq6' }}
+<br><hr>
+</div>
+    </div>
+  <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
+<button class="nexttab btn-primary btn next">Next</button>
+  </div>
+</div>
+
 
 {% endblock %}

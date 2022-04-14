@@ -1,4 +1,15 @@
 {% load otree %}
+{{ block styles }}
+<style type="text/css">
+
+.bg-primary {
+background-color: #3f51b5!important;
+color: white;
+}
+
+</style>
+
+{{ endblock }}
 
 {% block content %}
  <h2 style="display: inline-block; padding-right: 60px ">Part 2</h2>
@@ -24,7 +35,7 @@ Sender's group affiliations are shown via the respective colors.
 <div class="row row-cols-1 row-cols-md-6 g-2" align="center">
   <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header bg-primary" style="font-weight: bold">
+  <div class="card-header  bg-primary" style="font-weight: bold">
     Sender A
   </div>
   <ul class="list-group list-group-flush">

@@ -41,7 +41,7 @@ SESSION_CONFIGS = [
         name="SI_selection",
         display_name="SIB_SI_SB",
         num_demo_participants=10,
-        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_noSI_SB", "Payout"],
+        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_SB", "Payout"],
     ),
     dict(
         name="control_selection",
@@ -53,19 +53,17 @@ SESSION_CONFIGS = [
         name="control_correlation",
         display_name="SIB_control_CN",
         num_demo_participants=10,
-        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_CN", "Payout"],
+        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_CN", "Trust_noSI", "Payout"],
     ),
     dict(
         name="SI_correlation",
-        display_name="SIB_control_CN",
+        display_name="SIB_SI_CN",
         num_demo_participants=10,
-        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_noSI_CN", "Payout"],
+        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_noSI_CN", "Trust_SI", "Payout"],
     ),
 ]
 
-PARTICIPANT_FIELDS = ["identity", "SIM_payoff", "GuessingTask_payoff", "Trust_payoff", "signals_round_1", "signals_round_2",
-                      "signals_round_3", "signals_round_4", "signals_round_5", "signals_round_6", "signals_round_7",
-                      "signals_round_8", "signals_round_9", "signals_round_10"]
+PARTICIPANT_FIELDS = ["identity", "SIM_payoff", "GuessingTask_payoff", "Trust_payoff", "signals_all_rounds", "estimates_all_rounds"]
 SESSION_FIELDS = []
 
 # ISO-639 code

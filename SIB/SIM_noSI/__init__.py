@@ -28,12 +28,12 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     artist1 = models.StringField(
-        choices=['Klee', 'Kandinsky'],
+        choices=['Paul Klee', 'Wassily Kandinsky'],
         widget=widgets.RadioSelectHorizontal,
         label="",
     )
     artist2 = models.StringField(
-        choices=['Klee', 'Kandinsky'],
+        choices=['Paul Klee', 'Wassily Kandinsky'],
         widget=widgets.RadioSelectHorizontal,
         label="",
     )
@@ -46,27 +46,27 @@ class Instructions(Page):
 
 class MyWaitPage(WaitPage):
     wait_for_all_groups = True
-    after_all_players_arrive = 'artist_winner'
+    after_all_players_arrive = 'payout_calc'
 
 # Function to determine which individual has won the SIM
 # Winner is determined by amount of solved paintings (or at random if amount of solved paintings is equal)
-def artist_winner(subsession: Subsession):
+
+def payout_calc(subsession: Subsession):
     players = subsession.get_players()
     winner_list = []
     for p in players:
-        if p.artist1 == "Klee":
+        if p.artist1 == "Paul Klee":
             p.artist_points += 1
-        if p.artist2 == "Kandinsky":
+        if p.artist2 == "Wassily Kandinsky":
             p.artist_points += 1
     for p in players:
+        participant = p.participant
         others = [g.artist_points for g in players if g != p]
         if p.artist_points > max(others):
             p.payoff = Constants.artist_payoff
-            participant = p.participant
             participant.SIM_payoff = p.payoff
         if p.artist_points < max(others):
             p.payoff = 0
-            participant = p.participant
             participant.SIM_payoff = p.payoff
         if p.artist_points == max(others):
             winner_list.append(p.id_in_group)

@@ -1,6 +1,14 @@
 {% load otree %}
+{{ block styles }}
+<style type="text/css">
 
-{{block styles }}
+.bg-primary {
+background-color: #3f51b5!important;
+color: white;
+}
+
+</style>
+
     <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
 {{ endblock }}
 {{ block content }}

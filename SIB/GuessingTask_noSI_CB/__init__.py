@@ -88,61 +88,71 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
         label='')
     comprq7 = models.IntegerField(
-        choices=[[1, 'Each sender observed an estimate of 1 randomly drawn estimation device.'],
-                 [2, 'Each sender observed an estimate of 3 randomly drawn estimation devices.'],
-                 [3,
-                  'Each sender observed an estimate of an actual number x and the estimate of 1 randomly drawn estimation device.']],
+        choices=[[1,
+                  'The sender whose estimate I will observe first observed an estimate of 1 randomly drawn estimation device. '
+                  'The other 6 senders observed 3 randomly drawn estimation devices.'],
+                 [2,
+                  'The sender whose estimate I will observe first observed an estimate of 3 randomly drawn estimation device. '
+                  'The other 6 senders observed 1 randomly drawn estimation devices.'],
+                 [3, 'All 7 senders observed an estimate of 1 randomly drawn estimation device. '
+                     'All 7 senders had the identical task and have read the identical instructions.'],
+                 [4, 'All 7 senders observed an estimate of 1 randomly drawn estimation device. '
+                     'All 7 senders had the identical task but their instructions were not identical as the sender, whose estimate I will see first, had more detailed instructions.']],
         widget=widgets.RadioSelect,
         label='')
-    comprq8 = models.IntegerField(choices=[[1, 'I will observe an estimate of 1 randomly drawn estimation device.'],
-                                           [2, 'I will observe an estimate of 6 randomly drawn estimation devices.'],
-                                           [3, 'I will observe an estimate of 1 sender.'],
-                                           [4, 'I will observe the estimates of 6 different senders.']],
+    comprq8 = models.IntegerField(choices=[[1, 'For each estimation task, I observe an estimate of 1 randomly drawn estimation device every time I estimate x.'],
+                                           [2, 'For each estimation task, I will first see the estimate of 1 randomly drawn estimation device after which I will form my first estimate of x.'
+                                               ' After that, I will see the estimates of additional 6 estimation devices and form my second estimate of x.'],
+                                           [3, 'For each estimation task, I will first see the estimate of 1 randomly determined sender after which I will state my first estimate of x.'
+                                               ' After  that, I will see the estimates of the remaining 6 senders and state my second estimate of x.'
+                                               ' The senders’ names will not be shown.'],
+                                           [4, 'For each estimation task, I will first see the estimate of Sender 1, after which I will state my first estimate of x.'
+                                               ' After that, I will see the estimates of Sender A, Sender B, Sender C, Sender D, Sender E, and Sender F, after which I will state my second estimate of x.'
+                                               ' The senders’ names will be shown.']],
                                   widget=widgets.RadioSelect,
                                   label='')
     comprq9 = models.IntegerField(choices=[[1,
-                                            'The estimate of a randomly drawn estimation device is equally likely to be the correct number x or any other number'],
-                                           [2,
-                                            'The estimate of a randomly drawn estimation device is less likely to be the correct number x than any other number, and the further one moves away from x, the more likely it is that an estimation device reports such a number'],
-                                           [3,
-                                            'The estimate of a randomly drawn estimation device is more likely to be the correct number x than any other number, and the further one moves away from x, the less likely it is that an estimation device reports such a number']],
+                                            'The number I state as my second estimation of x can be any number.'],
+                                           [2,'The number I state as my second estimation of x should again be 88.'],
+                                           [3,'The number I state as my second estimation of x should be smaller than 88.'],
+                                           [4, 'The number I state as my second estimation of x should be larger than 88.']],
                                   widget=widgets.RadioSelect,
                                   label='')
-    comprq10 = models.IntegerField(choices=[
+    comprq10 = models.IntegerField(choices=[[1,
+                                             'The estimate of a randomly drawn estimation device is equally likely to be the correct number x or any other number'],
+                                            [2,
+                                             'The estimate of a randomly drawn estimation device is less likely to be the correct number x than any other number, and the further one moves away from x, the more likely it is that an estimation device reports such a number'],
+                                            [3,
+                                             'The estimate of a randomly drawn estimation device is more likely to be the correct number x than any other number, and the further one moves away from x, the less likely it is that an estimation device reports such a number']],
+                                   widget=widgets.RadioSelect,
+                                   label='')
+    comprq11 = models.IntegerField(choices=[
         [1, 'The average of estimates of all the estimation devices can be any number with equal probability.'],
         [2,
          'The average of estimates of all the estimation devices corresponds exactly (or almost exactly) to number x.'],
         [3, 'The average of estimates of all the estimation devices will always be larger than number x.'],
         [4, 'The average of estimates of all the estimation devices will always be smaller than number x.']],
-                                   widget=widgets.RadioSelect,
-                                   label='')
-    comprq11 = models.IntegerField(
+        widget=widgets.RadioSelect,
+        label='')
+    comprq12 = models.IntegerField(
         choices=[[1, 'A sender’s randomly drawn estimation device showed an estimate of 490.'],
                  [2, 'A sender’s randomly drawn estimation device showed an estimate of 541.'],
                  [3, 'A sender’s randomly drawn estimation device showed an estimate of 555.']],
         widget=widgets.RadioSelect,
         label='')
-    comprq12 = models.IntegerField(choices=[[1, '9'],
+    comprq13 = models.IntegerField(choices=[[1, '9'],
                                             [2, '18'],
                                             [3, '19'],
                                             [4, '24']],
                                    widget=widgets.RadioSelect,
                                    label='')
-    comprq13 = models.IntegerField(choices=[[1, '1490'],
+    comprq14 = models.IntegerField(choices=[[1, '1490'],
                                             [2, '1520'],
                                             [3, '1521'],
                                             [4, '1525']],
                                    widget=widgets.RadioSelect,
                                    label='')
-    comprq14 = models.IntegerField(
-        choices=[[1, 'All parts of the experiment in which additional money can be earned will be paid out.'],
-                 [2,
-                  'Only one of the parts in which additional money can be earned will be randomly chosen and paid out. '
-                  'If it happens that part 3 is chosen, then the earnings from each of the 10 estimation tasks will be paid out.'],
-                 [3,
-                  'Only one of the parts in which additional money can be earned will be randomly chosen and paid out. If it happens that part 3 is chosen, then one of the 10 estimation tasks will be randomly chosen, and my additional payment will depend only on my precision on that particular estimation task.']],
-        widget=widgets.RadioSelect,
-        label='')
+
 
 # FUNCTIONS
 
@@ -167,12 +177,6 @@ def creating_session(subsession: Subsession):
 
 # PAGES
 class Instructions_GT_senders(Page):
-    @staticmethod
-    def is_displayed(player):
-        return player.Role == "sender" and player.round_number == 1
-
-
-class Comprehension_GT_senders(Page):
     @staticmethod
     def is_displayed(player):
         return player.Role == "sender" and player.round_number == 1
@@ -206,26 +210,20 @@ class Instructions_GT_receivers(Page):
     def is_displayed(player):
         return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
 
-
-class Comprehension_GT_receivers(Page):
-    @staticmethod
-    def is_displayed(player):
-        return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
-
     form_model = "player"
     form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq11", "comprq12", "comprq13", "comprq14"]
 
     @staticmethod
     def error_message(player, values):
         solutions = dict(
-            comprq7=1,
+            comprq7=3,
             comprq8=4,
-            comprq9=3,
-            comprq10=2,
+            comprq9=1,
+            comprq10=3,
             comprq11=2,
-            comprq12=3,
-            comprq13=2,
-            comprq14=3,
+            comprq12=2,
+            comprq13=3,
+            comprq14=2,
         )
 
         error_messages = dict()
@@ -282,10 +280,12 @@ class Prior(Page):
     def is_displayed(player):
         return player.Role == "receiver" and player.round_number > Constants.num_rounds/2
 
+    @staticmethod
     def vars_for_template(player: Player):
-        estimate = player.estimate
+        current_round = player.round_number
+        prev_player = player.in_round(current_round - int(Constants.num_rounds/2))
         return dict(
-            estimate=estimate,
+            estimate=prev_player.estimate,
         )
 
     form_model = "player"
@@ -304,42 +304,38 @@ class FirstWaitPage(WaitPage):
 class SecondWaitPage(WaitPage):
     wait_for_all_groups = True
     after_all_players_arrive = 'save_signals_payoff'
+
     @staticmethod
     def is_displayed(player):
         return player.round_number == Constants.num_rounds
 
 
 def save_signals_payoff(subsession: Subsession):
-        signals_all_rounds = []
-        for i in range(10):  # Amount of rounds
-            signals_all_rounds.append([])
-            for j in range(6):  # Amount of players
-                signals_all_rounds[i].append(0)
-        players = subsession.get_players()
+    players = subsession.get_players()
+    signals_all_rounds = []
+    estimates_all_rounds = []
+
+    for i in list(range(0, int(Constants.num_rounds / 2))):
         for p in players:
-            for i in list(range(0, int(Constants.num_rounds / 2))):
+            if p.Role == 'sender':
                 prev_player = p.in_round(i + 1)
-                prev_players = prev_player.group.get_players()
-                signals = [p.field_maybe_none('sent_signal') for p in prev_players if p.Role == 'sender']
-                signals_all_rounds[i] = signals
+                signals_all_rounds.append(prev_player.field_maybe_none('sent_signal'))
+                estimates_all_rounds.append(prev_player.estimate)
+    # Payoff calculation
+    for p in players:
+        participant = p.participant
+        participant.estimates_all_rounds = estimates_all_rounds
+        participant.signals_all_rounds = signals_all_rounds
+        if p.Role == "sender":
+            i = random.randint(1, int(Constants.num_rounds / 2))
+            prev_player = p.in_round(i)
             participant = p.participant
-            participant.signals_round_1=signals_all_rounds[0]
-            participant.signals_round_2=signals_all_rounds[1]
-            participant.signals_round_3=signals_all_rounds[2]
-            participant.signals_round_4=signals_all_rounds[3]
-            participant.signals_round_5=signals_all_rounds[4]
-            participant.signals_round_6=signals_all_rounds[5]
-            # Payoff calculation
-            if p.Role == "sender":
-                i = random.randint(1, int(Constants.num_rounds / 2))
-                prev_player = p.in_round(i)
-                participant = p.participant
-                participant.GuessingTask_payoff = prev_player.payoff
-            if p.Role == "receiver":
-                i = random.randint(int(Constants.num_rounds / 2) + 1, Constants.num_rounds)
-                prev_player = p.in_round(i)
-                participant = p.participant
-                participant.GuessingTask_payoff = prev_player.payoff
+            participant.GuessingTask_payoff = prev_player.payoff
+        if p.Role == "receiver":
+            i = random.randint(int(Constants.num_rounds / 2) + 1, Constants.num_rounds)
+            prev_player = p.in_round(i)
+            participant = p.participant
+            participant.GuessingTask_payoff = prev_player.payoff
 
 
 # the receiver observes all the signals sent by senders and states a guess/posterior
@@ -390,5 +386,4 @@ class Guess(Page):
             round=player.round_number - Constants.num_rounds / 2,
         )
 
-page_sequence = [Instructions_GT_senders, Comprehension_GT_senders, StartWaitPage, Signals, Instructions_GT_receivers,
-                 Comprehension_GT_receivers, Prior, Guess, SecondWaitPage]
+page_sequence = [Instructions_GT_senders, StartWaitPage, Signals, Instructions_GT_receivers, Prior, Guess, SecondWaitPage]

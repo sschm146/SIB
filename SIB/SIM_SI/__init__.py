@@ -28,12 +28,12 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     identity = models.StringField()
     artist1 = models.StringField(
-        choices=['Klee', 'Kandinsky'],
+        choices=['Paul Klee', 'Wassily Kandinsky'],
         widget=widgets.RadioSelectHorizontal,
         label="",
     )
     artist2 = models.StringField(
-        choices=['Klee', 'Kandinsky'],
+        choices=['Paul Klee', 'Wassily Kandinsky'],
         widget=widgets.RadioSelectHorizontal,
         label="",
     )
@@ -47,19 +47,20 @@ class Instructions(Page):
 
 class MyWaitPage(WaitPage):
     wait_for_all_groups = True
-    after_all_players_arrive = 'artist_winner'
+    after_all_players_arrive = 'payout_calc'
 
-# Function to determine which group/identity has won the SIM
-# Winner is determine by amount of solved paintings (or at random if amount of solved paintings is equal)
-def artist_winner(subsession: Subsession):
+    # Function to determine which individual has won the SIM
+    # Winner is determined by amount of solved paintings (or at random if amount of solved paintings is equal)
+
+def payout_calc(subsession: Subsession):
     players = subsession.get_players()
     for p in players:
         participant = p.participant
         p.identity = participant.identity
     for p in players:
-        if p.artist1 == "Klee":
+        if p.artist1 == "Paul Klee":
             p.artist_points += 1
-        if p.artist2 == "Kandinsky":
+        if p.artist2 == "Wassily Kandinsky":
             p.artist_points += 1
     correct_yellow = 0
     correct_blue = 0
@@ -69,13 +70,12 @@ def artist_winner(subsession: Subsession):
         if p.identity == "Blue":
             correct_blue += p.artist_points
     for p in players:
+        participant = p.participant
         if correct_yellow > correct_blue and p.identity == "Yellow":
             p.payoff = Constants.artist_payoff
-            participant = p.participant
             participant.SIM_payoff = p.payoff
         if correct_yellow < correct_blue and p.identity == "Blue":
             p.payoff = Constants.artist_payoff
-            participant = p.participant
             participant.SIM_payoff = p.payoff
     if correct_yellow == correct_blue:
         winner = random.choice(["Yellow", "Blue"])

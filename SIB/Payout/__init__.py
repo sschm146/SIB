@@ -35,12 +35,14 @@ class Payout(Page):
         participant = player.participant
         SIM_payoff = participant.SIM_payoff
         GuessingTask_payoff = participant.GuessingTask_payoff
+        Trust_payoff = participant.Trust_payoff
         participant.payoff = participant.SIM_payoff + participant.GuessingTask_payoff
-        total_payoff = participant.payoff_plus_participation_fee()
+        total_payoff = SIM_payoff + GuessingTask_payoff + Trust_payoff + part_fee
         return dict(
             part_fee=part_fee,
             SIM_payoff=SIM_payoff,
             GuessingTask_payoff=GuessingTask_payoff,
+            Trust_payoff=Trust_payoff,
             total_payoff=total_payoff,
         )
 

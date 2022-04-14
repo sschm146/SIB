@@ -1,4 +1,15 @@
 {% load otree %}
+{{ block styles }}
+<style type="text/css">
+
+.bg-primary {
+background-color: #3f51b5!important;
+color: white;
+}
+
+</style>
+
+{{ endblock }}
 
 {% block content %}
  <h2 style="display: inline-block; padding-right: 60px ">Part 2</h2>
@@ -14,18 +25,17 @@ You are a {{ player.Role }} and a member of the {{player.identity}} Group.
 Below you see all received signals.
 Please read through all signals and report your guess.
 Sender's group affiliations are shown via the respective colors.
-<br>Based on previous sessions we know that omitted Sender F usually
-reports {{skipped}} more than Sender E.
+
 
 <br>
 <br>
 <br>
 
 
-<div class="row row-cols-1 row-cols-md-6 g-2" align="center">
+<div class="row row-cols-1 row-cols-md-5 g-2" align="center">
   <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header bg-primary" style="font-weight: bold">
+  <div class="card-header  bg-primary" style="font-weight: bold">
     Sender A
   </div>
   <ul class="list-group list-group-flush">
@@ -58,8 +68,12 @@ reports {{skipped}} more than Sender E.
 
     <div class="col">
 <div class="card" style="width: auto">
+    {{ if sender_4_identity == 'Yellow' }}
   <div class="card-header bg-warning" style="font-weight: bold">
-    Sender D
+      {{ else }}
+  <div class="card-header bg-primary" style="font-weight: bold">
+    {{ endif }}
+    Sender {{ sender_4 }}
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">{{ signal_4 }}</li>
@@ -68,8 +82,12 @@ reports {{skipped}} more than Sender E.
     </div>
         <div class="col">
 <div class="card" style="width: auto">
+      {{ if sender_5_identity == 'Yellow' }}
+  <div class="card-header bg-warning" style="font-weight: bold">
+      {{ else }}
   <div class="card-header bg-primary" style="font-weight: bold">
-    Sender E
+    {{ endif }}
+    Sender {{ sender_5 }}
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">{{ signal_5 }}</li>
@@ -92,6 +110,7 @@ reports {{skipped}} more than Sender E.
 <div align="center">
     {{ next_button }}
 </div>
+
 <script>
 window.onload = function progressbar_update() {
     bar = document.getElementById("progress");
@@ -99,4 +118,5 @@ window.onload = function progressbar_update() {
     bar.innerHTML = "<big><b> Round " + parseInt(js_vars.round) + " of 10</b></big>";
 }
 </script>
+
 {% endblock %}

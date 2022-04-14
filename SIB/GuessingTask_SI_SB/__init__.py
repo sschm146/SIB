@@ -6,7 +6,7 @@ import random
 c = Currency
 
 doc = """
-GuessingTask_noSI
+GuessingTask_SI_SB
 """
 
 
@@ -47,138 +47,119 @@ class Player(BasePlayer):
     received_signal_4_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     received_signal_5_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     received_signal_6_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
-    trust_sender_1 = models.IntegerField(min=0, max=10)
-    trust_sender_2 = models.IntegerField(min=0, max=10)
-    trust_sender_3 = models.IntegerField(min=0, max=10)
-    trust_sender_4 = models.IntegerField(min=0, max=10)
-    trust_sender_5 = models.IntegerField(min=0, max=10)
-    trust_sender_6 = models.IntegerField(min=0, max=10)
-    trust_sender_1_conf = models.IntegerField()
-    trust_sender_2_conf = models.IntegerField()
-    trust_sender_3_conf = models.IntegerField()
-    trust_sender_4_conf = models.IntegerField()
-    trust_sender_5_conf = models.IntegerField()
-    trust_sender_6_conf = models.IntegerField()
-    sender_1_correction_1_inround = models.IntegerField(blank=True)
-    sender_1_correction_2_inround = models.IntegerField(blank=True)
-    sender_1_correction_3_inround = models.IntegerField(blank=True)
-    sender_1_correction_4_inround = models.IntegerField(blank=True)
-    sender_1_correction_5_inround = models.IntegerField(blank=True)
-    sender_1_correction_6_inround = models.IntegerField(blank=True)
-    sender_1_correction_7_inround = models.IntegerField(blank=True)
-    sender_1_correction_8_inround = models.IntegerField(blank=True)
-    sender_1_correction_9_inround = models.IntegerField(blank=True)
-    sender_1_correction_10_inround = models.IntegerField(blank=True)
-    sender_1_correction_1_actually = models.IntegerField(blank=True)
-    sender_1_correction_2_actually = models.IntegerField(blank=True)
-    sender_1_correction_3_actually = models.IntegerField(blank=True)
-    sender_1_correction_4_actually = models.IntegerField(blank=True)
-    sender_1_correction_5_actually = models.IntegerField(blank=True)
-    sender_1_correction_6_actually = models.IntegerField(blank=True)
-    sender_1_correction_7_actually = models.IntegerField(blank=True)
-    sender_1_correction_8_actually = models.IntegerField(blank=True)
-    sender_1_correction_9_actually = models.IntegerField(blank=True)
-    sender_1_correction_10_actually = models.IntegerField(blank=True)
-    sender_2_correction_1_inround = models.IntegerField(blank=True)
-    sender_2_correction_2_inround = models.IntegerField(blank=True)
-    sender_2_correction_3_inround = models.IntegerField(blank=True)
-    sender_2_correction_4_inround = models.IntegerField(blank=True)
-    sender_2_correction_5_inround = models.IntegerField(blank=True)
-    sender_2_correction_6_inround = models.IntegerField(blank=True)
-    sender_2_correction_7_inround = models.IntegerField(blank=True)
-    sender_2_correction_8_inround = models.IntegerField(blank=True)
-    sender_2_correction_9_inround = models.IntegerField(blank=True)
-    sender_2_correction_10_inround = models.IntegerField(blank=True)
-    sender_2_correction_1_actually = models.IntegerField(blank=True)
-    sender_2_correction_2_actually = models.IntegerField(blank=True)
-    sender_2_correction_3_actually = models.IntegerField(blank=True)
-    sender_2_correction_4_actually = models.IntegerField(blank=True)
-    sender_2_correction_5_actually = models.IntegerField(blank=True)
-    sender_2_correction_6_actually = models.IntegerField(blank=True)
-    sender_2_correction_7_actually = models.IntegerField(blank=True)
-    sender_2_correction_8_actually = models.IntegerField(blank=True)
-    sender_2_correction_9_actually = models.IntegerField(blank=True)
-    sender_2_correction_10_actually = models.IntegerField(blank=True)
-    sender_3_correction_1_inround = models.IntegerField(blank=True)
-    sender_3_correction_2_inround = models.IntegerField(blank=True)
-    sender_3_correction_3_inround = models.IntegerField(blank=True)
-    sender_3_correction_4_inround = models.IntegerField(blank=True)
-    sender_3_correction_5_inround = models.IntegerField(blank=True)
-    sender_3_correction_6_inround = models.IntegerField(blank=True)
-    sender_3_correction_7_inround = models.IntegerField(blank=True)
-    sender_3_correction_8_inround = models.IntegerField(blank=True)
-    sender_3_correction_9_inround = models.IntegerField(blank=True)
-    sender_3_correction_10_inround = models.IntegerField(blank=True)
-    sender_3_correction_1_actually = models.IntegerField(blank=True)
-    sender_3_correction_2_actually = models.IntegerField(blank=True)
-    sender_3_correction_3_actually = models.IntegerField(blank=True)
-    sender_3_correction_4_actually = models.IntegerField(blank=True)
-    sender_3_correction_5_actually = models.IntegerField(blank=True)
-    sender_3_correction_6_actually = models.IntegerField(blank=True)
-    sender_3_correction_7_actually = models.IntegerField(blank=True)
-    sender_3_correction_8_actually = models.IntegerField(blank=True)
-    sender_3_correction_9_actually = models.IntegerField(blank=True)
-    sender_3_correction_10_actually = models.IntegerField(blank=True)
-    sender_4_correction_1_inround = models.IntegerField(blank=True)
-    sender_4_correction_2_inround = models.IntegerField(blank=True)
-    sender_4_correction_3_inround = models.IntegerField(blank=True)
-    sender_4_correction_4_inround = models.IntegerField(blank=True)
-    sender_4_correction_5_inround = models.IntegerField(blank=True)
-    sender_4_correction_6_inround = models.IntegerField(blank=True)
-    sender_4_correction_7_inround = models.IntegerField(blank=True)
-    sender_4_correction_8_inround = models.IntegerField(blank=True)
-    sender_4_correction_9_inround = models.IntegerField(blank=True)
-    sender_4_correction_10_inround = models.IntegerField(blank=True)
-    sender_4_correction_1_actually = models.IntegerField(blank=True)
-    sender_4_correction_2_actually = models.IntegerField(blank=True)
-    sender_4_correction_3_actually = models.IntegerField(blank=True)
-    sender_4_correction_4_actually = models.IntegerField(blank=True)
-    sender_4_correction_5_actually = models.IntegerField(blank=True)
-    sender_4_correction_6_actually = models.IntegerField(blank=True)
-    sender_4_correction_7_actually = models.IntegerField(blank=True)
-    sender_4_correction_8_actually = models.IntegerField(blank=True)
-    sender_4_correction_9_actually = models.IntegerField(blank=True)
-    sender_4_correction_10_actually = models.IntegerField(blank=True)
-    sender_5_correction_1_inround = models.IntegerField(blank=True)
-    sender_5_correction_2_inround = models.IntegerField(blank=True)
-    sender_5_correction_3_inround = models.IntegerField(blank=True)
-    sender_5_correction_4_inround = models.IntegerField(blank=True)
-    sender_5_correction_5_inround = models.IntegerField(blank=True)
-    sender_5_correction_6_inround = models.IntegerField(blank=True)
-    sender_5_correction_7_inround = models.IntegerField(blank=True)
-    sender_5_correction_8_inround = models.IntegerField(blank=True)
-    sender_5_correction_9_inround = models.IntegerField(blank=True)
-    sender_5_correction_10_inround = models.IntegerField(blank=True)
-    sender_5_correction_1_actually = models.IntegerField(blank=True)
-    sender_5_correction_2_actually = models.IntegerField(blank=True)
-    sender_5_correction_3_actually = models.IntegerField(blank=True)
-    sender_5_correction_4_actually = models.IntegerField(blank=True)
-    sender_5_correction_5_actually = models.IntegerField(blank=True)
-    sender_5_correction_6_actually = models.IntegerField(blank=True)
-    sender_5_correction_7_actually = models.IntegerField(blank=True)
-    sender_5_correction_8_actually = models.IntegerField(blank=True)
-    sender_5_correction_9_actually = models.IntegerField(blank=True)
-    sender_5_correction_10_actually = models.IntegerField(blank=True)
-    sender_6_correction_1_inround = models.IntegerField(blank=True)
-    sender_6_correction_2_inround = models.IntegerField(blank=True)
-    sender_6_correction_3_inround = models.IntegerField(blank=True)
-    sender_6_correction_4_inround = models.IntegerField(blank=True)
-    sender_6_correction_5_inround = models.IntegerField(blank=True)
-    sender_6_correction_6_inround = models.IntegerField(blank=True)
-    sender_6_correction_7_inround = models.IntegerField(blank=True)
-    sender_6_correction_8_inround = models.IntegerField(blank=True)
-    sender_6_correction_9_inround = models.IntegerField(blank=True)
-    sender_6_correction_10_inround = models.IntegerField(blank=True)
-    sender_6_correction_1_actually = models.IntegerField(blank=True)
-    sender_6_correction_2_actually = models.IntegerField(blank=True)
-    sender_6_correction_3_actually = models.IntegerField(blank=True)
-    sender_6_correction_4_actually = models.IntegerField(blank=True)
-    sender_6_correction_5_actually = models.IntegerField(blank=True)
-    sender_6_correction_6_actually = models.IntegerField(blank=True)
-    sender_6_correction_7_actually = models.IntegerField(blank=True)
-    sender_6_correction_8_actually = models.IntegerField(blank=True)
-    sender_6_correction_9_actually = models.IntegerField(blank=True)
-    sender_6_correction_10_actually = models.IntegerField(blank=True)
+    comprq1 = models.IntegerField(choices=[[1,
+                                            'The estimate of a randomly drawn estimation device is equally likely to be the correct number x or any other number.'],
+                                           [2,
+                                            'The estimate of a randomly drawn estimation device is less likely to be '
+                                            'the correct number x than any other number, and the further one moves away '
+                                            'from x, the more likely it is that an estimation device reports such a number.'],
+                                           [3,
+                                            'The estimate of a randomly drawn estimation device is more likely to be '
+                                            'the correct number x than any other number, and the further one moves away '
+                                            'from x, the less likely it is that an estimation device reports such a number.']],
+                                  widget=widgets.RadioSelect,
+                                  label='')
+    comprq2 = models.IntegerField(choices=[
+        [1, 'The average of estimates of all the estimation devices can be any number with equal probability.'],
+        [2,
+         'The average of estimates of all the estimation devices corresponds exactly (or almost exactly) to number x'],
+        [3, 'The average of estimates of all the estimation devices will always be larger than number x.'],
+        [4, 'The average of estimates of all the estimation devices will always be smaller than number x.']],
+                                  widget=widgets.RadioSelect,
+                                  label='')
+    comprq3 = models.IntegerField(choices=[[1, 'I will observe an estimate of 1 randomly drawn estimation device.'],
+                                           [2, 'I will observe the estimates of 3 randomly drawn estimation devices.'],
+                                           [3,
+                                            'I will observe the actual number x and the estimate of 1 randomly drawn estimation device.']],
+                                  widget=widgets.RadioSelect,
+                                  label='')
+    comprq4 = models.IntegerField(choices=[[1, 'A randomly drawn estimation device shows me an estimate of 490.'],
+                                           [2, 'A randomly drawn estimation device shows me an estimate of 541.'],
+                                           [3, 'A randomly drawn estimation device shows me an estimate of 555.']],
+                                  widget=widgets.RadioSelect,
+                                  label='')
+    comprq5 = models.IntegerField(choices=[[1, '9'],
+                                           [2, '18'],
+                                           [3, '19'],
+                                           [4, '24']],
+                                  widget=widgets.RadioSelect,
+                                  label='')
+    comprq6 = models.IntegerField(
+        choices=[[1, 'All parts of the experiment in which additional money can be earned will be paid out.'],
+                 [2,
+                  'Only one of the parts in which additional money can be earned will be randomly chosen and paid out. '
+                  'If it happens that part 2 is chosen, then the earnings from each of the 10 estimation tasks will be paid out.'],
+                 [3,
+                  'Only one of the parts in which additional money can be earned will be randomly chosen and paid out. '
+                  'If it happens that part 2 is chosen, then one of the 10 estimation tasks will be randomly chosen, and my additional payment will depend only on my precision on that particular estimation task.']],
+        widget=widgets.RadioSelect,
+        label='')
+    comprq7 = models.IntegerField(
+        choices=[[1, 'Each sender observed an estimate of 1 randomly drawn estimation device.'],
+                 [2, 'Each sender observed an estimate of 3 randomly drawn estimation devices.'],
+                 [3,
+                  'Each sender observed an estimate of an actual number x and the estimate of 1 randomly drawn estimation device.']],
+        widget=widgets.RadioSelect,
+        label='')
+    comprq8 = models.IntegerField(choices=[[1, 'I will observe the estimates of 6 senders. The senders’ group affiliation and names will not be shown.'],
+                                           [2, 'I will observe the estimates of 5 senders.This includes Sender A, Sender B, Sender C, and 2 out of the following 3 senders: '
+                                               'Sender D, Sender E, and Sender F. '
+                                               'The senders’ names and group affiliation will be shown. '
+                                               'From senders D, E, and F, I will always observe the two lowest estimates. '
+                                               'The highest of those 3 estimates is on average y higher than the second highest estimates.'],
+                                           [3, 'I will observe the estimates of 5 senders.This includes Sender A, Sender B, Sender C, and 2 out of the following 3 senders: '
+                                               'Sender D, Sender E, and Sender F. '
+                                               'The senders’ names and group affiliation will be shown. '
+                                               'From senders D, E, and F, I will always observe the two highest estimates. '
+                                               'The lowest of those 3 estimates is on average y-2 lower than the second lowest estimate.'],
+                                           [4, 'I will observe the estimates of 5 senders. '
+                                               'This includes Sender A, Sender B, Sender C, and 2 out of the following 3 senders: '
+                                               'Sender D, Sender E, and Sender F. '
+                                               'The senders’ names and group affiliation will be shown. '
+                                               'From senders D, E, and F, I will always observe the two lowest estimates. '
+                                               'The highest of those 3 estimates is on average y higher than the second highest estimates.']],
+                                  widget=widgets.RadioSelect,
+                                  label='')
+    comprq9 = models.IntegerField(choices=[[1, 'Sender X, Sender Y, and Sender X are my members my X group while Sender Y, Sender X, and Sender Y are members of Y group.'],
+                                           [2, 'Sender Y, Sender X, and Sender Y are my members my X group while Sender X, Sender Y, and Sender X are members of Y group.'],
+                                           [3, 'Sender X, Sender X, and Sender X are my members my X group while Sender Y, Sender Y, and Sender Y are members of Y group.']],
+                                  widget=widgets.RadioSelect,
+                                  label='')
+    comprq10 = models.IntegerField(choices=[[1,
+                                            'The estimate of a randomly drawn estimation device is equally likely to be the correct number x or any other number'],
+                                           [2,
+                                            'The estimate of a randomly drawn estimation device is less likely to be the correct number x than any other number, and the further one moves away from x, the more likely it is that an estimation device reports such a number'],
+                                           [3,
+                                            'The estimate of a randomly drawn estimation device is more likely to be the correct number x than any other number, and the further one moves away from x, the less likely it is that an estimation device reports such a number']],
+                                  widget=widgets.RadioSelect,
+                                  label='')
+    comprq11 = models.IntegerField(choices=[
+        [1, 'The average of estimates of all the estimation devices can be any number with equal probability.'],
+        [2,
+         'The average of estimates of all the estimation devices corresponds exactly (or almost exactly) to number x.'],
+        [3, 'The average of estimates of all the estimation devices will always be larger than number x.'],
+        [4, 'The average of estimates of all the estimation devices will always be smaller than number x.']],
+                                   widget=widgets.RadioSelect,
+                                   label='')
+    comprq12 = models.IntegerField(
+        choices=[[1, 'A sender’s randomly drawn estimation device showed an estimate of 490.'],
+                 [2, 'A sender’s randomly drawn estimation device showed an estimate of 541.'],
+                 [3, 'A sender’s randomly drawn estimation device showed an estimate of 555.']],
+        widget=widgets.RadioSelect,
+        label='')
+    comprq13 = models.IntegerField(choices=[[1, '9'],
+                                            [2, '18'],
+                                            [3, '19'],
+                                            [4, '24']],
+                                   widget=widgets.RadioSelect,
+                                   label='')
+    comprq14 = models.IntegerField(choices=[[1, '1490'],
+                                            [2, '1520'],
+                                            [3, '1521'],
+                                            [4, '1525']],
+                                   widget=widgets.RadioSelect,
+                                   label='')
+
 
 # FUNCTIONS
 
@@ -188,8 +169,6 @@ def creating_session(subsession: Subsession):
     subsession.x = random.randint(0, 100)
     estimates = np.random.normal(Constants.true_state[subsession.round_number - 1], Constants.sd, 6)
     estimates = np.rint(estimates)
-    # order according to ranks (from lowest to highest number)
-    estimates = np.sort(estimates)
     for p in players:  # Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
         if p.id_in_group in list(range(1, Constants.num_senders + 1)):
             p.Role = 'sender'
@@ -233,9 +212,8 @@ class Signals(Page):
     @staticmethod
     def js_vars(player: Player):
         return dict(
-            round=player.round_number ,
+            round=player.round_number,
         )
-
 
 
 class Instructions_GT_senders(Page):
@@ -243,33 +221,64 @@ class Instructions_GT_senders(Page):
     def is_displayed(player):
         return player.Role == "sender" and player.round_number == 1
 
+    form_model = "player"
+    form_fields = ["comprq1", "comprq2", "comprq3", "comprq4", "comprq5", "comprq6"]
+
+    @staticmethod
+    def error_message(player, values):
+        solutions = dict(
+            comprq1=3,
+            comprq2=2,
+            comprq3=1,
+            comprq4=2,
+            comprq5=3,
+            comprq6=3,
+        )
+
+        error_messages = dict()
+
+        for field_name in solutions:
+            if values[field_name] != solutions[field_name]:
+                error_messages[
+                    field_name] = 'Falsche Antwort - Bitte korrigiere deine Angabe oder hebe deine Hand zur Klärung mit dem Laborpersonal.'
+
+        return error_messages
+
 
 class Instructions_GT_receivers(Page):
     @staticmethod
     def is_displayed(player):
-        return player.Role == "receiver" and player.round_number == 1
+        return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
+
+    form_model = "player"
+    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq11", "comprq12", "comprq13", "comprq14"]
+
+    @staticmethod
+    def error_message(player, values):
+        solutions = dict(
+            comprq7=1,
+            comprq8=3,
+            comprq9=3,
+            comprq10=2,
+            comprq11=2,
+            comprq12=2,
+            comprq13=3,
+            comprq14=2,
+        )
+
+        error_messages = dict()
+
+        for field_name in solutions:
+            if values[field_name] != solutions[field_name]:
+                error_messages[
+                    field_name] = 'Falsche Antwort - Bitte korrigiere deine Angabe oder hebe deine Hand zur Klärung mit dem Laborpersonal.'
+
+        return error_messages
 
 
 # wait for all senders to send a signal
-class FirstWaitPage(WaitPage):
+class StartWaitPage(WaitPage):
     wait_for_all_groups = True
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == 1
-
-
-class SecondWaitPage(WaitPage):
-    wait_for_all_groups = True
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds/2 or player.round_number == Constants.num_rounds
-
-
-class ThirdWaitPage(WaitPage):
-    wait_for_all_groups = True
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds
 
 
 # the receiver observes all the signals sent by senders and states a guess/posterior
@@ -283,50 +292,44 @@ class Guess(Page):
         else:
             player.payoff = 0
 
-
     @staticmethod
     def vars_for_template(player: Player):
         current_round = player.round_number
-        prev_player = player.in_round(current_round - Constants.num_rounds/2)
+        prev_player = player.in_round(current_round - Constants.num_rounds / 2)
         prev_players = prev_player.group.get_players()
-        signals = [p.sent_signal for p in prev_players if p.Role =='sender']
-        identities = [p.participant.identity for p in prev_players if p.Role == 'sender']
-
-        signal_difference = []
-        for round in range(1, int(Constants.num_rounds / 2) + 1):
-            prev = player.in_round(round)
-            round_prev_players = prev.group.get_players()
-            round_signals = [p.sent_signal for p in round_prev_players if p.Role == 'sender']
-            signal_difference.append(round_signals[5] - round_signals[4])
-
-        if player.Role == "receiver":   # Gathering all signals and the resp. sender's identities for analyses -
-                                        # this part works but can be improved with a loop or something
+        signals = [p.sent_signal for p in prev_players if p.Role == 'sender']
+        senders = [p.id_in_group for p in prev_players if p.Role == 'sender']
+        identities = [p.identity for p in prev_players if p.Role == 'sender']
+        temp = []
+        for i in list(range(Constants.num_senders - 3, Constants.num_senders)):
+            temp.append([signals[i], senders[i], identities[i]])
+        temp.sort()
+        del temp[0]
+        # random.shuffle(temp)
+        for i in list(range(0, Constants.num_senders - 4)):
+            if temp[i][1] == 4:
+                temp[i][1] = 'D'
+            if temp[i][1] == 5:
+                temp[i][1] = 'E'
+            if temp[i][1] == 6:
+                temp[i][1] = 'F'
+        if player.Role == "receiver":
             player.received_signal_1 = signals[0]
-            if identities[0] == player.participant.identity:
-                player.received_signal_1_identity = True
             player.received_signal_2 = signals[1]
-            if identities[1] == player.participant.identity:
-                player.received_signal_2_identity = True
             player.received_signal_3 = signals[2]
-            if identities[2] == player.participant.identity:
-                player.received_signal_3_identity = True
-            player.received_signal_4 = signals[3]
-            if identities[3] == player.participant.identity:
-                player.received_signal_4_identity = True
-            player.received_signal_5 = signals[4]
-            if identities[4] == player.participant.identity:
-                player.received_signal_5_identity = True
-            player.received_signal_6 = signals[5]
-            if identities[5] == player.participant.identity:
-                player.received_signal_6_identity = True
+            player.received_signal_4 = temp[0][0]
+            player.received_signal_5 = temp[1][0]
+
             return dict(
                 signal_1=signals[0],
                 signal_2=signals[1],
                 signal_3=signals[2],
-                signal_4=signals[3],
-                signal_5=signals[4],
-                #signal_6=signals[5],
-                skipped=skipped_signal,
+                signal_4=temp[0][0],
+                signal_5=temp[1][0],
+                sender_4=temp[0][1],
+                sender_4_identity=temp[0][2],
+                sender_5=temp[1][1],
+                sender_5_identity=temp[1][2],
             )
 
     form_model = "player"
@@ -342,250 +345,31 @@ class Guess(Page):
             round=player.round_number - Constants.num_rounds / 2,
         )
 
-class Instructions_Trust_in_Senders(Page):
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver"
-
-
-class Trust_in_Senders(Page):
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver"
-
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        signals_all_rounds = []
-        for i in range(10): # Amount of rounds
-            signals_all_rounds.append([])
-            for j in range(6): # Amount of players
-                signals_all_rounds[i].append(0)
-        for i in list(range(0, int(Constants.num_rounds/2))):
-            prev_player = player.in_round(i + 1)
-            prev_players = prev_player.group.get_players()
-            signals = [p.field_maybe_none('sent_signal') for p in prev_players if p.Role == 'sender']
-            signals_all_rounds[i] = signals
-        return dict( #The following works but is super, super dirty coded - haven't found a way to easily shorten it
-            signals_round_1=signals_all_rounds[0],
-            signals_round_2=signals_all_rounds[1],
-            signals_round_3=signals_all_rounds[2],
-            signals_round_4=signals_all_rounds[3],
-            signals_round_5=signals_all_rounds[4],
-            signals_round_6=signals_all_rounds[5],
-            )
-
-    form_model = "player"
-    form_fields = ["trust_sender_1", "trust_sender_2", "trust_sender_3", "trust_sender_4", "trust_sender_5", "trust_sender_6"]
-
-class Confidence_1_all10(Page):
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
-               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_2 + player.trust_sender_2 +\
-               player.trust_sender_2 + player.trust_sender_2 == 100
-
-
-class Confidence_1_notall10(Page):
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
-               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_2 + player.trust_sender_2 +\
-               player.trust_sender_2 + player.trust_sender_2 < 100
-
-
-class Confidence_2(Page):
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver"
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        signals_all_rounds = []
-        for i in range(10):  # Amount of rounds
-            signals_all_rounds.append([])
-            for j in range(6):  # Amount of players
-                signals_all_rounds[i].append(0)
-        for i in list(range(0, int(Constants.num_rounds / 2))):
-            prev_player = player.in_round(i + 1)
-            prev_players = prev_player.group.get_players()
-            signals = [p.sent_signal for p in prev_players if p.Role == 'sender']
-            signals_all_rounds[i] = signals
-        return dict(  # The following works but is super, super dirty coded - haven't found a way to easily shorten it
-            signals_round_1=signals_all_rounds[0],
-            signals_round_2=signals_all_rounds[1],
-            signals_round_3=signals_all_rounds[2],
-            signals_round_4=signals_all_rounds[3],
-            signals_round_5=signals_all_rounds[4],
-            signals_round_6=signals_all_rounds[5],
-            trust_sender_1=player.trust_sender_1,
-            trust_sender_2=player.trust_sender_2,
-            trust_sender_3=player.trust_sender_3,
-            trust_sender_4=player.trust_sender_4,
-            trust_sender_5=player.trust_sender_5,
-            trust_sender_6=player.trust_sender_6,
-        )
-
-    @staticmethod
-    def js_vars(player: Player):
-        return dict(
-            trust_sender_1=player.trust_sender_1,
-            trust_sender_2=player.trust_sender_2,
-            trust_sender_3=player.trust_sender_3,
-            trust_sender_4=player.trust_sender_4,
-            trust_sender_5=player.trust_sender_5,
-            trust_sender_6=player.trust_sender_6,
-        )
-
-    form_model = "player"
-    form_fields = ["trust_sender_1_conf", "trust_sender_2_conf", "trust_sender_3_conf", "trust_sender_4_conf", "trust_sender_5_conf", "trust_sender_6_conf"]
-
-
-class Confidence_3(Page):
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
-               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_2 + player.trust_sender_2 +\
-               player.trust_sender_2 + player.trust_sender_2 < 100
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(
-            trust_sender_1=player.trust_sender_1,
-            trust_sender_2=player.trust_sender_2,
-            trust_sender_3=player.trust_sender_3,
-            trust_sender_4=player.trust_sender_4,
-            trust_sender_5=player.trust_sender_5,
-            trust_sender_6=player.trust_sender_6,
-            mistrust_sender_1=10 - player.trust_sender_1,
-            mistrust_sender_2=10 - player.trust_sender_2,
-            mistrust_sender_3=10 - player.trust_sender_3,
-            mistrust_sender_4=10 - player.trust_sender_4,
-            mistrust_sender_5=10 - player.trust_sender_5,
-            mistrust_sender_6=10 - player.trust_sender_6,
-        )
-
-class Confidence_4(Page):
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
-               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_2 + player.trust_sender_2 +\
-               player.trust_sender_2 + player.trust_sender_2 < 100
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        signals_all_rounds = []
-        for i in range(10):  # Amount of rounds
-            signals_all_rounds.append([])
-            for j in range(6):  # Amount of players
-                signals_all_rounds[i].append(0)
-        for i in list(range(0, int(Constants.num_rounds / 2))):
-            prev_player = player.in_round(i + 1)
-            prev_players = prev_player.group.get_players()
-            signals = [p.sent_signal for p in prev_players if p.Role == 'sender']
-            signals_all_rounds[i] = signals
-        return dict(  # The following works but is super, super dirty coded - haven't found a way to easily shorten it
-            signals_round_1=signals_all_rounds[0],
-            signals_round_2=signals_all_rounds[1],
-            signals_round_3=signals_all_rounds[2],
-            signals_round_4=signals_all_rounds[3],
-            signals_round_5=signals_all_rounds[4],
-            signals_round_6=signals_all_rounds[5],
-            trust_sender_1=player.trust_sender_1,
-            trust_sender_2=player.trust_sender_2,
-            trust_sender_3=player.trust_sender_3,
-            trust_sender_4=player.trust_sender_4,
-            trust_sender_5=player.trust_sender_5,
-            trust_sender_6=player.trust_sender_6,
-            mistrust_sender_1=10 - player.trust_sender_1,
-            mistrust_sender_2=10 - player.trust_sender_2,
-            mistrust_sender_3=10 - player.trust_sender_3,
-            mistrust_sender_4=10 - player.trust_sender_4,
-            mistrust_sender_5=10 - player.trust_sender_5,
-            mistrust_sender_6=10 - player.trust_sender_6,
-        )
-
-    @staticmethod
-    def js_vars(player: Player):
-        return dict(
-            mistrust_sender_1=10 - player.trust_sender_1,
-            mistrust_sender_2=10 - player.trust_sender_2,
-            mistrust_sender_3=10 - player.trust_sender_3,
-            mistrust_sender_4=10 - player.trust_sender_4,
-            mistrust_sender_5=10 - player.trust_sender_5,
-            mistrust_sender_6=10 - player.trust_sender_6,
-        )
-    form_model = "player"
-    form_fields = ["sender_1_correction_1_inround", "sender_1_correction_2_inround", "sender_1_correction_3_inround",
-                   "sender_1_correction_4_inround", "sender_1_correction_5_inround",
-                   "sender_1_correction_6_inround", "sender_1_correction_7_inround", "sender_1_correction_8_inround",
-                   "sender_1_correction_9_inround", "sender_1_correction_10_inround",
-                   "sender_1_correction_1_actually", "sender_1_correction_2_actually", "sender_1_correction_3_actually",
-                   "sender_1_correction_4_actually", "sender_1_correction_5_actually",
-                   "sender_1_correction_6_actually", "sender_1_correction_7_actually", "sender_1_correction_8_actually",
-                   "sender_1_correction_9_actually", "sender_1_correction_10_actually",
-                   "sender_2_correction_1_inround", "sender_2_correction_2_inround", "sender_2_correction_3_inround",
-                   "sender_2_correction_4_inround", "sender_2_correction_5_inround",
-                   "sender_2_correction_6_inround", "sender_2_correction_7_inround", "sender_2_correction_8_inround",
-                   "sender_2_correction_9_inround", "sender_2_correction_10_inround",
-                   "sender_2_correction_1_actually", "sender_2_correction_2_actually", "sender_2_correction_3_actually",
-                   "sender_2_correction_4_actually", "sender_2_correction_5_actually",
-                   "sender_2_correction_6_actually", "sender_2_correction_7_actually", "sender_2_correction_8_actually",
-                   "sender_2_correction_9_actually", "sender_2_correction_10_actually",
-                   "sender_3_correction_1_inround", "sender_3_correction_2_inround", "sender_3_correction_3_inround",
-                   "sender_3_correction_4_inround", "sender_3_correction_5_inround",
-                   "sender_3_correction_6_inround", "sender_3_correction_7_inround", "sender_3_correction_8_inround",
-                   "sender_3_correction_9_inround", "sender_3_correction_10_inround",
-                   "sender_3_correction_1_actually", "sender_3_correction_2_actually", "sender_3_correction_3_actually",
-                   "sender_3_correction_4_actually", "sender_3_correction_5_actually",
-                   "sender_3_correction_6_actually", "sender_3_correction_7_actually", "sender_3_correction_8_actually",
-                   "sender_3_correction_9_actually", "sender_3_correction_10_actually",
-                   "sender_4_correction_1_inround", "sender_4_correction_2_inround", "sender_4_correction_3_inround",
-                   "sender_4_correction_4_inround", "sender_4_correction_5_inround",
-                   "sender_4_correction_6_inround", "sender_4_correction_7_inround", "sender_4_correction_8_inround",
-                   "sender_4_correction_9_inround", "sender_4_correction_10_inround",
-                   "sender_4_correction_1_actually", "sender_4_correction_2_actually", "sender_4_correction_3_actually",
-                   "sender_4_correction_4_actually", "sender_4_correction_5_actually",
-                   "sender_4_correction_6_actually", "sender_4_correction_7_actually", "sender_4_correction_8_actually",
-                   "sender_4_correction_9_actually", "sender_4_correction_10_actually",
-                   "sender_5_correction_1_inround", "sender_5_correction_2_inround", "sender_5_correction_3_inround",
-                   "sender_5_correction_4_inround", "sender_5_correction_5_inround",
-                   "sender_5_correction_6_inround", "sender_5_correction_7_inround", "sender_5_correction_8_inround",
-                   "sender_5_correction_9_inround", "sender_5_correction_10_inround",
-                   "sender_5_correction_1_actually", "sender_5_correction_2_actually", "sender_5_correction_3_actually",
-                   "sender_5_correction_4_actually", "sender_5_correction_5_actually",
-                   "sender_5_correction_6_actually", "sender_5_correction_7_actually", "sender_5_correction_8_actually",
-                   "sender_5_correction_9_actually", "sender_5_correction_10_actually",
-                   "sender_6_correction_1_inround", "sender_6_correction_2_inround", "sender_6_correction_3_inround",
-                   "sender_6_correction_4_inround", "sender_6_correction_5_inround",
-                   "sender_6_correction_6_inround", "sender_6_correction_7_inround", "sender_6_correction_8_inround",
-                   "sender_6_correction_9_inround", "sender_6_correction_10_inround",
-                   "sender_6_correction_1_actually", "sender_6_correction_2_actually", "sender_6_correction_3_actually",
-                   "sender_6_correction_4_actually", "sender_6_correction_5_actually",
-                   "sender_6_correction_6_actually", "sender_6_correction_7_actually", "sender_6_correction_8_actually",
-                   "sender_6_correction_9_actually", "sender_6_correction_10_actually",
-                   ]
-
-
-class Payout_calc(WaitPage):
+class SecondWaitPage(WaitPage):
     wait_for_all_groups = True
-    after_all_players_arrive = 'payout_calc'
+    after_all_players_arrive = 'save_signals_payoff'
 
     @staticmethod
     def is_displayed(player):
         return player.round_number == Constants.num_rounds
 
 
-def payout_calc(subsession: Subsession):
+def save_signals_payoff(subsession: Subsession):
     players = subsession.get_players()
+    signals_all_rounds = []
+    estimates_all_rounds = []
+
+    for i in list(range(0, int(Constants.num_rounds / 2))):
+        for p in players:
+            if p.Role == 'sender':
+                prev_player = p.in_round(i + 1)
+                signals_all_rounds.append(prev_player.field_maybe_none('sent_signal'))
+                estimates_all_rounds.append(prev_player.estimate)
+    # Payoff calculation
     for p in players:
+        participant = p.participant
+        participant.estimates_all_rounds = estimates_all_rounds
+        participant.signals_all_rounds = signals_all_rounds
         if p.Role == "sender":
             i = random.randint(1, int(Constants.num_rounds / 2))
             prev_player = p.in_round(i)
@@ -598,5 +382,7 @@ def payout_calc(subsession: Subsession):
             participant.GuessingTask_payoff = prev_player.payoff
 
 
-page_sequence = [FirstWaitPage, Instructions_GT_senders, Signals, Instructions_GT_receivers, Guess, SecondWaitPage,
-                 Instructions_Trust_in_Senders, Trust_in_Senders, Confidence_1_all10, Confidence_1_notall10, Confidence_2, Confidence_3, Confidence_4, ThirdWaitPage, Payout_calc]
+
+
+page_sequence = [Instructions_GT_senders, StartWaitPage, Signals, Instructions_GT_receivers,
+                 Guess, SecondWaitPage]

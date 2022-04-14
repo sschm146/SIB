@@ -203,12 +203,6 @@ class Instructions_GT_senders(Page):
     def is_displayed(player):
         return player.Role == "sender" and player.round_number == 1
 
-
-class Comprehension_GT_senders(Page):
-    @staticmethod
-    def is_displayed(player):
-        return player.Role == "sender" and player.round_number == 1
-
     form_model = "player"
     form_fields = ["comprq1", "comprq2", "comprq3", "comprq4", "comprq5", "comprq6"]
 
@@ -234,12 +228,6 @@ class Comprehension_GT_senders(Page):
 
 
 class Instructions_GT_receivers(Page):
-    @staticmethod
-    def is_displayed(player):
-        return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
-
-
-class Comprehension_GT_receivers(Page):
     @staticmethod
     def is_displayed(player):
         return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
@@ -273,55 +261,6 @@ class Comprehension_GT_receivers(Page):
 # wait for all senders to send a signal
 class StartWaitPage(WaitPage):
     wait_for_all_groups = True
-
-
-class SecondWaitPage(WaitPage):
-    wait_for_all_groups = True
-    after_all_players_arrive = 'save_signals_payoff'
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds
-
-
-def save_signals_payoff(subsession: Subsession):
-    signals_all_rounds = []
-    for i in range(10):  # Amount of rounds
-        signals_all_rounds.append([])
-        for j in range(6):  # Amount of players
-            signals_all_rounds[i].append(0)
-    players = subsession.get_players()
-    for p in players:
-        for i in list(range(0, int(Constants.num_rounds / 2))):
-            prev_player = p.in_round(i + 1)
-            prev_players = prev_player.group.get_players()
-            signals = [p.field_maybe_none('sent_signal') for p in prev_players if p.Role == 'sender']
-            signals_all_rounds[i] = signals
-        participant = p.participant
-        participant.signals_round_1 = signals_all_rounds[0]
-        participant.signals_round_2 = signals_all_rounds[1]
-        participant.signals_round_3 = signals_all_rounds[2]
-        participant.signals_round_4 = signals_all_rounds[3]
-        participant.signals_round_5 = signals_all_rounds[4]
-        participant.signals_round_6 = signals_all_rounds[5]
-        #Payoff calculation
-        if p.Role == "sender":
-            i = random.randint(1, int(Constants.num_rounds / 2))
-            prev_player = p.in_round(i)
-            participant = p.participant
-            participant.GuessingTask_payoff = prev_player.payoff
-        if p.Role == "receiver":
-            i = random.randint(int(Constants.num_rounds / 2) + 1, Constants.num_rounds)
-            prev_player = p.in_round(i)
-            participant = p.participant
-            participant.GuessingTask_payoff = prev_player.payoff
-
-
-class ThirdWaitPage(WaitPage):
-    wait_for_all_groups = True
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds
 
 
 # the receiver observes all the signals sent by senders and states a guess/posterior
@@ -386,6 +325,44 @@ class Guess(Page):
             round=player.round_number - Constants.num_rounds / 2,
         )
 
+class SecondWaitPage(WaitPage):
+    wait_for_all_groups = True
+    after_all_players_arrive = 'save_signals_payoff'
 
-page_sequence = [Instructions_GT_senders, Comprehension_GT_senders, StartWaitPage, Signals, Instructions_GT_receivers,
-                 Comprehension_GT_receivers, Guess, SecondWaitPage]
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == Constants.num_rounds
+
+
+def save_signals_payoff(subsession: Subsession):
+    players = subsession.get_players()
+    signals_all_rounds = []
+    estimates_all_rounds = []
+
+    for i in list(range(0, int(Constants.num_rounds / 2))):
+        for p in players:
+            if p.Role == 'sender':
+                prev_player = p.in_round(i + 1)
+                signals_all_rounds.append(prev_player.field_maybe_none('sent_signal'))
+                estimates_all_rounds.append(prev_player.estimate)
+    # Payoff calculation
+    for p in players:
+        participant = p.participant
+        participant.estimates_all_rounds = estimates_all_rounds
+        participant.signals_all_rounds = signals_all_rounds
+        if p.Role == "sender":
+            i = random.randint(1, int(Constants.num_rounds / 2))
+            prev_player = p.in_round(i)
+            participant = p.participant
+            participant.GuessingTask_payoff = prev_player.payoff
+        if p.Role == "receiver":
+            i = random.randint(int(Constants.num_rounds / 2) + 1, Constants.num_rounds)
+            prev_player = p.in_round(i)
+            participant = p.participant
+            participant.GuessingTask_payoff = prev_player.payoff
+
+
+
+
+page_sequence = [Instructions_GT_senders, StartWaitPage, Signals, Instructions_GT_receivers,
+                 Guess, SecondWaitPage]
