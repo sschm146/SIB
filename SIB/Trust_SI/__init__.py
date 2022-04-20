@@ -215,6 +215,7 @@ class Trust_in_Senders(Page):
     @staticmethod
     def vars_for_template(player: Player):
         participant = player.participant
+
         return dict(
             signals_round_1=participant.signals_all_rounds[0:6],
             signals_round_2=participant.signals_all_rounds[6:12],
@@ -222,7 +223,37 @@ class Trust_in_Senders(Page):
             signals_round_4=participant.signals_all_rounds[18:24],
             signals_round_5=participant.signals_all_rounds[24:30],
             signals_round_6=participant.signals_all_rounds[30:36],
+            n_rec_signals_sender_1=10 - participant.signals_all_rounds[0:31:6].count('-'),
+            n_rec_signals_sender_2=10 - participant.signals_all_rounds[1:32:6].count('-'),
+            n_rec_signals_sender_3=10 - participant.signals_all_rounds[2:33:6].count('-'),
+            n_rec_signals_sender_4=10 - participant.signals_all_rounds[3:34:6].count('-'),
+            n_rec_signals_sender_5=10 - participant.signals_all_rounds[4:35:6].count('-'),
+            n_rec_signals_sender_6=10 - participant.signals_all_rounds[5:36:6].count('-'),
         )
+
+
+    @staticmethod
+    def error_message(player, values):
+        participant = player.participant
+        if values['trust_sender_1'] > 10 - participant.signals_all_rounds[0:31:6].count('-'):
+            return 'Error for Sender F: Please enter a number between 0 and ' + str(
+                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
+        if values['trust_sender_2'] > 10 - participant.signals_all_rounds[1:32:6].count('-'):
+            return 'Error for Sender F: Please enter a number between 0 and ' + str(
+                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
+        if values['trust_sender_3'] > 10 - participant.signals_all_rounds[2:33:6].count('-'):
+            return 'Error for Sender F: Please enter a number between 0 and ' + str(
+                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
+        if values['trust_sender_4'] > 10 - participant.signals_all_rounds[3:34:6].count('-'):
+            return 'Error for Sender F: Please enter a number between 0 and ' + str(
+                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
+        if values['trust_sender_5'] > 10 - participant.signals_all_rounds[4:35:6].count('-'):
+            return 'Error for Sender F: Please enter a number between 0 and ' + str(
+                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
+        if values['trust_sender_6'] > 10 - participant.signals_all_rounds[5:36:6].count('-'):
+            return 'Error for Sender F: Please enter a number between 0 and ' + str(
+                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
+
 
     form_model = "player"
     form_fields = ["trust_sender_1", "trust_sender_2", "trust_sender_3", "trust_sender_4", "trust_sender_5", "trust_sender_6"]
@@ -267,10 +298,17 @@ class Confidence_2(Page):
             trust_sender_4=player.trust_sender_4,
             trust_sender_5=player.trust_sender_5,
             trust_sender_6=player.trust_sender_6,
+            n_rec_signals_sender_1=10 - participant.signals_all_rounds[0:31:6].count('-'),
+            n_rec_signals_sender_2=10 - participant.signals_all_rounds[1:32:6].count('-'),
+            n_rec_signals_sender_3=10 - participant.signals_all_rounds[2:33:6].count('-'),
+            n_rec_signals_sender_4=10 - participant.signals_all_rounds[3:34:6].count('-'),
+            n_rec_signals_sender_5=10 - participant.signals_all_rounds[4:35:6].count('-'),
+            n_rec_signals_sender_6=10 - participant.signals_all_rounds[5:36:6].count('-'),
         )
 
     @staticmethod
     def js_vars(player: Player):
+        participant = player.participant
         return dict(
             trust_sender_1=player.trust_sender_1,
             trust_sender_2=player.trust_sender_2,
@@ -278,6 +316,12 @@ class Confidence_2(Page):
             trust_sender_4=player.trust_sender_4,
             trust_sender_5=player.trust_sender_5,
             trust_sender_6=player.trust_sender_6,
+            n_rec_signals_sender_1=10 - participant.signals_all_rounds[0:31:6].count('-'),
+            n_rec_signals_sender_2=10 - participant.signals_all_rounds[1:32:6].count('-'),
+            n_rec_signals_sender_3=10 - participant.signals_all_rounds[2:33:6].count('-'),
+            n_rec_signals_sender_4=10 - participant.signals_all_rounds[3:34:6].count('-'),
+            n_rec_signals_sender_5=10 - participant.signals_all_rounds[4:35:6].count('-'),
+            n_rec_signals_sender_6=10 - participant.signals_all_rounds[5:36:6].count('-'),
         )
 
     form_model = "player"
@@ -294,6 +338,7 @@ class Confidence_3(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
+        participant = player.participant
         return dict(
             trust_sender_1=player.trust_sender_1,
             trust_sender_2=player.trust_sender_2,
@@ -301,12 +346,12 @@ class Confidence_3(Page):
             trust_sender_4=player.trust_sender_4,
             trust_sender_5=player.trust_sender_5,
             trust_sender_6=player.trust_sender_6,
-            mistrust_sender_1=10 - player.trust_sender_1,
-            mistrust_sender_2=10 - player.trust_sender_2,
-            mistrust_sender_3=10 - player.trust_sender_3,
-            mistrust_sender_4=10 - player.trust_sender_4,
-            mistrust_sender_5=10 - player.trust_sender_5,
-            mistrust_sender_6=10 - player.trust_sender_6,
+            mistrust_sender_1=10 - participant.signals_all_rounds[0:31:6].count('-') - player.trust_sender_1,
+            mistrust_sender_2=10 - participant.signals_all_rounds[1:32:6].count('-') - player.trust_sender_2,
+            mistrust_sender_3=10 - participant.signals_all_rounds[2:33:6].count('-') - player.trust_sender_3,
+            mistrust_sender_4=10 - participant.signals_all_rounds[3:34:6].count('-') - player.trust_sender_4,
+            mistrust_sender_5=10 - participant.signals_all_rounds[4:35:6].count('-') - player.trust_sender_5,
+            mistrust_sender_6=10 - participant.signals_all_rounds[5:36:6].count('-') - player.trust_sender_6,
         )
 
 class Confidence_4(Page):
@@ -333,24 +378,49 @@ class Confidence_4(Page):
             trust_sender_4=player.trust_sender_4,
             trust_sender_5=player.trust_sender_5,
             trust_sender_6=player.trust_sender_6,
-            mistrust_sender_1=10 - player.trust_sender_1,
-            mistrust_sender_2=10 - player.trust_sender_2,
-            mistrust_sender_3=10 - player.trust_sender_3,
-            mistrust_sender_4=10 - player.trust_sender_4,
-            mistrust_sender_5=10 - player.trust_sender_5,
-            mistrust_sender_6=10 - player.trust_sender_6,
+            mistrust_sender_1=10 - participant.signals_all_rounds[0:31:6].count('-') - player.trust_sender_1,
+            mistrust_sender_2=10 - participant.signals_all_rounds[1:32:6].count('-') - player.trust_sender_2,
+            mistrust_sender_3=10 - participant.signals_all_rounds[2:33:6].count('-') - player.trust_sender_3,
+            mistrust_sender_4=10 - participant.signals_all_rounds[3:34:6].count('-') - player.trust_sender_4,
+            mistrust_sender_5=10 - participant.signals_all_rounds[4:35:6].count('-') - player.trust_sender_5,
+            mistrust_sender_6=10 - participant.signals_all_rounds[5:36:6].count('-') - player.trust_sender_6,
+            n_rec_signals_sender_1=10 - participant.signals_all_rounds[0:31:6].count('-'),
+            n_rec_signals_sender_2=10 - participant.signals_all_rounds[1:32:6].count('-'),
+            n_rec_signals_sender_3=10 - participant.signals_all_rounds[2:33:6].count('-'),
+            n_rec_signals_sender_4=10 - participant.signals_all_rounds[3:34:6].count('-'),
+            n_rec_signals_sender_5=10 - participant.signals_all_rounds[4:35:6].count('-'),
+            n_rec_signals_sender_6=10 - participant.signals_all_rounds[5:36:6].count('-'),
         )
 
     @staticmethod
     def js_vars(player: Player):
+        participant = player.participant
+        rec_signals_sender_4 = participant.signals_all_rounds[3:34:6]
+        censored_signals_sender_4 = []
+        for i in range(len(rec_signals_sender_4)):
+            if rec_signals_sender_4[i] == '-':
+                censored_signals_sender_4.append(i)
+        rec_signals_sender_5 = participant.signals_all_rounds[4:35:6]
+        censored_signals_sender_5 = []
+        for i in range(len(rec_signals_sender_5)):
+            if rec_signals_sender_5[i] == '-':
+                censored_signals_sender_5.append(i)
+        rec_signals_sender_6 = participant.signals_all_rounds[5:36:6]
+        censored_signals_sender_6 = []
+        for i in range(len(rec_signals_sender_6)):
+            if rec_signals_sender_6[i] == '-':
+                censored_signals_sender_6.append(i)
         return dict(
-            mistrust_sender_1=10 - player.trust_sender_1,
-            mistrust_sender_2=10 - player.trust_sender_2,
-            mistrust_sender_3=10 - player.trust_sender_3,
-            mistrust_sender_4=10 - player.trust_sender_4,
-            mistrust_sender_5=10 - player.trust_sender_5,
-            mistrust_sender_6=10 - player.trust_sender_6,
-            num_senders=Constants.num_senders
+            mistrust_sender_1=10 - participant.signals_all_rounds[0:31:6].count('-') - player.trust_sender_1,
+            mistrust_sender_2=10 - participant.signals_all_rounds[1:32:6].count('-') - player.trust_sender_2,
+            mistrust_sender_3=10 - participant.signals_all_rounds[2:33:6].count('-') - player.trust_sender_3,
+            mistrust_sender_4=10 - participant.signals_all_rounds[3:34:6].count('-') - player.trust_sender_4,
+            mistrust_sender_5=10 - participant.signals_all_rounds[4:35:6].count('-') - player.trust_sender_5,
+            mistrust_sender_6=10 - participant.signals_all_rounds[5:36:6].count('-') - player.trust_sender_6,
+            num_senders=Constants.num_senders,
+            censored_signals_sender_4=censored_signals_sender_4,
+            censored_signals_sender_5=censored_signals_sender_5,
+            censored_signals_sender_6=censored_signals_sender_6
         )
     form_model = "player"
     form_fields = ["sender_1_correction_1_inround", "sender_1_correction_2_inround", "sender_1_correction_3_inround",
@@ -415,7 +485,7 @@ def payout_calc(subsession: Subsession):
     for p in players:
         participant = p.participant
         if p.Role == "sender":
-            participant.Trust_payoff = 0
+            p.payoff = 0
         if p.Role == "receiver":
             participant = p.participant
             congruent_report = [0, 0, 0, 0, 0, 0]
@@ -433,6 +503,8 @@ def payout_calc(subsession: Subsession):
                         temp[j] = Constants.payoff_trust
             p.payoff = random.choice(temp)
         participant.Trust_payoff = p.payoff
+
+
 
 
 page_sequence = [StartWaitPage, Instructions_Trust_in_Senders, Trust_in_Senders, Confidence_1_all10,

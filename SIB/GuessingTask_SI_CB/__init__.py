@@ -33,7 +33,7 @@ class Player(BasePlayer):
     identity = models.StringField()  # the identity from the previous apps
     sent_signal = models.IntegerField()  # signal sent by the sender
     estimate = models.IntegerField()  # the estimate sent by the estimation device which is observed by senders
-    posterior = models.IntegerField()  # the posterior belief of the receiver
+    posterior = models.FloatField()  # the posterior belief of the receiver
     prior = models.IntegerField()
     true_state = models.IntegerField()
     received_signal_1 = models.IntegerField() #saving received signals across rounds for analyses

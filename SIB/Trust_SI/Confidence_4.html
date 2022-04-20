@@ -243,6 +243,17 @@ color: white;
                     arraySelects[m].options[selectedOption].disabled = true;
                   }
                 }
+            window.onload = censored_options_4;
+            function censored_options_4() {
+                for(var i = 1; i < js_vars.mistrust_sender_4 + 1 ; i++) {
+                    var dropdown = document.getElementById(["sender_4_correction_", i, "_inround_select"].join(""))
+                    for (var m = 0; m < dropdown.length + 1; m++) {
+                        console.log(js_vars.censored_signals_sender_4[m] + 1, dropdown.options[m+1].value, dropdown.options[m+1], dropdown)
+                        if (dropdown.options[m+1].value == js_vars.censored_signals_sender_4[m] + 1){
+                            console.log("yes")
+                        dropdown.options[m+1].disabled = true;}
+                          }
+                        }}
 
           </script>
           </table>
@@ -294,6 +305,17 @@ color: white;
                     arraySelects[m].options[selectedOption].disabled = true;
                   }
                 }
+            window.onload = censored_options_5;
+            function censored_options_5() {
+                for(var i = 1; i < js_vars.mistrust_sender_5 + 1 ; i++) {
+                    var dropdown = document.getElementById(["sender_5_correction_", i, "_inround_select"].join(""))
+                    for (var m = 0; m < dropdown.length + 1; m++) {
+                        console.log(js_vars.censored_signals_sender_5[m] + 1, dropdown.options[m+1].value, dropdown.options[m+1], dropdown)
+                        if (dropdown.options[m+1].value == js_vars.censored_signals_sender_5[m] + 1){
+                            console.log("yes")
+                        dropdown.options[m+1].disabled = true;}
+                          }
+                        }}
 
 
           </script>
@@ -307,12 +329,12 @@ color: white;
       <br>
              <div class="card">
         <h5 class="card-header bg-warning" align="center">
-            <b>Sender A</b>
+            <b>Sender F</b>
         </h5>
            <div class="card-body">
         <br>
       <p class="card-text">
-      You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_6}} times.
+      You have stated that sender F has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_6}} times.
           Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
         <table class="table table-hover">
         <tr>
@@ -347,6 +369,20 @@ color: white;
                     arraySelects[m].options[selectedOption].disabled = true;
                   }
                 }
+            window.onload = censored_options_6;
+            function censored_options_6() {
+                for(var i = 1; i < js_vars.mistrust_sender_6 + 1 ; i++) {
+                    var dropdown = document.getElementById(["sender_6_correction_", i, "_inround_select"].join(""))
+                    for (var m = 0; m < dropdown.length + 1; m++) {
+                        console.log(js_vars.censored_signals_sender_6[m] + 1, dropdown.options[m+1].value, dropdown.options[m+1], dropdown)
+                        if (dropdown.options[m+1].value == js_vars.censored_signals_sender_6[m] + 1){
+                            console.log("yes")
+                        dropdown.options[m+1].disabled = true;}
+                          }
+                        }}
+
+
+
 
           </script>
           </table>

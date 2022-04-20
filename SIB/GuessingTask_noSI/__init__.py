@@ -31,7 +31,7 @@ class Player(BasePlayer):
     Role = models.StringField()
     sent_signal = models.IntegerField()  # signal sent by the sender
     estimate = models.IntegerField()  # the estimate sent by the estimation device which is observed by senders
-    posterior = models.IntegerField()  # the posterior belief of the receiver
+    posterior = models.FloatField()  # the posterior belief of the receiver
     true_state = models.IntegerField()
     received_signal_1 = models.IntegerField()
     received_signal_2 = models.IntegerField()

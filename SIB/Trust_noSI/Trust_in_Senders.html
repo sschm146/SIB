@@ -14,6 +14,7 @@
 
         Please state for each sender, how many times out of the 10 estimation tasks has the sender stated the same number as the estimation device that was randomly assigned to him/her.
         In case you want to remind yourself of what the senders were stating across the 10 estimation tasks, you can look at the table at the bottom of the screen.
+        Note that you did not receive a signal by all senders in all rounds.
 
       <br>
       <br>
@@ -25,7 +26,7 @@
     Sender A
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_1' label=''}}</li>
+    <li class="list-group-item">{{ formfield 'trust_sender_1' label=''}} out of <i style="font-weight: bold">{{n_rec_signals_sender_1}}</i> received signals</li>
   </ul>
 </div>
     </div>
@@ -36,7 +37,7 @@
     Sender B
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_2' label=''}}</li>
+    <li class="list-group-item">{{ formfield 'trust_sender_2' label=''}} out of <i style="font-weight: bold">{{n_rec_signals_sender_2}}</i> received signals</li>
   </ul>
 </div>
     </div>
@@ -47,7 +48,7 @@
     Sender C
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_3' label=''}}</li>
+    <li class="list-group-item">{{ formfield 'trust_sender_3' label=''}} out of <i style="font-weight: bold">{{n_rec_signals_sender_3}}</i> received signals</li>
   </ul>
 </div>
     </div>
@@ -58,7 +59,7 @@
     Sender D
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_4' label=''}}</li>
+    <li class="list-group-item">{{ formfield 'trust_sender_4' label=''}} out of <i style="font-weight: bold">{{n_rec_signals_sender_4}}</i> received signals</li>
   </ul>
 </div>
     </div>
@@ -68,7 +69,7 @@
     Sender E
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_5' label=''}}</li>
+    <li class="list-group-item">{{ formfield 'trust_sender_5' label=''}} out of <i style="font-weight: bold">{{n_rec_signals_sender_5}}</i> received signals</li>
   </ul>
 </div>
     </div>
@@ -78,7 +79,7 @@
     Sender F
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_6' label=''}}</li>
+    <li class="list-group-item">{{ formfield 'trust_sender_6' label=''}} out of <i style="font-weight: bold">{{n_rec_signals_sender_6}}</i> received signals</li>
   </ul>
 </div>
     </div>
@@ -151,4 +152,5 @@ When you have finished with the task, please press “Next”.
 </div>
           </div>
 </div>
+
 {% endblock %}

@@ -1,7 +1,7 @@
 from otree.api import *
 import numpy as np
 import random
-
+import pandas as pd
 
 c = Currency
 
@@ -22,6 +22,7 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     x = models.IntegerField()
+    censored_signal = models.StringField()
 
 
 class Group(BaseGroup):
@@ -33,14 +34,17 @@ class Player(BasePlayer):
     identity = models.StringField()  # the identity from the previous apps
     sent_signal = models.IntegerField()  # signal sent by the sender
     estimate = models.IntegerField()  # the estimate sent by the estimation device which is observed by senders
-    posterior = models.IntegerField()  # the posterior belief of the receiver
+    posterior = models.FloatField()  # the posterior belief of the receiver
     true_state = models.IntegerField()
-    received_signal_1 = models.IntegerField() #saving received signals across rounds for analyses
-    received_signal_2 = models.IntegerField() #saving received signals across rounds for analyses
-    received_signal_3 = models.IntegerField() #saving received signals across rounds for analyses
-    received_signal_4 = models.IntegerField() #saving received signals across rounds for analyses
-    received_signal_5 = models.IntegerField() #saving received signals across rounds for analyses
-    received_signal_6 = models.IntegerField() #saving received signals across rounds for analyses
+    SB_sender_4 = models.StringField()
+    SB_sender_4_identity = models.StringField()
+    SB_sender_5 = models.StringField()
+    SB_sender_5_identity = models.StringField()
+    SB_received_signal_1 = models.IntegerField() #saving received signals across rounds for analyses
+    SB_received_signal_2 = models.IntegerField() #saving received signals across rounds for analyses
+    SB_received_signal_3 = models.IntegerField() #saving received signals across rounds for analyses
+    SB_received_signal_4 = models.IntegerField() #saving received signals across rounds for analyses
+    SB_received_signal_5 = models.IntegerField() #saving received signals across rounds for analyses
     received_signal_1_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     received_signal_2_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     received_signal_3_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
@@ -279,6 +283,45 @@ class Instructions_GT_receivers(Page):
 # wait for all senders to send a signal
 class StartWaitPage(WaitPage):
     wait_for_all_groups = True
+    after_all_players_arrive = 'set_signals'
+
+def set_signals(subsession: Subsession):
+    players = subsession.get_players()
+    if subsession.round_number > Constants.num_rounds / 2:
+        temp = []
+        for p in players:
+            prev_player = p.in_round(subsession.round_number - Constants.num_rounds / 2)
+        prev_players = prev_player.group.get_players()
+        signals = [prev.sent_signal for prev in prev_players if prev.Role == 'sender']
+        senders = [prev.id_in_group for prev in prev_players if prev.Role == 'sender']
+        identities = [prev.identity for prev in prev_players if prev.Role == 'sender']
+        for i in list(range(Constants.num_senders - 3, Constants.num_senders)):
+            temp.append([signals[i], senders[i], identities[i]])
+        random.shuffle(temp) #important to solve ties at random
+        temp = sorted(temp, key=lambda x: int(x[0]))
+        #temp.sort(reverse=True) #alternative is to sort first at signal size and then by id_in_group to preserve order at ties:
+                                    # temp = sorted(temp, key=lambda x:(int(x[0]), x[1]))
+        subsession.censored_signal = str(temp[0])
+        del temp[0]
+        temp = sorted(temp, key=lambda x: int(x[1]))
+        for i in list(range(0, 2)):
+            if senders[i] == 4:
+                senders[i] = 'D'
+            if senders[i] == 5:
+                senders[i] = 'E'
+            if senders[i] == 6:
+                senders[i] = 'F'
+        for p in players:
+            if p.Role == "receiver":
+                p.SB_sender_4 = temp[0][1]
+                p.SB_sender_5 = temp[1][1]
+                p.SB_sender_4_identity = temp[0][2]
+                p.SB_sender_5_identity = temp[1][2]
+                p.SB_received_signal_1 = signals[0]
+                p.SB_received_signal_2 = signals[1]
+                p.SB_received_signal_3 = signals[2]
+                p.SB_received_signal_4 = temp[0][0]
+                p.SB_received_signal_5 = temp[1][0]
 
 
 # the receiver observes all the signals sent by senders and states a guess/posterior
@@ -297,39 +340,32 @@ class Guess(Page):
         current_round = player.round_number
         prev_player = player.in_round(current_round - Constants.num_rounds / 2)
         prev_players = prev_player.group.get_players()
-        signals = [p.sent_signal for p in prev_players if p.Role == 'sender']
-        senders = [p.id_in_group for p in prev_players if p.Role == 'sender']
-        identities = [p.identity for p in prev_players if p.Role == 'sender']
-        temp = []
-        for i in list(range(Constants.num_senders - 3, Constants.num_senders)):
-            temp.append([signals[i], senders[i], identities[i]])
-        temp.sort()
-        del temp[0]
-        # random.shuffle(temp)
-        for i in list(range(0, Constants.num_senders - 4)):
-            if temp[i][1] == 4:
-                temp[i][1] = 'D'
-            if temp[i][1] == 5:
-                temp[i][1] = 'E'
-            if temp[i][1] == 6:
-                temp[i][1] = 'F'
-        if player.Role == "receiver":
-            player.received_signal_1 = signals[0]
-            player.received_signal_2 = signals[1]
-            player.received_signal_3 = signals[2]
-            player.received_signal_4 = temp[0][0]
-            player.received_signal_5 = temp[1][0]
+        identities = [p.participant.identity for p in prev_players if p.Role == 'sender']
 
+        if player.Role == "receiver":  # Gathering all signals and the resp. sender's identities for analyses -
+            # this part works but can be improved with a loop or something
+            if identities[0] == player.participant.identity:
+                player.received_signal_1_identity = True
+            if identities[1] == player.participant.identity:
+                player.received_signal_2_identity = True
+            if identities[2] == player.participant.identity:
+                player.received_signal_3_identity = True
+            if identities[3] == player.participant.identity:
+                player.received_signal_4_identity = True
+            if identities[4] == player.participant.identity:
+                player.received_signal_5_identity = True
+            if identities[5] == player.participant.identity:
+                player.received_signal_6_identity = True
             return dict(
-                signal_1=signals[0],
-                signal_2=signals[1],
-                signal_3=signals[2],
-                signal_4=temp[0][0],
-                signal_5=temp[1][0],
-                sender_4=temp[0][1],
-                sender_4_identity=temp[0][2],
-                sender_5=temp[1][1],
-                sender_5_identity=temp[1][2],
+                signal_1=player.SB_received_signal_1,
+                signal_2=player.SB_received_signal_2,
+                signal_3=player.SB_received_signal_3,
+                signal_4=player.SB_received_signal_4,
+                signal_5=player.SB_received_signal_5,
+                sender_4=player.SB_sender_4,
+                sender_4_identity=player.SB_sender_4_identity,
+                sender_5=player.SB_sender_5,
+                sender_5_identity=player.SB_sender_5_identity,
             )
 
     form_model = "player"
@@ -363,7 +399,11 @@ def save_signals_payoff(subsession: Subsession):
         for p in players:
             if p.Role == 'sender':
                 prev_player = p.in_round(i + 1)
-                signals_all_rounds.append(prev_player.field_maybe_none('sent_signal'))
+                prev_subsession = subsession.in_round(i + int(Constants.num_rounds / 2) + 1)
+                if prev_player.id_in_group != int(prev_subsession.censored_signal[4]): #indexing of "censored signal" is no as in "4th element of list" but as in "4th element of string object"
+                    signals_all_rounds.append(prev_player.field_maybe_none('sent_signal'))
+                else:
+                    signals_all_rounds.append('-')
                 estimates_all_rounds.append(prev_player.estimate)
     # Payoff calculation
     for p in players:
