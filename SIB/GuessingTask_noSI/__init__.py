@@ -132,6 +132,102 @@ class Player(BasePlayer):
                                   widget=widgets.RadioSelect,
                                   label='')
 
+    q1 = models.IntegerField(label='')
+    q2 = models.IntegerField(label='')
+    q3 = models.StringField(label='')
+    q4 = models.StringField(label='')
+    q5 = models.IntegerField(
+        choices=[[0, "Weiblich"],
+                 [1, "Mänlich"],
+                  [2, "Divers"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q6 = models.StringField(label='')
+    q7 = models.IntegerField(label='')
+    q8 = models.IntegerField(label='')
+    q9 = models.IntegerField(label='')
+    q10 = models.IntegerField(
+        choices=[[1, "Poor"],
+                 [2, "Average"],
+                  [3, "Good"],
+                 [4, "Excellent"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q11 =  models.IntegerField(
+        choices=[[1, "Poor"],
+                 [2, "Average"],
+                  [3, "Good"],
+                 [4, "Excellent"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q12 = models.IntegerField(
+        choices=[[1, "Yes"],
+                 [2, "No"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q13 =  models.IntegerField(
+        choices=[[1, "I’ve always known how to budget"],
+                 [2, "I’ve had to learn to budget whilst at University"],
+                 [3, "I struggle to purchase necessities"],
+                 [4, "I can afford everything but I don’t budget"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q14 = models.IntegerField(
+        choices=[[1, "Not budgeting"],
+                 [2, "Cost of necessities too expensive"],
+                 [3, "Too care-free with money"],
+                 [4, "Other priorities such as shopping & nightlife take a priority"],
+                 [5, "I don’t struggle"],
+                 [6, " I’m good with budgeting"],
+                 [7, " I have no idea"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q15 = models.StringField(label='')
+    q16 = models.IntegerField(
+        choices=[[1, "Yes"],
+                 [2, "No"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q17 = models.IntegerField(
+        choices=[[1, "Yes"],
+                 [2, "No"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q18 = models.IntegerField(
+        choices=[[1, "Yes"],
+                 [2, "No"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q19 = models.IntegerField(
+        choices=[[1, "Yes"],
+                 [2, "No"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q20 = models.IntegerField(
+        choices=[[1, "Yes"],
+                 [2, "No"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q21 = models.IntegerField(
+        choices=[[1, "Yes"],
+                 [2, "No"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q22 = models.IntegerField(
+        choices=[[1, "Student Union"],
+                 [2, "Parents"],
+                 [3, "Friends"],
+                 [4, "Bank"],
+                 [5, "Financial adviser"],
+                 [6, "Other"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q23 = models.StringField(label='')
+    q24 = models.StringField(label='')
+    q25 = models.StringField(label='')
+
+
+
 # FUNCTIONS
 
 #roles allocation and mu_signals (true) simulaion for each sender
@@ -252,6 +348,17 @@ class StartWaitPage(WaitPage):
     wait_for_all_groups = True
 
 
+class Filler_Task(Page):
+    form_model = "player"
+    form_fields = ["q"+str(i) for i in range(1, 26)]
+
+
+    @staticmethod
+    def is_displayed(player):
+        return (player.Role == "receiver" and player.round_number == 1) or (player.Role == "sender" and player.round_number == Constants.num_rounds/2 + 1)
+
+
+
 # the receiver observes all the signals sent by senders and states a guess/posterior
 # Receivers see signals sent by senders in a random order and with known group identity
 class Guess(Page):
@@ -335,5 +442,5 @@ def save_signals_payoff(subsession: Subsession):
             participant.GuessingTask_payoff = prev_player.payoff
 
 
-page_sequence = [Instructions_GT_senders, StartWaitPage, Signals, Instructions_GT_receivers,
+page_sequence = [Instructions_GT_senders, StartWaitPage, Signals, Filler_Task, Instructions_GT_receivers,
                  Guess, SecondWaitPage]

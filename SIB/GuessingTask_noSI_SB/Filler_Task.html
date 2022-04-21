@@ -1,0 +1,140 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+        This part of the study consists of a questionnaire. Please provide answers on the following questions.
+        <br><br>
+
+        <strong>1. An wie viel Studien im Kölner Laboratorium für Wirtschaftsforschung haben Sie bereits teilgenommen (abzüglich dieser Studie)? (Wenn Sie sich nicht sicher sind, schätzen Sie.)</strong>
+                {{formfield 'q1'}}
+
+        <br><br>
+
+        <strong>2. Wie viel Geld steht Ihnen im Monat zur Verfügung (abzüglich Miete)?</strong>
+                {{formfield 'q2'}}
+
+        <br><br>
+
+        <strong>3. Wie ist Ihre Stimmung?</strong>
+                {{formfield 'q3'}}
+
+
+        <br><br>
+
+        <strong>4. Wo würden Sie sich auf das politische Spektrum von "ganz links" zu "ganz rechts" einordnen?</strong>
+                {{formfield 'q4'}}
+
+        <br><br>
+
+        <strong>5. Welches Geschlecht haben Sie? </strong>
+                {{formfield 'q5'}}
+
+        <br><br>
+
+        <strong>6. Studieren Sie? </strong>
+                {{formfield 'q6'}}
+
+        <br><br>
+
+        <strong>7. Wenn ja, welches Fach studieren Sie? </strong>
+                {{formfield 'q7'}}
+
+        <br><br>
+
+        <strong>8. Wie alt sind Sie? </strong>
+                {{formfield 'q8'}}
+
+        <br><br>
+
+        <strong>9. Wie viele Geschwister haben Sie? </strong>
+                {{formfield 'q9'}}
+
+        <br><br>
+
+        <strong>10. How would you rate your money management? </strong>
+                {{formfield 'q10'}}
+
+        <br><br>
+
+        <strong>11. How would you rate your knowledge of financial products such as Individual Savings accounts, credit cards, loans and mortgages? </strong>
+                {{formfield 'q11'}}
+
+        <br><br>
+
+        <strong>12. Whilst growing up, were your parents/guardians open to discussing financial matters within the home?</strong>
+                {{formfield 'q12'}}
+
+        <br><br>
+
+        <strong>13. Since becoming a student & receiving maintenance loans/grants, would you say that you budget effectively or that you struggle to purchase basic necessities? Necessities meaning food, toiletries and standard living costs - not eating out.</strong>
+                {{formfield 'q13'}}
+
+        <br><br>
+
+        <strong>14. If you struggle to purchase necessities, what would you put this down to?</strong>
+                {{formfield 'q14'}}
+        <br><br>
+
+        <strong>15. What are your top five spending priorities?</strong>
+                {{formfield 'q15'}}
+
+        <br><br>
+
+        <strong>16. Do you regularly know how much money you have in your bank account?</strong>
+                {{formfield 'q16'}}
+
+        <br><br>
+
+        <strong>17. Do you keep track of your spending?</strong>
+                {{formfield 'q17'}}
+        <br><br>
+
+        <strong>18. Do you have money set aside for an emergency?</strong>
+                {{formfield 'q18'}}
+        <br><br>
+
+        <strong>19. Are you in debt?</strong>
+                {{formfield 'q19'}}
+        <br><br>
+
+        <strong>20. Do you shop around to get the best deal when selecting financial products such as insurance and mobile phones?</strong>
+                {{formfield 'q20'}}
+        <br><br>
+
+        <strong>21. Do you have a job to provide extra income whilst at University?</strong>
+                {{formfield 'q21'}}
+        <br><br>
+
+        <strong>22. If you needed financial advice tomorrow, who would you turn to?</strong>
+                {{formfield 'q22'}}
+
+        <br><br>
+
+        <strong>23. If your answer was "Other" in the previous question, please specify.</strong>
+                {{formfield 'q23'}}
+
+        <br><br>
+
+        <strong>24. What benefits would you expect from being able to better manage your money?</strong>
+                {{formfield 'q24'}}
+        <br><br>
+
+        <strong>25. Is there anything which would help you to better manage your money?</strong>
+                {{formfield 'q25'}}
+
+
+
+
+
+        <br><br>
+        <strong>When you have finished the questionnaire, please press “next”.</strong>
+   </div>
+</div>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{% endblock %}
