@@ -138,14 +138,13 @@ class Player(BasePlayer):
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
     subsession.x = random.randint(0, 100)
-    estimates = np.random.normal(Constants.true_state[subsession.round_number - 1], Constants.sd, 6)
+    estimates = np.random.normal(Constants.true_state[subsession.round_number - 1], Constants.sd, Constants.num_senders)
     estimates = np.rint(estimates)
     for p in players: #Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
-        if p.id_in_group in list(range(1, Constants.num_senders + 1)):
-            p.Role = 'sender'
+        participant = p.participant
+        p.Role = participant.Role
+        if p.Role == "sender":
             p.estimate = estimates[p.id_in_group-1]
-        else:
-            p.Role = 'receiver'
         if p.round_number <= Constants.num_rounds / 2:
             p.true_state = Constants.true_state[subsession.round_number - 1]
         else:

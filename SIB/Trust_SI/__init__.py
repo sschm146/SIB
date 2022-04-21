@@ -169,13 +169,10 @@ class Player(BasePlayer):
 #roles allocation and mu_signals (true) simulation for each sender
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
-    for p in players: #Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
-        if p.id_in_group in list(range(1, Constants.num_senders + 1)):
-            p.Role = 'sender'
-        else:
-            p.Role = 'receiver'
+    for p in players:  # Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
         participant = p.participant
         p.identity = participant.identity
+        p.Role = participant.Role
 
 
 # PAGES

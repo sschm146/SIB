@@ -169,14 +169,13 @@ class Player(BasePlayer):
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
     subsession.x = random.randint(0, 100)
-    estimates = np.random.normal(Constants.true_state[subsession.round_number - 1], Constants.sd, 10)
+    estimates = np.random.normal(Constants.true_state[subsession.round_number - 1], Constants.sd, Constants.num_senders + 1)
     estimates = np.rint(estimates)
     for p in players:  # Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
-        p.estimate = estimates[p.id_in_group - 1]
-        if p.id_in_group in list(range(1, Constants.num_senders + 1)):
-            p.Role = 'sender'
-        else:
-            p.Role = 'receiver'
+        participant = p.participant
+        p.Role = participant.Role
+        if p.Role == "sender" or p.Role == "prior_sender":
+            p.estimate = estimates[p.id_in_group - 1]
         if p.round_number <= Constants.num_rounds / 2:
             p.true_state = Constants.true_state[subsession.round_number - 1]
         else:
@@ -203,7 +202,7 @@ class Signals(Page):
 
     @staticmethod
     def is_displayed(player):
-        return player.Role == "sender" and player.round_number <= Constants.num_rounds/2
+        return (player.Role == "sender" or player.Role =="prior_sender") and player.round_number <= Constants.num_rounds/2
 
     def vars_for_template(player: Player):
         estimate = player.estimate
@@ -220,7 +219,7 @@ class Signals(Page):
 class Instructions_GT_senders(Page):
     @staticmethod
     def is_displayed(player):
-        return player.Role == "sender" and player.round_number == 1
+        return (player.Role == "sender" or player.Role =="prior_sender") and player.round_number == 1
 
     form_model = "player"
     form_fields = ["comprq1", "comprq2", "comprq3", "comprq4", "comprq5", "comprq6"]
@@ -292,9 +291,14 @@ class Prior(Page):
     @staticmethod
     def vars_for_template(player: Player):
         current_round = player.round_number
-        prev_player = player.in_round(current_round - int(Constants.num_rounds / 2))
+        subsession = player.subsession
+        players = subsession.get_players()
+        for p in players:
+            if p.Role == "prior_sender":
+                prev_player = p.in_round(current_round - int(Constants.num_rounds / 2))
+        prior_estimate = prev_player.estimate
         return dict(
-            estimate=prev_player.estimate,
+            prior_estimate=prior_estimate,
         )
 
     form_model = "player"

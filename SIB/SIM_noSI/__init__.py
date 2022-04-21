@@ -53,7 +53,6 @@ class MyWaitPage(WaitPage):
 
 def payout_calc(subsession: Subsession):
     players = subsession.get_players()
-    winner_list = []
     for p in players:
         if p.artist1 == "Paul Klee":
             p.artist_points += 1
@@ -62,24 +61,16 @@ def payout_calc(subsession: Subsession):
     for p in players:
         participant = p.participant
         others = [g.artist_points for g in players if g != p]
-        if p.artist_points > max(others):
+        competitor = random.choice(others)
+        if p.artist_points > competitor:
             p.payoff = Constants.artist_payoff
             participant.SIM_payoff = p.payoff
-        if p.artist_points < max(others):
+        if p.artist_points < competitor:
             p.payoff = 0
             participant.SIM_payoff = p.payoff
-        if p.artist_points == max(others):
-            winner_list.append(p.id_in_group)
-    if winner_list:
-        winner = random.choice(winner_list)
-        for p in players:
-            participant = p.participant
-            if p.id_in_group == winner:
-                p.payoff = Constants.artist_payoff
-                participant.SIM_payoff = p.payoff
-            else:
-                p.payoff = 0
-                participant.SIM_payoff = p.payoff
+        if p.artist_points == competitor:
+            p.payoff = random.choice([Constants.artist_payoff, 0])
+            participant.SIM_payoff = p.payoff
 
 
 class Paintings_labelled(Page):

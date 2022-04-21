@@ -24,46 +24,53 @@ SESSION_CONFIGS = [
         display_name="SIB_SI",
         num_demo_participants=10,
         app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI", "Trust_SI", "Final_Questionnaire_SI", "Payout"],
+        prior_sender=False,
     ),
     dict(
         name="control_confirmation",
         display_name="SIB_control_CB",
         num_demo_participants=10,
         app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_CB", "Trust_noSI","Final_Questionnaire_noSI", "Payout"],
+        prior_sender=True,
     ),
     dict(
         name="SI_confirmation",
         display_name="SIB_SI_CB",
         num_demo_participants=10,
         app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_CB", "Trust_SI", "Final_Questionnaire_SI", "Payout"],
+        prior_sender=True,
     ),
     dict(
         name="control_selection",
         display_name="SIB_control_SB",
         num_demo_participants=10,
         app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_SB", "Trust_noSI","Final_Questionnaire_noSI", "Payout"],
+        prior_sender=False,
     ),
     dict(
         name="SI_selection",
         display_name="SIB_SI_SB",
         num_demo_participants=10,
         app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_SB", "Trust_SI","Final_Questionnaire_SI",  "Payout"],
+        prior_sender=False,
     ),
     dict(
         name="control_correlation",
         display_name="SIB_control_CN",
         num_demo_participants=10,
         app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_CN", "Trust_noSI", "Final_Questionnaire_noSI","Payout"],
+        prior_sender=False,
     ),
     dict(
         name="SI_correlation",
         display_name="SIB_SI_CN",
         num_demo_participants=10,
         app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_CN", "Trust_SI", "Final_Questionnaire_SI", "Payout"],
+        prior_sender=False,
     ),
 ]
 
-PARTICIPANT_FIELDS = ["identity", "SIM_payoff", "GuessingTask_payoff", "Trust_payoff", "signals_all_rounds",
+PARTICIPANT_FIELDS = ["Role", "identity", "SIM_payoff", "GuessingTask_payoff", "Trust_payoff", "signals_all_rounds",
                       "estimates_all_rounds"]
 SESSION_FIELDS = []
 
