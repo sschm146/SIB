@@ -1,0 +1,289 @@
+{{ block title }}
+    Answer these questions
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .slidecontainer1 {
+      width: 90%;
+    }
+
+    .slider1  {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider1:hover  {
+      opacity: 1;
+    }
+
+    .slider_thumb1::-webkit-slider-thumb  {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: red;
+      cursor: pointer;
+    }
+
+    .slider_thumb_none1::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 0px;
+      border-radius: 50%;
+      background: red;
+      cursor: pointer;
+    }
+
+    .slider1::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #04AA6D;
+      cursor: pointer;
+    }
+    .value-spans1  {
+     display:flex;
+     justify-content: space-between;
+    }
+</style>
+
+
+<style>
+    .slidecontainer2  {
+      width: 90%;
+    }
+
+    .slider2 {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider2:hover {
+      opacity: 1;
+    }
+
+    .slider_thumb2::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: red;
+      cursor: pointer;
+    }
+
+    .slider_thumb_none2::-webkit-slider-thumb   {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 0px;
+      border-radius: 50%;
+      background: red;
+      cursor: pointer;
+    }
+
+    .slider2::-moz-range-thumb  {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #04AA6D;
+      cursor: pointer;
+    }
+    .value-spans2 {
+     display:flex;
+     justify-content: space-between;
+    }
+</style>
+
+<style>
+    .slidecontainer3  {
+      width: 90%;
+    }
+
+    .slider3 {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider3:hover  {
+      opacity: 1;
+    }
+
+    .slider_thumb3::-webkit-slider-thumb  {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: red;
+      cursor: pointer;
+    }
+
+    .slider_thumb_none3::-webkit-slider-thumb  {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 0px;
+      border-radius: 50%;
+      background: red;
+      cursor: pointer;
+    }
+
+    .slider3::-moz-range-thumb  {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #04AA6D;
+      cursor: pointer;
+    }
+    .value-spans3 {
+     display:flex;
+     justify-content: space-between;
+    }
+</style>
+
+<table align="center" border="0" cellpadding="1" cellspacing="1" width="90%">
+ <tbody>
+  <tr>
+   <td width="200">&nbsp;</td>
+   <td width="400"><span style="color:#009900;"><b>How would you split the money?</b></span></td>
+   <td width="200">&nbsp;</td>
+  </tr>
+  <tr>
+   <td><img height="110" src="https://harvard.az1.qualtrics.com/CP/Graphic.php?IM=IM_cwsOcL2n9EcrIyN" width="104" /></td>
+   <td><img height="122" src="https://harvard.az1.qualtrics.com/CP/Graphic.php?IM=IM_cV1sHyBhoybHdop" width="400" /></td>
+   <td><img height="110" src="https://harvard.az1.qualtrics.com/CP/Graphic.php?IM=IM_cwsOcL2n9EcrIyN" width="104" /></td>
+  </tr>
+</tbody>
+</table>
+
+<table align="center">
+    <br><br><br>
+<p align="center">Move the slider to decide how much to allocate.</p><br>
+
+
+<div class="Update">
+    <div class="slidecontainer1">
+        <div class="value-spans1">
+          <p><span id="left-span1">$0</span></p>
+          <p><span id="1_a">First statement</span></p>
+          <p><span id="1_b">Randomly-selected Person in Germany</span></p>
+          <p><span id="right-span1">$0</span></p>
+        </div>
+        <input type="range" min="0" max="100" value="50" class="slider1 slider_thumb_none1" id="myRange1">
+        <input type="hidden" value="0" id="question1_a" name="question1_a" >
+        <input type="hidden" value="0" id="question1_b" name="question1_b">
+    </div><br>
+</div>
+
+<div class="Update">
+    <div class="slidecontainer2">
+        <div class="value-spans2">
+          <p><span id="left-span2">$0</span></p>
+          <p><span id="2_a">Second statement</span></p>
+          <p><span id="2_b">Randomly-selected Person in Germany</span></p>
+          <p><span id="right-span2">$0</span></p>
+        </div>
+        <input type="range" min="0" max="100" value="50" class="slider2 slider_thumb_none2" id="myRange2">
+        <input type="hidden" value="0" id="question2_a" name="question2_a" >
+        <input type="hidden" value="0" id="question2_b" name="question2_b">
+    </div><br>
+</div>
+
+<div class="Update">
+    <div class="slidecontainer3">
+        <div class="value-spans3">
+          <p><span id="left-span3">$0</span></p>
+          <p><span id="3_a">Third statement</span></p>
+          <p><span id="3_b">Randomly-selected Person in Germany</span></p>
+          <p><span id="right-span3">$0</span></p>
+        </div>
+        <input type="range" min="0" max="100" value="50" class="slider3 slider_thumb_none3" id="myRange3">
+        <input type="hidden" value="0" id="question3_a" name="question3_a" >
+        <input type="hidden" value="0" id="question3_b" name="question3_b">
+    </div><br>
+</div>
+
+
+</table>
+<script>
+
+    var forms = $(".Update");
+    for(var i = 0; i < forms.length; i++){
+    var target = Math.floor(Math.random() * forms.length -1) + 1;
+    var target2 = Math.floor(Math.random() * forms.length -1) +1;
+    forms.eq(target).before(forms.eq(target2));
+}
+        let value1 = 0;
+        let other1 = 0;
+        let statements1 = ["First statment", "Randomly-selected Person in Germany"];
+        let value2 = 0;
+        let other2 = 0;
+        let statements2 = ["Second statment", "Randomly-selected Person in Germany"];
+        let value3 = 0;
+        let other3 = 0;
+        let statements3 = ["Third statment", "Randomly-selected Person in Germany"];
+        $(document).ready(function() {
+
+
+
+          $('.slider1').on('input', function () {
+            $(".slider1").removeClass("slider_thumb_none1").addClass("slider_thumb1");
+            value1 = $(".slider1").val();
+            other1 = 100 - value1;
+            $("#left-span1").html(`$${other1}`);
+            $("#right-span1").html(`$${value1}`);
+            $("#question1_a").val(other1)
+            $("#question1_b").val(value1)
+          });
+
+           $('.slider2').on('input', function () {
+            $(".slider2").removeClass("slider_thumb_none2").addClass("slider_thumb2");
+            value2 = $(".slider2").val();
+            other2 = 100 - value2;
+            $("#left-span2").html(`$${other2}`);
+            $("#right-span2").html(`$${value2}`);
+            $("#question2_a").val(other2)
+            $("#question2_b").val(value2)
+          });
+
+            $('.slider3').on('input', function () {
+            $(".slider3").removeClass("slider_thumb_none3").addClass("slider_thumb3");
+            value3 = $(".slider3").val();
+            other3 = 100 - value3;
+            $("#left-span3").html(`$${other3}`);
+            $("#right-span3").html(`$${value3}`);
+            $("#question3_a").val(other3)
+            $("#question3_b").val(value3)
+          });
+        });
+
+</script>
+
+    {{ next_button }}
+
+{{ endblock }}
