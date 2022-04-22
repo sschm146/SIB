@@ -11,10 +11,10 @@ GuessingTask_noSI
 
 class Constants(BaseConstants):
     name_in_url = "GuessingTask_noSI_CB"
-    num_rounds = 4
+    num_rounds = 20
     players_per_group = None
     num_senders = 6
-    true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     sd = 3
     payoff_guess = 1
 
@@ -332,6 +332,10 @@ class Instructions_GT_receivers(Page):
 class StartWaitPage(WaitPage):
     wait_for_all_groups = True
 
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == (Constants.num_rounds / 2) + 1
+
 
 # senders see estimate and send signal
 class Signals(Page):
@@ -362,7 +366,7 @@ class Signals(Page):
     @staticmethod
     def js_vars(player: Player):
         return dict(
-            round=player.round_number ,
+            round=player.round_number,
         )
 
 
@@ -435,8 +439,6 @@ def save_signals_payoff(subsession: Subsession):
             participant.GuessingTask_payoff = prev_player.payoff
 
 
-
-
 class Filler_Task(Page):
     form_model = "player"
     form_fields = ["q"+str(i) for i in range(1, 26)]
@@ -444,12 +446,7 @@ class Filler_Task(Page):
 
     @staticmethod
     def is_displayed(player):
-        return (player.Role == "receiver" and player.round_number == 1) or (player.Role == "sender" and player.round_number == Constants.num_rounds/2 + 1)
-
-
-
-
-
+        return (player.Role == "receiver" and player.round_number == 1) or ((player.Role == "sender" or player.Role == "prior_sender") and player.round_number == Constants.num_rounds/2 + 1)
 
 
 # the receiver observes all the signals sent by senders and states a guess/posterior

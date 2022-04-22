@@ -385,6 +385,21 @@ class Confidence_4(Page):
     @staticmethod
     def js_vars(player: Player):
         participant = player.participant
+        rec_signals_sender_4 = participant.signals_all_rounds[3:34:6]
+        censored_signals_sender_4 = []
+        for i in range(len(rec_signals_sender_4)):
+            if rec_signals_sender_4[i] == '-':
+                censored_signals_sender_4.append(i)
+        rec_signals_sender_5 = participant.signals_all_rounds[4:35:6]
+        censored_signals_sender_5 = []
+        for i in range(len(rec_signals_sender_5)):
+            if rec_signals_sender_5[i] == '-':
+                censored_signals_sender_5.append(i)
+        rec_signals_sender_6 = participant.signals_all_rounds[5:36:6]
+        censored_signals_sender_6 = []
+        for i in range(len(rec_signals_sender_6)):
+            if rec_signals_sender_6[i] == '-':
+                censored_signals_sender_6.append(i)
         return dict(
             mistrust_sender_1=10 - participant.signals_all_rounds[0:31:6].count('-') - player.trust_sender_1,
             mistrust_sender_2=10 - participant.signals_all_rounds[1:32:6].count('-') - player.trust_sender_2,
@@ -392,7 +407,10 @@ class Confidence_4(Page):
             mistrust_sender_4=10 - participant.signals_all_rounds[3:34:6].count('-') - player.trust_sender_4,
             mistrust_sender_5=10 - participant.signals_all_rounds[4:35:6].count('-') - player.trust_sender_5,
             mistrust_sender_6=10 - participant.signals_all_rounds[5:36:6].count('-') - player.trust_sender_6,
-            num_senders=Constants.num_senders
+            num_senders=Constants.num_senders,
+            censored_signals_sender_4=censored_signals_sender_4,
+            censored_signals_sender_5=censored_signals_sender_5,
+            censored_signals_sender_6=censored_signals_sender_6
         )
     form_model = "player"
     form_fields = ["sender_1_correction_1_inround", "sender_1_correction_2_inround", "sender_1_correction_3_inround",

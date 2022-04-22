@@ -18,6 +18,7 @@ SESSION_CONFIGS = [
         display_name="SIB_control",
         num_demo_participants=10,
         app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI", "Trust_noSI", "Final_Questionnaire_noSI",  "Payout"],
+        prior_sender=False,
     ),
     dict(
         name="SI",

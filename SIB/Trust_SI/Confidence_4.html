@@ -28,17 +28,17 @@ color: white;
       To see which estimation task corresponds to which number and to remind yourself what the senders have stated across the 10 estimation tasks, you can find a table at the bottom.
       Note that the tasks are ordered in the same way as you have faced them in Part 3.
 
-      {{ if trust_sender_1 < 10}}
+      {{ if mistrust_sender_1 > 0 }}
       <br>
       <br>
-       <div class="card">
-        <h5 class="card-header bg-primary" align="center">
+        <hr>
+       <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-primary" style="font-weight: bold">
             <b>Sender A</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_1}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+                </div></div>
+          You have stated that Sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_1}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -47,7 +47,7 @@ color: white;
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_1 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender1\" id=\"sender_1_correction_", i, "_inround_select\" onchange=\"dis_option1(this); update()\">" +
+              document.write(["<td><select required class=\"Sender1\" id=\"sender_1_correction_", i, "_inround_select\" onChange=\"dis_option1(this)\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -72,14 +72,9 @@ color: white;
             }
             });
 
-            function update() {
-                for(var i = 1; i < js_vars.mistrust_sender_1 + 1 ; i++) {
-                    for(var j = 1; i < 6 + 1 ; i++) {
-                    document.getElementById(["sender_", j, "_correction_", i, "_inround"].join('')).value = document.getElementById(["sender_", j , "_correction_", i, "_inround_select"].join('')).value
-            }}}
             function dis_option1(selectElement) {
+                update();
                 var arraySelects = document.getElementsByClassName('Sender1');
-                console.log(arraySelects)
                 var selectedOption = selectElement.selectedIndex;
                 for (var m = 0; m < arraySelects.length; m++) {
                     if (arraySelects[m] === selectElement)
@@ -90,22 +85,20 @@ color: white;
           </script>
           </table>
        </div>
-           </div>
-
       {{ endif }}
 
 
-      {{ if trust_sender_2 < 10}}
+      {{ if mistrust_sender_2 > 0 }}
       <br>
       <br>
-             <div class="card">
-        <h5 class="card-header bg-primary" align="center">
+        <hr>
+       <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-primary" style="font-weight: bold">
             <b>Sender B</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">You have stated that sender B has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_2}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+                </div></div>
+          You have stated that Sender B has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_2}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -114,7 +107,7 @@ color: white;
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_2 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select class=\"Sender2\" required id=\"sender_2_correction_", i, "_inround_select\" onchange=\"dis_option2(this); update()\">" +
+              document.write(["<td><select class=\"Sender2\" required id=\"sender_2_correction_", i, "_inround_select\" onchange=\"dis_option2(this)\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -131,6 +124,7 @@ color: white;
               document.write("</tr>");}
 
             function dis_option2(selectElement) {
+                update();
                 var arraySelects = document.getElementsByClassName('Sender2');
                 var selectedOption = selectElement.selectedIndex;
                 for (var m = 0; m < arraySelects.length; m++) {
@@ -142,22 +136,21 @@ color: white;
 
           </script>
           </table>
-           </div></div>
+           </div>
       {{ endif }}
 
 
-      {{ if trust_sender_3 < 10}}
+      {{ if mistrust_sender_3 > 0 }}
       <br>
       <br>
-             <div class="card">
-        <h5 class="card-header bg-primary" align="center">
+        <hr>
+       <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-primary" style="font-weight: bold">
             <b>Sender C</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">
-      You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_3}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+                </div></div>
+      You have stated that Sender C has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_3}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -166,7 +159,7 @@ color: white;
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_3 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender3\" id=\"sender_3_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required class=\"Sender3\" id=\"sender_3_correction_", i, "_inround_select\" onchange=\"dis_option3(this)\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -183,6 +176,7 @@ color: white;
               document.write("</tr>");}
 
             function dis_option3(selectElement) {
+                update();
                 var arraySelects = document.getElementsByClassName('Sender3');
                 var selectedOption = selectElement.selectedIndex;
                 for (var m = 0; m < arraySelects.length; m++) {
@@ -194,22 +188,21 @@ color: white;
 
           </script>
           </table>
-           </div></div>
+           </div>
       {{ endif }}
 
 
-      {{ if trust_sender_4 < 10}}
+      {{ if mistrust_sender_4 > 0 }}
       <br>
       <br>
-             <div class="card">
-        <h5 class="card-header bg-warning" align="center">
+        <hr>
+       <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-warning" style="font-weight: bold">
             <b>Sender D</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">
-      You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_4}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+                </div></div>
+      You have stated that Sender D has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_4}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -218,7 +211,7 @@ color: white;
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_4 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender4\" id=\"sender_4_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required class=\"Sender4\" id=\"sender_4_correction_", i, "_inround_select\" onclick=\"censored_options_4()\" onchange=\"dis_option4(this)\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -235,6 +228,7 @@ color: white;
               document.write("</tr>");}
 
             function dis_option4(selectElement) {
+                update();
                 var arraySelects = document.getElementsByClassName('Sender4');
                 var selectedOption = selectElement.selectedIndex;
                 for (var m = 0; m < arraySelects.length; m++) {
@@ -243,36 +237,34 @@ color: white;
                     arraySelects[m].options[selectedOption].disabled = true;
                   }
                 }
-            window.onload = censored_options_4;
+
             function censored_options_4() {
                 for(var i = 1; i < js_vars.mistrust_sender_4 + 1 ; i++) {
                     var dropdown = document.getElementById(["sender_4_correction_", i, "_inround_select"].join(""))
-                    for (var m = 0; m < dropdown.length + 1; m++) {
-                        console.log(js_vars.censored_signals_sender_4[m] + 1, dropdown.options[m+1].value, dropdown.options[m+1], dropdown)
-                        if (dropdown.options[m+1].value == js_vars.censored_signals_sender_4[m] + 1){
-                            console.log("yes")
-                        dropdown.options[m+1].disabled = true;}
-                          }
+                    for (var m = 1; m < dropdown.length; m++) {
+                        for(var j = 0; j <= js_vars.censored_signals_sender_4.length ; j++){
+                            if (dropdown.options[m].value == js_vars.censored_signals_sender_4[j] + 1){
+                            dropdown.options[m].disabled = true;}
+                          }}
                         }}
 
           </script>
           </table>
-           </div></div>
+           </div>
       {{ endif }}
 
 
-      {{ if trust_sender_5 < 10}}
+      {{ if mistrust_sender_5 > 0 }}
       <br>
       <br>
-             <div class="card">
-        <h5 class="card-header bg-warning" align="center">
+    <hr>
+       <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-warning" style="font-weight: bold">
             <b>Sender E</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">
-      You have stated that sender A has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_5}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+                </div></div>
+      You have stated that Sender E has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_5}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -281,7 +273,7 @@ color: white;
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_5 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender5\" id=\"sender_5_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required class=\"Sender5\" id=\"sender_5_correction_", i, "_inround_select\" onclick=\"censored_options_5()\" onchange=\"dis_option5(this)\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -296,46 +288,45 @@ color: white;
               document.write(["<input required name=\"sender_5_correction_", i, "_inround\" id=\"sender_5_correction_", i,"_inround\" type=\"hidden\">"].join(''));
               document.write(["<td><input required name=\"sender_5_correction_", i, "_actually\" id=\"sender_5_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
+
             function dis_option5(selectElement) {
+                update();
                 var arraySelects = document.getElementsByClassName('Sender5');
                 var selectedOption = selectElement.selectedIndex;
                 for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === selectElement)
+                    if (arraySelects[m] === this)
                       continue;
-                    arraySelects[m].options[selectedOption].disabled = true;
+                    arraySelects[m].options[selectedOption].disabled = selectElement;
                   }
                 }
-            window.onload = censored_options_5;
             function censored_options_5() {
                 for(var i = 1; i < js_vars.mistrust_sender_5 + 1 ; i++) {
                     var dropdown = document.getElementById(["sender_5_correction_", i, "_inround_select"].join(""))
-                    for (var m = 0; m < dropdown.length + 1; m++) {
-                        console.log(js_vars.censored_signals_sender_5[m] + 1, dropdown.options[m+1].value, dropdown.options[m+1], dropdown)
-                        if (dropdown.options[m+1].value == js_vars.censored_signals_sender_5[m] + 1){
-                            console.log("yes")
-                        dropdown.options[m+1].disabled = true;}
-                          }
+                    for (var m = 1; m < dropdown.length; m++) {
+                        for(var j = 0; j <= js_vars.censored_signals_sender_5.length ; j++){
+                            if (dropdown.options[m].value == js_vars.censored_signals_sender_5[j] + 1){
+                            dropdown.options[m].disabled = true;}
+                          }}
                         }}
 
 
           </script>
           </table>
-           </div>
              </div>
       {{ endif }}
 
-      {{ if trust_sender_6 < 10}}
+      {{ if mistrust_sender_6 > 0 }}
       <br>
       <br>
-             <div class="card">
-        <h5 class="card-header bg-warning" align="center">
+    <hr>
+              <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-warning" style="font-weight: bold">
             <b>Sender F</b>
-        </h5>
-           <div class="card-body">
-        <br>
-      <p class="card-text">
-      You have stated that sender F has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_6}} times.
-          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.</p>
+                </div></div>
+
+      You have stated that Sender F has not stated what the assigned estimation device has shown him/her {{ mistrust_sender_6}} times.
+          Please indicate which estimation tasks those were and type in which number do you believe the estimation device has actually stated.
         <table class="table table-hover">
         <tr>
           <th scope="col">Round</th>
@@ -344,7 +335,7 @@ color: white;
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_6 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender6\" id=\"sender_6_correction_", i, "_inround_select\" onchange=\"update()\">" +
+              document.write(["<td><select required class=\"Sender6\" id=\"sender_6_correction_", i, "_inround_select\" onclick= \"censored_options_6()\" onchange=\"dis_option6(this)\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -361,6 +352,7 @@ color: white;
               document.write("</tr>");}
 
             function dis_option6(selectElement) {
+                update();
                 var arraySelects = document.getElementsByClassName('Sender6');
                 var selectedOption = selectElement.selectedIndex;
                 for (var m = 0; m < arraySelects.length; m++) {
@@ -369,29 +361,42 @@ color: white;
                     arraySelects[m].options[selectedOption].disabled = true;
                   }
                 }
-            window.onload = censored_options_6;
-            function censored_options_6() {
+
+             function censored_options_6() {
                 for(var i = 1; i < js_vars.mistrust_sender_6 + 1 ; i++) {
                     var dropdown = document.getElementById(["sender_6_correction_", i, "_inround_select"].join(""))
-                    for (var m = 0; m < dropdown.length + 1; m++) {
-                        console.log(js_vars.censored_signals_sender_6[m] + 1, dropdown.options[m+1].value, dropdown.options[m+1], dropdown)
-                        if (dropdown.options[m+1].value == js_vars.censored_signals_sender_6[m] + 1){
-                            console.log("yes")
-                        dropdown.options[m+1].disabled = true;}
-                          }
+                    for (var m = 1; m < dropdown.length; m++) {
+                        for(var j = 0; j <= js_vars.censored_signals_sender_6.length ; j++){
+                            if (dropdown.options[m].value == js_vars.censored_signals_sender_6[j] + 1){
+                            dropdown.options[m].disabled = true;}
+                          }}
                         }}
-
-
-
-
           </script>
           </table>
-           </div></div>
+           </div>
       {{ endif }}
 
       <br>
       <br>
-      <hr>
+        <br>
+
+      <br>
+When you have answered all the questions, please press “Next”.
+
+    <br>
+      <br>
+<div align="center">
+    {{ next_button }}
+</div>
+          </div>
+    </div>
+
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+            <h3>
+        History of Signals
+    </h3>
 <table class="table table-hover table-striped ">
   <thead>
     <tr>
@@ -444,15 +449,18 @@ color: white;
   </tbody>
 </table>
       <br>
-      <br>
-When you have answered all the questions, please press “Next”.
-
-    <br>
-      <br>
-<div align="center">
-    {{ next_button }}
-</div>
-          </div>
+    </div>
 </div>
 
+<script>
+
+            function update() {
+            let check_trust = [js_vars.mistrust_sender_1, js_vars.mistrust_sender_2,js_vars.mistrust_sender_3,
+                                js_vars.mistrust_sender_4, js_vars.mistrust_sender_5, js_vars.mistrust_sender_6];
+            for(var k = 0; k <= check_trust.length; ++k){
+                for(var i = 1; i <= check_trust[k] ; i++) {
+                  document.getElementById(["sender_", k + 1, "_correction_", i, "_inround"].join('')).value = document.getElementById(["sender_", k + 1 , "_correction_", i, "_inround_select"].join('')).value
+            }}}
+
+</script>
 {% endblock %}

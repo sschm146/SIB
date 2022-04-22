@@ -12,10 +12,10 @@ GuessingTask_SI_SB
 
 class Constants(BaseConstants):
     name_in_url = "GuessingTask_SI_SB"
-    num_rounds = 4
+    num_rounds = 20
     players_per_group = None
     num_senders = 6
-    true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     sd = 3
     payoff_guess = 1
 
@@ -379,6 +379,10 @@ class StartWaitPage(WaitPage):
     wait_for_all_groups = True
     after_all_players_arrive = 'set_signals'
 
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number >= (Constants.num_rounds / 2) + 1
+
 def set_signals(subsession: Subsession):
     players = subsession.get_players()
     if subsession.round_number > Constants.num_rounds / 2:
@@ -399,12 +403,12 @@ def set_signals(subsession: Subsession):
         del temp[0]
         temp = sorted(temp, key=lambda x: int(x[1]))
         for i in list(range(0, 2)):
-            if senders[i] == 4:
-                senders[i] = 'D'
-            if senders[i] == 5:
-                senders[i] = 'E'
-            if senders[i] == 6:
-                senders[i] = 'F'
+            if temp[i][1] == 4:
+                temp[i][1] = 'D'
+            if temp[i][1] == 5:
+                temp[i][1] = 'E'
+            if temp[i][1] == 6:
+                temp[i][1] = 'F'
         for p in players:
             if p.Role == "receiver":
                 p.SB_sender_4 = temp[0][1]

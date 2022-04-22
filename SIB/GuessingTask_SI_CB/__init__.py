@@ -12,10 +12,11 @@ GuessingTask_noSI
 
 class Constants(BaseConstants):
     name_in_url = "GuessingTask_SI_CB"
-    num_rounds = 4
+    name_in_url = "GuessingTask_SI_CB"
+    num_rounds = 20
     players_per_group = None
     num_senders = 6
-    true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     sd = 3
     payoff_guess = 1
 
@@ -376,6 +377,9 @@ class Instructions_GT_receivers(Page):
 class StartWaitPage(WaitPage):
     wait_for_all_groups = True
 
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == (Constants.num_rounds / 2) + 1
 
 class Prior(Page):
 
@@ -393,7 +397,13 @@ class Prior(Page):
                 prev_player = p.in_round(current_round - int(Constants.num_rounds / 2))
         prior_estimate = prev_player.estimate
         return dict(
-            prior_estimate=prior_estimate,
+            prior_estimate=prior_estimate
+        )
+
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(
+            round=player.round_number
         )
 
     form_model = "player"
@@ -432,7 +442,7 @@ def save_signals_payoff(subsession: Subsession):
         participant = p.participant
         participant.estimates_all_rounds = estimates_all_rounds
         participant.signals_all_rounds = signals_all_rounds
-        if p.Role == "sender":
+        if p.Role == "sender" or p.Role == "prior_sender":
             i = random.randint(1, int(Constants.num_rounds / 2))
             prev_player = p.in_round(i)
             participant = p.participant
@@ -456,13 +466,9 @@ class Filler_Task(Page):
     form_model = "player"
     form_fields = ["q"+str(i) for i in range(1, 26)]
 
-
     @staticmethod
     def is_displayed(player):
-        return (player.Role == "receiver" and player.round_number == 1) or (player.Role == "sender" and player.round_number == Constants.num_rounds/2 + 1)
-
-
-
+        return (player.Role == "receiver" and player.round_number == 1) or ((player.Role == "sender" or player.Role == "prior_sender") and player.round_number == Constants.num_rounds/2 + 1)
 
 
 # the receiver observes all the signals sent by senders and states a guess/posterior

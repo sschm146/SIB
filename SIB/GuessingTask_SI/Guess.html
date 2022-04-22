@@ -12,7 +12,8 @@ color: white;
 {{ endblock }}
 
 {% block content %}
- <h2 style="display: inline-block; padding-right: 60px ">Part 2</h2>
+
+<h2 style="display: inline-block; padding-right: 60px ">Guessing Task</h2>
 
 <div align="center" style="display: inline-block; width: 60%; padding-left: 60px">
 <div class="progress" style="height: 25px">
@@ -115,7 +116,7 @@ Sender's group affiliations are shown via the respective colors.
 <script>
 window.onload = function progressbar_update() {
     bar = document.getElementById("progress");
-    bar.style.width = 10  + parseInt(js_vars.round)*9 + "%";
+        bar.style.width = parseInt(js_vars.round)*10 + "%";
     bar.innerHTML = "<big><b> Round " + parseInt(js_vars.round) + " of 10</b></big>";
 }
 </script>

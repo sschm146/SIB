@@ -11,10 +11,10 @@ GuessingTask_noSI
 
 class Constants(BaseConstants):
     name_in_url = "GuessingTask_noSI"
-    num_rounds = 4
+    num_rounds = 20
     players_per_group = None
     num_senders = 6
-    true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     sd = 3
     payoff_guess = 1
 
@@ -346,6 +346,9 @@ class Instructions_GT_receivers(Page):
 class StartWaitPage(WaitPage):
     wait_for_all_groups = True
 
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == (Constants.num_rounds / 2) + 1
 
 class Filler_Task(Page):
     form_model = "player"
