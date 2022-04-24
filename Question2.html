@@ -1,0 +1,117 @@
+{{ block title }}
+    Answer these questions
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .slidecontainer2  {
+      width: 90%;
+    }
+
+    .slider2 {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider2:hover {
+      opacity: 1;
+    }
+
+    .slider_thumb2::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: red;
+      cursor: pointer;
+    }
+
+    .slider_thumb_none2::-webkit-slider-thumb   {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 0px;
+      border-radius: 50%;
+      background: red;
+      cursor: pointer;
+    }
+
+    .slider2::-moz-range-thumb  {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #04AA6D;
+      cursor: pointer;
+    }
+    .value-spans2 {
+     display:flex;
+     justify-content: space-between;
+    }
+</style>
+
+
+<table align="center" border="0" cellpadding="1" cellspacing="1" width="90%">
+ <tbody>
+  <tr>
+   <td width="200">&nbsp;</td>
+   <td width="400"><span style="color:#009900;"><b>How would you split the money?</b></span></td>
+   <td width="200">&nbsp;</td>
+  </tr>
+  <tr>
+   <td><img height="110" src="https://harvard.az1.qualtrics.com/CP/Graphic.php?IM=IM_cwsOcL2n9EcrIyN" width="104" /></td>
+   <td><img height="122" src="https://harvard.az1.qualtrics.com/CP/Graphic.php?IM=IM_cV1sHyBhoybHdop" width="400" /></td>
+   <td><img height="110" src="https://harvard.az1.qualtrics.com/CP/Graphic.php?IM=IM_cwsOcL2n9EcrIyN" width="104" /></td>
+  </tr>
+</tbody>
+</table>
+
+<table align="center">
+    <br><br><br>
+<p align="center">Move the slider to decide how much to allocate.</p><br>
+
+<div class="Update">
+    <div class="slidecontainer2">
+        <div class="value-spans2">
+          <p><span id="left-span2">$0</span></p>
+          <p><span id="2_a">Second statement</span></p>
+          <p><span id="2_b">Randomly-selected Person in Germany</span></p>
+          <p><span id="right-span2">$0</span></p>
+        </div>
+        <input type="range" min="0" max="100" value="50" class="slider2 slider_thumb_none2" id="myRange2">
+        <input type="hidden" value="0" id="question2_a" name="question2_a" >
+        <input type="hidden" value="0" id="question2_b" name="question2_b">
+    </div><br>
+</div>
+
+
+</table>
+<script>
+
+        let value2 = 0;
+        let other2 = 0;
+        let statements2 = ["Second statment", "Randomly-selected Person in Germany"];
+
+        $(document).ready(function() {
+          $('.slider2').on('input', function () {
+          $(".slider2").removeClass("slider_thumb_none2").addClass("slider_thumb2");
+          value2 = $(".slider2").val();
+          other2 = 100 - value2;
+          $("#left-span2").html(`$${other2}`);
+          $("#right-span2").html(`$${value2}`);
+          $("#question2_a").val(other2)
+          $("#question2_b").val(value2)
+        });
+     });
+</script>
+
+    {{ next_button }}
+
+{{ endblock }}
