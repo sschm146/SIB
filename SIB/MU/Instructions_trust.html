@@ -1,0 +1,29 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Questionnaire
+    </h3>
+<br><br>
+        <p style="font-weight: bold">There are various ways in which people can cheat on others or take advantage of them.
+            We are now interested in how much you trust that different people will not cheat on you or take advantage of you.</p>
+        <p>In each of the following screens, you will be asked a series of questions about your trust in different individuals.
+            You will be provided with information about the individuals that are involved prior to providing your answers.</p>
+
+        <br>
+        <br>
+
+    <p>
+        <strong>When you have finished reading, please press “next” to proceed.</strong>
+    </p>
+   </div>
+</div>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{% endblock %}

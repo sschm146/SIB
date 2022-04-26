@@ -1,0 +1,32 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Questionnaire
+    </h3>
+<br><br>
+        <p style="font-weight: bold">In the following set of hypothetical games, you will be asked to take part in a sequence of <b>money allocation</b> tasks.
+</p>
+        <p>In each one of these tasks, <b>you</b> will be <b>endowed with a hypothetical sum of $100</b>, and will be asked to <b>allocate this money between two individuals</b>.</p>
+        <p>In each of these types of tasks, you will be provided with information about the individuals that are involved prior to making your decisions.
+            In all of these decisions, please <b>assume all individuals presented have the same income.</b>
+            Please also <b>assume that none of the individuals would find out who the identity of the individual sending them money (you) is</b>.</p>
+        <p>It is important to emphasize that, in all tasks, you can split the hypothetical money in <b>any way you see fit</b> – there are no restrictions of any kind.</p>
+
+        <br>
+        <br>
+
+    <p>
+        <strong>When you have finished reading, please press “next” to proceed.</strong>
+    </p>
+   </div>
+</div>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{% endblock %}

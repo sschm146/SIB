@@ -16,7 +16,6 @@ class Constants(BaseConstants):
     use_timeout = False
     guess_time = 600
     labelled_time = 300
-    artist_payoff = 3
 
 class Subsession(BaseSubsession):
     pass
@@ -63,13 +62,13 @@ def payout_calc(subsession: Subsession):
         others = [g.artist_points for g in players if g != p]
         competitor = random.choice(others)
         if p.artist_points > competitor:
-            p.payoff = Constants.artist_payoff
+            p.payoff = subsession.session.config['SIM_payoff']
             participant.SIM_payoff = p.payoff
         if p.artist_points < competitor:
             p.payoff = 0
             participant.SIM_payoff = p.payoff
         if p.artist_points == competitor:
-            p.payoff = random.choice([Constants.artist_payoff, 0])
+            p.payoff = random.choice([subsession.session.config['SIM_payoff'], 0])
             participant.SIM_payoff = p.payoff
 
 

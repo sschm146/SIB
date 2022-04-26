@@ -16,7 +16,6 @@ class Constants(BaseConstants):
     num_senders = 6
     true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     sd = 3
-    payoff_guess = 1
 
 
 class Subsession(BaseSubsession):
@@ -254,7 +253,7 @@ class Player(BasePlayer):
 #roles allocation and mu_signals (true) simulaion for each sender
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
-    subsession.x = random.randint(0, 100)
+    subsession.x = random.randint(0, 50)
     estimates = np.random.normal(Constants.true_state[subsession.round_number - 1], Constants.sd, Constants.num_senders)
     estimates = np.rint(estimates)
     for p in players: #Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
@@ -284,7 +283,7 @@ class Signals(Page):
     def before_next_page(player, timeout_happened):
         diff = pow((Constants.true_state[int(player.round_number) - 1] - player.sent_signal), 2)
         if diff <= player.subsession.x:
-            player.payoff = Constants.payoff_guess
+            player.payoff = player.session.config['GT_receiver_payoff']
         else:
             player.payoff = 0
 
@@ -428,7 +427,7 @@ class Guess(Page):
     def before_next_page(player, timeout_happened):
         diff = pow((Constants.true_state[int(player.round_number - Constants.num_rounds / 2) - 1] - player.posterior), 2)
         if diff <= player.subsession.x:
-            player.payoff = Constants.payoff_guess
+            player.payoff = player.session.config['GT_receiver_payoff']
         else:
             player.payoff = 0
 

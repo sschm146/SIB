@@ -1,0 +1,33 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Questionnaire
+    </h3>
+<br><br>
+        <p style="font-weight: bold">You will now be asked to participate in a variety of hypothetical games and answer a number of questions.</p>
+        <p>In these games, as in the rest of this survey, <b>none</b> of the tasks or questions will have right or wrong answers.
+            <b>We are only interested in your personal views and preferences</b>.</p>
+        <p>In each of these hypothetical games and questions, you will consider different individuals. There will be <b>four different types of individuals</b>:</p>
+        <ul>
+            <li>Members of different social groups of yours who live in Germany, such as a neighbor of yours, or a colleague at work or school.</li>
+            <li>Randomly-selected people who live in Germany.</li>
+            <li>Members of different social groups of yours who live anywhere in the world, such as someone who shares your values.</li>
+            <li>Randomly-selected people who live anywhere in the world.</li>
+        </ul>
+        <br>
+        <br>
+    <p>
+        <strong>When you have finished reading, please press “next” to proceed.</strong>
+    </p>
+   </div>
+</div>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{% endblock %}

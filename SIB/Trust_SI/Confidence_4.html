@@ -47,7 +47,7 @@ color: white;
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_1 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender1\" id=\"sender_1_correction_", i, "_inround_select\" onChange=\"dis_option1(this)\">" +
+              document.write(["<td><select required class=\"Sender1\" id=\"sender_1_correction_", i, "_inround_select\" onChange=\"dis_option1()\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -72,15 +72,17 @@ color: white;
             }
             });
 
-            function dis_option1(selectElement) {
-                update();
+            function dis_option1() {
                 var arraySelects = document.getElementsByClassName('Sender1');
-                var selectedOption = selectElement.selectedIndex;
+                for (var j = 0; j < arraySelects.length; j++) {
+                    for (var i = 0; i < arraySelects[j].options.length; i++) {
+                        arraySelects[j].options[i].disabled = false;}}
                 for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === selectElement)
-                      continue;
-                    arraySelects[m].options[selectedOption].disabled = true;
-                  }
+                    var selectedOption = arraySelects[m].selectedIndex;
+                    for (var k = 0; k < arraySelects.length; k++) {
+                        arraySelects[k].options[selectedOption].disabled = true;}
+                    update();
+                }
                 }
           </script>
           </table>
@@ -107,7 +109,7 @@ color: white;
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_2 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select class=\"Sender2\" required id=\"sender_2_correction_", i, "_inround_select\" onchange=\"dis_option2(this)\">" +
+              document.write(["<td><select class=\"Sender2\" required id=\"sender_2_correction_", i, "_inround_select\" onchange=\"dis_option2()\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -123,15 +125,17 @@ color: white;
               document.write(["<td><input required name=\"sender_2_correction_", i, "_actually\" id=\"sender_2_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
 
-            function dis_option2(selectElement) {
-                update();
-                var arraySelects = document.getElementsByClassName('Sender2');
-                var selectedOption = selectElement.selectedIndex;
+            function dis_option3() {
+                var arraySelects = document.getElementsByClassName('Sender3');
+                for (var j = 0; j < arraySelects.length; j++) {
+                    for (var i = 0; i < arraySelects[j].options.length; i++) {
+                        arraySelects[j].options[i].disabled = false;}}
                 for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === selectElement)
-                      continue;
-                    arraySelects[m].options[selectedOption].disabled = true;
-                  }
+                    var selectedOption = arraySelects[m].selectedIndex;
+                    for (var k = 0; k < arraySelects.length; k++) {
+                        arraySelects[k].options[selectedOption].disabled = true;}
+                    update();
+                }
                 }
 
           </script>
@@ -211,7 +215,7 @@ color: white;
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_4 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender4\" id=\"sender_4_correction_", i, "_inround_select\" onclick=\"censored_options_4()\" onchange=\"dis_option4(this)\">" +
+              document.write(["<td><select required class=\"Sender4\" id=\"sender_4_correction_", i, "_inround_select\" onchange=\"dis_option4()\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -227,15 +231,18 @@ color: white;
               document.write(["<td><input required name=\"sender_4_correction_", i, "_actually\" id=\"sender_4_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
 
-            function dis_option4(selectElement) {
-                update();
+            function dis_option4() {
                 var arraySelects = document.getElementsByClassName('Sender4');
-                var selectedOption = selectElement.selectedIndex;
+                for (var j = 0; j < arraySelects.length; j++) {
+                    for (var i = 0; i < arraySelects[j].options.length; i++) {
+                        arraySelects[j].options[i].disabled = false;}}
                 for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === selectElement)
-                      continue;
-                    arraySelects[m].options[selectedOption].disabled = true;
-                  }
+                    var selectedOption = arraySelects[m].selectedIndex;
+                    for (var k = 0; k < arraySelects.length; k++) {
+                        arraySelects[k].options[selectedOption].disabled = true;}
+                    update();
+                    censored_options_4();
+                }
                 }
 
             function censored_options_4() {
@@ -273,7 +280,7 @@ color: white;
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_5 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender5\" id=\"sender_5_correction_", i, "_inround_select\" onclick=\"censored_options_5()\" onchange=\"dis_option5(this)\">" +
+              document.write(["<td><select required class=\"Sender5\" id=\"sender_5_correction_", i, "_inround_select\" onchange=\"dis_option5()\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -289,15 +296,18 @@ color: white;
               document.write(["<td><input required name=\"sender_5_correction_", i, "_actually\" id=\"sender_5_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
 
-            function dis_option5(selectElement) {
-                update();
+            function dis_option5() {
                 var arraySelects = document.getElementsByClassName('Sender5');
-                var selectedOption = selectElement.selectedIndex;
+                for (var j = 0; j < arraySelects.length; j++) {
+                    for (var i = 0; i < arraySelects[j].options.length; i++) {
+                        arraySelects[j].options[i].disabled = false;}}
                 for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === this)
-                      continue;
-                    arraySelects[m].options[selectedOption].disabled = selectElement;
-                  }
+                    var selectedOption = arraySelects[m].selectedIndex;
+                    for (var k = 0; k < arraySelects.length; k++) {
+                        arraySelects[k].options[selectedOption].disabled = true;}
+                    update();
+                    censored_options_5();
+                }
                 }
             function censored_options_5() {
                 for(var i = 1; i < js_vars.mistrust_sender_5 + 1 ; i++) {
@@ -335,7 +345,7 @@ color: white;
           <script>
             for(var i = 1; i < js_vars.mistrust_sender_6 + 1 ; i++) {
               document.write("<tr>");
-              document.write(["<td><select required class=\"Sender6\" id=\"sender_6_correction_", i, "_inround_select\" onclick= \"censored_options_6()\" onchange=\"dis_option6(this)\">" +
+              document.write(["<td><select required class=\"Sender6\" id=\"sender_6_correction_", i, "_inround_select\" onchange=\"dis_option6()\">" +
               "<option value=>--------</option>" +
                       "<option value=1>1</option>" +
                       "<option value=2>2</option>" +
@@ -351,15 +361,18 @@ color: white;
               document.write(["<td><input required name=\"sender_6_correction_", i, "_actually\" id=\"sender_6_correction_", i,"_actually\"></td>"].join(''));
               document.write("</tr>");}
 
-            function dis_option6(selectElement) {
-                update();
+            function dis_option6() {
                 var arraySelects = document.getElementsByClassName('Sender6');
-                var selectedOption = selectElement.selectedIndex;
+                for (var j = 0; j < arraySelects.length; j++) {
+                    for (var i = 0; i < arraySelects[j].options.length; i++) {
+                        arraySelects[j].options[i].disabled = false;}}
                 for (var m = 0; m < arraySelects.length; m++) {
-                    if (arraySelects[m] === selectElement)
-                      continue;
-                    arraySelects[m].options[selectedOption].disabled = true;
-                  }
+                    var selectedOption = arraySelects[m].selectedIndex;
+                    for (var k = 0; k < arraySelects.length; k++) {
+                        arraySelects[k].options[selectedOption].disabled = true;}
+                    update();
+                    censored_options_6();
+                }
                 }
 
              function censored_options_6() {
@@ -446,6 +459,31 @@ When you have answered all the questions, please press “Next”.
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
+ <tr>
+      <th scope="row">7</th>
+    {{ for p in signals_round_7 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">8</th>
+    {{ for p in signals_round_8 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">9</th>
+    {{ for p in signals_round_9 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">10</th>
+    {{ for p in signals_round_10 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+
   </tbody>
 </table>
       <br>
@@ -453,6 +491,11 @@ When you have answered all the questions, please press “Next”.
 </div>
 
 <script>
+            window.onload = function(){
+                censored_options_4();
+                censored_options_5();
+                censored_options_6();
+            }
 
             function update() {
             let check_trust = [js_vars.mistrust_sender_1, js_vars.mistrust_sender_2,js_vars.mistrust_sender_3,
