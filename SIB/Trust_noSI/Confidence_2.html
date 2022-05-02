@@ -192,7 +192,7 @@ input[type=range]:focus::-ms-fill-upper {
         <br>
         <br>
         <div align="center">
-            <div class="card" style="width: auto">
+            <div class="card" style="width: 20%">
             <div class="card-header" style="font-weight: bold">
              Sender A
             </div></div>
@@ -207,7 +207,7 @@ input[type=range]:focus::-ms-fill-upper {
         <br>
         <hr>
         <div align="center">
-            <div class="card" style="width: auto">
+            <div class="card" style="width: 20%">
             <div class="card-header" style="font-weight: bold">
             <b>Sender B</b>
                 </div></div>
@@ -221,7 +221,7 @@ input[type=range]:focus::-ms-fill-upper {
         <br>
         <hr>
         <div align="center">
-            <div class="card" style="width: auto">
+            <div class="card" style="width: 20%">
             <div class="card-header" style="font-weight: bold">
             <b>Sender C</b>
                 </div></div>
@@ -235,7 +235,7 @@ input[type=range]:focus::-ms-fill-upper {
         <br>
         <hr>
         <div align="center">
-            <div class="card" style="width: auto">
+            <div class="card" style="width: 20%">
             <div class="card-header" style="font-weight: bold">
             <b>Sender D</b>
                 </div></div>
@@ -249,7 +249,7 @@ input[type=range]:focus::-ms-fill-upper {
         <br>
         <hr>
         <div align="center">
-            <div class="card" style="width: auto">
+            <div class="card" style="width: 20%">
             <div class="card-header" style="font-weight: bold">
             <b>Sender E</b>
                 </div></div>
@@ -263,7 +263,7 @@ input[type=range]:focus::-ms-fill-upper {
         <br>
         <hr>
         <div align="center">
-            <div class="card" style="width: auto">
+            <div class="card" style="width: 20%">
             <div class="card-header" style="font-weight: bold">
             <b>Sender F</b>
                 </div></div>
@@ -277,6 +277,24 @@ input[type=range]:focus::-ms-fill-upper {
         <br>
         <br>
         <br>
+
+When you have finished with the task, please press “Next” below.
+        The "Next" button only becomes visible if you submitted a choice in all sliders above.
+    <br>
+      <br>
+<div align="center">
+    <button  class="otree-btn-next btn btn-primary" id="nextbtn" style="visibility:hidden">Next</button>
+</div>
+          </div>
+</div>
+
+
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        History of Signals
+    </h3>
 <table class="table table-hover table-striped ">
   <thead>
     <tr>
@@ -326,20 +344,35 @@ input[type=range]:focus::-ms-fill-upper {
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
+          <tr>
+      <th scope="row">7</th>
+    {{ for p in signals_round_7 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">8</th>
+    {{ for p in signals_round_8 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">9</th>
+    {{ for p in signals_round_9 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">10</th>
+    {{ for p in signals_round_10 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
   </tbody>
 </table>
-      <br>
-      <br>
-When you have finished with the task, please press “Next” below.
-        The "Next" button only becomes visible if you submitted a choice in all sliders above.
-    <br>
-      <br>
-<div align="center">
-    <button  class="otree-btn-next btn btn-primary" id="nextbtn" style="visibility:hidden">Next</button>
-</div>
-          </div>
-</div>
 
+    </div>
+</div>
 <script>
         window.onload = function setInitials() {
             check1 = 0

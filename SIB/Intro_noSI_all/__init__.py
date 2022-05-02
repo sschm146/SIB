@@ -26,12 +26,19 @@ class Player(BasePlayer):
     Role = models.StringField()
 
 def creating_session(subsession: Subsession):
-    players = subsession.get_players()
-    for p in players:  # Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
+    for p in subsession.get_players():  # Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
+        participant = p.participant
         if p.id_in_group in list(range(1, Constants.num_senders + 1)):
-            p.Role = 'sender'
+            participant.Role = "sender"
+            p.Role = participant.Role
+        elif p.session.config['prior_sender'] and p.id_in_group in list(
+                range(Constants.num_senders + 1, Constants.num_senders + 2)):
+            participant.Role = "prior_sender"
+            p.Role = participant.Role
         else:
-            p.Role = 'receiver'
+            participant.Role = "receiver"
+            p.Role = participant.Role
+
 
 # PAGES
 class Instructions_all(Page):
@@ -40,7 +47,7 @@ class Instructions_all(Page):
 class Instructions_sender(Page):
     @staticmethod
     def is_displayed(player):
-        return player.Role == "sender"
+        return player.Role == "sender" or player.Role == "prior_sender"
 
 class Instructions_receiver(Page):
     @staticmethod

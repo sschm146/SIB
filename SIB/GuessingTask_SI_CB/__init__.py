@@ -12,12 +12,11 @@ GuessingTask_noSI
 
 class Constants(BaseConstants):
     name_in_url = "GuessingTask_SI_CB"
-    num_rounds = 4
+    num_rounds = 20
     players_per_group = None
     num_senders = 6
-    true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     sd = 3
-    payoff_guess = 1
 
 
 class Subsession(BaseSubsession):
@@ -263,15 +262,14 @@ class Player(BasePlayer):
 #roles allocation and mu_signals (true) simulation for each sender
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
-    subsession.x = random.randint(0, 100)
-    estimates = np.random.normal(Constants.true_state[subsession.round_number - 1], Constants.sd, 10)
+    subsession.x = random.randint(0, 50)
+    estimates = np.random.normal(Constants.true_state[subsession.round_number - 1], Constants.sd, Constants.num_senders + 1)
     estimates = np.rint(estimates)
     for p in players:  # Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
-        p.estimate = estimates[p.id_in_group - 1]
-        if p.id_in_group in list(range(1, Constants.num_senders + 1)):
-            p.Role = 'sender'
-        else:
-            p.Role = 'receiver'
+        participant = p.participant
+        p.Role = participant.Role
+        if p.Role == "sender" or p.Role == "prior_sender":
+            p.estimate = estimates[p.id_in_group - 1]
         if p.round_number <= Constants.num_rounds / 2:
             p.true_state = Constants.true_state[subsession.round_number - 1]
         else:
@@ -292,13 +290,13 @@ class Signals(Page):
     def before_next_page(player, timeout_happened):
         diff = pow((Constants.true_state[int(player.round_number) - 1] - player.sent_signal), 2)
         if diff <= player.subsession.x:
-            player.payoff = Constants.payoff_guess
+            player.payoff = player.session.config['GT_receiver_payoff']
         else:
             player.payoff = 0
 
     @staticmethod
     def is_displayed(player):
-        return player.Role == "sender" and player.round_number <= Constants.num_rounds/2
+        return (player.Role == "sender" or player.Role =="prior_sender") and player.round_number <= Constants.num_rounds/2
 
     def vars_for_template(player: Player):
         estimate = player.estimate
@@ -315,7 +313,7 @@ class Signals(Page):
 class Instructions_GT_senders(Page):
     @staticmethod
     def is_displayed(player):
-        return player.Role == "sender" and player.round_number == 1
+        return (player.Role == "sender" or player.Role =="prior_sender") and player.round_number == 1
 
     form_model = "player"
     form_fields = ["comprq1", "comprq2", "comprq3", "comprq4", "comprq5", "comprq6"]
@@ -377,6 +375,9 @@ class Instructions_GT_receivers(Page):
 class StartWaitPage(WaitPage):
     wait_for_all_groups = True
 
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == (Constants.num_rounds / 2) + 1
 
 class Prior(Page):
 
@@ -387,9 +388,20 @@ class Prior(Page):
     @staticmethod
     def vars_for_template(player: Player):
         current_round = player.round_number
-        prev_player = player.in_round(current_round - int(Constants.num_rounds / 2))
+        subsession = player.subsession
+        players = subsession.get_players()
+        for p in players:
+            if p.Role == "prior_sender":
+                prev_player = p.in_round(current_round - int(Constants.num_rounds / 2))
+        prior_estimate = prev_player.estimate
         return dict(
-            estimate=prev_player.estimate,
+            prior_estimate=prior_estimate
+        )
+
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(
+            round=player.round_number
         )
 
     form_model = "player"
@@ -428,7 +440,7 @@ def save_signals_payoff(subsession: Subsession):
         participant = p.participant
         participant.estimates_all_rounds = estimates_all_rounds
         participant.signals_all_rounds = signals_all_rounds
-        if p.Role == "sender":
+        if p.Role == "sender" or p.Role == "prior_sender":
             i = random.randint(1, int(Constants.num_rounds / 2))
             prev_player = p.in_round(i)
             participant = p.participant
@@ -452,13 +464,9 @@ class Filler_Task(Page):
     form_model = "player"
     form_fields = ["q"+str(i) for i in range(1, 26)]
 
-
     @staticmethod
     def is_displayed(player):
-        return (player.Role == "receiver" and player.round_number == 1) or (player.Role == "sender" and player.round_number == Constants.num_rounds/2 + 1)
-
-
-
+        return (player.Role == "receiver" and player.round_number == 1) or ((player.Role == "sender" or player.Role == "prior_sender") and player.round_number == Constants.num_rounds/2 + 1)
 
 
 # the receiver observes all the signals sent by senders and states a guess/posterior
@@ -468,7 +476,7 @@ class Guess(Page):
     def before_next_page(player, timeout_happened):
         diff = pow((Constants.true_state[int(player.round_number - Constants.num_rounds / 2) - 1] - player.posterior), 2)
         if diff <= player.subsession.x:
-            player.payoff = Constants.payoff_guess
+            player.payoff = player.session.config['GT_receiver_payoff']
         else:
             player.payoff = 0
 

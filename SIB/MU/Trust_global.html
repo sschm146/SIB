@@ -1,0 +1,120 @@
+{{ load otree staticfiles }}
+{{ block styles }}
+
+<style>
+
+    .slidecontainer  {
+      width: 90%;
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider:hover  {
+      opacity: 1;
+    }
+
+
+    .slider_thumb_none::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #04AA6D;
+      cursor: pointer;
+        opacity: 0;
+    }
+    .slider_thumb::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #04AA6D;
+      cursor: pointer;
+        opacity: 100;
+    }
+
+</style>
+{{ endblock }}
+{{block content}}
+
+    <h3>
+        Questionnaire
+    </h3>
+        <br>
+        <br>
+        <p style="font-weight: bold">In each row below, how would you split 100 "trust-points" between a randomly-selected person of your same race/ ethnicity who lives anywhere in the world and a randomly-selected person who lives anywhere in the world?</p>
+        <p>The closer you drag the slider to one individual, the more money you allocate to that individual.
+            Please assume both individuals below <b>live anywhere in the world</b>.
+            Click on the grey bar below and move the slider to decide how many trust points to allocate.</p>
+        <br>
+        <table align="center" border="0" cellpadding="1" cellspacing="1" width="90%">
+ <tbody>
+  <tr>
+
+      <td  style="text-align: center; font-weight: bold; float: left; width: 300px">A randomly-selected person in Germany</td>
+      <td align="center"><span style="color:#009900; float: bottom; width: 300px"><b>Whom do I trust more?</b></span></td>
+            <td style="text-align: center;  font-weight: bold; float: right; width: 300px">A randomly-selected person from anywhere in world</td>
+</tr>
+  <tr>
+   <td align="center"><img height="110" src=" {{ static 'MU_others.png' }}" /></td>
+   <td align="center"><img height="122" src="{{ static 'MU_trust.png' }}" width="400" /></td>
+   <td align="center"><img height="110" src="{{ static 'MU_others.png' }}" width="104" /></td>
+  </tr>
+   <tr>
+   <td align="center"><span id="left-span" style="font-size: large; font-weight: bold">0</span></td>
+   <td align="center"></td>
+   <td align="center"><span id="right-span" style="font-size: large; font-weight: bold">0</span></td>
+  </tr>
+  <tr>
+      <td style="text-align: center; width: 70%; float: left"> <br>I trust the individual on the left much more </td>
+      <td style="text-align: center;"> <br>I trust the two individuals to the same extent </td>
+      <td style="text-align: center; width: 70%; float: right"> <br>I trust the individual on the right much more </td>
+ </tr>
+  </tbody>
+</table>
+<br>
+<div class="Update" align="center">
+    <div class="slidecontainer">
+
+        <input type="range" min="0" max="100" value="50" class="slider slider_thumb_none" id="myRange">
+        <input type="hidden" name="trust_global" min="0" max="100" id="trust_global">
+
+    </div><br><br></div>
+
+<script>
+
+    var forms = $(".Update");
+    for(var i = 0; i < forms.length; i++){
+    var target = Math.floor(Math.random() * forms.length -1) + 1;
+    var target2 = Math.floor(Math.random() * forms.length -1) +1;
+    forms.eq(target).before(forms.eq(target2));
+}
+        let value1 = 0;
+        let other1 = 0;
+        $(document).ready(function() {
+          $('.slider').on('input', function () {
+            $(".slider").removeClass("slider_thumb_none").addClass("slider_thumb");
+            value1 = $(".slider").val();
+            other1 = 100 - value1;
+            $("#left-span").html(`${other1} points`);
+            $("#right-span").html(`${value1} points`);
+            document.getElementById("trust_global").value = 100 - document.getElementById("myRange").value
+          });
+        });
+
+
+</script>
+<br>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{{ endblock }}

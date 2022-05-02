@@ -22,6 +22,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    identity = models.StringField()
     all_clear = models.LongStringField(blank=True, label= '')
     comments = models.LongStringField(blank=True, label= '')
     sisi= models.IntegerField(
@@ -39,16 +40,23 @@ class Player(BasePlayer):
         label="",)
 
 
-
+def creating_session(subsession: Subsession):
+    players = subsession.get_players()
+    for p in players:
+        participant = p.participant
+        p.identity = participant.identity
 # PAGES
 class Final_SI(Page):
 
     @staticmethod
+    def is_displayed(player):
+        return player.identity != "neutral"
+
+    @staticmethod
     def vars_for_template(player: Player):
-        participant = player.participant
-        identity = participant.identity
+
         return dict(
-            group_name=identity,
+            group_name=player.identity,
         )
 
     form_model = 'player'

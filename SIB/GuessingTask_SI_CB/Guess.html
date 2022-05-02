@@ -11,13 +11,15 @@ color: white;
 
 {{ endblock }}
 {% block content %}
- <h2 style="display: inline-block; padding-right: 60px ">Part 2</h2>
+ <h2 style="display: inline-block; padding-right: 60px ">Guessing Task</h2>
 
 <div align="center" style="display: inline-block; width: 60%; padding-left: 60px">
 <div class="progress" style="height: 25px">
   <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 10%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="10"></div>
 </div>
 </div>
+<br>
+<br>
 <br>
 <br>
 You are a {{ player.Role }} and a member of the {{player.identity}} Group.
@@ -45,7 +47,7 @@ Sender's group affiliations are shown via the respective colors.
 
     <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header bg-warning" style="font-weight: bold">
+  <div class="card-header bg-primary" style="font-weight: bold">
     Sender B
   </div>
   <ul class="list-group list-group-flush">
@@ -77,7 +79,7 @@ Sender's group affiliations are shown via the respective colors.
     </div>
         <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header bg-primary" style="font-weight: bold">
+  <div class="card-header bg-warning" style="font-weight: bold">
     Sender E
   </div>
   <ul class="list-group list-group-flush">
@@ -113,7 +115,7 @@ Sender's group affiliations are shown via the respective colors.
 <script>
 window.onload = function progressbar_update() {
     bar = document.getElementById("progress");
-    bar.style.width = 10  + parseInt(js_vars.round)*9 + "%";
+    bar.style.width = parseInt(js_vars.round)*10 + "%";
     bar.innerHTML = "<big><b> Round " + parseInt(js_vars.round) + " of 10</b></big>";
 }
 </script>

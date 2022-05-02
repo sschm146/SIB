@@ -40,7 +40,7 @@ color: white;
 
     <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header  bg-warning" style="font-weight: bold">
+  <div class="card-header  bg-primary" style="font-weight: bold">
     Sender B
   </div>
   <ul class="list-group list-group-flush">
@@ -72,7 +72,7 @@ color: white;
     </div>
         <div class="col">
 <div class="card" style="width: auto">
-  <div class="card-header bg-primary" style="font-weight: bold">
+  <div class="card-header bg-warning" style="font-weight: bold">
     Sender E
   </div>
   <ul class="list-group list-group-flush">
@@ -95,7 +95,22 @@ color: white;
 <br>
 <br>
 <br>
-<hr>
+
+When you have finished with the task, please press “Next”.
+    <br>
+      <br>
+<div align="center">
+    {% next_button %}
+</div>
+          </div>
+</div>
+
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        History of Signals
+    </h3>
 
 <table class="table table-hover table-striped ">
   <thead>
@@ -146,18 +161,32 @@ color: white;
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
+  <tr>
+      <th scope="row">7</th>
+    {{ for p in signals_round_7 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">8</th>
+    {{ for p in signals_round_8 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">9</th>
+    {{ for p in signals_round_9 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">10</th>
+    {{ for p in signals_round_10 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
   </tbody>
 </table>
+    </div></div>
 
-
-      <br>
-      <br>
-When you have finished with the task, please press “Next”.
-    <br>
-      <br>
-<div align="center">
-    {% next_button %}
-</div>
-          </div>
-</div>
 {{ endblock}}
