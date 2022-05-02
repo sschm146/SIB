@@ -236,24 +236,24 @@ class Trust_in_Senders(Page):
     @staticmethod
     def error_message(player, values):
         participant = player.participant
-        if values['trust_sender_1'] > 10 - participant.signals_all_rounds[0:31:6].count('-'):
+        if values['trust_sender_1'] > 10 - participant.signals_all_rounds[0:55:6].count('-'):
+            return 'Error for Sender A: Please enter a number between 0 and ' + str(
+                10 - participant.signals_all_rounds[0:55:6].count('-')) + ' (amount of received signals Sender A)!'
+        if values['trust_sender_2'] > 10 - participant.signals_all_rounds[1:56:6].count('-'):
+            return 'Error for Sender B: Please enter a number between 0 and ' + str(
+                10 - participant.signals_all_rounds[1:56:6].count('-')) + ' (amount of received signals Sender B)!'
+        if values['trust_sender_3'] > 10 - participant.signals_all_rounds[2:57:6].count('-'):
+            return 'Error for Sender C: Please enter a number between 0 and ' + str(
+                10 - participant.signals_all_rounds[2:57:6].count('-')) + ' (amount of received signals Sender C)!'
+        if values['trust_sender_4'] > 10 - participant.signals_all_rounds[3:58:6].count('-'):
+            return 'Error for Sender D: Please enter a number between 0 and ' + str(
+                10 - participant.signals_all_rounds[3:58:6].count('-')) + ' (amount of received signals Sender D)!'
+        if values['trust_sender_5'] > 10 - participant.signals_all_rounds[4:59:6].count('-'):
+            return 'Error for Sender E: Please enter a number between 0 and ' + str(
+                10 - participant.signals_all_rounds[4:59:6].count('-')) + ' (amount of received signals Sender E)!'
+        if values['trust_sender_6'] > 10 - participant.signals_all_rounds[5:60:6].count('-'):
             return 'Error for Sender F: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
-        if values['trust_sender_2'] > 10 - participant.signals_all_rounds[1:32:6].count('-'):
-            return 'Error for Sender F: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
-        if values['trust_sender_3'] > 10 - participant.signals_all_rounds[2:33:6].count('-'):
-            return 'Error for Sender F: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
-        if values['trust_sender_4'] > 10 - participant.signals_all_rounds[3:34:6].count('-'):
-            return 'Error for Sender F: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
-        if values['trust_sender_5'] > 10 - participant.signals_all_rounds[4:35:6].count('-'):
-            return 'Error for Sender F: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
-        if values['trust_sender_6'] > 10 - participant.signals_all_rounds[5:36:6].count('-'):
-            return 'Error for Sender F: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[5:36:6].count('-')) + ' (amount of received signals Sender F)!'
+                10 - participant.signals_all_rounds[5:60:6].count('-')) + ' (amount of received signals Sender F)!'
 
 
     form_model = "player"

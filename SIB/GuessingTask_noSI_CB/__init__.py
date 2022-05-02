@@ -426,7 +426,7 @@ def save_signals_payoff(subsession: Subsession):
         participant = p.participant
         participant.estimates_all_rounds = estimates_all_rounds
         participant.signals_all_rounds = signals_all_rounds
-        if p.Role == "sender":
+        if p.Role == "sender" or p.Role == "prior_sender":
             i = random.randint(1, int(Constants.num_rounds / 2))
             prev_player = p.in_round(i)
             participant = p.participant
