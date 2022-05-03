@@ -18,7 +18,7 @@ def simulation(x, n_estimates):
     total_rounds = len(x)
 
     # canvas for saving the data satisfying the conditions
-    out = pd.DataFrame({"round":list(),"sender":list(), "estimate":list(), "mean" : list(),"avABC-avEFG":list(),
+    out = pd.DataFrame({"round":list(),"sender":list(), "estimate":list(), "mean" : list(),"avABC-avDEF":list(),
     "avEF-D":list(),"avDE":list(),"avDF":list()})
 
 
@@ -66,7 +66,7 @@ def simulation(x, n_estimates):
             av_EF = np.mean([signals_set[key] for key in ['E','F']])
             # 3. avDE and avDF
             av_DE = np.mean([signals_set[key] for key in ['D','E']])
-            av_DF = np.mean([signals_set[key] for key in ['E','F']])
+            av_DF = np.mean([signals_set[key] for key in ['D','F']])
 
     
             # CONDITIONS
@@ -181,16 +181,14 @@ def simulation(x, n_estimates):
 
         # after 10 rounds end check 2 lowest VS highest (D,E,F) condition
         temp = out.query("sender == 'D' or sender == 'E' or sender == 'F'")
-        av_highest = temp.groupby('mean')['estimate'].max().mean()
         av_lowest = temp.groupby('mean')['estimate'].min().mean()
         av_s_lowest = temp.groupby('mean')['estimate'].nsmallest(2).groupby(level="mean").last().mean() 
-        # CONDITION 4. lowest two signals of D, E, and F, should be on average at least 3 
-        # lower (preferably a bit more, e.g. 5-6 lower) than the highest of the 3 signals across the 10 rounds
-        if (av_lowest - av_highest< -3) and (av_s_lowest - av_highest< -3) :
+        # CONDITION 4. Lowest signal of D, E, and F should be on average at least 6 lower (preferably a bit more, e.g., 7)
+        # than the second lowest signal across the 10 rounds.
+        if av_s_lowest - av_lowest > 6:
             lowest_DEF = 1
-            #save info to the df to verify condition
-            out['lowest-highest_DEF'] = [av_lowest - av_highest for i in range(n_estimates*total_rounds)]
-            out['2nd_lowest-highest_DEF'] = [av_s_lowest - av_highest for i in range(n_estimates*total_rounds)]
+        # save info to the df to verify condition
+        out['2nd_lowest-lowest_DEF'] = [av_s_lowest - av_lowest for i in range(n_estimates * total_rounds)]
 
     return out
 
@@ -216,7 +214,7 @@ def save_data(x, n_estimates, round_out,out,n_rounds,av_ABC,av_DEF,avEF,D,avDE,a
         "sender":list(round_out.keys()),
         "estimate":list(round_out.values()),
         "mean":[x[n_rounds] for i in range(n_estimates)],
-        "avABC-avEFG":[av_ABC - av_DEF for i in range(n_estimates)],
+        "avABC-avDEF":[av_ABC - av_DEF for i in range(n_estimates)],
         "avEF-D":[avEF-D for i in range(n_estimates)],
         "avDE":[avDE for i in range(n_estimates)],
         "avDF":[avDF for i in range(n_estimates)]})
