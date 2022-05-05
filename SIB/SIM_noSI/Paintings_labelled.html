@@ -7,15 +7,13 @@
     display: block;
     }
 .carousel-inner {
-  height: 50%;
+  height: 100%;
   width: 100%;
   margin: auto;
-
 }
-
 .carousel-item {
-    height: 900px;
-    width: 100%;
+    height: 700px;
+    max-width: 100%;
     position: relative;
     text-align:center
 }
@@ -26,10 +24,9 @@ img {
     margin: auto;
 }
 .row {
-    height: 45%;
-    padding-bottom: 20px;
-    padding-top: 20px;
-
+    height: 85%;
+    max-width: 80%;
+    margin: auto;
 }
 
 </style>
@@ -41,7 +38,7 @@ img {
         Part 1
     </h3>
         <p>
-        On this page you see 5 paintings labelled with the respective artist’s name - Paul Klee or Wassily Kandinsky.
+        On this page you see 10 paintings labelled with the respective artist’s name - Paul Klee or Wassily Kandinsky.
         You have 5 minutes to study all the paintings.
         Please remember that communication is not allowed.
         </p>
@@ -54,39 +51,70 @@ img {
     <button type="button" data-bs-target="#Captions1" data-bs-slide-to="2" aria-label="Slide 3"></button>
     <button type="button" data-bs-target="#Captions1" data-bs-slide-to="3" aria-label="Slide 4"></button>
     <button type="button" data-bs-target="#Captions1" data-bs-slide-to="4" aria-label="Slide 5"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="5" aria-label="Slide 6"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="6" aria-label="Slide 7"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="7" aria-label="Slide 8"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="8" aria-label="Slide 9"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="9" aria-label="Slide 10"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="10" aria-label="Slide 11"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="11" aria-label="Slide 12"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="12" aria-label="Slide 13"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="13" aria-label="Slide 14"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="14" aria-label="Slide 15"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="15" aria-label="Slide 16"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="16" aria-label="Slide 17"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="17" aria-label="Slide 18"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="18" aria-label="Slide 19"></button>
+      <button type="button" data-bs-target="#Captions1" data-bs-slide-to="19" aria-label="Slide 20"></button>
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
         <div class="row justify-content-center align-items-center">
             <img src="{{ static 'Gebirgsbildung_Klee.jpg' }}">
-            <figcaption> <h5>Paul Klee</h5></figcaption>
+
+            <figcaption> <br>
+            <h3>Paul Klee</h3>
+            </figcaption>
         </div>
-        <hr>
+        </div>
+        <div class="carousel-item">
         <div class="row justify-content-center align-items-center">
             <img src="{{ static 'Subdued-Glow_Kandinsky.jpg' }}">
-            <figcaption> <h5>Wassily Kandinsky</h5></figcaption>
+            <figcaption> <br>
+            <h3>Wassily Kandinsky</h3>
+            </figcaption>
         </div>
         </div>
       <div class="carousel-item">
     <div class="row justify-content-center align-items-center">
             <img src="{{ static 'Dreamy-Improvisation_Kandinsky.jpg' }}">
-            <figcaption> <h5>Wassily Kandinsky</h5></figcaption>
+            <figcaption> <br>
+            <h3>Wassily Kandinsky</h3>
+            </figcaption>
         </div>
-          <hr>
+        </div>
+        <div class="carousel-item">
         <div class="row justify-content-center align-items-center">
             <img src="{{ static 'Warning-of-the-Ships_Klee.jpg' }}">
-            <figcaption> <h5>Paul Klee</h5></figcaption>
+            <figcaption> <br>
+            <h3>Paul Klee</h3>
+            </figcaption>
         </div>
     </div>
       <div class="carousel-item">
     <div class="row justify-content-center align-items-center">
             <img src="{{ static 'Dry-Cool-Garden_Klee.jpg' }}">
-            <figcaption> <h5>Paul Klee</h5></figcaption>
+            <figcaption> <br>
+            <h3>Paul Klee</h3>
+            </figcaption>
         </div>
-          <hr>
+        </div>
+        <div class="carousel-item">
     <div class="row justify-content-center align-items-center">
             <img src="{{ static 'Landscape-with-Red-Splashes_Kandinsky.jpg' }}">
-            <figcaption> <h5>Wassily Kandinsky</h5></figcaption>
+            <figcaption> <br>
+            <h3>Wassily Kandinsky</h3>
+            </figcaption>
         </div>
     </div>
 
@@ -94,12 +122,17 @@ img {
         <div class="row justify-content-center align-items-center">
 
             <img src="{{ static 'Gentle-Ascent_Kandinsky.jpg' }}">
-            <figcaption> <h5>Wassily Kandinsky</h5></figcaption>
+            <figcaption> <br>
+            <h3>Wassily Kandinsky</h3>
+            </figcaption>
         </div>
-          <hr>
+        </div>
+        <div class="carousel-item">
         <div class="row justify-content-center align-items-center">
             <img src="{{ static 'Hoffmannesque-Tale_Klee.jpg' }}">
-            <figcaption> <h5>Paul Klee</h5></figcaption>
+            <figcaption> <br>
+            <h3>Paul Klee</h3>
+            </figcaption>
         </div>
 
         </div>
@@ -107,14 +140,105 @@ img {
           <div class="row justify-content-center align-items-center">
 
             <img src="{{ static 'Development-in-Brown_Kandinsky.jpg' }}">
-            <figcaption> <h5>Wassily Kandinsky</h5></figcaption>
+            <figcaption> <br>
+            <h3>Wassily Kandinsky</h3>
+            </figcaption>
         </div>
-          <hr>
+        </div>
+        <div class="carousel-item">
         <div class="row justify-content-center align-items-center">
             <img src="{{ static 'The-Vase_Klee.jpg' }}">
-            <figcaption> <h5>Paul Klee</h5></figcaption>
+            <figcaption> <br>
+            <h3>Paul Klee</h3>
+            </figcaption>
         </div>
     </div>
+            <div class="carousel-item">
+          <div class="row justify-content-center align-items-center">
+
+            <img src="{{ static 'Klee_before-the-snow.jpg' }}">
+            <figcaption> <br>
+            <h3>Paul Klee</h3>
+            </figcaption>
+        </div>
+        </div>
+        <div class="carousel-item">
+        <div class="row justify-content-center align-items-center">
+            <img src="{{ static 'Kandinsky_black-strokes-i.jpg' }}">
+            <figcaption> <br>
+            <h3>Wassily Kandinsky</h3>
+            </figcaption>
+        </div>
+    </div>
+      <div class="carousel-item">
+          <div class="row justify-content-center align-items-center">
+
+            <img src="{{ static 'Klee_insula-dulcamara.jpg' }}">
+            <figcaption>  <br>
+            <h3>Paul Klee</h3>
+            </figcaption>
+        </div>
+        </div>
+        <div class="carousel-item">
+        <div class="row justify-content-center align-items-center">
+            <img src="{{ static 'Kandinsky_composition-vii.jpg' }}">
+            <figcaption> <br>
+            <h3>Wassily Kandinsky</h3>
+            </figcaption>
+        </div>
+    </div>
+      <div class="carousel-item">
+          <div class="row justify-content-center align-items-center">
+
+            <img src="{{ static 'Klee_rock-chamber.jpg' }}">
+            <figcaption> <br>
+            <h3>Paul Klee</h3>
+            </figcaption>
+        </div>
+        </div>
+        <div class="carousel-item">
+        <div class="row justify-content-center align-items-center">
+            <img src="{{ static 'Kandinsky_improvisation-11.jpg' }}">
+            <figcaption> <br>
+            <h3>Wassily Kandinsky</h3>
+            </figcaption>
+        </div>
+    </div>
+      <div class="carousel-item">
+          <div class="row justify-content-center align-items-center">
+
+            <img src="{{ static 'Klee_senecio.jpg' }}">
+            <figcaption> <br>
+            <h3>Wassily Kandinsky</h3>
+            </figcaption>
+        </div>
+        </div>
+        <div class="carousel-item">
+        <div class="row justify-content-center align-items-center">
+            <img src="{{ static 'Kandinsky_merry-structure.jpg' }}">
+            <figcaption>  <br>
+            <h3>Paul Klee</h3>
+            </figcaption>
+        </div>
+    </div>
+      <div class="carousel-item">
+          <div class="row justify-content-center align-items-center">
+
+            <img src="{{ static 'Klee_two-country-houses.jpg' }}">
+            <figcaption> <br>
+            <h3>Wassily Kandinsky</h3>
+            </figcaption>
+        </div>
+        </div>
+        <div class="carousel-item">
+        <div class="row justify-content-center align-items-center">
+            <img src="{{ static 'Kandinsky_the-elephant.jpg' }}">
+            <figcaption> <br>
+            <h3>Paul Klee</h3>
+            </figcaption>
+        </div>
+    </div>
+
 
   <button class="carousel-control-prev" type="button" data-bs-target="#Captions1" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

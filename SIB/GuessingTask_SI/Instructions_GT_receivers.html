@@ -198,7 +198,7 @@ p{
         <br>
     </div>
 </div>
-<button onclick="topFunction()" type="button" class="nexttab btn-primary btn next">Next</button>
+<button onclick="topFunction()" type="button" id="tab1_next" class="nexttab btn-primary btn next">Next</button>
   </div>
 
 
@@ -260,4 +260,24 @@ p{
 <button class="nexttab btn-primary btn next">Next</button>
   </div>
 </div>
+
+<script>
+
+     document.getElementById("tab1_next").onclick = function clicked(){
+    	window.location.hash = 'reload';
+
+    }
+    //When the document has loaded, call the function
+    window.onload = function() {
+    	if(window.location.hash === "#reload"){
+    		document.getElementById("part1").classList.remove("show")
+            document.getElementById("part1").classList.remove("active")
+            document.getElementById("part1-tab").classList.remove("active")
+            document.getElementById("part2").classList.add("show")
+            document.getElementById("part2").classList.add("active")
+            document.getElementById("part2-tab").classList.add("active")
+    	}
+    };
+
+</script>
 {% endblock %}

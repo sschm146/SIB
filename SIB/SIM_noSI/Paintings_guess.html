@@ -11,9 +11,8 @@
     </h3>
 
     <p>
-       On this page you see another pair of paintings.
+       On this page you see another four paintings.
         Please state your guess on who made each of the painting - Paul Klee or Wassily Kandinsky.
-        Note that the paintings might be drawn by the same or by two different artists.
         Correct answers are rewarded with 1 additional token that adds to your group account and increase your chances to win the prize.
         The group who achieved most tokens will win a monetary reward of XX€.
         Ties will be split at random.
@@ -31,7 +30,6 @@
                   <img src=" {{ static 'Sharp_Kandinsky.jpg' }}" width="90%" height="500px">
        </td>
         </tr>
-
         <tr>
             <td style="width:50%; border: solid 0 black; border-right-width:2px" align="center">
                 <br>
@@ -44,6 +42,33 @@
                 <div>
          <strong>Who is the artist of the painting 2.)?</strong>
                 {{formfield 'artist2'}}</div>
+            </td>
+        </tr>
+<tr><td><hr></td>
+    <td><hr></td></tr>
+
+<tr>
+       <td style="width:50%; border: solid 0 black; border-right-width:2px" align="center">
+           <h4> Painting 3.)</h4>
+                  <img src=" {{ static 'Kandinsky_Strahlen.jpg' }}" width="90%" height="500px" >
+       </td>
+        <td style="width:50%" align="center">
+            <h4> Painting 4.)</h4>
+                  <img src=" {{ static 'Kandinsky_fragile.jpg' }}" width="90%" height="500px">
+       </td>
+        </tr>
+        <tr>
+            <td style="width:50%; border: solid 0 black; border-right-width:2px" align="center">
+                <br>
+                <div>
+                    <strong>Who is the artist of painting 3.)?</strong>
+           {{formfield 'artist3'}}</div>
+            </td>
+            <td style="width:50%" align="center">
+                <br>
+                <div>
+         <strong>Who is the artist of the painting 4.)?</strong>
+                {{formfield 'artist4'}}</div>
             </td>
         </tr>
  </table>

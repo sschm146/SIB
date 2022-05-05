@@ -36,6 +36,16 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal,
         label="",
     )
+    artist3 = models.StringField(
+        choices=['Paul Klee', 'Wassily Kandinsky'],
+        widget=widgets.RadioSelectHorizontal,
+        label="",
+    )
+    artist4 = models.StringField(
+        choices=['Paul Klee', 'Wassily Kandinsky'],
+        widget=widgets.RadioSelectHorizontal,
+        label="",
+    )
     artist_points = models.IntegerField(initial=0)
 
 def creating_session(subsession: Subsession):
@@ -61,6 +71,10 @@ def payout_calc(subsession: Subsession):
         if p.artist1 == "Paul Klee":
             p.artist_points += 1
         if p.artist2 == "Wassily Kandinsky":
+            p.artist_points += 1
+        if p.artist3 == "Wassily Kandinsky":
+            p.artist_points += 1
+        if p.artist4 == "Wassily Kandinsky":
             p.artist_points += 1
     for p in players:
         participant = p.participant
@@ -114,7 +128,7 @@ class Paintings_guess(Page):
     if Constants.use_timeout:
         timeout_seconds = Constants.guess_time
     form_model = 'player'
-    form_fields = ['artist1', 'artist2']
+    form_fields = ['artist1', 'artist2', 'artist3', 'artist4']
 
 
 page_sequence = [Instructions, Paintings_labelled, Paintings_guess, MyWaitPage]

@@ -128,6 +128,7 @@ p{
         To use the information from the estimation device in a best way, remember that the estimate of a randomly drawn estimation device is more likely to be the correct number x than any other number.
         Hence, in order to maximize your chances of correctly estimating x, you should report exactly the number stated by the estimation device for each estimation task.
       </div>
+</div>
         <br>
         <br>
         As you can see, the task of the sender was pretty straightforward, and they were incentivized to guess the correct x.
@@ -267,4 +268,25 @@ p{
 </div>
 
 
-{{ endblock }}
+
+<script>
+
+     document.getElementById("tab1_next").onclick = function clicked(){
+    	window.location.hash = 'reload';
+
+    }
+    //When the document has loaded, call the function
+    window.onload = function() {
+    	if(window.location.hash === "#reload"){
+    		document.getElementById("part1").classList.remove("show")
+            document.getElementById("part1").classList.remove("active")
+            document.getElementById("part1-tab").classList.remove("active")
+            document.getElementById("part2").classList.add("show")
+            document.getElementById("part2").classList.add("active")
+            document.getElementById("part2-tab").classList.add("active")
+    	}
+    };
+
+</script>
+
+{% endblock %}

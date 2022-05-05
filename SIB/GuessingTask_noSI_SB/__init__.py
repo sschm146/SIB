@@ -33,12 +33,10 @@ class Player(BasePlayer):
     posterior = models.FloatField()  # the posterior belief of the receiver
     true_state = models.IntegerField()
     SB_sender_4 = models.StringField()
-    SB_sender_5 = models.StringField()
     SB_received_signal_1 = models.IntegerField()  # saving received signals across rounds for analyses
     SB_received_signal_2 = models.IntegerField()  # saving received signals across rounds for analyses
     SB_received_signal_3 = models.IntegerField()  # saving received signals across rounds for analyses
     SB_received_signal_4 = models.IntegerField()  # saving received signals across rounds for analyses
-    SB_received_signal_5 = models.IntegerField()  # saving received signals across rounds for analyses
     comprq1 = models.IntegerField(choices=[[1,
                                             'The estimate of a randomly drawn estimation device is equally likely to be the correct number x or any other number.'],
                                            [2,
@@ -371,26 +369,23 @@ def set_signals(subsession: Subsession):
         temp = sorted(temp, key=lambda x: int(x[0]))
         #temp.sort(reverse=True) #alternative is to sort first at signal size and then by id_in_group to preserve order at ties:
                                     # temp = sorted(temp, key=lambda x:(int(x[0]), x[1]))
-        subsession.censored_signal = str(temp[0])
-        del temp[0]
+        subsession.censored_signal = str(temp[0]) + str(temp[1])
+        del temp[0] #delete lowest and
+        del temp[0] #second lowest signal
         temp = sorted(temp, key=lambda x: int(x[1]))
-        for i in list(range(0, 2)):
-            if temp[i][1] == 4:
-                temp[i][1] = 'D'
-            if temp[i][1] == 5:
-                temp[i][1] = 'E'
-            if temp[i][1] == 6:
-                temp[i][1] = 'F'
+        if temp[0][1] == 4:
+            temp[0][1] = 'D'
+        if temp[0][1] == 5:
+            temp[0][1] = 'E'
+        if temp[0][1] == 6:
+            temp[0][1] = 'F'
         for p in players:
             if p.Role == "receiver":
                 p.SB_sender_4 = temp[0][1]
-                p.SB_sender_5 = temp[1][1]
                 p.SB_received_signal_1 = signals[0]
                 p.SB_received_signal_2 = signals[1]
                 p.SB_received_signal_3 = signals[2]
                 p.SB_received_signal_4 = temp[0][0]
-                p.SB_received_signal_5 = temp[1][0]
-
 
 
 class Filler_Task(Page):
@@ -421,15 +416,12 @@ class Guess(Page):
     def vars_for_template(player: Player):
         current_round = player.round_number
         prev_player = player.in_round(current_round - Constants.num_rounds / 2)
-        prev_players = prev_player.group.get_players()
         return dict(
                 signal_1=player.SB_received_signal_1,
                 signal_2=player.SB_received_signal_2,
                 signal_3=player.SB_received_signal_3,
                 signal_4=player.SB_received_signal_4,
-                signal_5=player.SB_received_signal_5,
                 sender_4=player.SB_sender_4,
-                sender_5=player.SB_sender_5,
             )
 
     form_model = "player"

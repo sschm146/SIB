@@ -37,19 +37,15 @@ class Player(BasePlayer):
     true_state = models.IntegerField()
     SB_sender_4 = models.StringField()
     SB_sender_4_identity = models.StringField()
-    SB_sender_5 = models.StringField()
-    SB_sender_5_identity = models.StringField()
     SB_received_signal_1 = models.IntegerField() #saving received signals across rounds for analyses
     SB_received_signal_2 = models.IntegerField() #saving received signals across rounds for analyses
     SB_received_signal_3 = models.IntegerField() #saving received signals across rounds for analyses
     SB_received_signal_4 = models.IntegerField() #saving received signals across rounds for analyses
-    SB_received_signal_5 = models.IntegerField() #saving received signals across rounds for analyses
     received_signal_1_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     received_signal_2_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     received_signal_3_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     received_signal_4_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     received_signal_5_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
-    received_signal_6_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     comprq1 = models.IntegerField(choices=[[1,
                                             'The estimate of a randomly drawn estimation device is equally likely to be the correct number x or any other number.'],
                                            [2,
@@ -398,27 +394,24 @@ def set_signals(subsession: Subsession):
         temp = sorted(temp, key=lambda x: int(x[0]))
         #temp.sort(reverse=True) #alternative is to sort first at signal size and then by id_in_group to preserve order at ties:
                                     # temp = sorted(temp, key=lambda x:(int(x[0]), x[1]))
-        subsession.censored_signal = str(temp[0])
+        subsession.censored_signal = str(temp[0]) + str(temp[1])
+        del temp[0]
         del temp[0]
         temp = sorted(temp, key=lambda x: int(x[1]))
-        for i in list(range(0, 2)):
-            if temp[i][1] == 4:
-                temp[i][1] = 'D'
-            if temp[i][1] == 5:
-                temp[i][1] = 'E'
-            if temp[i][1] == 6:
-                temp[i][1] = 'F'
+        if temp[0][1] == 4:
+            temp[0][1] = 'D'
+        if temp[0][1] == 5:
+            temp[0][1] = 'E'
+        if temp[0][1] == 6:
+            temp[0][1] = 'F'
         for p in players:
             if p.Role == "receiver":
                 p.SB_sender_4 = temp[0][1]
-                p.SB_sender_5 = temp[1][1]
                 p.SB_sender_4_identity = temp[0][2]
-                p.SB_sender_5_identity = temp[1][2]
                 p.SB_received_signal_1 = signals[0]
                 p.SB_received_signal_2 = signals[1]
                 p.SB_received_signal_3 = signals[2]
                 p.SB_received_signal_4 = temp[0][0]
-                p.SB_received_signal_5 = temp[1][0]
 
 
 class Filler_Task(Page):
@@ -463,18 +456,14 @@ class Guess(Page):
                 player.received_signal_4_identity = True
             if identities[4] == player.participant.identity:
                 player.received_signal_5_identity = True
-            if identities[5] == player.participant.identity:
-                player.received_signal_6_identity = True
             return dict(
                 signal_1=player.SB_received_signal_1,
                 signal_2=player.SB_received_signal_2,
                 signal_3=player.SB_received_signal_3,
                 signal_4=player.SB_received_signal_4,
-                signal_5=player.SB_received_signal_5,
                 sender_4=player.SB_sender_4,
                 sender_4_identity=player.SB_sender_4_identity,
-                sender_5=player.SB_sender_5,
-                sender_5_identity=player.SB_sender_5_identity,
+
             )
 
     form_model = "player"
