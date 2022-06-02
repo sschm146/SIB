@@ -172,22 +172,6 @@ def creating_session(subsession: Subsession):
 
 
 # wait for all senders to send a signal
-class StartWaitPage(WaitPage):
-    wait_for_all_groups = True
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == 1
-
-
-
-
-class SecondWaitPage(WaitPage):
-    wait_for_all_groups = True
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver"
-
 
 class ThirdWaitPage(WaitPage):
     wait_for_all_groups = True
@@ -602,5 +586,5 @@ def payout_calc(subsession: Subsession):
         participant.Trust_payoff = p.payoff
 
 
-page_sequence = [StartWaitPage,Instructions_Trust_in_Senders, Trust_in_Senders, Confidence_1_all10,
+page_sequence = [Instructions_Trust_in_Senders, Trust_in_Senders, Confidence_1_all10,
                  Confidence_1_notall10, Confidence_2, Confidence_3, Confidence_4, ThirdWaitPage, Payout_calc]

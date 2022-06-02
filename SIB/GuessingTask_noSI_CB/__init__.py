@@ -153,44 +153,64 @@ class Player(BasePlayer):
                                    label='')
     q1 = models.IntegerField(label='')
     q2 = models.IntegerField(label='')
-    q3 = models.StringField(label='')
-    q4 = models.StringField(label='')
+    q3 = models.IntegerField(
+        choices=[[0, ""],
+                 [1, ""],
+                 [2, ""],
+                 [3, ""],
+                 [4, ""],
+                 [5, ""], ],
+        widget=widgets.RadioSelect, label=''
+    )
+    q4 = models.IntegerField(
+        choices=[[0, ""],
+                 [1, ""],
+                 [2, ""],
+                 [3, ""],
+                 [4, ""],
+                 [5, ""], ],
+        widget=widgets.RadioSelect, label=''
+    )
     q5 = models.IntegerField(
         choices=[[0, "Weiblich"],
                  [1, "Mänlich"],
-                  [2, "Divers"]],
+                 [2, "Divers"]],
         widget=widgets.RadioSelect, label=''
-        )
-    q6 = models.StringField(label='')
-    q7 = models.IntegerField(label='')
+    )
+    q6 = models.IntegerField(
+        choices=[[0, "Nein"],
+                 [1, "Ja"]],
+        widget=widgets.RadioSelect, label=''
+    )
+    q7 = models.StringField(label='', blank=True)
     q8 = models.IntegerField(label='')
     q9 = models.IntegerField(label='')
     q10 = models.IntegerField(
         choices=[[1, "Poor"],
                  [2, "Average"],
-                  [3, "Good"],
+                 [3, "Good"],
                  [4, "Excellent"]],
         widget=widgets.RadioSelect, label=''
-        )
-    q11 =  models.IntegerField(
+    )
+    q11 = models.IntegerField(
         choices=[[1, "Poor"],
                  [2, "Average"],
-                  [3, "Good"],
+                 [3, "Good"],
                  [4, "Excellent"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q12 = models.IntegerField(
         choices=[[1, "Yes"],
                  [2, "No"]],
         widget=widgets.RadioSelect, label=''
-        )
-    q13 =  models.IntegerField(
+    )
+    q13 = models.IntegerField(
         choices=[[1, "I’ve always known how to budget"],
                  [2, "I’ve had to learn to budget whilst at University"],
                  [3, "I struggle to purchase necessities"],
                  [4, "I can afford everything but I don’t budget"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q14 = models.IntegerField(
         choices=[[1, "Not budgeting"],
                  [2, "Cost of necessities too expensive"],
@@ -200,38 +220,38 @@ class Player(BasePlayer):
                  [6, " I’m good with budgeting"],
                  [7, " I have no idea"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q15 = models.StringField(label='')
     q16 = models.IntegerField(
         choices=[[1, "Yes"],
                  [2, "No"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q17 = models.IntegerField(
         choices=[[1, "Yes"],
                  [2, "No"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q18 = models.IntegerField(
         choices=[[1, "Yes"],
                  [2, "No"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q19 = models.IntegerField(
         choices=[[1, "Yes"],
                  [2, "No"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q20 = models.IntegerField(
         choices=[[1, "Yes"],
                  [2, "No"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q21 = models.IntegerField(
         choices=[[1, "Yes"],
                  [2, "No"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q22 = models.IntegerField(
         choices=[[1, "Student Union"],
                  [2, "Parents"],
@@ -240,8 +260,8 @@ class Player(BasePlayer):
                  [5, "Financial adviser"],
                  [6, "Other"]],
         widget=widgets.RadioSelect, label=''
-        )
-    q23 = models.StringField(label='')
+    )
+    q23 = models.StringField(label='', blank=True)
     q24 = models.StringField(label='')
     q25 = models.StringField(label='')
 
@@ -358,8 +378,10 @@ class Signals(Page):
     @staticmethod
     def vars_for_template(player: Player):
         estimate = player.estimate
+        round = player.round_number
         return dict(
             estimate=estimate,
+            round=round
         )
 
     @staticmethod
@@ -384,8 +406,10 @@ class Prior(Page):
             if p.Role == "prior_sender":
                 prev_player = p.in_round(current_round - int(Constants.num_rounds / 2))
         prior_estimate = prev_player.estimate
+        round = player.round_number
         return dict(
             prior_estimate=prior_estimate,
+            round=round
         )
 
     form_model = "player"
@@ -408,6 +432,11 @@ class SecondWaitPage(WaitPage):
     @staticmethod
     def is_displayed(player):
         return player.round_number == Constants.num_rounds
+
+    @staticmethod
+    def app_after_this_page(player, upcoming_apps):
+        if player.Role == "receiver":
+            return upcoming_apps[1]
 
 
 def save_signals_payoff(subsession: Subsession):
@@ -474,6 +503,7 @@ class Guess(Page):
             player.received_signal_4 = signals[3]
             player.received_signal_5 = signals[4]
             player.received_signal_6 = signals[5]
+
             return dict(
                 signal_1=signals[0],
                 signal_2=signals[1],
@@ -481,6 +511,7 @@ class Guess(Page):
                 signal_4=signals[3],
                 signal_5=signals[4],
                 signal_6=signals[5],
+                round=current_round-10
             )
 
     form_model = "player"

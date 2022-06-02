@@ -13,8 +13,8 @@ class Constants(BaseConstants):
     name_in_url = 'SIM_noSI'
     players_per_group = None
     num_rounds = 1
-    use_timeout = False
-    guess_time = 600
+    use_timeout = True
+    guess_time = 180
     labelled_time = 300
 
 class Subsession(BaseSubsession):

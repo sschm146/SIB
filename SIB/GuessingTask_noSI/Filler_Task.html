@@ -8,7 +8,7 @@
         This part of the study consists of a questionnaire. Please provide answers on the following questions.
         <br><br>
 
-        <strong>1. An wie viel Studien im Kölner Laboratorium für Wirtschaftsforschung haben Sie bereits teilgenommen (abzüglich dieser Studie)? (Wenn Sie sich nicht sicher sind, schätzen Sie.)</strong>
+        <strong>1. An wie viel Studien im BonnEconLab oder dem Decision Lab haben Sie bereits teilgenommen (abzüglich dieser Studie)? (Wenn Sie sich nicht sicher sind, schätzen Sie.)</strong>
                 {{formfield 'q1'}}
 
         <br><br>
@@ -19,13 +19,24 @@
         <br><br>
 
         <strong>3. Wie ist Ihre Stimmung?</strong>
-                {{formfield 'q3'}}
-
+        <br>
+        <br>
+        <div style="text-align: center">
+        <strong> Sehr traurig
+    {{ for choice in form.q3 }}
+        {{ choice }}&nbsp;&nbsp;&nbsp;&nbsp;
+    {{ endfor }} Sehr Glücklich</strong></div>
 
         <br><br>
 
         <strong>4. Wo würden Sie sich auf das politische Spektrum von "ganz links" zu "ganz rechts" einordnen?</strong>
-                {{formfield 'q4'}}
+                        <br>
+        <br><br>
+        <div style="text-align: center">
+        <strong> Ganz links
+    {{ for choice in form.q4 }}
+        {{ choice }}&nbsp;&nbsp;&nbsp;&nbsp;
+    {{ endfor }} Ganz rechts</strong></div>
 
         <br><br>
 

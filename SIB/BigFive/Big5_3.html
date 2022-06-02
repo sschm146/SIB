@@ -1,0 +1,106 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block app_styles %}
+
+    <style type="text/css">
+        label {
+            padding-right: 13%;
+            margin-top: 3%;
+        }
+        .form-check-inline {
+            width: 13%;
+        }
+    </style>
+
+{% endblock %}
+
+{% block title %}
+    Teil 3: Fragebogen
+{% endblock %}
+
+{% block content %}
+    <hr>
+    <p>
+        Im Folgenden findest du eine Reihe von Beschreibungen, die auf dich zutreffen können oder nicht. Trifft es beispielsweise zu, dass du jemand bist, der gerne Zeit mit anderen verbringt?
+        Bitte verwende eine Skala von 0 bis 4, um anzuzeigen, wie sehr diese Aussage auf dich
+        zutrifft oder nicht zutrifft. 0 bedeutet "trifft überhaupt nicht zu" und 4 "trifft sehr gut zu".
+        Du kannst auch jede Zahl zwischen 0 und 4 verwenden, um anzugeben, wo du dich auf der Skala siehst, indem du (die Zahlen) 0, 1, 2, 3 oder 4 verwendest.
+    </p>
+    <hr>
+    <br />
+
+    <table>
+        <tr>
+            <td>Ich bin jemand, der ...</td>
+            <td width="15%"></td>
+            <td><p style="margin-left: 0px; font-size: 11pt; text-align:left; ">Trifft überhaupt <br>nicht zu</p> </td>
+            <td><p style="margin-right: 0px; font-size: 11pt; text-align:right;margin-right:45px">Trifft <br>sehr gut zu</p></td>
+        </tr>
+        <tr>
+            <td style="width: 50%; padding-right:20px;">erfinderisch und einfallsreich ist</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_25 %}</td>
+        </tr>
+        <tr>
+            <td>durchsetzungsfähig und energisch ist</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_26 %}</td>
+        </tr>
+        <tr>
+            <td>sich kalt und distanziert verhalten kann</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_27 %}</td>
+        </tr>
+        <tr>
+            <td>nicht aufgibt, ehe die Aufgabe erledigt ist</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_28 %}</td>
+        </tr>
+        <tr>
+            <td>launisch sein kann, schwankende Stimmungen hat</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_29 %}</td>
+        </tr>
+        <tr>
+            <td>künstlerische und ästhetische Eindrücke schätzt</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_30 %}</td>
+        </tr>
+        <tr>
+            <td>manchmal schüchtern und gehemmt ist</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_31 %}</td>
+        </tr>
+        <tr>
+            <td>rücksichtsvoll und einfühlsam zu anderen ist</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_32 %}</td>
+        </tr>
+        <tr>
+            <td>tüchtig ist und flott arbeitet</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_33 %}</td>
+        </tr>
+        <tr>
+            <td> ruhig bleibt, selbst in angespannten Situationen</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_34 %}</td>
+        </tr>
+        <tr>
+            <td>routinemäßige und einfache Aufgaben bevorzugt</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_35 %}</td>
+        </tr>
+        <tr>
+            <td>aus sich herausgeht, gesellig ist</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_36 %}</td>
+        </tr>
+    </table>
+
+        <div align="center">
+            <button class="btn btn-primary btn-large" style="font-size:1.3em">Weiter</button>
+        </div>
+
+{% endblock %}

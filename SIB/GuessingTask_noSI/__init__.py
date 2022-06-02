@@ -133,16 +133,36 @@ class Player(BasePlayer):
 
     q1 = models.IntegerField(label='')
     q2 = models.IntegerField(label='')
-    q3 = models.StringField(label='')
-    q4 = models.StringField(label='')
+    q3 = models.IntegerField(
+        choices=[[0, "" ],
+                 [1, ""],
+                  [2, ""],
+                 [3, ""],
+                 [4, ""],
+                 [5, ""],],
+        widget=widgets.RadioSelect, label=''
+        )
+    q4 = models.IntegerField(
+        choices=[[0, ""],
+                 [1, ""],
+                  [2, ""],
+                 [3, ""],
+                 [4, ""],
+                 [5, ""],],
+        widget=widgets.RadioSelect, label=''
+        )
     q5 = models.IntegerField(
         choices=[[0, "Weiblich"],
                  [1, "Mänlich"],
                   [2, "Divers"]],
         widget=widgets.RadioSelect, label=''
         )
-    q6 = models.StringField(label='')
-    q7 = models.IntegerField(label='')
+    q6 = models.IntegerField(
+        choices=[[0, "Nein"],
+                 [1, "Ja"]],
+        widget=widgets.RadioSelect, label=''
+        )
+    q7 = models.StringField(label='', blank=True)
     q8 = models.IntegerField(label='')
     q9 = models.IntegerField(label='')
     q10 = models.IntegerField(
@@ -221,7 +241,7 @@ class Player(BasePlayer):
                  [6, "Other"]],
         widget=widgets.RadioSelect, label=''
         )
-    q23 = models.StringField(label='')
+    q23 = models.StringField(label='', blank=True)
     q24 = models.StringField(label='')
     q25 = models.StringField(label='')
 
@@ -266,10 +286,13 @@ class Signals(Page):
     def is_displayed(player):
         return player.Role == "sender" and player.round_number <= Constants.num_rounds/2
 
+    @staticmethod
     def vars_for_template(player: Player):
         estimate = player.estimate
+        round = player.round_number
         return dict(
             estimate=estimate,
+            round=round
         )
 
     @staticmethod
@@ -372,6 +395,7 @@ class Guess(Page):
             player.payoff = 0
 
 
+
     @staticmethod
     def vars_for_template(player: Player):
         current_round = player.round_number
@@ -392,6 +416,7 @@ class Guess(Page):
                 signal_4=signals[3],
                 signal_5=signals[4],
                 signal_6=signals[5],
+                round=current_round-10
             )
 
     form_model = "player"
@@ -414,6 +439,10 @@ class SecondWaitPage(WaitPage):
     def is_displayed(player):
         return player.round_number == Constants.num_rounds
 
+    @staticmethod
+    def app_after_this_page(player, upcoming_apps):
+        if player.Role == "receiver":
+            return upcoming_apps[1]
 
 def save_signals_payoff(subsession: Subsession):
     players = subsession.get_players()

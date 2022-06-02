@@ -1,0 +1,87 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block app_styles %}
+
+    <style type="text/css">
+        label {
+            padding-right: 13%;
+            margin-top: 3%;
+        }
+        .form-check-inline {
+            width: 13%;
+        }
+    </style>
+
+{% endblock %}
+
+{% block title %}
+    Teil 3: Fragebogen
+{% endblock %}
+
+{% block content %}
+
+    <hr>
+    <p>
+        Im Folgenden findest du eine Reihe von Beschreibungen, die auf dich zutreffen können oder nicht. Trifft es beispielsweise zu, dass du jemand bist, der gerne Zeit mit anderen verbringt?
+        Bitte verwende eine Skala von 0 bis 4, um anzuzeigen, wie sehr diese Aussage auf dich
+        zutrifft oder nicht zutrifft. 0 bedeutet "trifft überhaupt nicht zu" und 4 "trifft sehr gut zu".
+        Du kannst auch jede Zahl zwischen 0 und 4 verwenden, um anzugeben, wo du dich auf der Skala siehst, indem du (die Zahlen) 0, 1, 2, 3 oder 4 verwendest.
+    </p>
+    <hr>
+    <br />
+
+    <table>
+        <tr>
+            <td>Ich bin jemand, der ...</td>
+            <td width="20%"></td>
+            <td><p style="margin-left: 0px; font-size: 11pt; text-align:left; ">Trifft überhaupt<br>nicht zu</p> </td>
+            <td><p style="margin-right: 0px; font-size: 11pt; text-align:right;margin-right:60px">Trifft<br>sehr gut zu</p></td>
+        </tr>
+        <tr>
+            <td style="width: 50%; padding-right:20px;">schroff und abweisend zu anderen sein kann</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_37 %}</td>
+        </tr>
+        <tr>
+            <td>Pläne macht und diese auch durchführt</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_38 %}</td>
+        </tr>
+        <tr>
+            <td>leicht nervös und unsicher wird</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_39 %}</td>
+        </tr>
+        <tr>
+            <td>gerne Überlegungen anstellt, mit Ideen spielt</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_40 %}</td>
+        </tr>
+        <tr>
+            <td>nur wenig künstlerische Interessen hat</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_41 %}</td>
+        </tr>
+        <tr>
+            <td>sich kooperativ verhält, Zusammenarbeit dem Wettbewerb vorzieht</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_42 %}</td>
+        </tr>
+        <tr>
+            <td>leicht ablenkbar ist, nicht bei der Sache bleibt</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_43 %}</td>
+        </tr>
+        <tr>
+            <td>sich gut in Musik, Kunst und Literatur auskennt</td>
+            <td></td>
+            <td colspan="2">{% formfield player.B_44 %}</td>
+        </tr>
+    </table>
+
+        <div align="center">
+            <button class="btn btn-primary btn-large" style="font-size:1.3em">Weiter</button>
+        </div>
+
+{% endblock %}
