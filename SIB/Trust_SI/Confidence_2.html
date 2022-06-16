@@ -173,12 +173,13 @@ input[type=range]:focus::-ms-fill-upper {
   <ul class="list-group list-group-flush">
     <li class="list-group-item">{{trust_sender_5}} out of {{n_rec_signals_sender_5}}</li>
   </ul>
+
 </div>
     </div>
         <div class="col">
+
 <div class="card" style="width: auto">
   <div class="card-header bg-warning" style="font-weight: bold">
-    Sender F
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">{{ trust_sender_6}} out of {{n_rec_signals_sender_6}}</li>
@@ -242,6 +243,7 @@ input[type=range]:focus::-ms-fill-upper {
         </div>
         <br>
         <hr>
+        {{ if n_rec_signals_sender_4 > 0}}
         <div align="center">
             <div class="card" style="width: 20%">
             <div class="card-header bg-warning" style="font-weight: bold">
@@ -254,8 +256,10 @@ input[type=range]:focus::-ms-fill-upper {
             <br>
             <div id="label_slider4"></div>
         </div>
+        {{ endif }}
         <br>
         <hr>
+        {{ if n_rec_signals_sender_5 > 0}}
         <div align="center">
             <div class="card" style="width: 20%">
             <div class="card-header bg-warning" style="font-weight: bold">
@@ -264,12 +268,15 @@ input[type=range]:focus::-ms-fill-upper {
             <br>
             <i style="font-weight: bold; float: left">very <br> uncertain</i> <i style="font-weight: bold; float: right">completey <br> certain</i>
           <input type="range" id="slider5" name="trust_sender_5_conf" min="0" step="1"  oninput="update5(parseInt(this.value)); update()">
+
             <br>
             <br>
             <div id="label_slider5"></div>
         </div>
+        {{ endif }}
         <br>
         <hr>
+        {{ if n_rec_signals_sender_6 > 0}}
         <div align="center">
             <div class="card" style="width: 20%">
             <div class="card-header bg-warning" style="font-weight: bold">
@@ -282,6 +289,7 @@ input[type=range]:focus::-ms-fill-upper {
             <br>
             <div id="label_slider6"></div>
         </div>
+        {{ endif }}
         <br>
         <br>
         <br>
@@ -382,7 +390,6 @@ When you have finished with the task, please press “Next” below.
 
     </div>
 </div>
-
 <script>
         window.onload = function setInitials() {
             check1 = 0
@@ -394,80 +401,108 @@ When you have finished with the task, please press “Next” below.
             document.getElementById("label_slider1").innerHTML= "Please submit a choice via the slider."
             document.getElementById("label_slider2").innerHTML= "Please submit a choice via the slider."
             document.getElementById("label_slider3").innerHTML= "Please submit a choice via the slider."
-            document.getElementById("label_slider4").innerHTML= "Please submit a choice via the slider."
-            document.getElementById("label_slider5").innerHTML= "Please submit a choice via the slider."
-            document.getElementById("label_slider6").innerHTML= "Please submit a choice via the slider."
-            document.getElementById("slider1").max = Math.max(js_vars.n_rec_signals_sender_1 - js_vars.trust_sender_1, js_vars.trust_sender_1)
+            document.getElementById("slider1").max = js_vars.n_rec_signals_sender_1
+            document.getElementById("slider1").min = Math.min(js_vars.trust_sender_1, js_vars.n_rec_signals_sender_1 - js_vars.trust_sender_1)
             document.getElementById("slider1").value = 0
-            document.getElementById("slider2").max = Math.max(js_vars.n_rec_signals_sender_2 - js_vars.trust_sender_2, js_vars.trust_sender_2)
+            document.getElementById("slider2").max = js_vars.n_rec_signals_sender_2
+            document.getElementById("slider2").min = Math.min(js_vars.trust_sender_2, js_vars.n_rec_signals_sender_2 - js_vars.trust_sender_2)
             document.getElementById("slider2").value = 0
-            document.getElementById("slider3").max = Math.max(js_vars.n_rec_signals_sender_3 - js_vars.trust_sender_3, js_vars.trust_sender_3)
+            document.getElementById("slider3").max = js_vars.n_rec_signals_sender_3
+            document.getElementById("slider3").min = Math.min(js_vars.trust_sender_3, js_vars.n_rec_signals_sender_3 - js_vars.trust_sender_3)
             document.getElementById("slider3").value = 0
-            document.getElementById("slider4").max = Math.max(js_vars.n_rec_signals_sender_4 - js_vars.trust_sender_4, js_vars.trust_sender_4)
-            document.getElementById("slider4").value = 0
-            document.getElementById("slider5").max = Math.max(js_vars.n_rec_signals_sender_5 - js_vars.trust_sender_5, js_vars.trust_sender_5)
-            document.getElementById("slider5").value = 0
-            document.getElementById("slider6").max = Math.max(js_vars.n_rec_signals_sender_6 - js_vars.trust_sender_6, js_vars.trust_sender_6)
-            document.getElementById("slider6").value = 0
- }
+            if (js_vars.n_rec_signals_sender_4>0) {
+            document.getElementById("label_slider4").innerHTML= "Please submit a choice via the slider."
+            document.getElementById("slider4").max = js_vars.n_rec_signals_sender_4
+                document.getElementById("slider4").min = Math.min(js_vars.trust_sender_4, js_vars.n_rec_signals_sender_4 - js_vars.trust_sender_4)
+            document.getElementById("slider4").value = 0}
+            if (js_vars.n_rec_signals_sender_5>0) {
+            document.getElementById("label_slider5").innerHTML= "Please submit a choice via the slider."
+            document.getElementById("slider5").max = js_vars.n_rec_signals_sender_5
+                document.getElementById("slider5").min = Math.min(js_vars.trust_sender_5, js_vars.n_rec_signals_sender_5 - js_vars.trust_sender_5)
+            document.getElementById("slider5").value = 0}
+            if (js_vars.n_rec_signals_sender_6>0) {
+            document.getElementById("label_slider6").innerHTML= "Please submit a choice via the slider."
+            document.getElementById("slider6").max = js_vars.n_rec_signals_sender_6
+            document.getElementById("slider6").min = Math.min(js_vars.trust_sender_6, js_vars.n_rec_signals_sender_6 - js_vars.trust_sender_6)
+            }}
+
+
             function update1(value){
                 check1 = 1
-                if (Math.max(js_vars.trust_sender_1 - value, 0) === Math.min(js_vars.trust_sender_1 + value, js_vars.n_rec_signals_sender_1)){
+                 if (value === js_vars.n_rec_signals_sender_1){
                     document.getElementById("label_slider1").innerHTML = "I am certain Sender A has stated the number that his estimation device has shown him exactly " + js_vars.trust_sender_1 +" times"
                 }
                 else {
-                    document.getElementById("label_slider1").innerHTML = "I am certain Sender A has stated the number that his estimation device has shown him between " + Math.max(js_vars.trust_sender_1 - value, 0) + " and " + Math.min(js_vars.trust_sender_1 + value, js_vars.n_rec_signals_sender_1) + " times."
+                    document.getElementById("label_slider1").innerHTML = "I am certain Sender A has stated the number that his estimation device has shown him between " +
+                        Math.max(0, js_vars.trust_sender_1 - (js_vars.n_rec_signals_sender_1 - value)) + " and "
+                        + Math.min(js_vars.trust_sender_1 + (js_vars.n_rec_signals_sender_1 - value) , js_vars.n_rec_signals_sender_1) + " times."
                 }
             }
             function update2(value){
                 check2 = 1
-                if (Math.max(js_vars.trust_sender_2 - value, 0) === Math.min(js_vars.trust_sender_2 + value, js_vars.n_rec_signals_sender_2)){
-                    document.getElementById("label_slider2").innerHTML = "I am certain Sender B has stated the number that his estimation device has shown him exactly " + js_vars.trust_sender_2 +" times"
+                if (value === js_vars.n_rec_signals_sender_2){
+                    document.getElementById("label_slider2").innerHTML = "I am certain Sender B has stated the number that his estimation device has shown him exactly " +
+                        js_vars.trust_sender_2 +" times"
                 }
                 else {
-                    document.getElementById("label_slider2").innerHTML = "I am certain Sender B has stated the number that his estimation device has shown him between " + Math.max(js_vars.trust_sender_2 - value, 0) + " and " + Math.min(js_vars.trust_sender_2 + value, js_vars.n_rec_signals_sender_2) + " times."
+                    document.getElementById("label_slider2").innerHTML = "I am certain Sender B has stated the number that his estimation device has shown him between " +
+                        Math.max(0,js_vars.trust_sender_2 - (js_vars.n_rec_signals_sender_2 - value)) + " and "
+                        + Math.min(js_vars.trust_sender_2 + (js_vars.n_rec_signals_sender_2 - value) , js_vars.n_rec_signals_sender_2) + " times."
                 }
             }
 
             function update3(value){
                 check3 = 1
                 if (Math.max(js_vars.trust_sender_3 - value, 0) === Math.min(js_vars.trust_sender_3 + value, js_vars.n_rec_signals_sender_3)){
-                    document.getElementById("label_slider3").innerHTML = "I am certain Sender C has stated the number that his estimation device has shown him exactly " + js_vars.trust_sender_3 +" times"
+                    document.getElementById("label_slider3").innerHTML = "I am certain Sender C has stated the number that his estimation device has shown him exactly " +
+                        js_vars.trust_sender_3 +" times"
                 }
                 else {
-                    document.getElementById("label_slider3").innerHTML = "I am certain Sender C has stated the number that his estimation device has shown him between " + Math.max(js_vars.trust_sender_3 - value, 0) + " and " + Math.min(js_vars.trust_sender_3 + value, js_vars.n_rec_signals_sender_3) + " times."
+                    document.getElementById("label_slider3").innerHTML = "I am certain Sender C has stated the number that his estimation device has shown him between " +
+                        Math.max(0,js_vars.trust_sender_3 - (js_vars.n_rec_signals_sender_3 - value)) + " and "
+                        + Math.min(js_vars.trust_sender_3 + (js_vars.n_rec_signals_sender_3 - value) , js_vars.n_rec_signals_sender_3) + " times."
                 }
             }
             function update4(value){
                 check4 = 1
                 if (Math.max(js_vars.trust_sender_4 - value, 0) === Math.min(js_vars.trust_sender_4 + value, js_vars.n_rec_signals_sender_4)){
-                    document.getElementById("label_slider4").innerHTML = "I am certain Sender D has stated the number that his estimation device has shown him exactly " + js_vars.trust_sender_4 +" times"
+                    document.getElementById("label_slider4").innerHTML = "I am certain Sender D has stated the number that his estimation device has shown him exactly " +
+                        js_vars.trust_sender_4 +" times"
                 }
                 else {
-                    document.getElementById("label_slider4").innerHTML = "I am certain Sender D has stated the number that his estimation device has shown him between " + Math.max(js_vars.trust_sender_4 - value, 0) + " and " + Math.min(js_vars.trust_sender_4 + value, js_vars.n_rec_signals_sender_4) + " times."
+                    document.getElementById("label_slider4").innerHTML = "I am certain Sender D has stated the number that his estimation device has shown him between " +
+                        Math.max(0,js_vars.trust_sender_4 - (js_vars.n_rec_signals_sender_4 - value)) + " and "
+                        + Math.min(js_vars.trust_sender_4 + (js_vars.n_rec_signals_sender_4 - value) , js_vars.n_rec_signals_sender_4) + " times."
                 }
             }
 
             function update5(value){
                 check5 = 1
                 if (Math.max(js_vars.trust_sender_5 - value, 0) === Math.min(js_vars.trust_sender_5 + value, js_vars.n_rec_signals_sender_5)){
-                    document.getElementById("label_slider5").innerHTML = "I am certain Sender E has stated the number that his estimation device has shown him exactly " + js_vars.trust_sender_5 +" times"
+                    document.getElementById("label_slider5").innerHTML = "I am certain Sender E has stated the number that his estimation device has shown him exactly " +
+                        js_vars.trust_sender_5 +" times"
                 }
                 else {
-                    document.getElementById("label_slider5").innerHTML = "I am certain Sender E has stated the number that his estimation device has shown him between " + Math.max(js_vars.trust_sender_5 - value, 0) + " and " + Math.min(js_vars.trust_sender_5 + value, js_vars.n_rec_signals_sender_5) + " times."
+                    document.getElementById("label_slider5").innerHTML = "I am certain Sender E has stated the number that his estimation device has shown him between " +
+                        Math.max(0,js_vars.trust_sender_5 - (js_vars.n_rec_signals_sender_5 - value)) + " and "
+                        + Math.min(js_vars.trust_sender_5 + (js_vars.n_rec_signals_sender_5 - value) , js_vars.n_rec_signals_sender_5) + " times."
                 }
             }
             function update6(value){
                 check6 = 1
                 if (Math.max(js_vars.trust_sender_6 - value, 0) === Math.min(js_vars.trust_sender_6 + value, js_vars.n_rec_signals_sender_6)){
-                    document.getElementById("label_slider6").innerHTML = "I am certain Sender F has stated the number that his estimation device has shown him exactly " + js_vars.trust_sender_6 +" times"
+                    document.getElementById("label_slider6").innerHTML = "I am certain Sender F has stated the number that his estimation device has shown him exactly " +
+                        js_vars.trust_sender_6 +" times"
                 }
                 else {
-                    document.getElementById("label_slider6").innerHTML = "I am certain Sender F has stated the number that his estimation device has shown him between " + Math.max(js_vars.trust_sender_6 - value, 0) + " and " + Math.min(js_vars.trust_sender_6 + value, js_vars.n_rec_signals_sender_6) + " times."
+                    document.getElementById("label_slider6").innerHTML = "I am certain Sender F has stated the number that his estimation device has shown him between " +
+                        Math.max(0,js_vars.trust_sender_6 - (js_vars.n_rec_signals_sender_6 - value)) + " and "
+                        + Math.min(js_vars.trust_sender_6 + (js_vars.n_rec_signals_sender_6 - value) , js_vars.n_rec_signals_sender_6) + " times."
                 }
             }
             function update(){
-                 if (check1 === 1 && check2 === 1 && check3 === 1 && check4 === 1 && check5 === 1 && check6 === 1 ) {
+                 if (check1 === 1 && check2 === 1 && check3 === 1 && (check4 === 1 || js_vars.n_rec_signals_sender_4 === 0) && (check5 === 1 || js_vars.n_rec_signals_sender_5 === 0
+                     && (check6 === 1 || js_vars.n_rec_signals_sender_6 === 0))) {
             document.getElementById("nextbtn").style.visibility="visible";}}
         </script>
 {% endblock %}

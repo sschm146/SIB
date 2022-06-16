@@ -1,9 +1,10 @@
 {% load otree %}
 {{ block styles }}
+<link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
 <style type="text/css">
 
 .bg-primary {
-background-color: #3f51b5!important;
+background-color: #322b7b!important;
 color: white;
 }
 
@@ -12,25 +13,23 @@ color: white;
 {{ endblock }}
 
 {% block content %}
-
-<h2 style="display: inline-block; padding-right: 60px ">Part 2</h2>
-
-<!--<div align="center" style="display: inline-block; width: 60%; padding-left: 60px">
-<div class="progress" style="height: 25px">
-  <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 10%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="10"></div>
-</div>
-</div>-->
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 2.)
+ </h3>
+        </div>
+    <div class="card-body">
+<h3 style="text-align: center"> Schätzaufgabe {{ round }} von 10</h3>
 <br>
 <br>
-<h3 style="text-align: center"> Estimation Task {{ round }} out of 10</h3>
-<br>
-<br>
-You are a member of the {{player.identity}} Group.
-Below you see all received signals.
-Please read through all signals and report your guess.
-Sender's group affiliations are shown via the respective colors.
+        Sie sind Mitglied der Gruppe {{player.identity}}.
+        Auf dieser Seite sehen Sie alle erhaltenen Schätzungen der Sender.
+        Die jeweiligen Gruppenzugehörigkeiten der Sender sind farblich dargestellt.
+        Bitte lesen Sie alle Schätzungen.
+        Geben Sie bitte anschließend Ihre eigene Schätzung zum tatsächlichen Wert der Zahl x ab.
 
 
+<br>
 <br>
 <br>
 <br>
@@ -104,14 +103,19 @@ Sender's group affiliations are shown via the respective colors.
 
 <br>
 <br>
+<br>
+<br>
 
 
 <div align="center">
-    What is your Guess on X? Please answer below and confirm with "Next":
+    Bitte geben Sie nun Ihre eigene Schätzung zum tatsächlichen Wert der Zahl x ab und bestätigen Sie mit "Weiter":
     <br>
     {{ formfield 'posterior' label=""}}
+    <br>
+<br>
 </div>
-
+   </div>
+    </div>
 <div align="center">
     {{ next_button }}
 </div>

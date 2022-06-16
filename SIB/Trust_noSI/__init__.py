@@ -35,9 +35,9 @@ class Player(BasePlayer):
     trust_sender_1_conf = models.IntegerField()
     trust_sender_2_conf = models.IntegerField()
     trust_sender_3_conf = models.IntegerField()
-    trust_sender_4_conf = models.IntegerField()
-    trust_sender_5_conf = models.IntegerField()
-    trust_sender_6_conf = models.IntegerField()
+    trust_sender_4_conf = models.IntegerField(blank=True)
+    trust_sender_5_conf = models.IntegerField(blank=True)
+    trust_sender_6_conf = models.IntegerField(blank=True)
     sender_1_correction_1_inround = models.IntegerField(blank=True)
     sender_1_correction_2_inround = models.IntegerField(blank=True)
     sender_1_correction_3_inround = models.IntegerField(blank=True)
@@ -481,6 +481,7 @@ def payout_calc(subsession: Subsession):
             trust_sender = [p.trust_sender_1, p.trust_sender_2, p.trust_sender_3, p.trust_sender_4, p.trust_sender_5, p.trust_sender_6]
             signals_all_rounds = participant.signals_all_rounds
             estimates_all_rounds = participant.estimates_all_rounds
+            print(estimates_all_rounds)
             for i in list(range(0,10)): #Amount of rounds
                 for j in list(range(0, 6)): #Amount of senders
                     temp_signal = signals_all_rounds[i*6 + j]

@@ -1,30 +1,26 @@
 {% load otree %}
-
-
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
 {% block content %}
- <h2 style="display: inline-block; padding-right: 60px ">Part 2</h2>
-
-<!--<div align="center" style="display: inline-block; width: 60%; padding-left: 60px">
-<div class="progress" style="height: 25px">
-  <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 10%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="10"></div>
-</div>
-</div>-->
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 2.)
+ </h3>
+        </div>
+    <div class="card-body">
+<h3 style="text-align: center"> Schätzaufgabe {{ round }} von 10</h3>
 <br>
 <br>
-<h3 style="text-align: center"> Estimation Task {{ round }} out of 10</h3>
-
+        <div style="text-align: center"> Unten finden Sie die Schätzung Ihres zufällig zugewiesenen Schätzgerätes.</div>
 <br>
-<br>
-<br>
-<br>
-Below you find an estimate of a randomly drawn estimation device.
 <br>
 <br>
 <div class="row" align="center">
   <div class="col">
 <div class="card" style="width: 18rem   ">
   <div class="card-header" style="font-weight: bold">
-    Estimate
+    Schätzung
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">{{ estimate }}</li>
@@ -34,19 +30,17 @@ Below you find an estimate of a randomly drawn estimation device.
 </div>
 <br>
 <br>
+<br>
 <div align="center">
-    Please submit your guess below and confirm with "Next":
+    Bitte geben Sie nun Ihre eigene Schätzung zum tatsächlichen Wert der Zahl x ab und bestätigen Sie mit weiter:
+    <br>
+    <br>
 {{ formfield 'sent_signal' label=""}}
-
+    <br>
 </div>
+        </div>
+        </div>
 <div align="center">
     {% next_button %}
 </div>
-<!--<script>
-window.onload = function progressbar_update() {
-    bar = document.getElementById("progress");
-    bar.style.width =  parseInt(js_vars.round)*10 + "%";
-    bar.innerHTML = "<big><b> Round " + parseInt(js_vars.round) + " of 10</b></big>";
-}
-</script>-->
 {% endblock %}

@@ -5,20 +5,21 @@
 {{ block content }}
 <div class="card bg-light instructions">
     <div class="card-body">
-        This part of the study consists of a questionnaire. Please provide answers on the following questions.
+        Dieser Teil der Studie besteht aus einem Fragebogen.
+        Bitte geben Sie Antworten auf die folgenden Fragen.
         <br><br>
 
         <strong>1. An wie viel Studien im BonnEconLab oder dem Decision Lab haben Sie bereits teilgenommen (abzüglich dieser Studie)? (Wenn Sie sich nicht sicher sind, schätzen Sie.)</strong>
                 {{formfield 'q1'}}
 
-        <br><br>
+        <br><hr><br>
 
         <strong>2. Wie viel Geld steht Ihnen im Monat zur Verfügung (abzüglich Miete)?</strong>
                 {{formfield 'q2'}}
 
-        <br><br>
+        <br><hr><br>
 
-                <strong>3. Wie ist Ihre Stimmung?</strong>
+        <strong>3. Wie ist Ihre Stimmung?</strong>
         <br>
         <br>
         <div style="text-align: center">
@@ -27,7 +28,7 @@
         {{ choice }}&nbsp;&nbsp;&nbsp;&nbsp;
     {{ endfor }} Sehr Glücklich</strong></div>
 
-        <br><br>
+        <br><hr><br>
 
         <strong>4. Wo würden Sie sich auf das politische Spektrum von "ganz links" zu "ganz rechts" einordnen?</strong>
                         <br>
@@ -38,12 +39,12 @@
         {{ choice }}&nbsp;&nbsp;&nbsp;&nbsp;
     {{ endfor }} Ganz rechts</strong></div>
 
-        <br><br>
+        <br><hr><br>
 
         <strong>5. Welches Geschlecht haben Sie? </strong>
                 {{formfield 'q5'}}
 
-        <br><br>
+        <br><hr><br>
 
         <strong>6. Studieren Sie? </strong>
                 {{formfield 'q6'}}
@@ -53,95 +54,97 @@
         <strong>7. Wenn ja, welches Fach studieren Sie? </strong>
                 {{formfield 'q7'}}
 
-        <br><br>
+        <br><hr><br>
 
         <strong>8. Wie alt sind Sie? </strong>
                 {{formfield 'q8'}}
 
-        <br><br>
+        <br><hr><br>
 
         <strong>9. Wie viele Geschwister haben Sie? </strong>
                 {{formfield 'q9'}}
 
-        <br><br>
+        <br><hr><br>
 
-        <strong>10. How would you rate your money management? </strong>
+        <strong>10. Wie würden Sie Ihren Umgang mit Geld beschreiben? </strong>
                 {{formfield 'q10'}}
 
-        <br><br>
+        <br><hr><br>
 
-        <strong>11. How would you rate your knowledge of financial products such as Individual Savings accounts, credit cards, loans and mortgages? </strong>
+        <strong>11. Wie würden Sie Ihre Kenntnisse über Finanzprodukte wie Sparkonten, Kreditkarten, Darlehen und Hypotheken bewerten?</strong>
                 {{formfield 'q11'}}
 
-        <br><br>
+        <br><hr><br>
 
-        <strong>12. Whilst growing up, were your parents/guardians open to discussing financial matters within the home?</strong>
+        <strong>12. Waren Ihre Eltern/Erziehungsberechtigten in Ihrer Kindheit offen für Gespräche über finanzielle Angelegenheiten im Elternhaus?</strong>
                 {{formfield 'q12'}}
 
-        <br><br>
+        <br><hr><br>
 
-        <strong>13. Since becoming a student & receiving maintenance loans/grants, would you say that you budget effectively or that you struggle to purchase basic necessities? Necessities meaning food, toiletries and standard living costs - not eating out.</strong>
-                {{formfield 'q13'}}
+        <strong>13. Würden Sie sagen, dass Sie, seit Sie studieren und Unterhaltsdarlehen/-stipendien erhalten, effektiv haushalten oder dass Sie Schwierigkeiten haben, lebensnotwendige Dinge zu kaufen?
+                    Lebensnotwendige Dinge, d. h. Lebensmittel, Toilettenartikel und normale Lebenshaltungskosten - nicht Essen gehen.</strong>
+            {{formfield 'q13'}}
 
-        <br><br>
+        <br><hr><br>
 
-        <strong>14. If you struggle to purchase necessities, what would you put this down to?</strong>
+        <strong>14. Wenn Sie Schwierigkeiten haben, lebensnotwendige Dinge zu kaufen, worauf führen Sie das zurück? </strong>
                 {{formfield 'q14'}}
-        <br><br>
 
-        <strong>15. What are your top five spending priorities?</strong>
+        <br><hr><br>
+
+        <strong>15. Was sind Ihre fünf wichtigsten Ausgabenprioritäten? </strong>
                 {{formfield 'q15'}}
 
-        <br><br>
+        <br><hr><br>
 
-        <strong>16. Do you regularly know how much money you have in your bank account?</strong>
+        <strong>16. Wissen Sie regelmäßig, wie viel Geld Sie auf Ihrem Bankkonto haben? </strong>
                 {{formfield 'q16'}}
 
-        <br><br>
+        <br><hr><br>
 
-        <strong>17. Do you keep track of your spending?</strong>
+        <strong>17. Behalten Sie den Überblick über Ihre Ausgaben?</strong>
                 {{formfield 'q17'}}
-        <br><br>
+        <br><hr><br>
 
-        <strong>18. Do you have money set aside for an emergency?</strong>
+        <strong>18. Haben Sie Geld für Notfälle zur Seite gelegt?</strong>
                 {{formfield 'q18'}}
-        <br><br>
+        <br><hr><br>
 
-        <strong>19. Are you in debt?</strong>
+        <strong>19. Sind Sie verschuldet?</strong>
                 {{formfield 'q19'}}
-        <br><br>
 
-        <strong>20. Do you shop around to get the best deal when selecting financial products such as insurance and mobile phones?</strong>
+        <br><hr><br>
+
+        <strong>20. Suchen Sie bei der Auswahl von Finanzprodukten wie Versicherungen und Mobiltelefonen nach dem besten Angebot? </strong>
                 {{formfield 'q20'}}
-        <br><br>
 
-        <strong>21. Do you have a job to provide extra income whilst at University?</strong>
+        <br><hr><br>
+
+        <strong>21. Haben Sie einen Job, um sich während des Studiums ein zusätzliches Einkommen zu verdienen? </strong>
                 {{formfield 'q21'}}
-        <br><br>
 
-        <strong>22. If you needed financial advice tomorrow, who would you turn to?</strong>
+        <br><hr><br>
+
+        <strong>22. Wenn Sie morgen eine Finanzberatung bräuchten, an wen würden Sie sich wenden? </strong>
                 {{formfield 'q22'}}
 
-        <br><br>
+        <br><hr><br>
 
-        <strong>23. If your answer was "Other" in the previous question, please specify.</strong>
+        <strong>23. Falls Ihre Antwort auf die vorhergehende Frage "Sonstige" war, geben Sie dies bitte an. </strong>
                 {{formfield 'q23'}}
 
-        <br><br>
+        <br><hr><br>
 
-        <strong>24. What benefits would you expect from being able to better manage your money?</strong>
+        <strong>24. Welche Vorteile würden Sie sich davon versprechen, Ihr Geld besser verwalten zu können?</strong>
                 {{formfield 'q24'}}
-        <br><br>
 
-        <strong>25. Is there anything which would help you to better manage your money?</strong>
+        <br><hr><br>
+
+        <strong>25. Gibt es etwas, das Ihnen helfen würde, Ihr Geld besser zu verwalten?</strong>
                 {{formfield 'q25'}}
 
-
-
-
-
         <br><br>
-        <strong>When you have finished the questionnaire, please press “next”.</strong>
+        <strong>Sobald Sie alle Fragen oben beantwortet haben, klicken Sie bitte auf "Weiter".</strong>
    </div>
 </div>
 <br>

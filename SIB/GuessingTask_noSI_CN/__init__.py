@@ -32,6 +32,7 @@ class Player(BasePlayer):
     estimate = models.IntegerField()  # the estimate sent by the estimation device which is observed by senders
     posterior = models.FloatField()  # the posterior belief of the receiver
     true_state = models.IntegerField()
+    signal_order = models.IntegerField()
     received_signal_1 = models.IntegerField()
     received_signal_2 = models.IntegerField()
     received_signal_3 = models.IntegerField()
@@ -162,7 +163,8 @@ class Player(BasePlayer):
                  [2, ""],
                  [3, ""],
                  [4, ""],
-                 [5, ""], ],
+                 [5, ""],
+                 [6, ""], ],
         widget=widgets.RadioSelect, label=''
     )
     q4 = models.IntegerField(
@@ -171,12 +173,13 @@ class Player(BasePlayer):
                  [2, ""],
                  [3, ""],
                  [4, ""],
-                 [5, ""], ],
+                 [5, ""],
+                 [6, ""], ],
         widget=widgets.RadioSelect, label=''
     )
     q5 = models.IntegerField(
         choices=[[0, "Weiblich"],
-                 [1, "Mänlich"],
+                 [1, "Männlich"],
                  [2, "Divers"]],
         widget=widgets.RadioSelect, label=''
     )
@@ -189,79 +192,79 @@ class Player(BasePlayer):
     q8 = models.IntegerField(label='')
     q9 = models.IntegerField(label='')
     q10 = models.IntegerField(
-        choices=[[1, "Poor"],
-                 [2, "Average"],
-                 [3, "Good"],
-                 [4, "Excellent"]],
+        choices=[[1, "Schlecht"],
+                 [2, "Durchschnittlich"],
+                 [3, "Gut"],
+                 [4, "Ausgezeichnet"]],
         widget=widgets.RadioSelect, label=''
     )
     q11 = models.IntegerField(
-        choices=[[1, "Poor"],
-                 [2, "Average"],
-                 [3, "Good"],
-                 [4, "Excellent"]],
+        choices=[[1, "Schlecht"],
+                 [2, "Durchschnittlich"],
+                 [3, "Gut"],
+                 [4, "Ausgezeichnet"]],
         widget=widgets.RadioSelect, label=''
     )
     q12 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q13 = models.IntegerField(
-        choices=[[1, "I’ve always known how to budget"],
-                 [2, "I’ve had to learn to budget whilst at University"],
-                 [3, "I struggle to purchase necessities"],
-                 [4, "I can afford everything but I don’t budget"]],
+        choices=[[1, "Ich habe schon immer gewusst, wie man haushaltet."],
+                 [2, "Ich musste während meines Studiums lernen, mit dem Geld umzugehen.."],
+                 [3, "Ich habe Mühe, das lebensnotwendige Dinge zu kaufen"],
+                 [4, "Ich kann mir alles leisten, aber ich haushalte nicht."]],
         widget=widgets.RadioSelect, label=''
     )
     q14 = models.IntegerField(
-        choices=[[1, "Not budgeting"],
-                 [2, "Cost of necessities too expensive"],
-                 [3, "Too care-free with money"],
-                 [4, "Other priorities such as shopping & nightlife take a priority"],
-                 [5, "I don’t struggle"],
-                 [6, " I’m good with budgeting"],
-                 [7, " I have no idea"]],
+        choices=[[1, "Keine Haushaltsplanung"],
+                 [2, "Kosten für lebensnotwendige Dinge zu hoch"],
+                 [3, "Zu sorglos mit Geld"],
+                 [4, "Andere Prioritäten wie Shopping und Nachtleben haben Vorrang"],
+                 [5, "Ich habe keine Schwierigkeiten"],
+                 [6, "Ich bin gut im Haushalten"],
+                 [7, "Ich wei? es nicht"]],
         widget=widgets.RadioSelect, label=''
     )
     q15 = models.StringField(label='')
     q16 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q17 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q18 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q19 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q20 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q21 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q22 = models.IntegerField(
-        choices=[[1, "Student Union"],
-                 [2, "Parents"],
-                 [3, "Friends"],
+        choices=[[1, "Studentenwerk"],
+                 [2, "Eltern"],
+                 [3, "Freunde"],
                  [4, "Bank"],
-                 [5, "Financial adviser"],
-                 [6, "Other"]],
+                 [5, "Finanzberatung"],
+                 [6, "Sonstige"]],
         widget=widgets.RadioSelect, label=''
     )
     q23 = models.StringField(label='', blank=True)
@@ -274,23 +277,18 @@ class Player(BasePlayer):
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
     subsession.x = random.randint(0, 50)
-    estimates = np.random.normal(Constants.true_state[subsession.round_number - 1], Constants.sd, Constants.num_senders)
-    estimates = np.rint(estimates)
     for p in players: #Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
         participant = p.participant
         p.Role = participant.Role
         if p.Role == "sender":
-            if p.id_in_group == Constants.num_senders:
-                p.estimate = (estimates[Constants.num_senders - 1 - 2] + estimates[Constants.num_senders - 1]) / 2
-            elif p.id_in_group == Constants.num_senders - 1:
-                p.estimate = (estimates[Constants.num_senders - 1 - 2] + estimates[Constants.num_senders - 1 - 1]) / 2
-            else:
-                p.estimate = estimates[p.id_in_group - 1]
-        if p.round_number <= Constants.num_rounds / 2:
-            p.true_state = Constants.true_state[subsession.round_number - 1]
-        else:
-            p.true_state = Constants.true_state[int(subsession.round_number - Constants.num_rounds / 2) - 1]
-
+            if p.round_number <= Constants.num_rounds / 2:
+                if p.id_in_group == Constants.num_senders:
+                    p.estimate = int((p.session.config['Signals'][p.id_in_group - 1 - 2][p.round_number - 1] + p.session.config['Signals'][p.id_in_group - 1][p.round_number - 1]) / 2)
+                elif p.id_in_group == Constants.num_senders - 1:
+                    p.estimate = int((p.session.config['Signals'][p.id_in_group - 1 - 1][p.round_number - 1] + p.session.config['Signals'][p.id_in_group - 1][p.round_number - 1]) / 2)
+                else:
+                    p.estimate = p.session.config['Signals'][p.id_in_group - 1][p.round_number - 1]
+                p.true_state = p.session.config['True_state'][p.round_number - 1]
 
 # PAGES
 
@@ -424,10 +422,45 @@ class Instructions_GT_receivers(Page):
 # wait for all senders to send a signal
 class StartWaitPage(WaitPage):
     wait_for_all_groups = True
+    after_all_players_arrive = 'set_signals'
 
     @staticmethod
     def is_displayed(player):
-        return player.round_number == (Constants.num_rounds / 2) + 1
+        return player.round_number == (Constants.num_rounds / 2)
+
+def set_signals(subsession: Subsession):
+    players = subsession.get_players()
+
+    if subsession.round_number == Constants.num_rounds / 2:
+        all = [0,0,0,0,0,0]
+        for i in list(range(1, 11, 1)):
+            all_signals = []
+            all_senders = []
+            for p in players:
+                prev_player = p.in_round(i)
+                prev_players = prev_player.group.get_players()
+                all_signals = [prev.sent_signal for prev in prev_players if prev.Role == 'sender']
+                all_senders = [prev.id_in_group for prev in prev_players if prev.Role == 'sender']
+            all = np.vstack([all, all_signals])
+            all = np.vstack([all, all_senders])
+            if i == 1:
+                all = np.delete(all, 0, 0)
+        for p in players:
+            if p.Role == "receiver":
+                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'], p.session.config['signal_order_3']]
+                p.signal_order = random.choice(range(len(orders)))
+                signal_order = orders[p.signal_order]
+                for i in list(range(0, 10, 1)):
+                    fut_player = p.in_round(Constants.num_rounds/2 + i + 1)
+                    fut_player.signal_order = p.signal_order
+                    fut_player.received_signal_1 = int(all[2 * signal_order[i]][0])
+                    fut_player.received_signal_2 = int(all[2 * signal_order[i]][1])
+                    fut_player.received_signal_3 = int(all[2 * signal_order[i]][2])
+                    fut_player.received_signal_4 = int(all[2 * signal_order[i]][3])
+                    fut_player.received_signal_5 = int(((all[2 * signal_order[i]][4]) + fut_player.received_signal_4)/2)
+                    fut_player.received_signal_6 = int(((all[2 * signal_order[i]][5]) + fut_player.received_signal_4)/2)
+                    fut_player.true_state = p.session.config['True_state'][signal_order[i]]
+
 
 class Filler_Task(Page):
     form_model = "player"
@@ -454,29 +487,18 @@ class Guess(Page):
         else:
             player.payoff = 0
 
-
     @staticmethod
     def vars_for_template(player: Player):
-        current_round = player.round_number
-        prev_player = player.in_round(current_round - Constants.num_rounds/2)
-        prev_players = prev_player.group.get_players()
-        signals = [p.sent_signal for p in prev_players if p.Role =='sender']
-        if player.Role == "receiver":
-            player.received_signal_1 = signals[0]
-            player.received_signal_2 = signals[1]
-            player.received_signal_3 = signals[2]
-            player.received_signal_4 = signals[3]
-            player.received_signal_5 = signals[4]
-            player.received_signal_6 = signals[5]
-            return dict(
-                signal_1=signals[0],
-                signal_2=signals[1],
-                signal_3=signals[2],
-                signal_4=signals[3],
-                signal_5=signals[4],
-                signal_6=signals[5],
-                round=current_round-10
-            )
+        return dict(
+            signal_1=player.received_signal_1,
+            signal_2=player.received_signal_2,
+            signal_3=player.received_signal_3,
+            signal_4=player.received_signal_4,
+            signal_5=player.received_signal_5,
+            signal_6=player.received_signal_6,
+            round=player.round_number - 10
+        )
+
 
     form_model = "player"
     form_fields = ["posterior"]
@@ -532,5 +554,5 @@ def save_signals_payoff(subsession: Subsession):
             participant.GuessingTask_payoff = prev_player.payoff
 
 
-page_sequence = [Instructions_GT_senders_CN, Instructions_GT_senders_noCN, StartWaitPage, Signals, Filler_Task,Instructions_GT_receivers,
-                 Guess, SecondWaitPage]
+page_sequence = [Instructions_GT_senders_CN, Instructions_GT_senders_noCN, Signals, Filler_Task,
+                 Instructions_GT_receivers, StartWaitPage, Guess, SecondWaitPage]

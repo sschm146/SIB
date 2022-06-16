@@ -24,7 +24,9 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-   pass
+    payoff_urn = models.StringField()
+    payoff_ball = models.IntegerField()
+
 
 
 # PAGES
@@ -39,23 +41,43 @@ def payout_calc(subsession: Subsession):
         GuessingTask_payoff = participant.GuessingTask_payoff
         if participant.Role == 'receiver':
             Trust_payoff = participant.Trust_payoff
-            participant.payoff = random.choice([SIM_payoff, GuessingTask_payoff, Trust_payoff]) + p.session.config[
-            'participation_fee']
+            payoff_urn = [SIM_payoff, GuessingTask_payoff, Trust_payoff]
+            p.payoff_urn = str(payoff_urn)
+            p.payoff_ball = random.choice([0, 1, 2])
+            p.payoff = payoff_urn[p.payoff_ball] + p.session.config['participation_fee']
         if participant.Role == 'sender':
-            participant.payoff = random.choice([SIM_payoff, GuessingTask_payoff]) + p.session.config[
-                'participation_fee']
-        p.payoff = participant.payoff
+            payoff_urn = [SIM_payoff, GuessingTask_payoff]
+            p.payoff_urn = str(payoff_urn)
+            p.payoff_ball = random.choice([0, 1])
+            p.payoff = payoff_urn[p.payoff_ball] + p.session.config['participation_fee']
+
 
 class Payout(Page):
     @staticmethod
     def vars_for_template(player: Player):
         participant = player.participant
         SIM_payoff = participant.SIM_payoff
-        return dict(
-            part_fee=player.session.config['participation_fee'],
-            SIM_payoff=SIM_payoff,
-            total_payoff=participant.payoff,
-        )
+        GuessingTask_payoff = participant.GuessingTask_payoff
+
+        if participant.Role == 'sender':
+            return dict(
+                part_fee=player.session.config['participation_fee'],
+                SIM_payoff=SIM_payoff,
+                GuessingTask_payoff=GuessingTask_payoff,
+                total_payoff=player.payoff,
+                payoff_ball=player.payoff_ball
+            )
+        if participant.Role == 'receiver':
+            Trust_payoff = participant.Trust_payoff
+            return dict(
+                part_fee=player.session.config['participation_fee'],
+                SIM_payoff=SIM_payoff,
+                GuessingTask_payoff=GuessingTask_payoff,
+                Trust_payoff=Trust_payoff,
+                total_payoff=player.payoff,
+                payoff_ball=player.payoff_ball
+            )
+        print(player.problem)
 
 
 

@@ -1,0 +1,32 @@
+{% load otree %}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+
+{{ endblock }}
+
+{% block content %}
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+        <h3 class="card-title font-weight-bold"> Teil 5.) - Fragebogen</h3>
+        <hr>
+        <br>
+    <div align="center">
+        <p>
+            In der nächsten Aufgabe werden Ihnen einige Bilder wie unten abgebildet gezeigt. Dabei müssen Sie
+            das jeweils gezeigte Bild genau anschauen und das fehlende Teil finden, welches in die Lücke passt.
+        </p>
+        <p>
+            Sobald Sie das fehlende Stück gefunden haben, tippen Sie bitte auf die entsprechende Nummer im unteren
+            Teil des Bildschirms und bestätigen Sie Ihre Auswahl. Das Ziel ist es, möglichst viele dieser Bilderrätsel innerhalb
+            von 5 Minuten korrekt zu lösen. Sollten Sie eine Frage haben, heben Sie bitte die Hand. Wir kommen dann zu Ihnen.
+        </p>
+        <img align="center" src="{{ static 'ravens_ex.jpg' }}" style="width: 80%; height: 80%; margin-bottom: 20px;"/>
+        <br>
+        </div>
+    </div>
+    </div>
+        <div align="center">
+    {{ next_button }}
+</div>
+
+{% endblock %}

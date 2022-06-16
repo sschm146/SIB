@@ -1,8 +1,8 @@
 {% extends "global/Page.html" %}
 {% load otree static %}
 
-{% block app_styles %}
-
+{{block styles }}
+<link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
     <style type="text/css">
         label {
             padding-right: 13%;
@@ -15,12 +15,12 @@
 
 {% endblock %}
 
-{% block title %}
-    Teil 3: Fragebogen
-{% endblock %}
-
 {% block content %}
-    <hr>
+<div class="card bg-light instructions">
+        <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 3.) </h3>
+        </div>
+    <div class="card-body">
     <p>
         Im Folgenden findest du eine Reihe von Beschreibungen, die auf dich zutreffen können oder nicht. Trifft es beispielsweise zu, dass du jemand bist, der gerne Zeit mit anderen verbringt?
         Bitte verwende eine Skala von 0 bis 4, um anzuzeigen, wie sehr diese Aussage auf dich
@@ -32,15 +32,15 @@
 
     <table>
         <tr>
-            <td>Ich bin jemand, der ...</td>
-            <td width="15%"></td>
-            <td><p style="margin-left: 0px; font-size: 11pt; text-align:left; ">Trifft überhaupt <br>nicht zu</p> </td>
-            <td><p style="margin-right: 0px; font-size: 11pt; text-align:right;margin-right:45px">Trifft <br>sehr gut zu</p></td>
+                <td><b>Ich bin jemand, der ...</b></td>
+                <td width="15%"></td>
+                <td><p style="margin-left: 0px; font-size: 11pt; text-align:left; "><b>Trifft überhaupt</b> <br><b>nicht zu</b></p> </td>
+                <td><p style="margin-right: 0px; font-size: 11pt; text-align:right;padding-right: 35px"><b>Trifft</b> <br><b>sehr gut zu</b></p></td>
         </tr>
         <tr>
             <td style="width: 50%; padding-right:20px;">erfinderisch und einfallsreich ist</td>
             <td></td>
-            <td colspan="2">{% formfield player.B_25 %}</td>
+            <td colspan="2" width="40%">{% formfield player.B_25 %}</td>
         </tr>
         <tr>
             <td>durchsetzungsfähig und energisch ist</td>
@@ -98,9 +98,11 @@
             <td colspan="2">{% formfield player.B_36 %}</td>
         </tr>
     </table>
+         </div>
+     </div>
 
-        <div align="center">
-            <button class="btn btn-primary btn-large" style="font-size:1.3em">Weiter</button>
-        </div>
+<div align="center">
+    {{ next_button }}
+</div>
 
 {% endblock %}

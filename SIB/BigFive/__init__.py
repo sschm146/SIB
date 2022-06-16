@@ -22,7 +22,7 @@ class Group(BaseGroup):
 
 
 def create_B_field():
-    field = models.IntegerField(choices=[0, 1, 2, 3, 4],
+    field = models.IntegerField(choices=[1, 2, 3, 4, 5],
                                 widget=widgets.RadioSelectHorizontal, label="")
     return field
 

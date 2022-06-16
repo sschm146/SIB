@@ -30,7 +30,7 @@ class Player(BasePlayer):
 #FUNCTIONS
 def creating_session(subsession: Subsession):
     import itertools
-    identity = itertools.cycle(["Blue", "Yellow"])
+    identity = itertools.cycle(["Blau", "Gelb"])
     for player in subsession.get_players():
         participant = player.participant
         if player.session.config['prior_sender']:
@@ -41,20 +41,20 @@ def creating_session(subsession: Subsession):
                 participant.identity = next(identity)
                 player.identity = participant.identity
             if player.id_in_group <= Constants.num_senders/2:
-                participant.identity = "Blue"
+                participant.identity = "Blau"
                 player.identity = participant.identity
             if player.id_in_group > Constants.num_senders/2 and player.id_in_group <= Constants.num_senders:
-                participant.identity = "Yellow"
+                participant.identity = "Gelb"
                 player.identity = participant.identity
         else:
             if player.id_in_group > Constants.num_senders:
                 participant.identity = next(identity)
                 player.identity = participant.identity
             if player.id_in_group <= Constants.num_senders / 2:
-                participant.identity = "Blue"
+                participant.identity = "Blau"
                 player.identity = participant.identity
             if player.id_in_group > Constants.num_senders / 2 and player.id_in_group <= Constants.num_senders:
-                participant.identity = "Yellow"
+                participant.identity = "Gelb"
                 player.identity = participant.identity
 
     for p in subsession.get_players():  # Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd

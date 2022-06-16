@@ -12,8 +12,8 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     use_timeout = True
-    guess_time = 180
-    labelled_time = 300
+    guess_time = 120
+    labelled_time = 240
 
 
 class Subsession(BaseSubsession):

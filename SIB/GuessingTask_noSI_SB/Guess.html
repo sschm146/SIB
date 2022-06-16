@@ -1,22 +1,26 @@
 {% load otree %}
-
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
 {% block content %}
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 2.)
+ </h3>
+        </div>
+    <div class="card-body">
 
-<h2 style="display: inline-block; padding-right: 60px ">Part 2</h2>
+<h3 style="text-align: center"> Schätzaufgabe {{ round }} von 10</h3>
+<br>
+<br>
+<br>
+<br>
+        Auf dieser Seite sehen Sie alle erhaltenen Schätzungen der Sender.
+        Die jeweiligen Gruppenzugehörigkeiten der Sender sind farblich dargestellt.
+        Bitte lesen Sie alle Schätzungen.
+        Geben Sie bitte anschließend Ihre eigene Schätzung zum tatsächlichen Wert der Zahl x ab.
 
-<!--<div align="center" style="display: inline-block; width: 60%; padding-left: 60px">
-<div class="progress" style="height: 25px">
-  <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 10%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="10"></div>
-</div>
-</div>-->
 <br>
-<br>
-<h3 style="text-align: center"> Estimation Task {{ round }} out of 10</h3>
-<br>
-<br>
-Below you see all received signals.
-Please read through all signals and report your guess.
-
 <br>
 <br>
 <br>
@@ -70,14 +74,18 @@ Please read through all signals and report your guess.
 
 <br>
 <br>
-
+<br>
+<br>
 
 <div align="center">
-    What is your Guess on X? Please answer below and confirm with "Next":
+    Bitte geben Sie nun Ihre eigene Schätzung zum tatsächlichen Wert der Zahl x ab und bestätigen Sie mit "Weiter":
     <br>
     {{ formfield 'posterior' label=""}}
+    <br>
+<br>
 </div>
-
+    </div>
+</div>
 <div align="center">
     {{ next_button }}
 </div>

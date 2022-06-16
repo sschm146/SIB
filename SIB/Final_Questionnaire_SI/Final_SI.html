@@ -6,20 +6,8 @@
 <div class="card bg-light instructions">
     <div class="card-body">
         Thank you for participating in this study! We are currently preparing your Payout. Meanwhile please fill out the short questionnaire below and press "next" as soon as you are ready.
-        <br><br>
-        <strong>Please consider the following statement and state how much you agree/disagree below: <br> <br><div align="center" style="font-style: italic">"I identify with my Group '{{ group_name }}'"</div> </strong>
-                <table class="table">
-        <tr>
-            <br>
-            <div  style="text-align: center">
-            <strong>Fully Disagree&nbsp;&nbsp;
-    {{ for choice in form.sisi }}
-        {{ choice }}&nbsp;&nbsp;&nbsp;&nbsp;
-    {{ endfor }}
-    &nbsp;&nbsp;Fully Agree</strong></div>
 
-                </table>
-        <br> <hr><br>
+        <br><br>
         <strong>Was everything clear in the instructions during the study?</strong>
                 {{formfield 'all_clear'}}
         <br> <hr>   <br>

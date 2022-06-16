@@ -1,24 +1,24 @@
 {% load otree %}
-
-
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
 {% block content %}
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 2.)
+ </h3>
+        </div>
+    <div class="card-body">
 
- <h2 style="display: inline-block; padding-right: 60px ">Part 2</h2>
+<h3 style="text-align: center"> Schätzaufgabe {{ round }} von 10</h3>
+<br>
+<br>
+<br>
+<br>
 
-<!--<div align="center" style="display: inline-block; width: 60%; padding-left: 60px">
-<div class="progress" style="height: 25px">
-  <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 10%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="10"></div>
-</div>
-</div>-->
-<br>
-<br>
-<h3 style="text-align: center"> Estimation Task {{ round }} out of 10</h3>
-<br>
-<br>
-You are a member of the {{player.identity}} Group.
-Below you see the received signal provided by Sender 1.
-Please read through the signal and report your guess.
-
+        Auf dieser Seite sehen Sie die erhaltene Schätzung von Sender 1.
+        Bitte lesen Sie alle erhaltenen Schätzungen.
+        Geben Sie anschließend Ihre eigene Schätzung zum tatsächlichen Wert der Zahl x ab.
 
 <br>
 <br>
@@ -39,30 +39,24 @@ Please read through the signal and report your guess.
       </div>
     </div>
 
-
-
-
 <br>
 <br>
-
-
 
 
 <div align="center">
-    What is your Guess on X? Please answer below and confirm with "Next":
+    Bitte geben Sie nun Ihre eigene Schätzung zum tatsächlichen Wert der Zahl x ab und bestätigen Sie mit "Weiter":
     <br>
     {{ formfield 'prior' label=""}}
 </div>
-
+</div></div>
 <div align="center">
     {{ next_button }}
 </div>
 <!--<script>
 window.onload = function progressbar_update() {
     bar = document.getElementById("progress");
-    bar.style.width =  parseInt(js_vars.round - 10 )*10 + "%";
+    bar.style.width =  parseInt(js_vars.round - 10 )*9 + "%";
     bar.innerHTML = "<big><b> Round " + parseInt(js_vars.round - 10) + " of 10</b></big>";
 }
 </script>-->
-
 {% endblock %}

@@ -11,7 +11,8 @@
 
  <div class="card bg-light instructions">
     <div class="card-body">
- <h5>Vielen Dank für die Teilnahme an der heutigen Studie.
+ <h5>Die Studie ist nun beendet.
+     Vielen Dank für die Teilnahme an der heutigen Studie.
      Unten finden Sie die Berechnung Ihrer finalen Auszahlung.
      Bitte bleiben Sie noch einen Moment sitzen.
      Wenn Ihre Platznummer aufgerufen wird, gehen Sie bitte zum Ausgang.
@@ -21,17 +22,48 @@
         <h5>Ihre Auszahlung beträgt: <b>{{ total_payoff }}</b>.</h5>
      <br><br>
 
-    <p>Darin enthalten sind {{ part_fee }} als Aufwandsentschädigung für Ihr heutiges Erscheinen und weitere Auszahlungen,
-        die abhängig von Ihren Entscheidungen in den einzelnen Teilen dieser Studie sind.</p>
-
-        <p> <u>Ergebnis des Wettbewerbs aus Teil 1.):</u>
+        <u>Darin enthalten ist:</u>
+        <br>
+        <ul>
+        <li>Aufwandsentschädigung für Ihr heutiges Erscheinen:  <b>{{ part_fee }}</b></li>
+            <li>
             {{ if SIM_payoff > 0 }}
-            Sie haben den Wettbewerb aus Teil 1.) <u>gewonnen</u>. Dadurch haben Sie zudem den Preis von 3€ gewonnen. Dieser wurde Ihrer Auszahlung gutgeschrieben
-            {{ endif }}
+            Sie haben den Wettbewerb aus Teil 1.) <u>gewonnen</u>.
+                {{ if payoff_ball == 0 }}
+                Teil 1.) wurde für Ihre Auszahlung ausgewählt.
+                Dadurch wurden Ihrer Auszahlung <b>2,00 € </b> gutgeschrieben.
+                {{ endif }}
+                {{ if payoff_ball > 0 }}
+                Teil 1.) wurde nicht für Ihre Auszahlung ausgewählt.
+                Ihre Auszahlung bleibt daher unverändert.
+                {{ endif }}
+                {{ endif }}
             {{ if SIM_payoff == 0 }}
-            Sie haben den Wettbewerb aus Teil 1.) <u>nicht gewonnen</u>.
+                {{ if payoff_ball == 0 }}
+                Sie haben den Wettbewerb aus Teil 1.) <u>nicht gewonnen</u>.
+                Teil 1.) für Ihre Auszahlung ausgewählt.
+                Ihre Auszahlung bleibt daher unverändert.
+                {{ endif }}
+                {{ if payoff_ball > 0 }}
+                Sie haben den Wettbewerb aus Teil 1.) <u>nicht gewonnen</u>.
+                Teil 1.) wurde nicht für Ihre Auszahlung ausgewählt.
+                Ihre Auszahlung bleibt daher unverändert.
+                {{ endif }}
+                {{ endif }}
+        </li>
+
+        {{ if payoff_ball == 1 }}
+        {{ if GuessingTask_payoff > 0 }}
+        <li><u>Auszahlung aus Teil 2.):</u> <b> {{GuessingTask_payoff}}</b></li>
             {{ endif }}
-        </p>
+            {{ endif }}
+        {{ if payoff_ball == 2 }}
+        {{ if Trust_payoff > 0 }}
+        <li>Auszahlung aus Teil 4.):<b> {{Trust_payoff}}</b></li>
+            {{ endif }}
+            {{ endif }}
+        </ul>
+
  </div>
  </div>
 

@@ -1,0 +1,20 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+        <br><br>
+        <strong>Mit welcher Note haben Sie Ihr Abitur abgeschlossen?</strong>
+                {{formfield 'Abitur'}}
+        <br>
+        <br>
+        <strong>When you have finished the questionnaire, please press “next”.</strong>
+   </div>
+</div>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{% endblock %}

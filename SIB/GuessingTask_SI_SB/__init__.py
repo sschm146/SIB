@@ -35,17 +35,16 @@ class Player(BasePlayer):
     estimate = models.IntegerField()  # the estimate sent by the estimation device which is observed by senders
     posterior = models.FloatField()  # the posterior belief of the receiver
     true_state = models.IntegerField()
+    signal_order = models.IntegerField()
     SB_sender_4 = models.StringField()
-    SB_sender_4_identity = models.StringField()
     SB_received_signal_1 = models.IntegerField() #saving received signals across rounds for analyses
     SB_received_signal_2 = models.IntegerField() #saving received signals across rounds for analyses
     SB_received_signal_3 = models.IntegerField() #saving received signals across rounds for analyses
     SB_received_signal_4 = models.IntegerField() #saving received signals across rounds for analyses
-    received_signal_1_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
-    received_signal_2_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
-    received_signal_3_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
-    received_signal_4_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
-    received_signal_5_identity = models.BooleanField(initial=False) #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
+    received_signal_1_identity = models.StringField() #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
+    received_signal_2_identity = models.StringField() #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
+    received_signal_3_identity = models.StringField() #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
+    received_signal_4_identity = models.StringField() #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     comprq1 = models.IntegerField(choices=[[1,
                                             'The estimate of a randomly drawn estimation device is equally likely to be the correct number x or any other number.'],
                                            [2,
@@ -166,7 +165,8 @@ class Player(BasePlayer):
                  [2, ""],
                  [3, ""],
                  [4, ""],
-                 [5, ""], ],
+                 [5, ""],
+                 [6, ""], ],
         widget=widgets.RadioSelect, label=''
     )
     q4 = models.IntegerField(
@@ -175,12 +175,13 @@ class Player(BasePlayer):
                  [2, ""],
                  [3, ""],
                  [4, ""],
-                 [5, ""], ],
+                 [5, ""],
+                 [6, ""], ],
         widget=widgets.RadioSelect, label=''
     )
     q5 = models.IntegerField(
         choices=[[0, "Weiblich"],
-                 [1, "Mänlich"],
+                 [1, "Männlich"],
                  [2, "Divers"]],
         widget=widgets.RadioSelect, label=''
     )
@@ -193,79 +194,79 @@ class Player(BasePlayer):
     q8 = models.IntegerField(label='')
     q9 = models.IntegerField(label='')
     q10 = models.IntegerField(
-        choices=[[1, "Poor"],
-                 [2, "Average"],
-                 [3, "Good"],
-                 [4, "Excellent"]],
+        choices=[[1, "Schlecht"],
+                 [2, "Durchschnittlich"],
+                 [3, "Gut"],
+                 [4, "Ausgezeichnet"]],
         widget=widgets.RadioSelect, label=''
     )
     q11 = models.IntegerField(
-        choices=[[1, "Poor"],
-                 [2, "Average"],
-                 [3, "Good"],
-                 [4, "Excellent"]],
+        choices=[[1, "Schlecht"],
+                 [2, "Durchschnittlich"],
+                 [3, "Gut"],
+                 [4, "Ausgezeichnet"]],
         widget=widgets.RadioSelect, label=''
     )
     q12 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q13 = models.IntegerField(
-        choices=[[1, "I’ve always known how to budget"],
-                 [2, "I’ve had to learn to budget whilst at University"],
-                 [3, "I struggle to purchase necessities"],
-                 [4, "I can afford everything but I don’t budget"]],
+        choices=[[1, "Ich habe schon immer gewusst, wie man haushaltet."],
+                 [2, "Ich musste während meines Studiums lernen, mit dem Geld umzugehen.."],
+                 [3, "Ich habe Mühe, das lebensnotwendige Dinge zu kaufen"],
+                 [4, "Ich kann mir alles leisten, aber ich haushalte nicht."]],
         widget=widgets.RadioSelect, label=''
     )
     q14 = models.IntegerField(
-        choices=[[1, "Not budgeting"],
-                 [2, "Cost of necessities too expensive"],
-                 [3, "Too care-free with money"],
-                 [4, "Other priorities such as shopping & nightlife take a priority"],
-                 [5, "I don’t struggle"],
-                 [6, " I’m good with budgeting"],
-                 [7, " I have no idea"]],
+        choices=[[1, "Keine Haushaltsplanung"],
+                 [2, "Kosten für lebensnotwendige Dinge zu hoch"],
+                 [3, "Zu sorglos mit Geld"],
+                 [4, "Andere Prioritäten wie Shopping und Nachtleben haben Vorrang"],
+                 [5, "Ich habe keine Schwierigkeiten"],
+                 [6, "Ich bin gut im Haushalten"],
+                 [7, "Ich wei? es nicht"]],
         widget=widgets.RadioSelect, label=''
     )
     q15 = models.StringField(label='')
     q16 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q17 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q18 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q19 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q20 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q21 = models.IntegerField(
-        choices=[[1, "Yes"],
-                 [2, "No"]],
+        choices=[[1, "Ja"],
+                 [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
     )
     q22 = models.IntegerField(
-        choices=[[1, "Student Union"],
-                 [2, "Parents"],
-                 [3, "Friends"],
+        choices=[[1, "Studentenwerk"],
+                 [2, "Eltern"],
+                 [3, "Freunde"],
                  [4, "Bank"],
-                 [5, "Financial adviser"],
-                 [6, "Other"]],
+                 [5, "Finanzberatung"],
+                 [6, "Sonstige"]],
         widget=widgets.RadioSelect, label=''
     )
     q23 = models.StringField(label='', blank=True)
@@ -281,18 +282,15 @@ class Player(BasePlayer):
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
     subsession.x = random.randint(0, 50)
-    estimates = np.random.normal(Constants.true_state[subsession.round_number - 1], Constants.sd, Constants.num_senders)
-    estimates = np.rint(estimates)
-    for p in players:  # Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
+    for p in players: #Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
         participant = p.participant
         p.Role = participant.Role
         if p.Role == "sender":
-            p.estimate = estimates[p.id_in_group - 1]
-        if p.round_number <= Constants.num_rounds / 2:
-            p.true_state = Constants.true_state[subsession.round_number - 1]
-        else:
-            p.true_state = Constants.true_state[int(subsession.round_number - Constants.num_rounds / 2) - 1]
-        participant = p.participant
+            if p.round_number <= Constants.num_rounds / 2:
+                p.estimate = p.session.config['Signals'][p.id_in_group - 1][p.round_number - 1]
+                p.true_state = p.session.config['True_state'][p.round_number - 1]
+            else:
+                p.true_state = p.session.config['True_state'][int(p.round_number - Constants.num_rounds / 2) - 1]
         p.identity = participant.identity
 
 
@@ -399,42 +397,81 @@ class StartWaitPage(WaitPage):
 
     @staticmethod
     def is_displayed(player):
-        return player.round_number >= (Constants.num_rounds / 2) + 1
+        return player.round_number == (Constants.num_rounds / 2)
 
 def set_signals(subsession: Subsession):
     players = subsession.get_players()
-    if subsession.round_number > Constants.num_rounds / 2:
-        temp = []
-        for p in players:
-            prev_player = p.in_round(subsession.round_number - Constants.num_rounds / 2)
-        prev_players = prev_player.group.get_players()
-        signals = [prev.sent_signal for prev in prev_players if prev.Role == 'sender']
-        senders = [prev.id_in_group for prev in prev_players if prev.Role == 'sender']
-        identities = [prev.identity for prev in prev_players if prev.Role == 'sender']
-        for i in list(range(Constants.num_senders - 3, Constants.num_senders)):
-            temp.append([signals[i], senders[i], identities[i]])
-        random.shuffle(temp) #important to solve ties at random
-        temp = sorted(temp, key=lambda x: int(x[0]))
-        #temp.sort(reverse=True) #alternative is to sort first at signal size and then by id_in_group to preserve order at ties:
-                                    # temp = sorted(temp, key=lambda x:(int(x[0]), x[1]))
-        subsession.censored_signal = str(temp[0]) + str(temp[1])
-        del temp[0]
-        del temp[0]
-        temp = sorted(temp, key=lambda x: int(x[1]))
-        if temp[0][1] == 4:
-            temp[0][1] = 'D'
-        if temp[0][1] == 5:
-            temp[0][1] = 'E'
-        if temp[0][1] == 6:
-            temp[0][1] = 'F'
+
+    if subsession.round_number == Constants.num_rounds / 2:
+        all = [0,0,0,0,0,0]
+        for i in list(range(1, 11, 1)):
+            all_signals = []
+            all_senders = []
+            all_identities = []
+            for p in players:
+                prev_player = p.in_round(i)
+                prev_players = prev_player.group.get_players()
+                all_signals = [prev.sent_signal for prev in prev_players if prev.Role == 'sender']
+                all_senders = [prev.id_in_group for prev in prev_players if prev.Role == 'sender']
+                all_identities = [prev.identity for prev in prev_players if prev.Role == 'sender']
+            all = np.vstack([all, all_signals])
+            all = np.vstack([all, all_senders])
+            all = np.vstack([all, all_identities])
+            if i == 1:
+                all = np.delete(all, 0, 0)
+
         for p in players:
             if p.Role == "receiver":
-                p.SB_sender_4 = temp[0][1]
-                p.SB_sender_4_identity = temp[0][2]
-                p.SB_received_signal_1 = signals[0]
-                p.SB_received_signal_2 = signals[1]
-                p.SB_received_signal_3 = signals[2]
-                p.SB_received_signal_4 = temp[0][0]
+                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'], p.session.config['signal_order_3']]
+                p.signal_order = random.choice(range(len(orders)))
+                signal_order = orders[p.signal_order]
+                for i in list(range(0, 10, 1)):
+                    fut_player = p.in_round(Constants.num_rounds/2 + i + 1)
+                    fut_player.signal_order = p.signal_order
+                    fut_player.SB_received_signal_1 = int(all[3 * signal_order[i]][0])
+                    fut_player.SB_received_signal_2 = int(all[3 * signal_order[i]][1])
+                    fut_player.SB_received_signal_3 = int(all[3 * signal_order[i]][2])
+                    fut_player.received_signal_1_identity = all[3 * signal_order[i] + 2][0]
+                    fut_player.received_signal_2_identity = all[3 * signal_order[i] + 2][1]
+                    fut_player.received_signal_3_identity = all[3 * signal_order[i] + 2][2]
+                    SB_list = [int(all[3 * signal_order[i]][3]), int(all[3 * signal_order[i]][4]), int(all[3 * signal_order[i]][5])]
+                    fut_player.SB_received_signal_4 = max(SB_list)
+                    if int(all[3 * signal_order[i] + 1][SB_list.index(fut_player.SB_received_signal_4)]) == 1:
+                        fut_player.SB_sender_4 = "D"
+                    if int(all[3 * signal_order[i] + 1][SB_list.index(fut_player.SB_received_signal_4)]) == 2:
+                        fut_player.SB_sender_4 = "E"
+                    if int(all[3 * signal_order[i] + 1][SB_list.index(fut_player.SB_received_signal_4)]) == 3:
+                        fut_player.SB_sender_4 = "F"
+
+                    all_cut = np.delete(all, np.s_[0:3], 1)
+                    fut_player.received_signal_4_identity = all_cut[3 * signal_order[i] + 2][SB_list.index(fut_player.SB_received_signal_4)]
+                    fut_player.true_state = p.session.config['True_state'][signal_order[i]]
+
+
+        # for i in list(range(Constants.num_senders - 3, Constants.num_senders)):
+        #     all.append([all_signals[i], all_senders[i], all_identities[i]])
+        # random.shuffle(temp) #important to solve ties at random
+        # temp = sorted(temp, key=lambda x: int(x[0]))
+        # #temp.sort(reverse=True) #alternative is to sort first at signal size and then by id_in_group to preserve order at ties:
+        #                             # temp = sorted(temp, key=lambda x:(int(x[0]), x[1]))
+        # subsession.censored_signal = str(temp[0]) + str(temp[1])
+        # del temp[0]
+        # del temp[0]
+        # temp = sorted(temp, key=lambda x: int(x[1]))
+        # if temp[0][1] == 4:
+        #     temp[0][1] = 'D'
+        # if temp[0][1] == 5:
+        #     temp[0][1] = 'E'
+        # if temp[0][1] == 6:
+        #     temp[0][1] = 'F'
+        # for p in players:
+        #     if p.Role == "receiver":
+        #         p.SB_sender_4 = temp[0][1]
+        #         p.SB_sender_4_identity = temp[0][2]
+        #         p.SB_received_signal_1 = signals[0]
+        #         p.SB_received_signal_2 = signals[1]
+        #         p.SB_received_signal_3 = signals[2]
+        #         p.SB_received_signal_4 = temp[0][0]
 
 
 class Filler_Task(Page):
@@ -462,33 +499,15 @@ class Guess(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        current_round = player.round_number
-        prev_player = player.in_round(current_round - Constants.num_rounds / 2)
-        prev_players = prev_player.group.get_players()
-        identities = [p.participant.identity for p in prev_players if p.Role == 'sender']
-
-        if player.Role == "receiver":  # Gathering all signals and the resp. sender's identities for analyses -
-            # this part works but can be improved with a loop or something
-            if identities[0] == player.participant.identity:
-                player.received_signal_1_identity = True
-            if identities[1] == player.participant.identity:
-                player.received_signal_2_identity = True
-            if identities[2] == player.participant.identity:
-                player.received_signal_3_identity = True
-            if identities[3] == player.participant.identity:
-                player.received_signal_4_identity = True
-            if identities[4] == player.participant.identity:
-                player.received_signal_5_identity = True
-            return dict(
-                signal_1=player.SB_received_signal_1,
-                signal_2=player.SB_received_signal_2,
-                signal_3=player.SB_received_signal_3,
-                signal_4=player.SB_received_signal_4,
-                sender_4=player.SB_sender_4,
-                sender_4_identity=player.SB_sender_4_identity,
-                round=current_round-10
-
-            )
+        return dict(
+            signal_1=player.SB_received_signal_1,
+            signal_2=player.SB_received_signal_2,
+            signal_3=player.SB_received_signal_3,
+            signal_4=player.SB_received_signal_4,
+            sender_4=player.SB_sender_4,
+            sender_4_identity=player.received_signal_4_identity,
+            round=player.round_number - 10
+        )
 
     form_model = "player"
     form_fields = ["posterior"]
@@ -520,17 +539,24 @@ def save_signals_payoff(subsession: Subsession):
     players = subsession.get_players()
     signals_all_rounds = []
     estimates_all_rounds = []
-
-    for i in list(range(0, int(Constants.num_rounds / 2))):
+    for i in list(range(1, 11, 1)):
         for p in players:
+            prev_player = p.in_round(i)
+            prev_players = prev_player.group.get_players()
             if p.Role == 'sender':
-                prev_player = p.in_round(i + 1)
-                prev_subsession = subsession.in_round(i + int(Constants.num_rounds / 2) + 1)
-                if prev_player.id_in_group != int(prev_subsession.censored_signal[4]): #indexing of "censored signal" is no as in "4th element of list" but as in "4th element of string object"
-                    signals_all_rounds.append(prev_player.field_maybe_none('sent_signal'))
-                else:
-                    signals_all_rounds.append('-')
                 estimates_all_rounds.append(prev_player.estimate)
+        signals_1_3 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group <= 3]
+        pre_signals_4_6 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group > 3]
+        max_signal = max(pre_signals_4_6)
+        max_index = pre_signals_4_6.index(max_signal)
+        signals_4_6 = ['-', '-', '-']
+        signals_4_6[max_index] = pre_signals_4_6[max_index]
+        pre = signals_1_3 + signals_4_6
+        signals_all_rounds.extend(pre)
+    print(estimates_all_rounds)
+    print(signals_all_rounds)
+
+
     # Payoff calculation
     for p in players:
         participant = p.participant
@@ -550,5 +576,5 @@ def save_signals_payoff(subsession: Subsession):
 
 
 
-page_sequence = [Instructions_GT_senders, StartWaitPage, Signals, Filler_Task, Instructions_GT_receivers,
+page_sequence = [Instructions_GT_senders, Signals, Filler_Task, Instructions_GT_receivers, StartWaitPage,
                  Guess, SecondWaitPage]
