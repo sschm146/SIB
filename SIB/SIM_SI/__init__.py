@@ -55,7 +55,14 @@ def creating_session(subsession: Subsession):
         p.identity = participant.identity
 # PAGES
 class Instructions(Page):
-    pass
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        participant = player.participant
+        identity = participant.identity
+        return dict(
+            identity=identity
+        )
 
 
 class MyWaitPage(WaitPage):

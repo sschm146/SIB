@@ -3,6 +3,8 @@ import numpy as np
 import random
 import pandas as pd
 
+import settings
+
 c = Currency
 
 doc = """
@@ -46,31 +48,29 @@ class Player(BasePlayer):
     received_signal_3_identity = models.StringField() #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     received_signal_4_identity = models.StringField() #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     comprq1 = models.IntegerField(choices=[[1,
-                                            'The estimate of a randomly drawn estimation device is equally likely to be the correct number x or any other number.'],
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts kann mit gleicher Wahrscheinlichkeit der Zahl x oder einer andere Zahl entsprechen.'],
                                            [2,
-                                            'The estimate of a randomly drawn estimation device is less likely to be '
-                                            'the correct number x than any other number, and the further one moves away '
-                                            'from x, the more likely it is that an estimation device reports such a number.'],
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der Zahl x als jede andere Zahl. '
+                                            'Je weiter man sich von der Zahl x entfernt, desto wahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.'],
                                            [3,
-                                            'The estimate of a randomly drawn estimation device is more likely to be '
-                                            'the correct number x than any other number, and the further one moves away '
-                                            'from x, the less likely it is that an estimation device reports such a number.']],
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der Zahl x als jede andere Zahl. '
+                                            'Je weiter man sich von der Zahl x entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.']],
                                   widget=widgets.RadioSelect,
                                   label='')
     comprq2 = models.IntegerField(choices=[
-        [1, 'The average of estimates of all the estimation devices can be any number with equal probability.'],
-        [2,
-         'The average of estimates of all the estimation devices corresponds exactly (or almost exactly) to number x'],
-        [3, 'The average of estimates of all the estimation devices will always be larger than number x.'],
-        [4, 'The average of estimates of all the estimation devices will always be smaller than number x.']],
-                                  widget=widgets.RadioSelect,
-                                  label='')
-    comprq3 = models.IntegerField(choices=[[1, 'I will observe an estimate of 1 randomly drawn estimation device.'],
-                                           [2, 'I will observe the estimates of 3 randomly drawn estimation devices.'],
-                                           [3,
-                                            'I will observe the actual number x and the estimate of 1 randomly drawn estimation device.']],
-                                  widget=widgets.RadioSelect,
-                                  label='')
+        [1,
+         'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht mit gleicher Wahrscheinlichkeit entweder der Zahl x oder jeder beliebigen anderen Zahl.'],
+        [2, 'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht genau (oder fast genau) der Zahl x.'],
+        [3, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer größer als die Zahl x.'],
+        [4, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer kleiner als die Zahl x.']],
+        widget=widgets.RadioSelect,
+        label='')
+    comprq3 = models.IntegerField(
+        choices=[[1, 'Ich werde die Schätzung von 1 zufällig gezogenen Schätzgerät beobachten.'],
+                 [2, 'Ich werde die Schätzungen von 2 zufällig gezogenen Schätzgeräten beobachten.'],
+                 [3, 'Ich werde die Schätzungen von 3 zufällig ausgewählten Schätzgeräten beobachten.']],
+        widget=widgets.RadioSelect,
+        label='')
     comprq4 = models.IntegerField(choices=[[1, 'A randomly drawn estimation device shows me an estimate of 490.'],
                                            [2, 'A randomly drawn estimation device shows me an estimate of 541.'],
                                            [3, 'A randomly drawn estimation device shows me an estimate of 555.']],
@@ -93,68 +93,61 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
         label='')
     comprq7 = models.IntegerField(
-        choices=[[1, 'Each sender observed an estimate of 1 randomly drawn estimation device.'],
-                 [2, 'Each sender observed an estimate of 3 randomly drawn estimation devices.'],
-                 [3,
-                  'Each sender observed an estimate of an actual number x and the estimate of 1 randomly drawn estimation device.']],
+        choices=[[1, 'Jeder Sender hat die Schätzung von 1 zufällig gezogenen Schätzgerät beobachtet.'],
+                 [2, 'Jeder Sender hat die Schätzungen von 2 zufällig gezogenen Schätzgeräten beobachtet.'],
+                 [3, ' Jeder Sender hat die Schätzungen von 3 zufällig gezogenen Schätzgeräten beobachtet.']],
         widget=widgets.RadioSelect,
         label='')
-    comprq8 = models.IntegerField(choices=[[1, 'I will observe the estimates of 6 senders. The senders’ group affiliation and names will not be shown.'],
-                                           [2, 'I will observe the estimates of 5 senders.This includes Sender A, Sender B, Sender C, and 2 out of the following 3 senders: '
-                                               'Sender D, Sender E, and Sender F. '
-                                               'The senders’ names and group affiliation will be shown. '
-                                               'From senders D, E, and F, I will always observe the two lowest estimates. '
-                                               'The highest of those 3 estimates is on average y higher than the second highest estimates.'],
-                                           [3, 'I will observe the estimates of 5 senders.This includes Sender A, Sender B, Sender C, and 2 out of the following 3 senders: '
-                                               'Sender D, Sender E, and Sender F. '
-                                               'The senders’ names and group affiliation will be shown. '
-                                               'From senders D, E, and F, I will always observe the two highest estimates. '
-                                               'The lowest of those 3 estimates is on average y-2 lower than the second lowest estimate.'],
-                                           [4, 'I will observe the estimates of 5 senders. '
-                                               'This includes Sender A, Sender B, Sender C, and 2 out of the following 3 senders: '
-                                               'Sender D, Sender E, and Sender F. '
-                                               'The senders’ names and group affiliation will be shown. '
-                                               'From senders D, E, and F, I will always observe the two lowest estimates. '
-                                               'The highest of those 3 estimates is on average y higher than the second highest estimates.']],
+    comprq8 = models.IntegerField(choices=[[1, ' Ich werde die Schätzungen von 4 Sendern beobachten. '
+                                               'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die niedrigste Schätzung der folgenden 3 Sender betrachten: '
+                                               'Sender D, Sender E und Sender F. '
+                                               'Die niedrigste der drei Schätzungen ist im Durchschnitt y niedriger als die zweitniedrigste und x niedriger als die höchste.'],
+                                           [2, 'Ich werde die Schätzungen von 4 Sendern beobachten. '
+                                               'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die höchste Schätzung der folgenden 3 Sender sehen: '
+                                               'Sender D, Sender E und Sender F. '
+                                               'Die zweithöchste Schätzung ist im Durchschnitt y niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt x niedriger als die höchste.'],
+                                           [3, ' Ich werde die Schätzungen von 4 Sendern beobachten. '
+                                               'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die höchste Schätzung der folgenden 3 Sender sehen: '
+                                               'Sender D, Sender E und Sender F. '
+                                               'Die zweithöchste Schätzung ist im Durchschnitt y+2 niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt x+2 niedriger als die höchste.']],
                                   widget=widgets.RadioSelect,
                                   label='')
-    comprq9 = models.IntegerField(choices=[[1, 'Sender X, Sender Y, and Sender X are my members my X group while Sender Y, Sender X, and Sender Y are members of Y group.'],
-                                           [2, 'Sender Y, Sender X, and Sender Y are my members my X group while Sender X, Sender Y, and Sender X are members of Y group.'],
-                                           [3, 'Sender X, Sender X, and Sender X are my members my X group while Sender Y, Sender Y, and Sender Y are members of Y group.']],
+    comprq9 = models.IntegerField(choices=[[1,
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts ist mit gleicher Wahrscheinlichkeit die tatsächliche Zahl x oder eine andere Zahl.'],
+                                           [2,
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der tatsächlichen Zahl als jede andere Zahl. '
+                                            'Je weiter man sich von Zahl x entfernt, desto wahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung meldet.'],
+                                           [3,
+                                            ' Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der tatsächlichen Zahl als jede andere Zahl. '
+                                            'Je weiter man sich von Zahl x entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung meldet.']],
                                   widget=widgets.RadioSelect,
                                   label='')
     comprq10 = models.IntegerField(choices=[[1,
-                                            'The estimate of a randomly drawn estimation device is equally likely to be the correct number x or any other number'],
-                                           [2,
-                                            'The estimate of a randomly drawn estimation device is less likely to be the correct number x than any other number, and the further one moves away from x, the more likely it is that an estimation device reports such a number'],
-                                           [3,
-                                            'The estimate of a randomly drawn estimation device is more likely to be the correct number x than any other number, and the further one moves away from x, the less likely it is that an estimation device reports such a number']],
-                                  widget=widgets.RadioSelect,
-                                  label='')
-    comprq11 = models.IntegerField(choices=[
-        [1, 'The average of estimates of all the estimation devices can be any number with equal probability.'],
-        [2,
-         'The average of estimates of all the estimation devices corresponds exactly (or almost exactly) to number x.'],
-        [3, 'The average of estimates of all the estimation devices will always be larger than number x.'],
-        [4, 'The average of estimates of all the estimation devices will always be smaller than number x.']],
+                                             'Der Durchschnitt der Schätzungen aller Schätzgeräte kann mit gleicher Wahrscheinlichkeit eine beliebige Zahl sein.'],
+                                            [2,
+                                             'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht genau (oder fast genau) der Zahl x.'],
+                                            [3,
+                                             'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer größer als die Zahl x.'],
+                                            [4,
+                                             'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer kleiner als die Zahl x.']],
                                    widget=widgets.RadioSelect,
                                    label='')
-    comprq12 = models.IntegerField(
-        choices=[[1, 'A sender’s randomly drawn estimation device showed an estimate of 490.'],
-                 [2, 'A sender’s randomly drawn estimation device showed an estimate of 541.'],
-                 [3, 'A sender’s randomly drawn estimation device showed an estimate of 555.']],
+    comprq11 = models.IntegerField(
+        choices=[[1, 'Sender A, Sender E und Sender F sind Mitglieder der Gruppe Blau, während Sender D, Sender B und Sender C Mitglieder der Gruppe Gelb sind.'],
+                 [2, 'Sender D, Sender B und Sender F sind Mitglieder der Gruppe Blau, während Sender A, Sender E und Sender C Mitglieder der Gruppe Gelb sind.'],
+                 [3, 'Sender A, Sender B und Sender C sind Mitglieder der Gruppe Blau, während Sender D, Sender E und Sender F Mitglieder der Gruppe Gelb sind.']],
         widget=widgets.RadioSelect,
         label='')
-    comprq13 = models.IntegerField(choices=[[1, '9'],
+    comprq12 = models.IntegerField(choices=[[1, '9'],
                                             [2, '18'],
                                             [3, '19'],
                                             [4, '24']],
                                    widget=widgets.RadioSelect,
                                    label='')
-    comprq14 = models.IntegerField(choices=[[1, '1490'],
-                                            [2, '1520'],
-                                            [3, '1521'],
-                                            [4, '1525']],
+    comprq13 = models.IntegerField(choices=[[1, '0%'],
+                                            [2, '50%'],
+                                            [3, '67%'],
+                                            [4, '100%']],
                                    widget=widgets.RadioSelect,
                                    label='')
     q1 = models.IntegerField(label='')
@@ -336,7 +329,7 @@ class Instructions_GT_senders(Page):
         return player.Role == "sender" and player.round_number == 1
 
     form_model = "player"
-    form_fields = ["comprq1", "comprq2", "comprq3", "comprq4", "comprq5", "comprq6"]
+    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5",]
 
     @staticmethod
     def error_message(player, values):
@@ -344,9 +337,7 @@ class Instructions_GT_senders(Page):
             comprq1=3,
             comprq2=2,
             comprq3=1,
-            comprq4=2,
             comprq5=3,
-            comprq6=3,
         )
 
         error_messages = dict()
@@ -365,7 +356,15 @@ class Instructions_GT_receivers(Page):
         return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
 
     form_model = "player"
-    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq11", "comprq12", "comprq13", "comprq14"]
+    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq11", "comprq12", "comprq13"]
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        participant = player.participant
+        identity = participant.identity
+        return dict(
+            identity=identity
+        )
 
     @staticmethod
     def error_message(player, values):
@@ -374,10 +373,9 @@ class Instructions_GT_receivers(Page):
             comprq8=3,
             comprq9=3,
             comprq10=2,
-            comprq11=2,
+            comprq11=3,
             comprq12=2,
             comprq13=3,
-            comprq14=2,
         )
 
         error_messages = dict()
@@ -434,17 +432,14 @@ def set_signals(subsession: Subsession):
                     fut_player.received_signal_1_identity = all[3 * signal_order[i] + 2][0]
                     fut_player.received_signal_2_identity = all[3 * signal_order[i] + 2][1]
                     fut_player.received_signal_3_identity = all[3 * signal_order[i] + 2][2]
-                    SB_list = [int(all[3 * signal_order[i]][3]), int(all[3 * signal_order[i]][4]), int(all[3 * signal_order[i]][5])]
-                    fut_player.SB_received_signal_4 = max(SB_list)
-                    if int(all[3 * signal_order[i] + 1][SB_list.index(fut_player.SB_received_signal_4)]) == 1:
-                        fut_player.SB_sender_4 = "D"
-                    if int(all[3 * signal_order[i] + 1][SB_list.index(fut_player.SB_received_signal_4)]) == 2:
-                        fut_player.SB_sender_4 = "E"
-                    if int(all[3 * signal_order[i] + 1][SB_list.index(fut_player.SB_received_signal_4)]) == 3:
-                        fut_player.SB_sender_4 = "F"
-
-                    all_cut = np.delete(all, np.s_[0:3], 1)
-                    fut_player.received_signal_4_identity = all_cut[3 * signal_order[i] + 2][SB_list.index(fut_player.SB_received_signal_4)]
+                    SB_list = np.array([[int(all[3 * signal_order[i] + 1][3]), int(all[3 * signal_order[i]][3]), all[3 * signal_order[i] + 2][3]],
+                                        [int(all[3 * signal_order[i] + 1][4]), int(all[3 * signal_order[i]][4]), all[3 * signal_order[i] + 2][4]],
+                                        [int(all[3 * signal_order[i] + 1][5]), int(all[3 * signal_order[i]][5]), all[3 * signal_order[i] + 2][5]]])
+                    np.random.shuffle(SB_list)
+                    max_index = SB_list[:, 1].argmax()
+                    fut_player.SB_received_signal_4 = int(SB_list[max_index][1])
+                    fut_player.SB_sender_4 = SB_list[max_index][0]
+                    fut_player.received_signal_4_identity = SB_list[max_index][2]
                     fut_player.true_state = p.session.config['True_state'][signal_order[i]]
 
 
@@ -489,6 +484,8 @@ class Filler_Task(Page):
 # the receiver observes all the signals sent by senders and states a guess/posterior
 # Receivers see signals sent by senders in a random order and with known group identity
 class Guess(Page):
+    timeout_seconds = 240
+
     @staticmethod
     def before_next_page(player, timeout_happened):
         diff = pow((Constants.true_state[int(player.round_number - Constants.num_rounds / 2) - 1] - player.posterior), 2)
@@ -535,26 +532,28 @@ class SecondWaitPage(WaitPage):
         if player.Role == "receiver":
             return upcoming_apps[1]
 
-def save_signals_payoff(subsession: Subsession):
+def save_signals_payoff(subsession: Subsession): # Difficulty for SB: Every player saw different sets of signals
     players = subsession.get_players()
-    signals_all_rounds = []
     estimates_all_rounds = []
-    for i in list(range(1, 11, 1)):
-        for p in players:
+    for p in players:
+        signals_all_rounds = []
+        for i in list(range(1, 11, 1)):
             prev_player = p.in_round(i)
             prev_players = prev_player.group.get_players()
             if p.Role == 'sender':
                 estimates_all_rounds.append(prev_player.estimate)
-        signals_1_3 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group <= 3]
-        pre_signals_4_6 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group > 3]
-        max_signal = max(pre_signals_4_6)
-        max_index = pre_signals_4_6.index(max_signal)
-        signals_4_6 = ['-', '-', '-']
-        signals_4_6[max_index] = pre_signals_4_6[max_index]
-        pre = signals_1_3 + signals_4_6
-        signals_all_rounds.extend(pre)
-    print(estimates_all_rounds)
-    print(signals_all_rounds)
+            if p.Role == 'receiver':
+                signals_1_3 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group <= 3]
+                pre_signals_4_6 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group > 3]
+                prev_receiver = p.in_round(i + 10)
+                max_signal_sender = prev_receiver.SB_sender_4
+                signals_4_6 = ['-', '-', '-']
+                signals_4_6[int(max_signal_sender) - 3 - 1] = pre_signals_4_6[int(max_signal_sender) - 3 - 1]
+                pre = signals_1_3 + signals_4_6
+                signals_all_rounds.extend(pre)
+        participant = p.participant
+        participant.signals_all_rounds = signals_all_rounds
+        participant.estimates_all_rounds = estimates_all_rounds
 
 
     # Payoff calculation

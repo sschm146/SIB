@@ -1,6 +1,14 @@
 {% load otree %}
-{{block styles }}
-    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ block styles }}
+<link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+<style type="text/css">
+
+.otree-timer {
+    background-color: transparent;
+    border: none;
+}
+</style>
+
 {{ endblock }}
 {% block content %}
 <div class="card bg-light instructions">
@@ -15,10 +23,8 @@
 <br>
 
 
-        Auf dieser Seite sehen Sie alle erhaltenen Schätzungen der Sender.
-        Die jeweiligen Gruppenzugehörigkeiten der Sender sind farblich dargestellt.
-        Bitte lesen Sie alle Schätzungen.
-        Geben Sie bitte anschließend Ihre eigene Schätzung zum tatsächlichen Wert der Zahl x ab.
+        Auf dieser Seite sehen Sie die Schätzungen der Sender.
+        Bitte geben Sie nun Ihre eigene Schätzung zum Wert der Zahl <i>x</i> an und bestätigen Sie mit "Weiter".
 
 
 <br>

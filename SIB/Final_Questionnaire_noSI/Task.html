@@ -23,49 +23,42 @@
 {{ endblock }}
 {{ block content }}
 <div class="card bg-light instructions">
+    <div class="card-header">
+        Teil 5.)
+    </div>
     <div class="card-body">
 
-    <h3 style="text-align:center">
-        R&auml;tselfrage {{round}}
-    </h3>
 
     <table>
         <tr><!-- Short version with 10 items -->
-            {% if round < 5 %}
+            {% if round < 3 %}
                 <td colspan="8" height="50%" width="50%" align="center">
             {% endif %}
-            {% if round > 4 %}
+            {% if round > 2 %}
                 <td colspan="10" height="50%" width="50%" align="center">
             {% endif %}
-
                     {% if round == 1 %}
-                        <img class="pic" style="transform: rotate(-1deg);" src="{% static "1.png" %}"/>
-                    {% endif %}
-                    {% if round == 2 %}
-                        <img class="pic" style="transform: rotate(0deg);" src="{% static "2.png" %}"/>
-                    {% endif %}
-                    {% if round == 3 %}
                         <img class="pic" style="transform: rotate(-0.5deg);" src="{% static "3.png" %}"/>
                     {% endif %}
-                    {% if round == 4 %}
+                    {% if round == 2 %}
                         <img class="pic" src="{% static "5.png" %}"/>
                     {% endif %}
-                    {% if round == 5 %}
+                    {% if round == 3 %}
                         <img class="pic" style="transform: rotate(-0.5deg);" src="{% static "7.png" %}"/>
                     {% endif %}
-                    {% if round == 6 %}
+                    {% if round == 4 %}
                         <img class="pic" src="{% static "10.png" %}"/>
                     {% endif %}
-                    {% if round == 7 %}
+                    {% if round == 5 %}
                         <img class="pic" src="{% static "11.png" %}"/>
                     {% endif %}
-                    {% if round == 8 %}
+                    {% if round == 6 %}
                         <img class="pic" src="{% static "13.png" %}"/>
                     {% endif %}
-                    {% if round == 9 %}
+                    {% if round == 7 %}
                         <img class="pic" src="{% static "15.png" %}"/>
                     {% endif %}
-                    {% if round == 10 %}
+                    {% if round == 8 %}
                         <img class="pic" src="{% static "16.png" %}"/>
                     {% endif %}
             </td>

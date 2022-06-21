@@ -2,6 +2,8 @@ from otree.api import *
 import numpy as np
 import random
 
+import settings
+
 c = Currency
 
 doc = """
@@ -42,31 +44,29 @@ class Player(BasePlayer):
     received_signal_5 = models.IntegerField()
     received_signal_6 = models.IntegerField()
     comprq1 = models.IntegerField(choices=[[1,
-                                            'The estimate of a randomly drawn estimation device is equally likely to be the correct number x or any other number.'],
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts kann mit gleicher Wahrscheinlichkeit der Zahl x oder einer andere Zahl entsprechen.'],
                                            [2,
-                                            'The estimate of a randomly drawn estimation device is less likely to be '
-                                            'the correct number x than any other number, and the further one moves away '
-                                            'from x, the more likely it is that an estimation device reports such a number.'],
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der Zahl x als jede andere Zahl. '
+                                            'Je weiter man sich von der Zahl x entfernt, desto wahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.'],
                                            [3,
-                                            'The estimate of a randomly drawn estimation device is more likely to be '
-                                            'the correct number x than any other number, and the further one moves away '
-                                            'from x, the less likely it is that an estimation device reports such a number.']],
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der Zahl x als jede andere Zahl. '
+                                            'Je weiter man sich von der Zahl x entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.']],
                                   widget=widgets.RadioSelect,
                                   label='')
     comprq2 = models.IntegerField(choices=[
-        [1, 'The average of estimates of all the estimation devices can be any number with equal probability.'],
-        [2,
-         'The average of estimates of all the estimation devices corresponds exactly (or almost exactly) to number x'],
-        [3, 'The average of estimates of all the estimation devices will always be larger than number x.'],
-        [4, 'The average of estimates of all the estimation devices will always be smaller than number x.']],
+        [1,
+         'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht mit gleicher Wahrscheinlichkeit entweder der Zahl x oder jeder beliebigen anderen Zahl.'],
+        [2, 'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht genau (oder fast genau) der Zahl x.'],
+        [3, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer größer als die Zahl x.'],
+        [4, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer kleiner als die Zahl x.']],
         widget=widgets.RadioSelect,
         label='')
-    comprq3 = models.IntegerField(choices=[[1, 'I will observe an estimate of 1 randomly drawn estimation device.'],
-                                           [2, 'I will observe the estimates of 3 randomly drawn estimation devices.'],
-                                           [3,
-                                            'I will observe the actual number x and the estimate of 1 randomly drawn estimation device.']],
-                                  widget=widgets.RadioSelect,
-                                  label='')
+    comprq3 = models.IntegerField(
+        choices=[[1, 'Ich werde die Schätzung von 1 zufällig gezogenen Schätzgerät beobachten.'],
+                 [2, 'Ich werde die Schätzungen von 2 zufällig gezogenen Schätzgeräten beobachten.'],
+                 [3, 'Ich werde die Schätzungen von 3 zufällig ausgewählten Schätzgeräten beobachten.']],
+        widget=widgets.RadioSelect,
+        label='')
     comprq4 = models.IntegerField(choices=[[1, 'A randomly drawn estimation device shows me an estimate of 490.'],
                                            [2, 'A randomly drawn estimation device shows me an estimate of 541.'],
                                            [3, 'A randomly drawn estimation device shows me an estimate of 555.']],
@@ -90,49 +90,43 @@ class Player(BasePlayer):
         label='')
     comprq7 = models.IntegerField(
         choices=[[1,
-                  'The sender whose estimate I will observe first observed an estimate of 1 randomly drawn estimation device. '
-                  'The other 6 senders observed 3 randomly drawn estimation devices.'],
-                 [2,
-                  'The sender whose estimate I will observe first observed an estimate of 3 randomly drawn estimation device. '
-                  'The other 6 senders observed 1 randomly drawn estimation devices.'],
-                 [3, 'All 7 senders observed an estimate of 1 randomly drawn estimation device. '
-                     'All 7 senders had the identical task and have read the identical instructions.'],
-                 [4, 'All 7 senders observed an estimate of 1 randomly drawn estimation device. '
-                     'All 7 senders had the identical task but their instructions were not identical as the sender, whose estimate I will see first, had more detailed instructions.']],
+                  'Der Sender, dessen Schätzung ich zuerst beobachtet habe, sah die Schätzungen von 6 Schätzgeräten. '
+                  'Die anderen 6 Sender sahen jeweils die Schätzung von 1 Schätzgerät.'],
+                 [2,'Alle 7 Sender haben die Schätzung von jeweils einem Schätzgerät beobachtet. '
+                  'Zudem haben alle 7 Sender die gleiche Aufgabe bearbeitet und vorher identische Anweisungen gelesen.'],
+                 [3, 'Alle 7 Sender haben die Schätzung von jeweils einem Schätzgerät beobachtet. '
+                     'Zudem haben alle 7 Sender die gleiche Aufgabe bearbeitet. '
+                     'Allerdings waren die Anweisungen des Senders, dessen Schätzung ich zuerst sehen werde, detaillierter.']],
         widget=widgets.RadioSelect,
         label='')
-    comprq8 = models.IntegerField(choices=[[1, 'For each estimation task, I observe an estimate of 1 randomly drawn estimation device every time I estimate x.'],
-                                           [2, 'For each estimation task, I will first see the estimate of 1 randomly drawn estimation device after which I will form my first estimate of x.'
-                                               ' After that, I will see the estimates of additional 6 estimation devices and form my second estimate of x.'],
-                                           [3, 'For each estimation task, I will first see the estimate of 1 randomly determined sender after which I will state my first estimate of x.'
-                                               ' After  that, I will see the estimates of the remaining 6 senders and state my second estimate of x.'
-                                               ' The senders’ names will not be shown.'],
-                                           [4, 'For each estimation task, I will first see the estimate of Sender 1, after which I will state my first estimate of x.'
-                                               ' After that, I will see the estimates of Sender A, Sender B, Sender C, Sender D, Sender E, and Sender F, after which I will state my second estimate of x.'
-                                               ' The senders’ names will be shown.']],
+    comprq8 = models.IntegerField(choices=[[1, 'Bei jeder Schätzaufgabe sehe ich zuerst die Schätzung von Sender 1 und mache meine erste Schätzung der Zahl x. '
+                                               'Dann sehe ich nur eine der Schätzungen von Sender A, Sender B, Sender C, Sender D, Sender E und Sender F und mache meine zweite Schätzung der Zahl x.'],
+                                           [2, ' Bei jeder Schätzaufgabe sehe ich zunächst die Schätzung von 1 Schätzgerät und mache meine erste Schätzung der Zahl x. '
+                                               'Dann sehe ich die Schätzungen von 6 weiteren Schätzgeräten und mache meine zweite Schätzung der Zahl x.'],
+                                           [3, ' In jeder Schätzaufgabe sehe ich zuerst die Schätzung von Sender 1 und mache meine erste Schätzung der Zahl x. '
+                                               'Dann sehe ich die Schätzungen von Sender A, Sender B, Sender C, Sender D, Sender E und Sender F und mache meine zweite Schätzung der Zahl x']],
                                   widget=widgets.RadioSelect,
                                   label='')
-    comprq9 = models.IntegerField(choices=[[1,
-                                            'The number I state as my second estimation of x can be any number.'],
-                                           [2,'The number I state as my second estimation of x should again be 88.'],
-                                           [3,'The number I state as my second estimation of x should be smaller than 88.'],
-                                           [4, 'The number I state as my second estimation of x should be larger than 88.']],
+    comprq9 = models.IntegerField(choices=[[1,'Die Zahl, die ich als zweite Schätzung der Zahl x angebe, kann eine beliebige Zahl sein.'],
+                                           [2,'Die Zahl, die ich als zweite Schätzung der Zahl x angebe, sollte 91 betragen.'],
+                                           [3,'Die Zahl, die ich als zweite Schätzung der Zahl x angebe, sollte kleiner sein als 91.'],
+                                           [4,'Die Zahl, die ich als zweite Schätzung der Zahl x angebe, sollte größer als 91 sein.']],
                                   widget=widgets.RadioSelect,
                                   label='')
     comprq10 = models.IntegerField(choices=[[1,
-                                             'The estimate of a randomly drawn estimation device is equally likely to be the correct number x or any other number'],
+                                             'Die Schätzung eines zufällig gezogenen Schätzgeräts ist mit gleicher Wahrscheinlichkeit die tatsächliche Zahl x oder eine andere Zahl.'],
                                             [2,
-                                             'The estimate of a randomly drawn estimation device is less likely to be the correct number x than any other number, and the further one moves away from x, the more likely it is that an estimation device reports such a number'],
+                                             'Die Schätzung eines zufällig gezogenen Schätzgeräts ist entspricht mit geringerer Wahrscheinlichkeit der tatsächlichen Zahl als jede andere Zahl. Je weiter man sich von Zahl x entfernt, desto wahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung meldet.'],
                                             [3,
-                                             'The estimate of a randomly drawn estimation device is more likely to be the correct number x than any other number, and the further one moves away from x, the less likely it is that an estimation device reports such a number']],
+                                             'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit entspricht mit größerer Wahrscheinlichkeit der tatsächlichen Zahl als jede andere Zahl. Je weiter man sich von Zahl x entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung meldet.']],
                                    widget=widgets.RadioSelect,
                                    label='')
     comprq11 = models.IntegerField(choices=[
-        [1, 'The average of estimates of all the estimation devices can be any number with equal probability.'],
+        [1, 'Der Durchschnitt der Schätzungen aller Schätzgeräte kann mit gleicher Wahrscheinlichkeit eine beliebige Zahl sein.'],
         [2,
-         'The average of estimates of all the estimation devices corresponds exactly (or almost exactly) to number x.'],
-        [3, 'The average of estimates of all the estimation devices will always be larger than number x.'],
-        [4, 'The average of estimates of all the estimation devices will always be smaller than number x.']],
+         'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht genau (oder fast genau) der Zahl x.'],
+        [3, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer größer als die Zahl x.'],
+        [4, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer kleiner als die Zahl x.']],
         widget=widgets.RadioSelect,
         label='')
     comprq12 = models.IntegerField(
@@ -147,10 +141,10 @@ class Player(BasePlayer):
                                             [4, '24']],
                                    widget=widgets.RadioSelect,
                                    label='')
-    comprq14 = models.IntegerField(choices=[[1, '1490'],
-                                            [2, '1520'],
-                                            [3, '1521'],
-                                            [4, '1525']],
+    comprq14 = models.IntegerField(choices=[[1, '0%'],
+                                            [2, '50%'],
+                                            [3, '67%'],
+                                            [4, '100%']],
                                    widget=widgets.RadioSelect,
                                    label='')
     q1 = models.IntegerField(label='')
@@ -292,8 +286,7 @@ class Instructions_GT_senders(Page):
     def is_displayed(player):
         return (player.Role == "sender" or player.Role == "prior_sender") and player.round_number == 1
 
-    form_model = "player"
-    form_fields = ["comprq1", "comprq2", "comprq3", "comprq4", "comprq5", "comprq6"]
+    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5",]
 
     @staticmethod
     def error_message(player, values):
@@ -301,9 +294,7 @@ class Instructions_GT_senders(Page):
             comprq1=3,
             comprq2=2,
             comprq3=1,
-            comprq4=2,
             comprq5=3,
-            comprq6=3,
         )
 
         error_messages = dict()
@@ -322,19 +313,18 @@ class Instructions_GT_receivers(Page):
         return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
 
     form_model = "player"
-    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq11", "comprq12", "comprq13", "comprq14"]
+    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq11", "comprq13", "comprq14"]
 
     @staticmethod
     def error_message(player, values):
         solutions = dict(
-            comprq7=3,
-            comprq8=4,
-            comprq9=1,
+            comprq7=2,
+            comprq8=3,
+            comprq9=2,
             comprq10=3,
             comprq11=2,
-            comprq12=2,
             comprq13=3,
-            comprq14=2,
+            comprq14=4,
         )
 
         error_messages = dict()
@@ -428,7 +418,7 @@ class Signals(Page):
 
 
 class Prior(Page):
-
+    timeout_seconds = 240
     @staticmethod
     def is_displayed(player):
         return player.Role == "receiver" and player.round_number > Constants.num_rounds/2
@@ -500,6 +490,8 @@ class Filler_Task(Page):
 # the receiver observes all the signals sent by senders and states a guess/posterior
 # Receivers see signals sent by senders in a random order and with known group identity
 class Guess(Page):
+    timeout_seconds = 240
+
     @staticmethod
     def before_next_page(player, timeout_happened):
         diff = pow((Constants.true_state[int(player.round_number - Constants.num_rounds / 2) - 1] - player.posterior), 2)

@@ -7,36 +7,61 @@
 <div class="card bg-light instructions">
     <div class="card-body">
     <h3>
-        Part 4
+        Teil 4.)
     </h3>
-
-In this part, your task is to state your opinion regarding how often, out of the 10 estimation tasks, did the senders state the same number as their assigned estimation devices.
-You will be paid according to the precision of your estimates as described below.
-<br>
-        <br>
+        In diesem Teil werden wir Ihnen einige Fragen zu den Sendern stellen.
+        Sie werden die Instruktionen für jede Frage erhalten, nachdem Sie die vorherige Frage beantwortet haben.
+<br><br>
 <h4>
-    Task
+    Frage 1
 </h4>
-        Your task is to guess how often, out of the 10 estimation tasks, did a sender state the exact number which was stated by an estimation device that was randomly assigned to him/her.
-        You should make this guess for each of the 6 senders separately.
-        To remind you, in part 3, the senders had to estimate the number x for each of the 10 estimation tasks you had faced.
-        They were paid according to the precision of their estimate. For each estimation task, one estimation device was randomly drawn for each sender, and the sender observed the estimate of only that one device.
-        The senders were aware that the estimate of a randomly drawn estimation device was more likely to be the correct number x than any other number, and the further away one went from number x, the less likely it was that an estimation device stated such a number.
-        They were made explicitly aware that to maximize their chances of correctly guessing x, they should have reported exactly the number the estimation device has stated in each task.
-        In case you will want to remind yourself what the senders were reporting, you will also be able to look at the stated estimates of the 6 senders across the 10 estimation tasks, when stating your belief.
+        Wie in Teil 3 beschrieben, mussten die Sender bei jeder der 10 Schätzaufgaben, die Sie ebenfalls bearbeitet haben, eine unbekannte Zahl x schätzen.
+        Diese wurden nach der Genauigkeit ihrer Schätzungen bezahlt.<br>
         <br>
-        <br>
+        {{ if CN_treatment = False }}
+        <p>
+            Bevor ein Sender bei jeder Schätzaufgabe seine Schätzung angegeben hat, hat er die Schätzung eines zufällig ausgewählten Schätzgeräts gesehen.
+            Jedem Sender war bewusst, dass die erhaltene Schätzung eines Schätzgerätes mit größerer Wahrscheinlichkeit der tatsächlichen Zahl x entspricht als jeder andere Zahl.
+            Zudem werden Schätzungen unwahrscheinlicher, je weiter diese von der Zahl x entfernt sind.
+            Die Sender wurden ausdrücklich darauf hingewiesen, dass sie bei jeder Aufgabe genau die Zahl, die sie sahen, angeben sollten, um ihre Chancen zu maximieren, die Zahl x richtig zu schätzen.
+        </p>
+        <p><b>Ihre Aufgabe lautet wie folgt:
+            Erraten Sie bei wie vielen der 10 Schätzaufgaben jeder der 6 Sender genau die Zahl angegeben hat, die er zuvor gesehen hat. </b>
+            Wenn Sie sich während des Erratens die Angaben der Absender in allen 10 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie diese am unteren Rand des Bildschirms finden.</p>
+        {{ endif }}
+        {{ if CN_treatment = True }}
+        <p>
+            Bevor ein Sender bei jeder Schätzaufgabe seine Schätzung angegeben hat, hat er die Schätzung eines zufällig ausgewählten Schätzgeräts gesehen (für Sender A, B, C und D) oder den Durchschnitt von zwei zufällig gezogenen Schätzgeräten (für Sender E und F).
+            Jedem Sender war bewusst, dass die erhaltene Schätzung eines Schätzgerätes mit größerer Wahrscheinlichkeit der tatsächlichen Zahl x entspricht als jeder andere Zahl.
+            Zudem werden Schätzungen unwahrscheinlicher, je weiter diese von der Zahl x entfernt sind.
+            Die Sender wurden ausdrücklich darauf hingewiesen, dass sie bei jeder Aufgabe genau die Zahl, die sie sahen, angeben sollten, um ihre Chancen zu maximieren, die Zahl x richtig zu schätzen.
+        </p>
+        <p>
+            <b>Ihre Aufgabe lautet wie folgt:
+                Erraten Sie bei wie vielen der 10 Schätzaufgaben jeder der 6 Sender genau die Zahl, die er gesehen hat, angegeben hat. </b>
+            Wenn Sie sich während des Erratens die Angaben der Absender in allen 10 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie diese am unteren Rand des Bildschirms finden.
+        </p>
+        {{ endif }}
 <h4>
-    Payment
+    Auszahlung
 </h4>
-        If this part of the study (part 3) is chosen for payment, then 1 out of the 6 senders will be randomly chosen, and you will be paid according to the precision of your guess for that particular sender.
-        Since any of the guesses for the 6 senders can determine your payment, you should take each guess seriously.
-        The following rule will be used to determine your payment: You will receive a bonus of C Euros if you guess the exact number of times the sender has stated the same number as the estimation device assigned to him/her.
-        If your guess is wrong, you will receive 0 euros.
-        Thus, you should guess the correct number to earn the additional payment.
-        Any other number will bring you no payment.
-        If you have any questions, please raise your hand and an experimenter will come to you.
-        If you are ready to proceed, please press “next”.
+        <p>
+        Falls dieser Teil der Studie (Teil 4) für die Auszahlung ausgewählt werden sollte, <b>werden Sie entsprechend Ihrer Einschätzung zu der Genauigkeit eines zufällig bestimmten Senders bezahlt.</b>
+        Da jede ihrer Einschätzungen bezüglich der Genauigkeit der Sender über Ihre Bezahlung entscheiden kann, sollten Sie jede ihrer abgegebenen Einschätzungen ernst nehmen.
+            </p>
+        <p>
+            Die folgende Regel wird verwendet, um Ihre Auszahlung zu bestimmen:
+            <b>Falls ihre Einschätzung - wie oft ein Sender die jeweils erhaltene Schätzung des Schätzgeräts genau weitergegeben hat - der Wahrheit entspricht, erhalten Sie eine zusätzliche Auszahlung von 8 Euro.
+                Ist Ihre Einschätzung falsch, erhalten Sie 0 €. </b>
+            Sie sollten also die korrekte Anzahl erraten, um die Zusatzzahlung zu erhalten.
+            Eine Einschätzung, die nicht der Wahrheit entspricht, bringt Ihnen keine Auszahlung.
+        </p>
+        <br>
+        <br>
+        <p>
+            Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
+            Wenn Sie bereit sind, fortzufahren, drücken Sie bitte auf "Weiter".
+        </p>
 <br>
         <br>
    </div>

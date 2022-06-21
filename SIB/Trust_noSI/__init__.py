@@ -2,6 +2,8 @@ from otree.api import *
 import numpy as np
 import random
 
+import settings
+
 c = Currency
 
 doc = """
@@ -180,14 +182,20 @@ class ThirdWaitPage(WaitPage):
         return player.round_number == Constants.num_rounds
 
 
-
-
 class Instructions_Trust_in_Senders(Page):
 
     @staticmethod
     def is_displayed(player):
         return player.round_number == Constants.num_rounds and player.Role == "receiver"
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        CN_treatment = False
+        if "correlation" in player.session.config['name']:
+            CN_treatment = True
+        dict(
+            CN_treatment=CN_treatment
+        )
 
 class Trust_in_Senders(Page):
 
@@ -243,22 +251,22 @@ class Trust_in_Senders(Page):
     form_model = "player"
     form_fields = ["trust_sender_1", "trust_sender_2", "trust_sender_3", "trust_sender_4", "trust_sender_5", "trust_sender_6"]
 
-class Confidence_1_all10(Page):
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
-               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_3 + player.trust_sender_4 +\
-               player.trust_sender_5 + player.trust_sender_6 == 60
-
-
-class Confidence_1_notall10(Page):
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
-               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_3 + player.trust_sender_4 + \
-               player.trust_sender_5 + player.trust_sender_6 < 60
+# class Confidence_1_all10(Page):
+#
+#     @staticmethod
+#     def is_displayed(player):
+#         return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
+#                player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_3 + player.trust_sender_4 +\
+#                player.trust_sender_5 + player.trust_sender_6 == 60
+#
+#
+# class Confidence_1_notall10(Page):
+#
+#     @staticmethod
+#     def is_displayed(player):
+#         return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
+#                player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_3 + player.trust_sender_4 + \
+#                player.trust_sender_5 + player.trust_sender_6 < 60
 
 class Confidence_2(Page):
 
@@ -269,6 +277,9 @@ class Confidence_2(Page):
     @staticmethod
     def vars_for_template(player: Player):
         participant = player.participant
+        CN_treatment = False
+        if "correlation" in player.session.config['name']:
+            CN_treatment = True
         return dict(
             signals_round_1=participant.signals_all_rounds[0:6],
             signals_round_2=participant.signals_all_rounds[6:12],
@@ -292,8 +303,7 @@ class Confidence_2(Page):
             n_rec_signals_sender_4=10 - participant.signals_all_rounds[3:58:6].count('-'),
             n_rec_signals_sender_5=10 - participant.signals_all_rounds[4:59:6].count('-'),
             n_rec_signals_sender_6=10 - participant.signals_all_rounds[5:60:6].count('-'),
-
-
+            CN_treatment=CN_treatment
         )
 
     @staticmethod
@@ -329,6 +339,9 @@ class Confidence_3(Page):
     @staticmethod
     def vars_for_template(player: Player):
         participant = player.participant
+        CN_treatment = False
+        if "correlation" in player.session.config['name']:
+            CN_treatment = True
         return dict(
             trust_sender_1=player.trust_sender_1,
             trust_sender_2=player.trust_sender_2,
@@ -342,6 +355,7 @@ class Confidence_3(Page):
             mistrust_sender_4=10 - participant.signals_all_rounds[3:58:6].count('-') - player.trust_sender_4,
             mistrust_sender_5=10 - participant.signals_all_rounds[4:59:6].count('-') - player.trust_sender_5,
             mistrust_sender_6=10 - participant.signals_all_rounds[5:60:6].count('-') - player.trust_sender_6,
+            CN_treatment=CN_treatment
         )
 
 class Confidence_4(Page):
@@ -481,7 +495,6 @@ def payout_calc(subsession: Subsession):
             trust_sender = [p.trust_sender_1, p.trust_sender_2, p.trust_sender_3, p.trust_sender_4, p.trust_sender_5, p.trust_sender_6]
             signals_all_rounds = participant.signals_all_rounds
             estimates_all_rounds = participant.estimates_all_rounds
-            print(estimates_all_rounds)
             for i in list(range(0,10)): #Amount of rounds
                 for j in list(range(0, 6)): #Amount of senders
                     temp_signal = signals_all_rounds[i*6 + j]
@@ -587,5 +600,4 @@ def payout_calc(subsession: Subsession):
         participant.Trust_payoff = p.payoff
 
 
-page_sequence = [Instructions_Trust_in_Senders, Trust_in_Senders, Confidence_1_all10,
-                 Confidence_1_notall10, Confidence_2, Confidence_3, Confidence_4, ThirdWaitPage, Payout_calc]
+page_sequence = [Instructions_Trust_in_Senders, Trust_in_Senders, Confidence_2, Confidence_3, Confidence_4, ThirdWaitPage, Payout_calc]

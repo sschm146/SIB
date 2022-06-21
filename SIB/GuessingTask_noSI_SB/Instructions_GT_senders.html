@@ -61,40 +61,54 @@ p{
 
 <div class="card bg-light instructions">
     <div class="card-header bg-transparent mainheader" >
- <h3 class="card-title font-weight-bold"> Part 2 - Instructions
+ <h3 class="card-title font-weight-bold"> Teil 2.)
  </h3>
     </div>
     <div class="card-body">
 
-This part is composed of 10 separate estimation tasks. In each task, you will estimate an unknown number x, and you will be paid according to the precision of your estimates as described below.
-<br>
-        <br>
+        Dieser Teil besteht aus 10 separaten Schätzaufgaben.
+        Bei jeder Aufgabe <b>müssen Sie eine unbekannte Zahl x schätzen. Sie werden nach der Genauigkeit Ihrer Schätzung bezahlt</b> (wie unten beschrieben).
+
+<br><br>
+
 <h4>
-   Estimation Task
+   Schätzaufgaben
 </h4>
-        In each of the 10 tasks, you will need to estimate a new number x.
-        While all 10 estimation tasks have the same structure, they are fully independent from each other.
-        This means that the numbers are not in any way connected across the tasks.
-        You will never be informed of the exact number x.
-        Instead, you will receive computer-generated information which will help you estimate x.
-        For each task, you will see this information and then report your own estimate of x.
-        We explain the computer-generated information and how it will be presented to you in the following.
-        An algorithm will simulate devices which are also solving the same task as you.
-        We will call these devices “estimation devices”.
-        For each task, 5000 estimation devices will make their estimate of x.
-        These estimation devices are independent from each other and their estimates are all of the same quality.
-        The estimation devices are good at solving their task and have the following properties:<br>
+        <p>
+            Bei jeder der 10 Aufgaben wird vom Computer eine neue Zahl x festgelegt.
+            Alle 10 Schätzaufgaben haben zwar die gleiche Struktur, sind aber völlig unabhängig voneinander.
+            Das bedeutet, dass die Zahlen in den einzelnen Aufgaben in keiner Weise miteinander verbunden sind.
+        </p>
+        <p>
+            Sie werden nie mit Sicherheit wissen, was die genaue Zahl x ist.
+            Stattdessen werden Sie Informationen, die von einem Computer generiert werden, erhalten.
+            Diese helfen Ihnen, x zu schätzen.
+            Bei jeder Aufgabe werden Sie diese Informationen erhalten und werden dann Ihre eigene Schätzung von x angeben.
+            Im Folgenden wird Ihnen erklärt, wie die informationen generiert werden und welche davon Sie erhalten werden.
+        </p>
+        <p>
+            Der Computer simuliert Geräte, die die gleiche Aufgabe lösen wie Sie.
+        Wir werden diese Geräte "Schätzgeräte" nennen.
+        Für jede Aufgabe machen 10000 Schätzgeräte ihre Schätzung der Zahl x.
+        Die Geräte sind gut darin, diese Schätzungen zu machen.
+        Sie sind unabhängig voneinander und haben alle die gleiche Qualität, d. h., sie sind gleich gut in der Schätzung der Zahl x.
+        Die Geräte haben die folgenden Eigenschaften:
+        </p>
+<br>
         <ul>
-            <li>The estimate of a randomly drawn estimation device is more likely to be the correct number x than any other number.</li>
-            <li>The further away one goes from the number x, the less likely it is that an estimating device will state that number.
-                Numbers which are larger or smaller than x by 10 will never be stated.</li>
-            <li>The average of the 5000 estimates corresponds exactly (or almost exactly) to number x, which means that the estimation devices are on average correct.</li>
+            <li>Die Schätzung eines zufällig ausgewählten Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der tatsächlichen Zahl x als jede andere Zahl.</li>
+            <li>Je weiter man sich von der Zahl x entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.
+                Die Wahrscheinlichkeit, dass ein Schätzgerät eine Schätzung angibt, die um 10 größer oder kleiner ist als die Zahl x, ist sehr gering.</li>
+            <li>Der Durchschnitt der 10000 Schätzungen entspricht genau (oder fast genau) der Zahl x.
+                Das bedeutet, dass die Schätzgeräte im Durchschnitt richtig liegen.</li>
         </ul>
         <br>
         <br>
-        Consider the following example.
-        Imagine that the computer has drawn 280 as the actual number x.
-        The following figure shows an example how often the 5000 estimation devices would give which estimate.
+        <p>
+        Betrachten Sie bitte das folgende Beispiel.
+        Stellen Sie sich vor, der Computer hat 280 als die tatsächliche Zahl x gezogen.
+        Die folgende Abbildung zeigt ein Beispiel für die 10000 Schätzgeräte und ihre Schätzungen.
+            </p>
         <br>
         <br>
         <div style="margin: auto; width: 80%; height: auto">
@@ -102,74 +116,56 @@ This part is composed of 10 separate estimation tasks. In each task, you will es
             </div>
         <br>
         <br>
-        As you can see, the estimate with the highest frequency is exactly 280, and the frequency decreases when going further away from 280.
-        Thus, it is more likely that the estimate of a randomly drawn estimation device corresponds to the correct number x than any other number.
-        Moreover, the further one moves away from 280, the less likely it is that the number is stated as the estimate, and numbers larger than 290 and smaller than 270 are never stated.
-        Finally, the average of all 5000 estimates is exactly 280.
+        <p>
+        Wie Sie sehen können, bilden die Schätzungen eine typische Glockenkurve.
+        Die häufigste Schätzung ist genau 280.
+        Es ist also wahrscheinlicher, dass die Schätzung eines zufällig gezogenen Schätzgerätes der tatsächlichen Zahl x entspricht als jede andere Zahl.
+        Je weiter man sich von 280 entfernt, desto unwahrscheinlicher ist es, dass eine solche Schätzung von einem Schätzgerät angegeben wird, und Schätzungen größer als 290 und kleiner als 270 werden fast nie angegeben.
+        Der Durchschnitt aller 10000 Schätzungen, der durch die blaue gestrichelte Linie dargestellt wird, beträgt 280.
+        Der Durchschnitt ist also korrekt, d. h. er entspricht der Zahl x.
+            </p>
         <br>
         <br>
-        To help you estimate the number x, the following procedure will be implemented.
-        For each estimation task, one estimation device will be randomly drawn.
-        You will observe the estimate of that estimation device.
-        This means that for your own estimate, you will rely on the estimate of a single estimation device.
-        To use the information from the estimation device in a best way, remember that the estimate of a randomly drawn estimation device is more likely to be the correct number x than any other number.
-        Hence, in order to maximize your chances of correctly estimating x, you should report exactly the number stated by the estimation device for each estimation task.
+        <p>
+            Um Ihnen bei der Schätzung der Zahl x zu helfen, wird das folgende Verfahren angewendet.
+            Bei jeder Schätzaufgabe wird ein Schätzgerät zufällig gezogen.
+            Sie werden die Schätzung dieses Schätzgeräts beobachten.
+            Das bedeutet, dass Sie sich für Ihre eigene Schätzung nur auf die Schätzung eines einzigen Schätzgeräts verlassen werden.
+            Um die Informationen des Schätzgeräts bestmöglich zu nutzen, sollten Sie bedenken, dass die Schätzung eines zufällig ausgewählten Schätzgeräters mit größerer Wahrscheinlichkeit der tatsächlichen Zahl x entspricht als jeder andere Zahl.
+            <b>Um Ihre Chancen auf eine korrekte Schätzung der Zahl x zu maximieren, sollten Sie daher bei jeder Schätzaufgabe genau die vom Schätzgerät angegebene Zahl angeben.</b>
+        </p>
         <br>
         <br>
-        <h4>
-        Payment
-        </h4>
-        If this part of the study (part 2) is chosen for payment, then 1 of the 10 estimation tasks will be randomly chosen, and you will be paid according to the precision of your estimate in that task.
-        Since any task can determine your payment, you should take each task seriously.
-        <br>
-        The following rule will be used to determine your payment:
-        The closer your estimate is to the number x, the higher the probability that you receive the bonus of Z Euros.
-        <br>
-        If your estimate is exactly equal to number x, you will get Z Euros for sure.
-        The further away your estimate is from number x, the smaller the probability that you receive Z Euros.
-        The payment rule is designed so that you can secure the largest chance of getting Z Euros by reporting your most accurate estimation of x.
-        Below you can find a description of the technical details of the payment rule.
-        <br>
-        <br>
-        The computer will draw a random number y between 0 and 100. Each number between 0 and 100 is equally likely to be drawn.
-        You will receive Z euros if the quadratic distance between your estimate and the actual number is smaller or equal than y.
-        Otherwise, you will receive 0 euros.
-        This is the exact formula for the calculation of your payoff:
-        <br>
-         <ul>
-          <li>Your payoff = Y, if (x - estimate)&#178; &#8924;y </li>
-          <li>Your payoff = 0, if (x - estimate)&#178; &#62;y </li>
-      </ul>
-
-        Consider the following examples.
-        Suppose the actual number x is 150 and a randomly drawn number y is 50.
-        If your estimate is 130, the quadratic distance is (130-150)2= 400, which is larger than 50.
-        This means you would earn 0 euros.
-        If you estimate 145, the quadratic distance is (145-150)2= 25, which is smaller than 50.
-        This means you would earn Z euros.
-        If you estimate 155, the quadratic distance is (155-150)2= 25, which is larger than 50.
-        This means you would earn Z euros.
-        If you estimate 165, the quadratic distance is (165-150)2= 225 which is larger than 50.
-        This means you would earn 0 euros.
-        Notice that your chances of winning depend on the absolute distance from the actual number Z, so there is no difference if you underestimate or overestimate.
-        The important thing is that your estimate is close enough to the actual number x.
-        The closer it is, the higher your chances are of winning Z euros.
+        <h4>Auszahlung</h4>
+        Wenn dieser Teil der Studie (Teil 2) für die Bezahlung ausgewählt wird, wird eine der 10 Schätzaufgaben zufällig ausgewählt und <b>Sie werden entsprechend der Genauigkeit Ihrer Schätzung bei dieser Aufgabe bezahlt.</b>
+        Da jede Aufgabe für ihre Auszahlung ausgewählt werden kann, sollten Sie jede Aufgabe sorgfältig bearbeiten.
+        Ihre Auszahlung wird durch der folgenden Regel bestimmt werden:
+        <b>Je näher Ihre Schätzung an der Zahl x liegt, desto höher ist die Wahrscheinlichkeit, dass Sie eine zusätzliche Auszahlung von 13 € erhalten.
+            Wenn Ihre Schätzung genau der Zahl x entspricht, werden Sie auf jeden Fall 13 € erhalten. </b>
+        Die Regel ist so gestaltet, dass Sie sich die größte Chance auf die 13 € sichern können, indem Sie Ihre genaueste Schätzung angeben.
+        Falls Sie an den Einzelheiten der Regel interessiert sind, beschreiben wir sie im Folgenden:
+        Der Computer zieht zufällig eine Zahl zwischen 0 und 50.
+        Wenn der quadratische Abstand zwischen Ihrer Schätzung und der Zahl x gleich oder kleiner als diese zufällig gezogene Zahl ist, erhalten Sie 13€. Ist er größer,
+        erhalten Sie 0 €. Beachten Sie, dass Ihre Gewinnchancen vom quadratischen Abstand zur tatsächlichen Zahl x abhängen.
+        Es macht also keinen Unterschied, ob Sie die Zahl x unter- oder überschätzen.
+        Auch wenn diese Regel kompliziert erscheinen mag, ist das zugrunde liegende Prinzip sehr einfach:
+        Je präziser Ihre Schätzung ist (d. h. je geringer der Abstand zwischen Ihrer Schätzung und der Zahl x), desto höher ist die Wahrscheinlichkeit, dass Sie die 13 € erhalten.
         <br>
         <br>
-       <h4> A summation of the instructions:</h4>
+       <h4>Zusammengefasst:</h4>
         <ul>
-            <li>In this part you have to estimate an unknown number x in 10 different tasks that are fully independent from each other.</li>
-            <li>In each task, you will observe an average estimate of two randomly drawn estimation devices.</li>
-            <li>You will be paid according to the precision of your estimates.</li>
+            <li>In diesem Teil werden Sie 10 unabhängige Schätzaufgaben lösen. Bei jeder Aufgabe müssen Sie eine unbekannte Zahl x schätzen.</li>
+            <li>In jeder Aufgabe werden Sie eine Schätzung eines zufällig gezogenen Schätzgeräts beobachten.</li>
+            <li>Sie werden nach der Genauigkeit Ihrer Schätzungen bezahlt.</li>
         </ul>
         <br>
         <br>
-        In case of any questions, please raise your hand and an experimenter will come to you.
-        If you have understood the instructions and are ready to proceed, please click “Next”.
+        Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
+        Wenn Sie die Anweisungen verstanden haben und bereit sind, fortzufahren, klicken Sie bitte auf "Weiter".
         <br>
   </div>
 </div>
-<button onclick="topFunction()" id="tab1_next"  type="button" class="nexttab btn-primary btn next">Next</button>
+<button onclick="topFunction()" id="tab1_next" type="button" class="nexttab btn-primary btn next">Next</button>
  </div>
 
 
@@ -178,52 +174,40 @@ This part is composed of 10 separate estimation tasks. In each task, you will es
 
 <div class="card bg-light instructions">
     <div class="card-header bg-transparent mainheader" >
- <h3 class="card-title font-weight-bold"> Part 2 - Comprehension Questions
+ <h3 class="card-title font-weight-bold"> Teil 2.)
  </h3>
         </div>
     <div class="card-body">
 
 <br>
     <div class="alert alert-primary" role="alert">
- <strong> Before proceeding with the task, we would ask you to please answer the following control questions.
-     In case you have any questions, please raise your hand and an experimenter will come to you.
- Please press the "Back"-button at the bottom of this page to go back to the Instructions.</strong>
+ <strong> Bevor Sie mit der Aufgabe fortfahren, bitten wir Sie, die folgenden Verständnisfragen zu beantworten.
+     Sollten Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.</strong>
 </div>
 <p style="font-weight: bold">
-    1.) Please indicate which statement is true.</p>
+    1.) Bitte geben Sie an, welche dieser Aussagen zutrifft.</p>
 {{ formfield 'comprq1' }}
 <br><hr>
         <p style="font-weight: bold">
-    2.) Please indicate which statement is true.</p>
+    2.) Bitte geben Sie an, welche dieser Aussagen zutrifft.</p>
 {{ formfield 'comprq2' }}
 <br><hr>
         <p style="font-weight: bold">
-    3.) For each estimation task, what information will you observe to help you make an estimate of the number x?</p>
+    3.) Welche Informationen erhalten Sie bei jeder Schätzaufgabe, um die Zahl x zu schätzen?</p>
 {{ formfield 'comprq3' }}
 <br><hr>
         <p style="font-weight: bold">
-    4.) Let’s assume that in one estimation task, number x is 541. Which of the following statements can be true?</p>
-{{ formfield 'comprq4' }}
-<br><hr>
-        <p style="font-weight: bold">
-    5.) Let’s say that in one estimation task, the estimation device you observe states an estimate of 19.
+    5.) Nehmen wir an, dass das von Ihnen beobachtete Schätzgerät bei einer Schätzaufgabe eine Schätzung von 19 angibt.
+            Welche Zahl sollten Sie angesichts dieser Information angeben, um Ihre Chancen auf die zusätzliche Zahlung von 13 € zu maximieren?
         Given this information, which number should you state to maximize your chances of earning the additional payment of Z euros?</p>
 {{ formfield 'comprq5' }}
 <br><hr>
-<p style="font-weight: bold">
-    6.) The experiment consists of altogether 4 parts.
-    You can earn additional payment in part 1 and part 2.
-    The 10 estimation tasks are part 2 of the experiment.
-    Please indicate which statement concerning the payment procedure is correct.</p>
-{{ formfield 'comprq6' }}
-<br><hr>
 </div>
     </div>
-  <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
+  <button onclick="topFunction()"  type="button" class="prevtab btn-primary btn back">Back</button>
 <button class="nexttab btn-primary btn next">Next</button>
   </div>
 </div>
-
 
 <script>
 

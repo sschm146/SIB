@@ -1,6 +1,14 @@
 {% load otree %}
 {{block styles }}
-    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+   <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+<style type="text/css">
+
+
+.otree-timer {
+    background-color: transparent;
+    border: none;
+}
+</style>
 {{ endblock }}
 {% block content %}
 <div class="card bg-light instructions">
@@ -16,9 +24,8 @@
 <br>
 <br>
 
-        Auf dieser Seite sehen Sie die erhaltene Schätzung von Sender 1.
-        Bitte lesen Sie alle erhaltenen Schätzungen.
-        Geben Sie anschließend Ihre eigene Schätzung zum tatsächlichen Wert der Zahl x ab.
+        Auf dieser Seite sehen Sie die Schätzung von Sender 1.
+        Bitte geben Sie nun Ihre eigene Schätzung zum Wert der Zahl <i>x</i> an und bestätigen Sie mit "Weiter".
 
 <br>
 <br>

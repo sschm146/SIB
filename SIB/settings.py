@@ -9,11 +9,11 @@ from os import environ
 
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=5.00, doc="",
-    SIM_payoff=2, #Payoff for winning the Klee/Kandinsky contest in SIM
-    GT_sender_payoff=0.5, #Payoff for precision of sent signal (QSR)
-    GT_receiver_payoff=0.5, #Payoff for precision of submitted estimate (QSR)
-    Trust_payoff_1=0.5, #Payoff for receivers based on TiS
-    Trust_payoff_2=0.5, #Payoff for receivers based on Confidence_2
+    SIM_payoff=16, #Payoff for winning the Klee/Kandinsky contest in SIM
+    GT_sender_payoff=13, #Payoff for precision of sent signal (QSR)
+    GT_receiver_payoff=13, #Payoff for precision of submitted estimate (QSR)
+    Trust_payoff_1=8, #Payoff for receivers based on TiS
+    Trust_payoff_2=3, #Payoff for receivers based on Confidence_2
     True_state=[531, 233, 4495, 6713, 6635, 7114, 1823, 2892, 200, 2353],
     Signals=[[538, 244, 4506, 6706, 6644, 7102, 1813, 2883, 203, 2362],
              [539, 241, 4505, 6704, 6643, 7106, 1817, 2884, 204, 2343],
@@ -24,7 +24,8 @@ SESSION_CONFIG_DEFAULTS = dict(
              [541, 247, 4492, 6703, 6626, 7104, 1815, 2899, 193, 2351]],
     signal_order_1=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     signal_order_2=[9, 0, 7, 1, 8, 2, 6, 4, 5, 3],
-    signal_order_3=[8, 7, 9, 3, 6, 4, 5, 2, 0, 1]
+    signal_order_3=[8, 7, 9, 3, 6, 4, 5, 2, 0, 1],
+    timeout_guess=240
 )
 
 SESSION_CONFIGS = [

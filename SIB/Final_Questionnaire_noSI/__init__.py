@@ -10,9 +10,9 @@ Final Questionnaire
 class Constants(BaseConstants):
     name_in_url = 'Final_Questionnaire_noSI'
     players_per_group = None
-    num_rounds = 10  # Short version with 10 imtes and 5 minutes
-    solution = [5, 2, 4, 4, 7, 1, 6, 3, 2, 5]  # Short version with 10 items and 5 minutes
-    IQ_time = 300
+    num_rounds = 8  # Short version with 8 imtes and 4 minutes
+    solution = [4, 4, 7, 1, 6, 3, 2, 5]  # Short version with 8 items and 4 minutes
+    IQ_time = 240
     use_timeout = True
 
 class Subsession(BaseSubsession):
@@ -52,7 +52,8 @@ class Player(BasePlayer):
             [3, "1,5-1,9"],
             [2, "1,0-1,5"],
             [1, "Weiß ich nicht mehr."],
-            [0, "Ich habe kein Abitur."]])
+            [0, "Ich habe kein Abitur."]],
+        label="", )
 
 
 
@@ -71,7 +72,7 @@ class Final_noSI(Page):
 
     @staticmethod
     def is_displayed(player):
-        return player.round_number == 10
+        return player.round_number == 8
 
     form_model = 'player'
     form_fields = ["all_clear", "comments"]
@@ -94,7 +95,7 @@ class Task(Page):
 
     @staticmethod
     def input_field_max(player):
-        if player.round_number < 5:
+        if player.round_number < 3:
             return 6
         else:
             return 8
@@ -119,9 +120,9 @@ class Abitur(Page):
 
     @staticmethod
     def is_displayed(player):
-        return player.round_number == 10
+        return player.round_number == 8
 
     form_model = 'player'
     form_fields = ["Abitur"]
 
-page_sequence = [SiSi_noSI, IQ_Instructions, Task, Final_noSI, Abitur]
+page_sequence = [SiSi_noSI, IQ_Instructions, Task, Abitur, Final_noSI]

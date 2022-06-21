@@ -79,10 +79,26 @@ class Instructions_sender(Page):
     def is_displayed(player):
             return player.Role == "sender" or player.Role == "prior_sender"
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        participant = player.participant
+        identity = participant.identity
+        return dict(
+            identity=identity
+        )
+
 class Instructions_receiver(Page):
     @staticmethod
     def is_displayed(player):
         return player.Role == "receiver"
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        participant = player.participant
+        identity = participant.identity
+        return dict(
+            identity=identity
+        )
 
 
 
