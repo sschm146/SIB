@@ -13,11 +13,12 @@ color: white;
 {{ endblock }}
 {{ block content }}
 <div class="card bg-light instructions">
+        <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 4.) - Frage 1
+ </h3>
+        </div>
     <div class="card-body">
-    <h3>
-        Teil 4.) - Frage 1
-    </h3>
-<br>
+
 <br>
 
         Bitte geben Sie an, bei wie vielen der 10 Schätzaufgaben jeder der 6 Sender die genaue Zahl angegeben hat, die er/sie gesehen hat.
@@ -33,7 +34,7 @@ color: white;
     Sender A
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_1' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_1}}</i> Beobachtete Schätzungen </li>
+    <li class="list-group-item">{{ formfield 'trust_sender_1' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_1}}</i> beobachteten Schätzungen </li>
   </ul>
 </div>
     </div>
@@ -44,7 +45,7 @@ color: white;
     Sender B
   </div>
   <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{ formfield 'trust_sender_2' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_2}}</i> Beobachtete Schätzungen </li>
+      <li class="list-group-item">{{ formfield 'trust_sender_2' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_2}}</i> beobachteten Schätzungen </li>
   </ul>
 </div>
     </div>
@@ -55,7 +56,7 @@ color: white;
     Sender C
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_3' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_3}}</i> Beobachtete Schätzungen </li>
+    <li class="list-group-item">{{ formfield 'trust_sender_3' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_3}}</i> beobachteten Schätzungen </li>
   </ul>
 </div>
     </div>
@@ -66,7 +67,7 @@ color: white;
     Sender D
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_4' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_4}}</i> Beobachtete Schätzungen </li>
+    <li class="list-group-item">{{ formfield 'trust_sender_4' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_4}}</i> beobachteten Schätzungen </li>
   </ul>
 </div>
     </div>
@@ -76,7 +77,7 @@ color: white;
     Sender E
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_5' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_5}}</i> Beobachtete Schätzungen </li>
+    <li class="list-group-item">{{ formfield 'trust_sender_5' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_5}}</i> beobachteten Schätzungen </li>
   </ul>
 </div>
     </div>
@@ -86,15 +87,14 @@ color: white;
     Sender F
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_6' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_6}}</i> Beobachtete Schätzungen </li>
+    <li class="list-group-item">{{ formfield 'trust_sender_6' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_6}}</i> beobachteten Schätzungen </li>
   </ul>
 </div>
     </div>
 </div>
 
 <br>
-<br>
-<br>
+
 
         Wenn Sie mit der Beantwortung von Frage 1 fertig sind, drücken Sie bitte auf "Weiter".
         Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
@@ -190,5 +190,17 @@ color: white;
   </tbody>
 </table>
     </div></div>
-
+<script>
+     window.onload = function setInitials() {
+         if (js_vars.n_rec_signals_sender_4 === 0) {
+             document.querySelector('[name=trust_sender_4]').value = 0
+         }
+         if (js_vars.n_rec_signals_sender_5 === 0) {
+             document.querySelector('[name=trust_sender_5]').value = 0
+         }
+         if (js_vars.n_rec_signals_sender_6 === 0) {
+             document.querySelector('[name=trust_sender_6]').value = 0
+         }
+     }
+</script>
 {{ endblock}}

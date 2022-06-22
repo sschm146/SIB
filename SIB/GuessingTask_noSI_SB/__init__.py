@@ -190,9 +190,9 @@ class Player(BasePlayer):
     )
     q13 = models.IntegerField(
         choices=[[1, "Ich habe schon immer gewusst, wie man haushaltet."],
-                 [2, "Ich musste während meines Studiums lernen, mit dem Geld umzugehen.."],
-                 [3, "Ich habe Mühe, das lebensnotwendige Dinge zu kaufen"],
-                 [4, "Ich kann mir alles leisten, aber ich haushalte nicht."]],
+                 [2, "Ich musste während meines Studiums lernen, mit Geld umzugehen."],
+                 [3, "Ich habe Mühe, lebensnotwendige Dinge zu kaufen"],
+                 [4, "Ich kann mir alles leisten, ich haushalte nicht."]],
         widget=widgets.RadioSelect, label=''
     )
     q14 = models.IntegerField(
@@ -202,7 +202,7 @@ class Player(BasePlayer):
                  [4, "Andere Prioritäten wie Shopping und Nachtleben haben Vorrang"],
                  [5, "Ich habe keine Schwierigkeiten"],
                  [6, "Ich bin gut im Haushalten"],
-                 [7, "Ich wei? es nicht"]],
+                 [7, "Ich weiß es nicht"]],
         widget=widgets.RadioSelect, label=''
     )
     q15 = models.StringField(label='')
@@ -280,7 +280,7 @@ class Signals(Page):
     def before_next_page(player, timeout_happened):
         diff = pow((Constants.true_state[int(player.round_number) - 1] - player.sent_signal), 2)
         if diff <= player.subsession.x:
-            player.payoff = player.session.config['GT_receiver_payoff']
+            player.payoff = player.session.config['GT_sender_payoff']
         else:
             player.payoff = 0
 
@@ -391,9 +391,11 @@ def set_signals(subsession: Subsession):
 
         for p in players:
             if p.Role == "receiver":
-                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'], p.session.config['signal_order_3']]
-                p.signal_order = random.choice(range(len(orders)))
-                signal_order = orders[p.signal_order]
+                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'],
+                          p.session.config['signal_order_3']]
+                temp = [1, 2, 3] * 100
+                p.signal_order = temp[p.id_in_group - 1]
+                signal_order = orders[p.signal_order - 1]
                 for i in list(range(0, 10, 1)):
                     fut_player = p.in_round(Constants.num_rounds/2 + i + 1)
                     fut_player.signal_order = p.signal_order
@@ -438,12 +440,18 @@ class Guess(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
+        if player.SB_sender_4 == '4':
+            sender_4 = "D"
+        if player.SB_sender_4 == '5':
+            sender_4 = "E"
+        if player.SB_sender_4 == '6':
+            sender_4 = "F"
         return dict(
                 signal_1=player.SB_received_signal_1,
                 signal_2=player.SB_received_signal_2,
                 signal_3=player.SB_received_signal_3,
                 signal_4=player.SB_received_signal_4,
-                sender_4=player.SB_sender_4,
+                sender_4=sender_4,
                 round=player.round_number-10
             )
 

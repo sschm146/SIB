@@ -1,6 +1,17 @@
 {% load otree %}
 {{block styles }}
     <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+<style type="text/css">
+#fadeIn {
+            animation-name: fade;
+            animation-duration: 4s;
+        }
+        @keyframes fade{
+            0% {background-color: cyan;border-radius: 5px;}
+            50% {background-color: #58FAAC;border-radius: 5px;}
+            100% {background-color: transparent}
+        }
+</style>
 {{ endblock }}
 {% block content %}
 <div class="card bg-light instructions">
@@ -9,7 +20,7 @@
  </h3>
         </div>
     <div class="card-body">
-<h3 style="text-align: center"> Schätzaufgabe {{ round }} von 10</h3>
+<h3 style="text-align: center"> Schätzaufgabe <b id="fadeIn">{{ round }} von 10</b></h3>
 <br>
 <br>
         <div style="text-align: center"> Unten finden Sie die Schätzung Ihres zufällig zugewiesenen Schätzgerätes.</div>

@@ -42,7 +42,13 @@ def creating_session(subsession: Subsession):
 
 # PAGES
 class Instructions_all(Page):
-    pass
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        part_fee = player.session.config['participation_fee']
+        return dict(
+            part_fee=part_fee
+        )
 
 class Instructions_sender(Page):
     @staticmethod

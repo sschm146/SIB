@@ -186,9 +186,9 @@ class Player(BasePlayer):
         )
     q13 =  models.IntegerField(
         choices=[[1, "Ich habe schon immer gewusst, wie man haushaltet."],
-                 [2, "Ich musste während meines Studiums lernen, mit dem Geld umzugehen.."],
-                 [3, "Ich habe Mühe, das lebensnotwendige Dinge zu kaufen"],
-                 [4, "Ich kann mir alles leisten, aber ich haushalte nicht."]],
+                 [2, "Ich musste während meines Studiums lernen, mit Geld umzugehen."],
+                 [3, "Ich habe Mühe, lebensnotwendige Dinge zu kaufen"],
+                 [4, "Ich kann mir alles leisten, ich haushalte nicht."]],
         widget=widgets.RadioSelect, label=''
         )
     q14 = models.IntegerField(
@@ -198,7 +198,7 @@ class Player(BasePlayer):
                  [4, "Andere Prioritäten wie Shopping und Nachtleben haben Vorrang"],
                  [5, "Ich habe keine Schwierigkeiten"],
                  [6, "Ich bin gut im Haushalten"],
-                 [7, "Ich wei? es nicht"]],
+                 [7, "Ich weiß es nicht"]],
         widget=widgets.RadioSelect, label=''
         )
     q15 = models.StringField(label='')
@@ -332,22 +332,15 @@ class Instructions_GT_receivers(Page):
 
 
     form_model = "player"
-    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq11", "comprq12", "comprq13"]
+    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq12", "comprq13"]
 
-    @staticmethod
-    def vars_for_template(player: Player):
-       participant = player.participant
-       identity = participant.identity
-       return dict(
-            identity=identity,
-        )
 
     @staticmethod
     def error_message(player, values):
         solutions = dict(
             comprq7=1,
             comprq8=3,
-            comprq9=2,
+            comprq9=3,
             comprq10=2,
             comprq12=3,
             comprq13=4,
@@ -393,8 +386,9 @@ def set_signals(subsession: Subsession):
         for p in players:
             if p.Role == "receiver":
                 orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'], p.session.config['signal_order_3']]
-                p.signal_order = random.choice(range(len(orders)))
-                signal_order = orders[p.signal_order]
+                temp = [1, 2, 3]*100
+                p.signal_order = temp[p.id_in_group - 1]
+                signal_order = orders[p.signal_order - 1]
                 for i in list(range(0, 10, 1)):
                     fut_player = p.in_round(Constants.num_rounds/2 + i + 1)
                     fut_player.signal_order = p.signal_order

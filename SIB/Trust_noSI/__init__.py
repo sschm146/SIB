@@ -193,7 +193,7 @@ class Instructions_Trust_in_Senders(Page):
         CN_treatment = False
         if "correlation" in player.session.config['name']:
             CN_treatment = True
-        dict(
+        return dict(
             CN_treatment=CN_treatment
         )
 
@@ -343,33 +343,6 @@ class Confidence_3(Page):
         if "correlation" in player.session.config['name']:
             CN_treatment = True
         return dict(
-            trust_sender_1=player.trust_sender_1,
-            trust_sender_2=player.trust_sender_2,
-            trust_sender_3=player.trust_sender_3,
-            trust_sender_4=player.trust_sender_4,
-            trust_sender_5=player.trust_sender_5,
-            trust_sender_6=player.trust_sender_6,
-            mistrust_sender_1=10 - participant.signals_all_rounds[0:56:6].count('-') - player.trust_sender_1,
-            mistrust_sender_2=10 - participant.signals_all_rounds[1:56:6].count('-') - player.trust_sender_2,
-            mistrust_sender_3=10 - participant.signals_all_rounds[2:57:6].count('-') - player.trust_sender_3,
-            mistrust_sender_4=10 - participant.signals_all_rounds[3:58:6].count('-') - player.trust_sender_4,
-            mistrust_sender_5=10 - participant.signals_all_rounds[4:59:6].count('-') - player.trust_sender_5,
-            mistrust_sender_6=10 - participant.signals_all_rounds[5:60:6].count('-') - player.trust_sender_6,
-            CN_treatment=CN_treatment
-        )
-
-class Confidence_4(Page):
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
-               player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_3 + player.trust_sender_4 + \
-               player.trust_sender_5 + player.trust_sender_6 < 60
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        participant = player.participant
-        return dict(
             signals_round_1=participant.signals_all_rounds[0:6],
             signals_round_2=participant.signals_all_rounds[6:12],
             signals_round_3=participant.signals_all_rounds[12:18],
@@ -392,6 +365,7 @@ class Confidence_4(Page):
             mistrust_sender_4=10 - participant.signals_all_rounds[3:58:6].count('-') - player.trust_sender_4,
             mistrust_sender_5=10 - participant.signals_all_rounds[4:59:6].count('-') - player.trust_sender_5,
             mistrust_sender_6=10 - participant.signals_all_rounds[5:60:6].count('-') - player.trust_sender_6,
+            CN_treatment=CN_treatment
         )
 
     @staticmethod
@@ -424,6 +398,7 @@ class Confidence_4(Page):
             censored_signals_sender_5=censored_signals_sender_5,
             censored_signals_sender_6=censored_signals_sender_6
         )
+
     form_model = "player"
     form_fields = ["sender_1_correction_1_inround", "sender_1_correction_2_inround", "sender_1_correction_3_inround",
                    "sender_1_correction_4_inround", "sender_1_correction_5_inround",
@@ -475,6 +450,124 @@ class Confidence_4(Page):
                    "sender_6_correction_9_actually", "sender_6_correction_10_actually",
                    ]
 
+#
+# class Confidence_4(Page):
+#
+#     @staticmethod
+#     def is_displayed(player):
+#         return player.round_number == Constants.num_rounds and player.Role == "receiver" and \
+#                player.trust_sender_1 + player.trust_sender_2 + player.trust_sender_3 + player.trust_sender_4 + \
+#                player.trust_sender_5 + player.trust_sender_6 < 60
+#
+#     @staticmethod
+#     def vars_for_template(player: Player):
+#         participant = player.participant
+#         return dict(
+#             signals_round_1=participant.signals_all_rounds[0:6],
+#             signals_round_2=participant.signals_all_rounds[6:12],
+#             signals_round_3=participant.signals_all_rounds[12:18],
+#             signals_round_4=participant.signals_all_rounds[18:24],
+#             signals_round_5=participant.signals_all_rounds[24:30],
+#             signals_round_6=participant.signals_all_rounds[30:36],
+#             signals_round_7=participant.signals_all_rounds[36:42],
+#             signals_round_8=participant.signals_all_rounds[42:48],
+#             signals_round_9=participant.signals_all_rounds[48:54],
+#             signals_round_10=participant.signals_all_rounds[54:60],
+#             trust_sender_1=player.trust_sender_1,
+#             trust_sender_2=player.trust_sender_2,
+#             trust_sender_3=player.trust_sender_3,
+#             trust_sender_4=player.trust_sender_4,
+#             trust_sender_5=player.trust_sender_5,
+#             trust_sender_6=player.trust_sender_6,
+#             mistrust_sender_1=10 - participant.signals_all_rounds[0:56:6].count('-') - player.trust_sender_1,
+#             mistrust_sender_2=10 - participant.signals_all_rounds[1:56:6].count('-') - player.trust_sender_2,
+#             mistrust_sender_3=10 - participant.signals_all_rounds[2:57:6].count('-') - player.trust_sender_3,
+#             mistrust_sender_4=10 - participant.signals_all_rounds[3:58:6].count('-') - player.trust_sender_4,
+#             mistrust_sender_5=10 - participant.signals_all_rounds[4:59:6].count('-') - player.trust_sender_5,
+#             mistrust_sender_6=10 - participant.signals_all_rounds[5:60:6].count('-') - player.trust_sender_6,
+#         )
+#
+#     @staticmethod
+#     def js_vars(player: Player):
+#         participant = player.participant
+#         rec_signals_sender_4 = participant.signals_all_rounds[3:34:6]
+#         censored_signals_sender_4 = []
+#         for i in range(len(rec_signals_sender_4)):
+#             if rec_signals_sender_4[i] == '-':
+#                 censored_signals_sender_4.append(i)
+#         rec_signals_sender_5 = participant.signals_all_rounds[4:35:6]
+#         censored_signals_sender_5 = []
+#         for i in range(len(rec_signals_sender_5)):
+#             if rec_signals_sender_5[i] == '-':
+#                 censored_signals_sender_5.append(i)
+#         rec_signals_sender_6 = participant.signals_all_rounds[5:36:6]
+#         censored_signals_sender_6 = []
+#         for i in range(len(rec_signals_sender_6)):
+#             if rec_signals_sender_6[i] == '-':
+#                 censored_signals_sender_6.append(i)
+#         return dict(
+#             mistrust_sender_1=10 - participant.signals_all_rounds[0:56:6].count('-') - player.trust_sender_1,
+#             mistrust_sender_2=10 - participant.signals_all_rounds[1:56:6].count('-') - player.trust_sender_2,
+#             mistrust_sender_3=10 - participant.signals_all_rounds[2:57:6].count('-') - player.trust_sender_3,
+#             mistrust_sender_4=10 - participant.signals_all_rounds[3:58:6].count('-') - player.trust_sender_4,
+#             mistrust_sender_5=10 - participant.signals_all_rounds[4:59:6].count('-') - player.trust_sender_5,
+#             mistrust_sender_6=10 - participant.signals_all_rounds[5:60:6].count('-') - player.trust_sender_6,
+#             num_senders=Constants.num_senders,
+#             censored_signals_sender_4=censored_signals_sender_4,
+#             censored_signals_sender_5=censored_signals_sender_5,
+#             censored_signals_sender_6=censored_signals_sender_6
+#         )
+#     form_model = "player"
+#     form_fields = ["sender_1_correction_1_inround", "sender_1_correction_2_inround", "sender_1_correction_3_inround",
+#                    "sender_1_correction_4_inround", "sender_1_correction_5_inround",
+#                    "sender_1_correction_6_inround", "sender_1_correction_7_inround", "sender_1_correction_8_inround",
+#                    "sender_1_correction_9_inround", "sender_1_correction_10_inround",
+#                    "sender_1_correction_1_actually", "sender_1_correction_2_actually", "sender_1_correction_3_actually",
+#                    "sender_1_correction_4_actually", "sender_1_correction_5_actually",
+#                    "sender_1_correction_6_actually", "sender_1_correction_7_actually", "sender_1_correction_8_actually",
+#                    "sender_1_correction_9_actually", "sender_1_correction_10_actually",
+#                    "sender_2_correction_1_inround", "sender_2_correction_2_inround", "sender_2_correction_3_inround",
+#                    "sender_2_correction_4_inround", "sender_2_correction_5_inround",
+#                    "sender_2_correction_6_inround", "sender_2_correction_7_inround", "sender_2_correction_8_inround",
+#                    "sender_2_correction_9_inround", "sender_2_correction_10_inround",
+#                    "sender_2_correction_1_actually", "sender_2_correction_2_actually", "sender_2_correction_3_actually",
+#                    "sender_2_correction_4_actually", "sender_2_correction_5_actually",
+#                    "sender_2_correction_6_actually", "sender_2_correction_7_actually", "sender_2_correction_8_actually",
+#                    "sender_2_correction_9_actually", "sender_2_correction_10_actually",
+#                    "sender_3_correction_1_inround", "sender_3_correction_2_inround", "sender_3_correction_3_inround",
+#                    "sender_3_correction_4_inround", "sender_3_correction_5_inround",
+#                    "sender_3_correction_6_inround", "sender_3_correction_7_inround", "sender_3_correction_8_inround",
+#                    "sender_3_correction_9_inround", "sender_3_correction_10_inround",
+#                    "sender_3_correction_1_actually", "sender_3_correction_2_actually", "sender_3_correction_3_actually",
+#                    "sender_3_correction_4_actually", "sender_3_correction_5_actually",
+#                    "sender_3_correction_6_actually", "sender_3_correction_7_actually", "sender_3_correction_8_actually",
+#                    "sender_3_correction_9_actually", "sender_3_correction_10_actually",
+#                    "sender_4_correction_1_inround", "sender_4_correction_2_inround", "sender_4_correction_3_inround",
+#                    "sender_4_correction_4_inround", "sender_4_correction_5_inround",
+#                    "sender_4_correction_6_inround", "sender_4_correction_7_inround", "sender_4_correction_8_inround",
+#                    "sender_4_correction_9_inround", "sender_4_correction_10_inround",
+#                    "sender_4_correction_1_actually", "sender_4_correction_2_actually", "sender_4_correction_3_actually",
+#                    "sender_4_correction_4_actually", "sender_4_correction_5_actually",
+#                    "sender_4_correction_6_actually", "sender_4_correction_7_actually", "sender_4_correction_8_actually",
+#                    "sender_4_correction_9_actually", "sender_4_correction_10_actually",
+#                    "sender_5_correction_1_inround", "sender_5_correction_2_inround", "sender_5_correction_3_inround",
+#                    "sender_5_correction_4_inround", "sender_5_correction_5_inround",
+#                    "sender_5_correction_6_inround", "sender_5_correction_7_inround", "sender_5_correction_8_inround",
+#                    "sender_5_correction_9_inround", "sender_5_correction_10_inround",
+#                    "sender_5_correction_1_actually", "sender_5_correction_2_actually", "sender_5_correction_3_actually",
+#                    "sender_5_correction_4_actually", "sender_5_correction_5_actually",
+#                    "sender_5_correction_6_actually", "sender_5_correction_7_actually", "sender_5_correction_8_actually",
+#                    "sender_5_correction_9_actually", "sender_5_correction_10_actually",
+#                    "sender_6_correction_1_inround", "sender_6_correction_2_inround", "sender_6_correction_3_inround",
+#                    "sender_6_correction_4_inround", "sender_6_correction_5_inround",
+#                    "sender_6_correction_6_inround", "sender_6_correction_7_inround", "sender_6_correction_8_inround",
+#                    "sender_6_correction_9_inround", "sender_6_correction_10_inround",
+#                    "sender_6_correction_1_actually", "sender_6_correction_2_actually", "sender_6_correction_3_actually",
+#                    "sender_6_correction_4_actually", "sender_6_correction_5_actually",
+#                    "sender_6_correction_6_actually", "sender_6_correction_7_actually", "sender_6_correction_8_actually",
+#                    "sender_6_correction_9_actually", "sender_6_correction_10_actually",
+#                    ]
+#
 
 class Payout_calc(WaitPage):
     wait_for_all_groups = True
@@ -600,4 +693,4 @@ def payout_calc(subsession: Subsession):
         participant.Trust_payoff = p.payoff
 
 
-page_sequence = [Instructions_Trust_in_Senders, Trust_in_Senders, Confidence_2, Confidence_3, Confidence_4, ThirdWaitPage, Payout_calc]
+page_sequence = [Instructions_Trust_in_Senders, Trust_in_Senders, Confidence_2, Confidence_3, ThirdWaitPage, Payout_calc]

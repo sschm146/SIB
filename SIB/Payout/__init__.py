@@ -24,6 +24,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    all_clear = models.LongStringField(blank=True, label='')
+    comments = models.LongStringField(blank=True, label='')
     payoff_urn = models.StringField()
     payoff_ball = models.IntegerField()
 
@@ -45,12 +47,18 @@ def payout_calc(subsession: Subsession):
             p.payoff_urn = str(payoff_urn)
             p.payoff_ball = random.choice([0, 1, 2])
             p.payoff = payoff_urn[p.payoff_ball] + p.session.config['participation_fee']
-        if participant.Role == 'sender':
+        if participant.Role == 'sender' or participant.Role == 'prior_sender':
             payoff_urn = [SIM_payoff, GuessingTask_payoff]
             p.payoff_urn = str(payoff_urn)
             p.payoff_ball = random.choice([0, 1])
             p.payoff = payoff_urn[p.payoff_ball] + p.session.config['participation_fee']
 
+
+
+class Final_Q(Page):
+
+    form_model = 'player'
+    form_fields = ["all_clear", "comments"]
 
 class Payout(Page):
     @staticmethod
@@ -59,7 +67,7 @@ class Payout(Page):
         SIM_payoff = participant.SIM_payoff
         GuessingTask_payoff = participant.GuessingTask_payoff
 
-        if participant.Role == 'sender':
+        if participant.Role == 'sender' or participant.Role == 'prior_sender':
             return dict(
                 part_fee=player.session.config['participation_fee'],
                 SIM_payoff=SIM_payoff,
@@ -77,8 +85,8 @@ class Payout(Page):
                 total_payoff=player.payoff,
                 payoff_ball=player.payoff_ball
             )
-        print(player.problem)
 
 
 
-page_sequence = [Payout_calc, Payout]
+
+page_sequence = [Payout_calc, Final_Q, Payout]

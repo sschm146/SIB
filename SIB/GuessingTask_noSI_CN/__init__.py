@@ -205,9 +205,9 @@ class Player(BasePlayer):
     )
     q13 = models.IntegerField(
         choices=[[1, "Ich habe schon immer gewusst, wie man haushaltet."],
-                 [2, "Ich musste während meines Studiums lernen, mit dem Geld umzugehen.."],
-                 [3, "Ich habe Mühe, das lebensnotwendige Dinge zu kaufen"],
-                 [4, "Ich kann mir alles leisten, aber ich haushalte nicht."]],
+                 [2, "Ich musste während meines Studiums lernen, mit Geld umzugehen."],
+                 [3, "Ich habe Mühe, lebensnotwendige Dinge zu kaufen"],
+                 [4, "Ich kann mir alles leisten, ich haushalte nicht."]],
         widget=widgets.RadioSelect, label=''
     )
     q14 = models.IntegerField(
@@ -217,7 +217,7 @@ class Player(BasePlayer):
                  [4, "Andere Prioritäten wie Shopping und Nachtleben haben Vorrang"],
                  [5, "Ich habe keine Schwierigkeiten"],
                  [6, "Ich bin gut im Haushalten"],
-                 [7, "Ich wei? es nicht"]],
+                 [7, "Ich weiß es nicht"]],
         widget=widgets.RadioSelect, label=''
     )
     q15 = models.StringField(label='')
@@ -294,7 +294,7 @@ class Signals(Page):
     def before_next_page(player, timeout_happened):
         diff = pow((Constants.true_state[int(player.round_number) - 1] - player.sent_signal), 2)
         if diff <= player.subsession.x:
-            player.payoff = player.session.config['GT_receiver_payoff']
+            player.payoff = player.session.config['GT_sender_payoff']
         else:
             player.payoff = 0
 
@@ -353,8 +353,8 @@ class Instructions_GT_senders_noCN(Page):
         return player.Role == "sender" and player.round_number == 1 and (
                     player.id_in_group not in [Constants.num_senders, Constants.num_senders - 1])
 
-
-    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5",]
+    form_model = "player"
+    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5"]
 
     @staticmethod
     def error_message(player, values):
@@ -388,7 +388,7 @@ class Instructions_GT_receivers(Page):
     def error_message(player, values):
         solutions = dict(
             comprq7=3,
-            comprq8=2,
+            comprq8=3,
             comprq9=3,
             comprq10=3,
             comprq11=2,
@@ -434,9 +434,11 @@ def set_signals(subsession: Subsession):
                 all = np.delete(all, 0, 0)
         for p in players:
             if p.Role == "receiver":
-                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'], p.session.config['signal_order_3']]
-                p.signal_order = random.choice(range(len(orders)))
-                signal_order = orders[p.signal_order]
+                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'],
+                          p.session.config['signal_order_3']]
+                temp = [1, 2, 3] * 100
+                p.signal_order = temp[p.id_in_group - 1]
+                signal_order = orders[p.signal_order - 1]
                 for i in list(range(0, 10, 1)):
                     fut_player = p.in_round(Constants.num_rounds/2 + i + 1)
                     fut_player.signal_order = p.signal_order

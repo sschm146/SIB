@@ -8,23 +8,23 @@ from os import environ
 
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=1.00, participation_fee=5.00, doc="",
+    real_world_currency_per_point=1.00, participation_fee=7.00, doc="",
     SIM_payoff=16, #Payoff for winning the Klee/Kandinsky contest in SIM
     GT_sender_payoff=13, #Payoff for precision of sent signal (QSR)
     GT_receiver_payoff=13, #Payoff for precision of submitted estimate (QSR)
     Trust_payoff_1=8, #Payoff for receivers based on TiS
-    Trust_payoff_2=3, #Payoff for receivers based on Confidence_2
-    True_state=[531, 233, 4495, 6713, 6635, 7114, 1823, 2892, 200, 2353],
-    Signals=[[538, 244, 4506, 6706, 6644, 7102, 1813, 2883, 203, 2362],
-             [539, 241, 4505, 6704, 6643, 7106, 1817, 2884, 204, 2343],
-             [532, 234, 4503, 6713, 6641, 7107, 1818, 2889, 188, 2342],
-             [534, 235, 4490, 6712, 6639, 7126, 1821, 2890, 200, 2346],
-             [524, 229, 4504, 6724, 6625, 7120, 1831, 2802, 198, 2348],
-             [520, 221, 4498, 6722, 6631, 7108, 1833, 2898, 196, 2349],
-             [541, 247, 4492, 6703, 6626, 7104, 1815, 2899, 193, 2351]],
-    signal_order_1=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    signal_order_2=[9, 0, 7, 1, 8, 2, 6, 4, 5, 3],
-    signal_order_3=[8, 7, 9, 3, 6, 4, 5, 2, 0, 1],
+    Trust_payoff_2=2, #Payoff for receivers based on Confidence_2
+    True_state=[531, 233, 4495, 6713, 69, 7114, 1823, 2892, 1200, 4353],
+    Signals=[[538, 244, 4506, 6706, 75, 7102, 1813, 2883, 1203, 4362],
+             [539, 241, 4505, 6704, 72, 7106, 1817, 2884, 1204, 4343],
+             [532, 234, 4503, 6713, 79, 7107, 1818, 2889, 1188, 4342],
+             [534, 235, 4490, 6712, 61, 7126, 1821, 2890, 1200, 4346],
+             [524, 229, 4504, 6724, 69, 7120, 1831, 2802, 1198, 4348],
+             [520, 221, 4498, 6722, 73, 7108, 1833, 2898, 1196, 4349],
+             [541, 247, 4492, 6703, 77, 7104, 1815, 2899, 1193, 4351]],
+    signal_order_1=[0,1,8,2,3,4,5,9,6,7],
+    signal_order_2=[6,7,9,4,2,5,4,1,8,0],
+    signal_order_3=[3,2,4,9,5,1,8,7,0,6],
     timeout_guess=240
 )
 
@@ -33,56 +33,56 @@ SESSION_CONFIGS = [
         name="control",
         display_name="SIB_control",
         num_demo_participants=10,
-        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI", "BigFive", "Trust_noSI", "Final_Questionnaire_noSI", "MU", "Payout"],
+        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI", "BigFive", "Trust_noSI", "Final_Questionnaire", "MU", "Payout"],
         prior_sender=False,
     ),
     dict(
         name="SI",
         display_name="SIB_SI",
         num_demo_participants=10,
-        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI", "BigFive", "Trust_SI", "Final_Questionnaire_SI", "MU",  "Payout"],
+        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI", "BigFive", "Trust_SI", "Final_Questionnaire", "MU",  "Payout"],
         prior_sender=False,
     ),
     dict(
         name="control_confirmation",
         display_name="SIB_control_CB",
         num_demo_participants=10,
-        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_CB", "BigFive","Trust_noSI",  "Final_Questionnaire_noSI", "MU", "Payout"],
+        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_CB", "BigFive","Trust_noSI",  "Final_Questionnaire", "MU", "Payout"],
         prior_sender=True,
     ),
     dict(
         name="SI_confirmation",
         display_name="SIB_SI_CB",
         num_demo_participants=10,
-        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_CB", "BigFive","Trust_SI", "Final_Questionnaire_SI", "MU", "Payout"],
+        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_CB", "BigFive","Trust_SI", "Final_Questionnaire", "MU", "Payout"],
         prior_sender=True,
     ),
     dict(
         name="control_selection",
         display_name="SIB_control_SB",
         num_demo_participants=10,
-        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_SB", "BigFive","Trust_noSI", "Final_Questionnaire_noSI", "MU", "Payout"],
+        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_SB", "BigFive","Trust_noSI", "Final_Questionnaire", "MU", "Payout"],
         prior_sender=False,
     ),
     dict(
         name="SI_selection",
         display_name="SIB_SI_SB",
         num_demo_participants=10,
-        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_SB","BigFive", "Trust_SI", "Final_Questionnaire_SI", "MU", "Payout"],
+        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_SB","BigFive", "Trust_SI", "Final_Questionnaire", "MU", "Payout"],
         prior_sender=False,
     ),
     dict(
         name="control_correlation",
         display_name="SIB_control_CN",
         num_demo_participants=10,
-        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_CN","BigFive", "Trust_noSI", "Final_Questionnaire_noSI", "MU", "Payout"],
+        app_sequence=["Intro_noSI_all", "SIM_noSI", "GuessingTask_noSI_CN","BigFive", "Trust_noSI", "Final_Questionnaire", "MU", "Payout"],
         prior_sender=False,
     ),
     dict(
         name="SI_correlation",
         display_name="SIB_SI_CN",
         num_demo_participants=10,
-        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_CN", "BigFive","Trust_SI", "Final_Questionnaire_SI", "MU", "Payout"],
+        app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_CN", "BigFive","Trust_SI", "Final_Questionnaire", "MU", "Payout"],
         prior_sender=False,
     ),
 dict(

@@ -16,12 +16,12 @@ class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
-    altruism_domestic = models.IntegerField(min=0, max=Constants.endowment)
-    altruism_foreign = models.IntegerField(min=0, max=Constants.endowment)
-    altruism_global = models.IntegerField(min=0, max=Constants.endowment)
-    trust_domestic = models.IntegerField(min=0, max=Constants.endowment)
-    trust_foreign = models.IntegerField(min=0, max=Constants.endowment)
-    trust_global = models.IntegerField(min=0, max=Constants.endowment)
+    altruism_domestic = models.IntegerField(min=0, max=Constants.endowment, blank=True)
+    altruism_foreign = models.IntegerField(min=0, max=Constants.endowment, blank=True)
+    altruism_global = models.IntegerField(min=0, max=Constants.endowment, blank=True)
+    trust_domestic = models.IntegerField(min=0, max=Constants.endowment, blank=True)
+    trust_foreign = models.IntegerField(min=0, max=Constants.endowment, blank=True)
+    trust_global = models.IntegerField(min=0, max=Constants.endowment, blank=True)
 
 
 # FUNCTIONS
@@ -57,6 +57,12 @@ class Altruism_domestic(Page):
 
         return player.round_number == participant.task_rounds['Altruism']
 
+    @staticmethod
+    def error_message(player, values):
+        if values['altruism_domestic'] is None:
+            error_message = 'Bitte klicken Sie auf den grauen Balken und treffen Sie eine Auswahl über den Schieberegler.'
+            return error_message
+
     form_model = 'player'
     form_fields = ['altruism_domestic']
 
@@ -68,6 +74,12 @@ class Altruism_foreign(Page):
         participant = player.participant
 
         return player.round_number == participant.task_rounds['Altruism']
+
+    @staticmethod
+    def error_message(player, values):
+        if values['altruism_foreign'] is None:
+            error_message = 'Bitte klicken Sie auf den grauen Balken und treffen Sie eine Auswahl über den Schieberegler.'
+            return error_message
 
     form_model = 'player'
     form_fields = ['altruism_foreign']
@@ -81,6 +93,12 @@ class Altruism_global(Page):
 
         return player.round_number == participant.task_rounds['Altruism']
 
+    @staticmethod
+    def error_message(player, values):
+        if values['altruism_global'] is None:
+            error_message = 'Bitte klicken Sie auf den grauen Balken und treffen Sie eine Auswahl über den Schieberegler.'
+            return error_message
+
     form_model = 'player'
     form_fields = ['altruism_global']
 
@@ -92,6 +110,12 @@ class Trust_domestic(Page):
         participant = player.participant
 
         return player.round_number == participant.task_rounds['Trust']
+
+    @staticmethod
+    def error_message(player, values):
+        if values['trust_domestic'] is None:
+            error_message = 'Bitte klicken Sie auf den grauen Balken und treffen Sie eine Auswahl über den Schieberegler.'
+            return error_message
 
     form_model = 'player'
     form_fields = ['trust_domestic']
@@ -105,6 +129,12 @@ class Trust_foreign(Page):
 
         return player.round_number == participant.task_rounds['Trust']
 
+    @staticmethod
+    def error_message(player, values):
+        if values['trust_foreign'] is None:
+            error_message = 'Bitte klicken Sie auf den grauen Balken und treffen Sie eine Auswahl über den Schieberegler.'
+            return error_message
+
     form_model = 'player'
     form_fields = ['trust_foreign']
 
@@ -116,6 +146,12 @@ class Trust_global(Page):
         participant = player.participant
 
         return player.round_number == participant.task_rounds['Trust']
+
+    @staticmethod
+    def error_message(player, values):
+        if values['trust_global'] is None:
+            error_message = 'Bitte klicken Sie auf den grauen Balken und treffen Sie eine Auswahl über den Schieberegler.'
+            return error_message
 
     form_model = 'player'
     form_fields = ['trust_global']

@@ -1,0 +1,56 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+ <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 5.)
+ </h3>
+        </div>
+    <div class="card-body">
+        {{ if SI == False}}
+        In Teil 5.) bitten wir Sie, mehrere kurze Fragebögen und Aufgaben zu bearbeiten. Bitte füllen Sie diese aus.
+        <br><br>
+        <strong>Bitte lesen Sie folgende Aussage und geben Sie an, inwiefern Sie dieser Aussage zustimmen/nicht zustimmen: <br> <br><div align="center" style="font-style: italic">
+            "Ich identifiziere mich mit den anderen anwesenden TeilnehmerInnen der heutigen Studie."</div> </strong>
+                <table class="table">
+        <tr>
+            <br>
+            <div  style="text-align: center">
+            <strong>Stimme gar nicht zu&nbsp;&nbsp;
+    {{ for choice in form.sisi }}
+        {{ choice }}&nbsp;&nbsp;&nbsp;&nbsp;
+    {{ endfor }}
+    &nbsp;&nbsp;Stimme voll zu</strong></div>
+
+                </table>
+        <br> <hr><br>
+        {{ endif }}
+
+
+        {{ if SI == True }}
+        <strong>Bitte lesen Sie folgende Aussage und geben Sie an, inwiefern Sie dieser Aussage zustimmen/nicht zustimmen: <br> <br><div align="center" style="font-style: italic">
+            "Ich identifiziere mich mit meiner Gruppe '{{ identity }}'"</div> </strong>
+                <table class="table">
+        <tr>
+            <br>
+            <div  style="text-align: center">
+            <strong>Stimme gar nicht zu&nbsp;&nbsp;
+    {{ for choice in form.sisi }}
+        {{ choice }}&nbsp;&nbsp;&nbsp;&nbsp;
+    {{ endfor }}
+    &nbsp;&nbsp;Stimme voll zu</strong></div>
+
+                </table>
+        <br> <hr><br>
+        {{ endif }}
+
+        <strong>Wenn Sie die Frage beantwortet haben, drücken Sie bitte auf "Weiter".</strong>
+   </div>
+</div>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{% endblock %}

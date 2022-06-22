@@ -8,6 +8,15 @@
     background-color: transparent;
     border: none;
 }
+#fadeIn {
+            animation-name: fade;
+            animation-duration: 4s;
+        }
+        @keyframes fade{
+            0% {background-color: cyan;border-radius: 5px;}
+            50% {background-color: #58FAAC;border-radius: 5px;}
+            100% {background-color: transparent}
+        }
 </style>
 {{ endblock }}
 {% block content %}
@@ -18,14 +27,13 @@
         </div>
     <div class="card-body">
 
-<h3 style="text-align: center"> Schätzaufgabe {{ round }} von 10</h3>
+<h3 style="text-align: center"> Schätzaufgabe <b id="fadeIn">{{ round }} von 10</b></h3>
 <br>
 <br>
 <br>
 <br>
 
-         Auf dieser Seite sehen Sie die Schätzung von Sender 1.
-        Bitte geben Sie nun Ihre eigene Schätzung zum Wert der Zahl <i>x</i> an und bestätigen Sie mit "Weiter".
+        <div align="center">Auf dieser Seite sehen Sie die Schätzung von Sender 1.</div>
 
 
 <br>

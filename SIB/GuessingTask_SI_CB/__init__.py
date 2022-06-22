@@ -214,9 +214,9 @@ class Player(BasePlayer):
     )
     q13 = models.IntegerField(
         choices=[[1, "Ich habe schon immer gewusst, wie man haushaltet."],
-                 [2, "Ich musste während meines Studiums lernen, mit dem Geld umzugehen.."],
-                 [3, "Ich habe Mühe, das lebensnotwendige Dinge zu kaufen"],
-                 [4, "Ich kann mir alles leisten, aber ich haushalte nicht."]],
+                 [2, "Ich musste während meines Studiums lernen, mit Geld umzugehen."],
+                 [3, "Ich habe Mühe, lebensnotwendige Dinge zu kaufen"],
+                 [4, "Ich kann mir alles leisten, ich haushalte nicht."]],
         widget=widgets.RadioSelect, label=''
     )
     q14 = models.IntegerField(
@@ -226,7 +226,7 @@ class Player(BasePlayer):
                  [4, "Andere Prioritäten wie Shopping und Nachtleben haben Vorrang"],
                  [5, "Ich habe keine Schwierigkeiten"],
                  [6, "Ich bin gut im Haushalten"],
-                 [7, "Ich wei? es nicht"]],
+                 [7, "Ich weiß es nicht"]],
         widget=widgets.RadioSelect, label=''
     )
     q15 = models.StringField(label='')
@@ -302,7 +302,7 @@ class Signals(Page):
     def before_next_page(player, timeout_happened):
         diff = pow((Constants.true_state[int(player.round_number) - 1] - player.sent_signal), 2)
         if diff <= player.subsession.x:
-            player.payoff = player.session.config['GT_receiver_payoff']
+            player.payoff = player.session.config['GT_sender_payoff']
         else:
             player.payoff = 0
 
@@ -330,7 +330,8 @@ class Instructions_GT_senders(Page):
     def is_displayed(player):
         return (player.Role == "sender" or player.Role =="prior_sender") and player.round_number == 1
 
-    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5",]
+    form_model = "player"
+    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5"]
 
     @staticmethod
     def error_message(player, values):
@@ -357,7 +358,7 @@ class Instructions_GT_receivers(Page):
         return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
 
     form_model = "player"
-    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq11", "comprq12", "comprq13", "comprq14", "comprq15"]
+    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq11", "comprq13", "comprq14"]
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -370,15 +371,13 @@ class Instructions_GT_receivers(Page):
     @staticmethod
     def error_message(player, values):
         solutions = dict(
-            comprq7=3,
-            comprq8=4,
-            comprq9=3,
-            comprq10=1,
-            comprq11=3,
-            comprq12=2,
-            comprq13=2,
-            comprq14=3,
-            comprq15=2,
+            comprq7=2,
+            comprq8=3,
+            comprq9=1,
+            comprq10=3,
+            comprq11=2,
+            comprq13=3,
+            comprq14=4,
         )
 
         error_messages = dict()
@@ -404,7 +403,7 @@ def set_signals(subsession: Subsession):
     players = subsession.get_players()
 
     if subsession.round_number == Constants.num_rounds / 2:
-        all = [0,0,0,0,0,0]
+        all = [0,0,0,0,0,0,0]
         for i in list(range(1, 11, 1)):
             all_signals = []
             all_senders = []
@@ -413,16 +412,20 @@ def set_signals(subsession: Subsession):
                 prev_players = prev_player.group.get_players()
                 all_signals = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' or prev.Role == 'prior_sender']
                 all_senders = [prev.id_in_group for prev in prev_players if prev.Role == 'sender' or prev.Role == 'prior_sender']
+                all_identities = [prev.identity for prev in prev_players if prev.Role == 'sender' or prev.Role == 'prior_sender']
             all = np.vstack([all, all_signals])
             all = np.vstack([all, all_senders])
+            all = np.vstack([all, all_identities])
             if i == 1:
                 all = np.delete(all, 0, 0)
 
         for p in players:
             if p.Role == "receiver":
-                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'], p.session.config['signal_order_3']]
-                p.signal_order = random.choice(range(len(orders)))
-                signal_order = orders[p.signal_order]
+                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'],
+                          p.session.config['signal_order_3']]
+                temp = [1, 2, 3] * 100
+                p.signal_order = temp[p.id_in_group - 2]
+                signal_order = orders[p.signal_order - 1]
                 for i in list(range(0, 10, 1)):
                     fut_player = p.in_round(Constants.num_rounds/2 + i + 1)
                     fut_player.signal_order = p.signal_order
@@ -445,7 +448,7 @@ class Prior(Page):
     def vars_for_template(player: Player):
         return dict(
             prior_estimate=player.received_signal_0,
-            round=player.round_number
+            round=player.round_number - 10
         )
 
     form_model = "player"

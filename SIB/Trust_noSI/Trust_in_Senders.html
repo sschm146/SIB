@@ -25,7 +25,7 @@
     Sender A
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_1' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_1}}</i> Beobachtete Schätzungen </li>
+    <li class="list-group-item">{{ formfield 'trust_sender_1' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_1}}</i> beobachteten Schätzungen </li>
   </ul>
 </div>
     </div>
@@ -36,7 +36,7 @@
     Sender B
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_2' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_2}}</i> Beobachtete Schätzungen </li>
+    <li class="list-group-item">{{ formfield 'trust_sender_2' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_2}}</i> beobachteten Schätzungen </li>
   </ul>
 </div>
     </div>
@@ -47,7 +47,7 @@
     Sender C
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_3' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_3}}</i> Beobachtete Schätzungen </li>
+    <li class="list-group-item">{{ formfield 'trust_sender_3' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_3}}</i> beobachteten Schätzungen </li>
   </ul>
 </div>
     </div>
@@ -58,7 +58,12 @@
     Sender D
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_4' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_4}}</i> Beobachtete Schätzungen </li>
+      {{ if n_rec_signals_sender_4 > 0 }}
+    <li class="list-group-item">{{ formfield 'trust_sender_4' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_4}}</i> beobachteten Schätzungen </li>
+      {{ endif }}
+      {{ if n_rec_signals_sender_4 == 0 }}
+    <li class="list-group-item"> Keine Schätzungen beobachtet </li>
+      {{ endif }}
   </ul>
 </div>
     </div>
@@ -68,7 +73,12 @@
     Sender E
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_5' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_5}}</i> Beobachtete Schätzungen </li>
+    {{ if n_rec_signals_sender_5 > 0 }}
+    <li class="list-group-item">{{ formfield 'trust_sender_5' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_5}}</i> beobachteten Schätzungen </li>
+      {{ endif }}
+      {{ if n_rec_signals_sender_5 == 0 }}
+    <li class="list-group-item"> Keine Schätzungen beobachtet </li>
+      {{ endif }}
   </ul>
 </div>
     </div>
@@ -78,7 +88,12 @@
     Sender F
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ formfield 'trust_sender_6' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_6}}</i> Beobachtete Schätzungen </li>
+   {{ if n_rec_signals_sender_6 > 0 }}
+    <li class="list-group-item">{{ formfield 'trust_sender_6' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_6}}</i> beobachteten Schätzungen </li>
+      {{ endif }}
+      {{ if n_rec_signals_sender_6 == 0 }}
+    <li class="list-group-item"> Keine Schätzungen beobachtet </li>
+      {{ endif }}
   </ul>
 </div>
     </div>
@@ -182,4 +197,19 @@
   </tbody>
 </table>
     </div></div>
+
+<script>
+     window.onload = function setInitials() {
+         if (js_vars.n_rec_signals_sender_4 === 0) {
+             document.querySelector('[name=trust_sender_4]').value = 0
+         }
+         if (js_vars.n_rec_signals_sender_5 === 0) {
+             document.querySelector('[name=trust_sender_5]').value = 0
+         }
+         if (js_vars.n_rec_signals_sender_6 === 0) {
+             document.querySelector('[name=trust_sender_6]').value = 0
+         }
+
+     }
+</script>
 {% endblock %}

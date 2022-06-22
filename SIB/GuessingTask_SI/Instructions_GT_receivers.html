@@ -39,6 +39,21 @@ p{
 {% endblock %}
 {{ block content }}
 
+<!-- Tab navigation -->
+<ul class="nav nav-tabs fixed-top navbar-light bg-light justify-content-center " id="myTab" role="tablist">
+  <li class="nav-item" >
+    <a class="nav-link active" id="part1-tab" data-toggle="tab" href="#part1" role="tab" aria-controls="part1" onclick="topFunction()"> Tab 1
+</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="part2-tab" data-toggle="tab" href="#part2" role="tab" aria-controls="part2" onclick="topFunction()">Tab 2</a>
+  </li>
+
+</ul>
+<br>
+<br>
+
+
 <!-- Tab content -->
 <div class="tab-content" id="myTabContent">
 
@@ -46,10 +61,11 @@ p{
 
 <div class="card bg-light instructions">
     <div class="card-header bg-transparent mainheader" >
- <h3 class="card-title font-weight-bold"> Teil 3.)
+ <h3 class="card-title font-weight-bold"> Teil 2.)
  </h3>
-        </div>
+    </div>
     <div class="card-body">
+        <br>
 
         Dieser Teil besteht aus 10 separaten Schätzaufgaben.
         Bei jeder Aufgabe <b>müssen Sie eine unbekannte Zahl x schätzen und werden entsprechend der Genauigkeit Ihrer Schätzung bezahlt</b> (wie unten beschrieben).
@@ -91,9 +107,10 @@ p{
         Um zu verstehen, welche Informationen die 6 Sender erhalten haben, um die Zahl x zu schätzen, zeigen wir nun Ihnen ihre Instruktionen.
         Beachten Sie, dass alle 6 Sender die gleichen Anweisungen hatten.
 <br>
+        <br>
 <div class="card">
   <div class="card-header">
-      Instruktionen der Sender
+      <b>Instruktionen der Sender</b>
       </div>
   <div class="card-body">
         Bei jeder der 10 Aufgaben wird vom Computer eine neue Zahl x festgelegt.
@@ -120,18 +137,16 @@ p{
             <li>Der Durchschnitt der 10000 Schätzungen entspricht genau (oder fast genau) der Zahl x.
                 Das bedeutet, dass die Schätzgeräte im Durchschnitt richtig liegen.</li>
         </ul>
-        <br>
-        <br>
+
         Betrachten Sie bitte das folgende Beispiel.
       Stellen Sie sich vor, der Computer hat 280 als die tatsächliche Zahl x gezogen.
       Die folgende Abbildung zeigt ein Beispiel für die 10000 Schätzgeräte und ihre Schätzungen.
-        <br>
-        <br>
+<br>
+      <br>
         <div style="margin: auto; width: 80%; height: auto">
         <img src="{{ static 'Distr.png' }}" style="height: 100%; width:100%"/>
             </div>
-        <br>
-        <br>
+
         Wie Sie sehen können, bilden die Schätzungen eine typische Glockenkurve.
       Die häufigste Schätzung ist genau 280. Es ist also wahrscheinlicher, dass die Schätzung eines zufällig gezogenen Schätzgerätes der tatsächlichen Zahl x entspricht als jede andere Zahl. J
       e weiter man sich von 280 entfernt, desto unwahrscheinlicher ist es, dass eine solche Schätzung von einem Schätzgerät angegeben wird, und Schätzungen größer als 290 und kleiner als 270 werden fast nie angegeben.
@@ -147,7 +162,7 @@ p{
       </div>
 </div>
         <br>
-        <br>
+
         Wie Sie sehen können, war die Aufgabe der Sender ziemlich einfach, und sie hatten einen Anreiz, die Zahl x möglichst präzise zu schätzen.
         Je näher deren Schätzungen an der Zahl x lagen, desto höher waren deren Chancen auf eine zusätzliche Auszahlung.
         Beachten Sie auch, dass die Sender nicht darüber informiert wurden, dass ihre Schätzungen Ihnen oder anderen TeilnehmerInnen gezeigt werden würden.
@@ -167,11 +182,12 @@ p{
         Sender A schätzt daraufhin die Zahl x auf 823, Sender B schätzt diese auf 831, Sender C schätzt diese auf 825, Sender D schätzt diese auf 827, Sender E schätzt diese auf 836 und Sender F schätzt diese auf 835.
         In diesem Fall würden Sie das folgende Bild auf Ihrem Bildschirm sehen.
                 <br>
+        <br>
                 <div style="margin: auto; width: 80%; height: auto">
         <img src="{{ static 'control.png' }}" style="height: 100%; width:100%"/>
             </div>
         <br>
-        <br>
+
     <h4>
         Auszahlung
         </h4>
@@ -193,8 +209,8 @@ p{
         Dies ist die genaue Formel für die Berechnung Ihrer Auszahlung:
         <br>
          <ul>
-          <li>Ihre Auszahlung = Z, if (x - Schätzung)&#178; &#8924;y </li>
-          <li>Ihre Auszahlung =  0, if (x - Schätzung)&#178; &#62;y </li>
+          <li>Ihre Auszahlung = 13, if (x - Schätzung)&#178; &#8924;y </li>
+          <li>Ihre Auszahlung = 0, if (x - Schätzung)&#178; &#62;y </li>
       </ul>
 
         <p>Betrachten Sie die folgenden Beispiele.
@@ -208,13 +224,13 @@ p{
 <br><br>
         Ihre Schätzung 155: quadratischer Abstand ist (150-155)&#178;= 25 &#62; y &#8594; Sie verdienen 0€.</p>
         <br>
-        <br>
+
         Beachten Sie, dass Ihre Gewinnchancen vom quadratischen Abstand zur tatsächlichen Zahl x abhängen.
         Es macht also keinen Unterschied, ob Sie die Zahl x unter- oder überschätzen.
         Wichtig ist nur, dass Ihre Schätzung nahe genug an der tatsächlichen Zahl x liegt.
         Je präziser Sie die Zahl x schätzen, desto höher sind Ihre Gewinnchancen auf <b>13€.</b>
-        <br>
-        <br>
+
+
        <h4> Zusammenfassung:</h4>
         <ul>
             <li>In diesem Teil werden Sie 10 unabhängige Schätzaufgaben lösen.
@@ -225,7 +241,7 @@ p{
                 Die Sender A, B und C sind Mitglieder Ihrer Gruppe Blau, während die Sender D, E und F Mitglieder der Gruppe Gelb sind.
                 In Teil 1 des Experiments sind Sie und die Sender A, B, C gegen die Sender D, E und F angetreten.
             {{ endif }}
-            {{ if identity = "Gelb" }}
+            {{ if identity == "Gelb" }}
                 Die Sender D, E und F sind Mitglieder Ihrer Gruppe Gelb, während die Sender A, B und C Mitglieder der Gruppe Blau sind.
                 In Teil 1 des Experiments sind Sie und die Sender D, E, F gegen die Sender A, B und C angetreten.
             {{ endif }}</li>
@@ -239,15 +255,14 @@ p{
                     Das bedeutet, dass die Schätzgeräte im Durchschnitt richtig sind.</li>
             </ul></li>
         </ul>
-        <br>
-        <br>
+
        Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
         Wenn Sie bereit sind, drücken Sie bitte auf "Weiter".
         <br>
-    </div>
+   </div>
 </div>
-<button onclick="topFunction()"  type="button" id="tab1_next" class="nexttab btn-primary btn next">Next</button>
-  </div>
+<button onclick="topFunction()" id="tab1_next" type="button" class="nexttab btn-primary btn next">Weiter</button>
+ </div>
 
 
 
@@ -259,18 +274,19 @@ p{
  </h3>
         </div>
     <div class="card-body">
+
         <br>
     <div class="alert alert-primary" role="alert">
- <strong> Before proceeding with the task, we would ask you to please answer the following control questions.
-     In case you have any questions, please raise your hand and an experimenter will come to you.
- Please press the "Back"-button at the bottom of this page to go back to the Instructions.</strong>
+ <strong> Bevor Sie mit der Aufgabe fortfahren, bitten wir Sie, die folgenden Fragen zum Verständnis zu beantworten.
+     Falls Sie die Anweisungen zu Teil 2.) erneut lesen möchten, können Sie auf "Zurück" am Ende der Seite klicken.
+     Sollten Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird sich an Sie wenden.</strong>
 </div>
 <p style="font-weight: bold">
     1.) Welche Informationen haben die Sender bei jeder Schätzaufgabe erhalten, um die Zahl x zu schätzen?</p>
 {{ formfield 'comprq7' }}
 <br><hr>
         <p style="font-weight: bold">
-    2.) Welche Sender sind Mitglieder der Gruppe Blau {{ if identity = "Blau" }} (Ihrer Gruppe) {{ endif }} und welche sind Mitglieder der Gruppe Gelb {{ if identity = "Gelb" }} (Ihrer Gruppe) {{ endif }}?</p>
+    2.) Welche Sender sind Mitglieder der Gruppe Blau {{ if identity == "Blau" }} (Ihrer Gruppe) {{ endif }} und welche sind Mitglieder der Gruppe Gelb {{ if identity == "Gelb" }} (Ihrer Gruppe) {{ endif }}?</p>
 {{ formfield 'comprq8' }}
 <br><hr>
         <p style="font-weight: bold">
@@ -288,13 +304,14 @@ p{
 <br><hr>
         <p style="font-weight: bold">
     7.) Angenommen, in einer Schätzaufgabe ist die Zahl x gleich 1520, und Sie geben 1520 als Ihre Schätzung der Zahl x an.
-            Wie hoch sind Ihre Chancen, die zusätliche Auszahlung zu erhalten?</p>
+            Wie hoch sind Ihre Chancen, die zusätzliche Auzahlung  zu erhalten?</p>
 {{ formfield 'comprq13' }}
-<br><hr>
-    </div>
+
+
 </div>
-  <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
-<button class="nexttab btn-primary btn next">Next</button>
+    </div>
+  <button onclick="topFunction()"  type="button" class="prevtab btn-primary btn back">Zurück</button>
+<button class="nexttab btn-primary btn next">Weiter</button>
   </div>
 </div>
 

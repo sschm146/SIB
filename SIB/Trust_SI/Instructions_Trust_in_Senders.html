@@ -5,20 +5,20 @@
 {{ endblock }}
 {{ block content }}
 <div class="card bg-light instructions">
+        <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 4.) - Frage 1
+ </h3>
+        </div>
     <div class="card-body">
-    <h3>
-        Teil 4.)
-    </h3>
+
         In diesem Teil werden wir Ihnen einige Fragen zu den Sendern stellen.
         Sie werden die Instruktionen für jede Frage erhalten, nachdem Sie die vorherige Frage beantwortet haben.
 <br><br>
-<h4>
-    Frage 1
-</h4>
+
         Wie in Teil 3 beschrieben, mussten die Sender bei jeder der 10 Schätzaufgaben, die Sie ebenfalls bearbeitet haben, eine unbekannte Zahl x schätzen.
         Diese wurden nach der Genauigkeit ihrer Schätzungen bezahlt.<br>
         <br>
-        {{ if CN_treatment = False }}
+        {{ if CN_treatment == False }}
         <p>
             Bevor ein Sender bei jeder Schätzaufgabe seine Schätzung angegeben hat, hat er die Schätzung eines zufällig ausgewählten Schätzgeräts gesehen.
             Jedem Sender war bewusst, dass die erhaltene Schätzung eines Schätzgerätes mit größerer Wahrscheinlichkeit der tatsächlichen Zahl x entspricht als jeder andere Zahl.
@@ -29,7 +29,7 @@
             Erraten Sie bei wie vielen der 10 Schätzaufgaben jeder der 6 Sender genau die Zahl angegeben hat, die er zuvor gesehen hat. </b>
             Wenn Sie sich während des Erratens die Angaben der Absender in allen 10 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie diese am unteren Rand des Bildschirms finden.</p>
         {{ endif }}
-        {{ if CN_treatment = True }}
+        {{ if CN_treatment == True }}
         <p>
             Bevor ein Sender bei jeder Schätzaufgabe seine Schätzung angegeben hat, hat er die Schätzung eines zufällig ausgewählten Schätzgeräts gesehen (für Sender A, B, C und D) oder den Durchschnitt von zwei zufällig gezogenen Schätzgeräten (für Sender E und F).
             Jedem Sender war bewusst, dass die erhaltene Schätzung eines Schätzgerätes mit größerer Wahrscheinlichkeit der tatsächlichen Zahl x entspricht als jeder andere Zahl.
@@ -56,14 +56,12 @@
             Sie sollten also die korrekte Anzahl erraten, um die Zusatzzahlung zu erhalten.
             Eine Einschätzung, die nicht der Wahrheit entspricht, bringt Ihnen keine Auszahlung.
         </p>
-        <br>
-        <br>
+
         <p>
             Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
             Wenn Sie bereit sind, fortzufahren, drücken Sie bitte auf "Weiter".
         </p>
-<br>
-        <br>
+
    </div>
 </div>
 <div align="center">

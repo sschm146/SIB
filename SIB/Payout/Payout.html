@@ -2,25 +2,24 @@
 {{block styles }}
     <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
 {{ endblock }}
-{% block title %}
-    Auszahlungsseite
-{% endblock %}
-
 {% block content %}
 
 
  <div class="card bg-light instructions">
+      <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Auszahlungsseite
+ </h3>
+      </div>
     <div class="card-body">
- <h5>Die Studie ist nun beendet.
+ <p>Die Studie ist nun beendet.
      Vielen Dank für die Teilnahme an der heutigen Studie.
      Unten finden Sie die Berechnung Ihrer finalen Auszahlung.
      Bitte bleiben Sie noch einen Moment sitzen.
      Wenn Ihre Platznummer aufgerufen wird, gehen Sie bitte zum Ausgang.
-     Dort erhalten Sie Ihre Auszahlung.</h5>
-     <br><hr>
-        <br>
+     Dort erhalten Sie Ihre Auszahlung.</p>
+     <br>
         <h5>Ihre Auszahlung beträgt: <b>{{ total_payoff }}</b>.</h5>
-     <br><br>
+     <br>
 
         <u>Darin enthalten ist:</u>
         <br>
@@ -51,12 +50,12 @@
 
         </li>
         {{ if payoff_ball == 1 }}
-            Teil 2.) wurde für Ihre Auszahlung ausgewählt.
-        <li><u>Auszahlung aus Teil 2.):</u> <b> {{GuessingTask_payoff}}</b></li>
+            <li>Teil 2.) wurde für Ihre Auszahlung ausgewählt.
+        <u>Auszahlung aus Teil 2.):</u> <b> {{GuessingTask_payoff}}</b></li>
             {{ endif }}
         {{ if payoff_ball == 2 }}
-            Teil 4.) wurde für Ihre Auszahlung ausgewählt.
-        <li>Auszahlung aus Teil 4.):<b> {{Trust_payoff}}</b></li>
+            <li>Teil 4.) wurde für Ihre Auszahlung ausgewählt.
+        Auszahlung aus Teil 4.):<b> {{Trust_payoff}}</b></li>
             {{ endif }}
         </ul>
 

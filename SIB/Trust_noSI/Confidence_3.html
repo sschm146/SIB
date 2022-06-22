@@ -2,15 +2,66 @@
 
 {{block styles }}
     <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+<style type="text/css">
+.next {
+    float: right;
+    margin: 40px auto;
+    }
+
+ .back{
+    float: left;
+    margin: 40px auto;
+    }
+
+.page-header {
+    margin: 0px 0 5px;
+    padding: 0;
+    border-bottom: none;
+    text-align: center;
+}
+
+p{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.nav {
+    visibility: hidden;
+}
+</style>
 {{ endblock }}
+{% block scripts %}
+
+<script src="{% static 'prev_next_button.js' %}"></script>
+
+{% endblock %}
 {{ block content }}
+
+<!-- Tab navigation -->
+
+<ul class="nav nav-tabs fixed-top navbar-light bg-light justify-content-center " id="myTab" role="tablist">
+  <li class="nav-item" >
+    <a class="nav-link active" id="part1-tab" data-toggle="tab" href="#part1" role="tab" aria-controls="part1" onclick="topFunction()"> Tab 1
+</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="part2-tab" data-toggle="tab" href="#part2" role="tab" aria-controls="part2" onclick="topFunction()">Tab 2</a>
+  </li>
+
+</ul>
+
+<!-- Tab content -->
+<div class="tab-content" id="myTabContent">
+
+  <div class="tab-pane show active" id="part1" role="tabpanel" aria-labelledby="part1-tab">
+
 <div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 4.) - Frage 3
+ </h3>
+    </div>
     <div class="card-body">
-    <h3>
-        Teil 4.) - Frage 3
-    </h3>
 <br>
-        <br>
         <p>
         {{ if CN_treatment == False }}
         In Frage 1 haben Sie Ihre Einschätzung darüber abgegeben, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die selbe Zahl angegeben hat, die er gesehen hat (d. h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde).
@@ -21,41 +72,38 @@
         Für die folgenden Sender haben Sie angegeben, dass sie nicht immer die Zahl angegeben haben, die sie gesehen haben.
         {{ endif }}
 </p>
-        <p>
-        {{ if trust_sender_1 < Constants.num_rounds}}
-        Sender A hat ihrer Einschätzung nach {{ mistrust_sender_1 }} nicht die Zahl angegeben, die er gesehen hat.
+        <ul>
+        {{ if trust_sender_1 < 10}}
+            <li>Sender A hat ihrer Einschätzung nach {{ mistrust_sender_1 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
         {{ endif }}
-        {{ if trust_sender_2 < Constants.num_rounds}}
-        Sender B hat ihrer Einschätzung nach {{ mistrust_sender_2 }} nicht die Zahl angegeben, die er gesehen hat.
+        {{ if trust_sender_2 < 10}}
+        <li>Sender B hat ihrer Einschätzung nach {{ mistrust_sender_2 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
         {{ endif }}
-        {{ if trust_sender_3 < Constants.num_rounds}}
-        Sender C hat ihrer Einschätzung nach {{ mistrust_sender_3 }} nicht die Zahl angegeben, die er gesehen hat.
+        {{ if trust_sender_3 < 10}}
+        <li>Sender C hat ihrer Einschätzung nach {{ mistrust_sender_3 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
         {{ endif }}
-        {{ if trust_sender_4 < Constants.num_rounds}}
-        Sender D hat ihrer Einschätzung nach {{ mistrust_sender_4 }} nicht die Zahl angegeben, die er gesehen hat.
+        {{ if trust_sender_4 < 10}}
+        <li>Sender D hat ihrer Einschätzung nach {{ mistrust_sender_4 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
         {{ endif }}
-        {{ if trust_sender_5 < Constants.num_rounds}}
-        Sender E hat ihrer Einschätzung nach {{ mistrust_sender_5 }} nicht die Zahl angegeben, die er gesehen hat.
+        {{ if trust_sender_5 < 10}}
+        <li>Sender E hat ihrer Einschätzung nach {{ mistrust_sender_5 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
         {{ endif }}
-        {{ if trust_sender_6 < Constants.num_rounds}}
-        Sender F hat ihrer Einschätzung nach {{ mistrust_sender_6 }} nicht die Zahl angegeben, die er gesehen hat.
+        {{ if trust_sender_6 < 10}}
+        <li>Sender F hat ihrer Einschätzung nach {{ mistrust_sender_6 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
         {{ endif }}
-            </p>
-        <br>
-        <br>
+            </ul>
+
        Für jeden oben aufgeführten Sender bitten wir Sie um folgende Angaben:
-        <br>
         <br>
         <ul>
             <li><b>die Schätzungsaufgabe(n), für die Sie glauben, dass der Sender die Zahl, die er gesehen hat, nicht angegeben hat;</b></li>
             <li><b>ihre Schätzung darüber, welche Zahl der Sender eigentlich gesehen hat.</b></li>
         </ul>
-        <br>
+
         <p>
         Am unteren Rand des Bildschirms werden Sie wieder eine Übersicht mit den abgegebenen Schätzungen finden, die jeder Sender für die 10 Schätzaufgaben abgegeben hat.
         </p>
-        <br>
-        <br>
+
          <h4> Auszahlung </h4>
         <p>
             Wenn dieser Teil der Studie (Teil 4) für die Bezahlung ausgewählt wird, wird eine der 10 Schätzaufgaben zufällig ausgewählt, und <b>Sie werden entsprechend der Genauigkeit Ihrer Schätzung bei dieser Aufgabe bezahlt. </b>
@@ -71,13 +119,11 @@
             Nachfolgend finden Sie die technischen Details der Auszahlungsregel.
             Wenn Sie die technischen Einzelheiten der Auszahlungsregelnachlesen möchten, können Sie unten auf "Details" klicken, um den Dropdown-Text zu öffnen und mehr zu lesen.
         </p>
-    <br>
-        <br>
- <p align="center">
+ <div align="center">
      <a class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#Tech">
     Details zur Auszahlung
      </a>
- </p>
+ </div>
         <div class="collapse" id="Tech">
   <div class="card card-body">
     <p>Der Computer wird eine zufällige Zahl y zwischen 0 und 50 ziehen.
@@ -86,7 +132,7 @@
       Ansonsten erhalten Sie 0 €.
         Dies ist die genaue Formel für die Berechnung Ihrer Auszahlung:</p>
       <ul>
-          <li>Ihre Auszahlung = Z, wenn (x - Schätzung)&#178; &#8924;y </li>
+          <li>Ihre Auszahlung = 3, wenn (x - Schätzung)&#178; &#8924;y </li>
           <li>Ihre Auszahlung = 0, wenn (x - Schätzung)&#178; &#62;y </li>
       </ul>
       <p>Betrachten Sie die folgenden Beispiele.
@@ -104,8 +150,7 @@
       Beachten Sie, dass Ihre Gewinnchancen vom quadratischen Abstand zur tatsächlichen Zahl, die der Sender gesehen hat, abhängen.
       Es macht also keinen Unterschied, ob Sie die Zahl unter- oder überschätzen.
       Wichtig ist nur, dass Ihre Schätzung nahe genug an der tatsächlichen Zahl, die der Sender gesehen hat, liegt.
-      Je präziser Sie die Zahl schätzen, desto höher sind Ihre Gewinnchancen auf <b>3€</b>.
-            <br>
+      Je präziser Sie die Zahl schätzen, desto höher sind Ihre Gewinnchancen auf 3€.
         </div>
 </div>
 <br>
@@ -114,8 +159,505 @@
 
 </div>
     </div>
-<div align="center">
-    {{ next_button }}
+      <button onclick="topFunction()" id="tab1_next" type="button" class="nexttab btn-primary btn next">Next</button>
+ </div>
+
+
+
+       <div class="tab-pane" id="part2" role="tabpanel" aria-labelledby="part2-tab">
+
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold">Teil 4.) - Frage 3
+ </h3>
+        </div>
+    <div class="card-body">
+
+       Bitte geben Sie Ihre Antworten auf Frage 3 unten an.
+        Falls Sie die Anweisungen zu Frage 3 erneut lesen möchten, können Sie auf "Zurück" am Ende der Seite klicken.
+        Nachfolgend finden Sie eine Übersicht mit den Schätzungen, die von jedem Sender für die 10 Schätzaufgaben angegeben wurden.
+
+      {{ if mistrust_sender_1 > 0}}
+      <br><hr>
+       <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header" style="font-weight: bold">
+            <b>Sender A</b>
+                </div></div>
+           Sie haben angegeben, dass Sender A bei {{ mistrust_sender_1}} Schätzaufgaben nicht die Zahl berichtet hat, die er zuvor gesehen hat.
+            Bitte geben Sie an, bei welchen Schätzaufgaben dies Ihrer Meinung nach der Fall ist, und tragen Sie ein, welche Zahl er/sie Ihrer Meinung nach tatsächlich gesehen hat:
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Schätzaufgabe</th>
+          <th scope="col"> Zahl, die Sender A tatsächlich gesehen hat</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_1 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select class=\"Sender1\" required id=\"sender_1_correction_", i, "_inround_select\" onchange=\"dis_option1()\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_1_correction_", i, "_inround\" id=\"sender_1_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_1_correction_", i, "_actually\" id=\"sender_1_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+
+            $('body').on('propertychange input', 'input', function() {
+            var inputVal = $(this).val();
+            if( isNaN(Number(inputVal)) ) {
+                  this.value = this.hasOwnProperty("oldValue") ? this.oldValue : '';
+            } else {
+                  this.oldValue = inputVal;
+            }
+            });
+
+
+            function dis_option1() {
+                var arraySelects = document.getElementsByClassName('Sender1');
+                for (var j = 0; j < arraySelects.length; j++) {
+                    for (var i = 0; i < arraySelects[j].options.length; i++) {
+                        arraySelects[j].options[i].disabled = false;}}
+                for (var m = 0; m < arraySelects.length; m++) {
+                    var selectedOption = arraySelects[m].selectedIndex;
+                    for (var k = 0; k < arraySelects.length; k++) {
+                        arraySelects[k].options[selectedOption].disabled = true;}
+                    update();
+                }
+                }
+
+          </script>
+          </table>
+       </div>
+      {{ endif }}
+
+
+      {{ if mistrust_sender_2 > 0}}
+      <br>
+      <br>
+        <hr>
+       <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header" style="font-weight: bold">
+            <b>Sender B</b>
+                </div></div>
+           Sie haben angegeben, dass Sender B bei {{ mistrust_sender_2}} Schätzaufgaben nicht die Zahl berichtet hat, die er zuvor gesehen hat.
+            Bitte geben Sie an, bei welchen Schätzaufgaben dies Ihrer Meinung nach der Fall ist, und tragen Sie ein, welche Zahl er/sie Ihrer Meinung nach tatsächlich gesehen hat:
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Schätzaufgabe</th>
+          <th scope="col"> Zahl, die Sender B tatsächlich gesehen hat</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_2 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select required class=\"Sender2\" id=\"sender_2_correction_", i, "_inround_select\" onchange=\"dis_option2()\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_2_correction_", i, "_inround\" id=\"sender_2_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_2_correction_", i, "_actually\" id=\"sender_2_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+
+            function dis_option2() {
+                var arraySelects = document.getElementsByClassName('Sender2');
+                for (var j = 0; j < arraySelects.length; j++) {
+                    for (var i = 0; i < arraySelects[j].options.length; i++) {
+                        arraySelects[j].options[i].disabled = false;}}
+                for (var m = 0; m < arraySelects.length; m++) {
+                    var selectedOption = arraySelects[m].selectedIndex;
+                    for (var k = 0; k < arraySelects.length; k++) {
+                        arraySelects[k].options[selectedOption].disabled = true;}
+                    update();
+                }
+                }
+          </script>
+          </table>
+       </div>
+      {{ endif }}
+
+
+      {{ if mistrust_sender_3 > 0}}
+      <br>
+      <br>
+        <hr>
+       <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header" style="font-weight: bold">
+            <b>Sender C</b>
+                </div></div>
+           Sie haben angegeben, dass Sender C bei {{ mistrust_sender_3}} Schätzaufgaben nicht die Zahl berichtet hat, die er zuvor gesehen hat.
+            Bitte geben Sie an, bei welchen Schätzaufgaben dies Ihrer Meinung nach der Fall ist, und tragen Sie ein, welche Zahl er/sie Ihrer Meinung nach tatsächlich gesehen hat:
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Schätzaufgabe</th>
+          <th scope="col"> Zahl, die Sender C tatsächlich gesehen hat</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_3 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select required class=\"Sender3\" id=\"sender_3_correction_", i, "_inround_select\" onchange=\"dis_option3()\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_3_correction_", i, "_inround\" id=\"sender_3_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_3_correction_", i, "_actually\" id=\"sender_3_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+
+            function dis_option3() {
+                var arraySelects = document.getElementsByClassName('Sender3');
+                for (var j = 0; j < arraySelects.length; j++) {
+                    for (var i = 0; i < arraySelects[j].options.length; i++) {
+                        arraySelects[j].options[i].disabled = false;}}
+                for (var m = 0; m < arraySelects.length; m++) {
+                    var selectedOption = arraySelects[m].selectedIndex;
+                    for (var k = 0; k < arraySelects.length; k++) {
+                        arraySelects[k].options[selectedOption].disabled = true;}
+                    update();
+                }
+                }
+          </script>
+          </table>
+       </div>
+      {{ endif }}
+
+
+      {{ if mistrust_sender_4 > 0}}
+      <br>
+      <br>
+        <hr>
+       <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header" style="font-weight: bold">
+            <b>Sender D</b>
+                </div></div>
+           Sie haben angegeben, dass Sender D bei {{ mistrust_sender_4}} Schätzaufgaben nicht die Zahl berichtet hat, die er zuvor gesehen hat.
+            Bitte geben Sie an, bei welchen Schätzaufgaben dies Ihrer Meinung nach der Fall ist, und tragen Sie ein, welche Zahl er/sie Ihrer Meinung nach tatsächlich gesehen hat:
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Schätzaufgabe</th>
+          <th scope="col"> Zahl, die Sender D tatsächlich gesehen hat</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_4 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select required class=\"Sender4\" id=\"sender_4_correction_", i, "_inround_select\" onchange=\"dis_option4()\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_4_correction_", i, "_inround\" id=\"sender_4_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_4_correction_", i, "_actually\" id=\"sender_4_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+
+            function dis_option4() {
+                var arraySelects = document.getElementsByClassName('Sender4');
+                for (var j = 0; j < arraySelects.length; j++) {
+                    for (var i = 0; i < arraySelects[j].options.length; i++) {
+                        arraySelects[j].options[i].disabled = false;}}
+                for (var m = 0; m < arraySelects.length; m++) {
+                    var selectedOption = arraySelects[m].selectedIndex;
+                    for (var k = 0; k < arraySelects.length; k++) {
+                        arraySelects[k].options[selectedOption].disabled = true;}
+                    update();
+                    censored_options_4();
+                }
+                }
+
+            function censored_options_4() {
+                for(var i = 1; i < js_vars.mistrust_sender_4 + 1 ; i++) {
+                    var dropdown = document.getElementById(["sender_4_correction_", i, "_inround_select"].join(""))
+                    for (var m = 1; m < dropdown.length; m++) {
+                        for(var j = 0; j <= js_vars.censored_signals_sender_4.length ; j++){
+                            if (dropdown.options[m].value == js_vars.censored_signals_sender_4[j] + 1){
+                            dropdown.options[m].disabled = true;}
+                          }}
+                        }}
+          </script>
+          </table>
+       </div>
+      {{ endif }}
+
+
+      {{ if mistrust_sender_5 > 0}}
+      <br>
+      <br>
+        <hr>
+       <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header" style="font-weight: bold">
+            <b>Sender E</b>
+                </div></div>
+           Sie haben angegeben, dass Sender E bei {{ mistrust_sender_5}} Schätzaufgaben nicht die Zahl berichtet hat, die er zuvor gesehen hat.
+            Bitte geben Sie an, bei welchen Schätzaufgaben dies Ihrer Meinung nach der Fall ist, und tragen Sie ein, welche Zahl er/sie Ihrer Meinung nach tatsächlich gesehen hat:
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Schätzaufgabe</th>
+          <th scope="col"> Zahl, die Sender E tatsächlich gesehen hat</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_5 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select required class=\"Sender5\" id=\"sender_5_correction_", i, "_inround_select\" onchange=\"dis_option5();\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_5_correction_", i, "_inround\" id=\"sender_5_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_5_correction_", i, "_actually\" id=\"sender_5_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+
+            function dis_option5() {
+                var arraySelects = document.getElementsByClassName('Sender5');
+                for (var j = 0; j < arraySelects.length; j++) {
+                    for (var i = 0; i < arraySelects[j].options.length; i++) {
+                        arraySelects[j].options[i].disabled = false;}}
+                for (var m = 0; m < arraySelects.length; m++) {
+                    var selectedOption = arraySelects[m].selectedIndex;
+                    for (var k = 0; k < arraySelects.length; k++) {
+                        arraySelects[k].options[selectedOption].disabled = true;}
+                    update();
+                    censored_options_5();
+                }
+                }
+
+            function censored_options_5() {
+                for(var i = 1; i < js_vars.mistrust_sender_5 + 1 ; i++) {
+                    var dropdown = document.getElementById(["sender_5_correction_", i, "_inround_select"].join(""))
+                    for (var m = 1; m < dropdown.length; m++) {
+                        for(var j = 0; j <= js_vars.censored_signals_sender_5.length ; j++){
+                            if (dropdown.options[m].value == js_vars.censored_signals_sender_5[j] + 1){
+                            dropdown.options[m].disabled = true;}
+                          }}
+                        }}
+          </script>
+          </table>
+       </div>
+      {{ endif }}
+
+      {{ if mistrust_sender_6 > 0}}
+      <br>
+      <br>
+        <hr>
+       <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header" style="font-weight: bold">
+            <b>Sender F</b>
+                </div></div>
+           Sie haben angegeben, dass Sender F bei {{ mistrust_sender_6}} Schätzaufgaben nicht die Zahl berichtet hat, die er zuvor gesehen hat.
+            Bitte geben Sie an, bei welchen Schätzaufgaben dies Ihrer Meinung nach der Fall ist, und tragen Sie ein, welche Zahl er/sie Ihrer Meinung nach tatsächlich gesehen hat:
+        <table class="table table-hover">
+        <tr>
+          <th scope="col">Schätzaufgabe</th>
+          <th scope="col"> Zahl, die Sender F tatsächlich gesehen hat</th>
+        </tr>
+          <script>
+            for(var i = 1; i < js_vars.mistrust_sender_6 + 1 ; i++) {
+              document.write("<tr>");
+              document.write(["<td><select required class=\"Sender6\" id=\"sender_6_correction_", i, "_inround_select\" onchange=\"dis_option6()\">" +
+              "<option value=>--------</option>" +
+                      "<option value=1>1</option>" +
+                      "<option value=2>2</option>" +
+                      "<option value=3>3</option>" +
+                      "<option value=4>4</option>" +
+                      "<option value=5>5</option>" +
+                      "<option value=6>6</option>" +
+                      "<option value=7>7</option>" +
+                      "<option value=8>8</option>" +
+                      "<option value=9>9</option>" +
+                      "<option value=10>10</option></select></td>"].join(''));
+              document.write(["<input required name=\"sender_6_correction_", i, "_inround\" id=\"sender_6_correction_", i,"_inround\" type=\"hidden\">"].join(''));
+              document.write(["<td><input required name=\"sender_6_correction_", i, "_actually\" id=\"sender_6_correction_", i,"_actually\"></td>"].join(''));
+              document.write("</tr>");}
+
+            function dis_option6() {
+                var arraySelects = document.getElementsByClassName('Sender6');
+                for (var j = 0; j < arraySelects.length; j++) {
+                    for (var i = 0; i < arraySelects[j].options.length; i++) {
+                        arraySelects[j].options[i].disabled = false;}}
+                for (var m = 0; m < arraySelects.length; m++) {
+                    var selectedOption = arraySelects[m].selectedIndex;
+                    for (var k = 0; k < arraySelects.length; k++) {
+                        arraySelects[k].options[selectedOption].disabled = true;}
+                    update();
+                    censored_options_6();
+                }
+                }
+
+            function censored_options_6() {
+                for(var i = 1; i < js_vars.mistrust_sender_6 + 1 ; i++) {
+                    var dropdown = document.getElementById(["sender_6_correction_", i, "_inround_select"].join(""))
+                    for (var m = 1; m < dropdown.length; m++) {
+                        for(var j = 0; j <= js_vars.censored_signals_sender_6.length ; j++){
+                            if (dropdown.options[m].value == js_vars.censored_signals_sender_6[j] + 1){
+                            dropdown.options[m].disabled = true;}
+                          }}
+                        }}
+          </script>
+          </table>
+       </div>
+      {{ endif }}
+
+      <br>
+      <br>
+        <br><hr>
+
+
+            <h3>
+        Historie der beobachteten Signale
+    </h3>
+<table class="table table-hover table-striped ">
+  <thead>
+    <tr>
+      <th scope="col">Schätzaufgabe</th>
+      <th scope="col">Sender A</th>
+      <th scope="col">Sender B</th>
+      <th scope="col">Sender C</th>
+      <th scope="col">Sender D</th>
+      <th scope="col">Sender E</th>
+      <th scope="col">Sender F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+    {{ for p in signals_round_1 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+      <tr>
+      <th scope="row">2</th>
+    {{ for p in signals_round_2 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
+      <th scope="row">3</th>
+    {{ for p in signals_round_3 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
+      <th scope="row">4</th>
+    {{ for p in signals_round_4 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
+      <th scope="row">5</th>
+    {{ for p in signals_round_5 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
+      <th scope="row">6</th>
+    {{ for p in signals_round_6 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+ <tr>
+      <th scope="row">7</th>
+    {{ for p in signals_round_7 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">8</th>
+    {{ for p in signals_round_8 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">9</th>
+    {{ for p in signals_round_9 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">10</th>
+    {{ for p in signals_round_10 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+
+  </tbody>
+</table>
+      <br>
+        <hr>
+      <br>
+        <p>Wenn Sie alle Fragen beantwortet haben, drücken Sie bitte auf "Weiter".
+            Falls Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.</p>
+          <button onclick="topFunction()"  type="button" class="prevtab btn-primary btn back">Back</button>
+<button class="nexttab btn-primary btn next">Next</button>
+          </div>
+    </div>
+       </div>
 </div>
 
+<script>
+                document.getElementById("tab1_next").onclick = function clicked(){
+    	window.location.hash = 'reload';
+
+    }
+
+
+            window.onload = function(){
+        if(window.location.hash === "#reload"){
+    		document.getElementById("part1").classList.remove("show")
+            document.getElementById("part1").classList.remove("active")
+            document.getElementById("part1-tab").classList.remove("active")
+            document.getElementById("part2").classList.add("show")
+            document.getElementById("part2").classList.add("active")
+            document.getElementById("part2-tab").classList.add("active")}
+                censored_options_4();
+                censored_options_5();
+                censored_options_6();
+            }
+
+            function update() {
+            let check_trust = [js_vars.mistrust_sender_1, js_vars.mistrust_sender_2,js_vars.mistrust_sender_3,
+                                js_vars.mistrust_sender_4, js_vars.mistrust_sender_5, js_vars.mistrust_sender_6];
+            for(var k = 0; k <= check_trust.length; ++k){
+                for(var i = 1; i <= check_trust[k] ; i++) {
+                  document.getElementById(["sender_", k + 1, "_correction_", i, "_inround"].join('')).value = document.getElementById(["sender_", k + 1 , "_correction_", i, "_inround_select"].join('')).value
+            }}}
+
+</script>
 {% endblock %}

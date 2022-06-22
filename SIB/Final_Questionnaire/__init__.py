@@ -8,13 +8,12 @@ Final Questionnaire
 
 
 class Constants(BaseConstants):
-    name_in_url = 'Final_Questionnaire_SI'
+    name_in_url = 'Final_Questionnaire'
     players_per_group = None
     num_rounds = 8  # Short version with 8 imtes and 4 minutes
     solution = [4, 4, 7, 1, 6, 3, 2, 5]  # Short version with 8 items and 4 minutes
     IQ_time = 240
     use_timeout = True
-
 
 class Subsession(BaseSubsession):
     pass
@@ -26,13 +25,11 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     identity = models.StringField()
-    all_clear = models.LongStringField(blank=True, label= '')
-    comments = models.LongStringField(blank=True, label= '')
     input_field = models.IntegerField(label="Welches Puzzlestück passt?", min=1)
     win = models.IntegerField()
     time_spend = models.FloatField(initial=0)
     total_points = models.IntegerField()
-    sisi= models.IntegerField(
+    sisi = models.IntegerField(
         choices=[
             [1, ''],
             [2, ''],
@@ -44,7 +41,7 @@ class Player(BasePlayer):
 
         ],
         widget=widgets.RadioSelectHorizontal,
-        label="",)
+        label="", )
     Abitur = models.IntegerField(
         choices=[
             [7, "3,5-4,0"],
@@ -58,36 +55,33 @@ class Player(BasePlayer):
         label="", )
 
 
-def creating_session(subsession: Subsession):
-    players = subsession.get_players()
-    for p in players:
-        participant = p.participant
-        p.identity = participant.identity
+
+
 # PAGES
-class Final_SI(Page):
-
+class SiSi(Page):
     @staticmethod
-    def is_displayed(player):
-        return player.round_number == 8
+    def vars_for_template(player: Player):
+        if "SI" in player.session.config['name']:
+            participant = player.participant
+            player.identity = participant.identity
+            return dict(
+                SI=True,
+                identity=player.identity
+            )
+        else:
+            return dict(
+                SI=False
+            )
 
-    form_model = 'player'
-    form_fields = ["all_clear", "comments"]
-
-class SiSi_SI(Page):
 
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
 
-    @staticmethod
-    def vars_for_template(player: Player):
-
-        return dict(
-            group_name=player.identity,
-        )
 
     form_model = 'player'
     form_fields = ["sisi"]
+
 
 class IQ_Instructions(Page):
 
@@ -114,7 +108,7 @@ class Task(Page):
 
     @staticmethod
     def get_timeout_seconds(player):
-        if player.round_number > 1:
+        if player.round_number > 0:
             participant = player.participant
             import time
             return participant.expiry - time.time()
@@ -137,4 +131,4 @@ class Abitur(Page):
     form_model = 'player'
     form_fields = ["Abitur"]
 
-page_sequence = [SiSi_SI, IQ_Instructions, Task, Abitur, Final_SI]
+page_sequence = [SiSi, IQ_Instructions, Task, Abitur]

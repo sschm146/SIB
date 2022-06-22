@@ -64,7 +64,7 @@ p{
  </h3>
         </div>
     <div class="card-body">
-
+<br>
         Dieser Teil besteht aus 10 separaten Schätzaufgaben.
         Bei jeder Aufgabe <b>müssen Sie eine unbekannte Zahl x schätzen und werden entsprechend der Genauigkeit Ihrer Schätzung bezahlt</b> (wie unten beschrieben).
 <br>
@@ -103,9 +103,10 @@ p{
         Um zu verstehen, welche Informationen die 6 Sender erhalten haben, um die Zahl x zu schätzen, zeigen wir nun Ihnen ihre Instruktionen.
         Beachten Sie, dass alle 6 Sender die gleichen Anweisungen hatten.
 <br>
+        <br>
 <div class="card">
   <div class="card-header">
-      Instruktionen der Sender
+      <b>Instruktionen der Sender</b>
       </div>
   <div class="card-body">
         Bei jeder der 10 Aufgaben wird vom Computer eine neue Zahl x festgelegt.
@@ -137,13 +138,12 @@ p{
         Betrachten Sie bitte das folgende Beispiel.
       Stellen Sie sich vor, der Computer hat 280 als die tatsächliche Zahl x gezogen.
       Die folgende Abbildung zeigt ein Beispiel für die 10000 Schätzgeräte und ihre Schätzungen.
-        <br>
-        <br>
+
         <div style="margin: auto; width: 80%; height: auto">
         <img src="{{ static 'Distr.png' }}" style="height: 100%; width:100%"/>
             </div>
         <br>
-        <br>
+
         Wie Sie sehen können, bilden die Schätzungen eine typische Glockenkurve.
       Die häufigste Schätzung ist genau 280. Es ist also wahrscheinlicher, dass die Schätzung eines zufällig gezogenen Schätzgerätes der tatsächlichen Zahl x entspricht als jede andere Zahl. J
       e weiter man sich von 280 entfernt, desto unwahrscheinlicher ist es, dass eine solche Schätzung von einem Schätzgerät angegeben wird, und Schätzungen größer als 290 und kleiner als 270 werden fast nie angegeben.
@@ -158,6 +158,7 @@ p{
       <b>Um Ihre Chancen auf eine korrekte Schätzung der Zahl x zu maximieren, sollten Sie daher bei jeder Schätzaufgabe genau die vom Schätzgerät angegebene Zahl angeben.</b>
       </div>
 </div>
+        <br>
         <b>Dann haben die Sender A, B, C und D die folgenden Instruktionen erhalten:</b>
         <div class="card">
   <div class="card-body">
@@ -207,12 +208,12 @@ p{
         Nehmen Sie an, dass jeder Sender die Schätzung des jeweils zugeordneten Schätzgerätes erhalten hat.
         Sender A schätzt daraufhin die Zahl x auf 823, Sender B schätzt diese auf 831, Sender C schätzt diese auf 825, Sender D schätzt diese auf 827, Sender E schätzt diese auf 836 und Sender F schätzt diese auf 835.
         In diesem Fall würden Sie folgendes Bild auf Ihrem Bildschirm sehen.
-                <br>
+
                 <div style="margin: auto; width: 80%; height: auto">
         <img src="{{ static 'CN.png' }}" style="height: 100%; width:100%"/>
             </div>
         <br>
-        <br>
+
     <h4>
         Auszahlung
         </h4>
@@ -249,7 +250,6 @@ p{
 <br><br>
         Ihre Schätzung 155: quadratischer Abstand ist (150-155)&#178;= 25 &#62; y &#8594; Sie verdienen 0€.</p>
         <br>
-        <br>
         Beachten Sie, dass Ihre Gewinnchancen vom quadratischen Abstand zur tatsächlichen Zahl x abhängen.
         Es macht also keinen Unterschied, ob Sie die Zahl x unter- oder überschätzen.
         Wichtig ist nur, dass Ihre Schätzung nahe genug an der tatsächlichen Zahl x liegt.
@@ -280,14 +280,13 @@ p{
                     Das bedeutet, dass die Schätzgeräte im Durchschnitt richtig sind.</li>
             </ul></li>
         </ul>
-        <br>
-        <br>
+
        Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
         Wenn Sie bereit sind, drücken Sie bitte auf "Weiter".
         <br>
  </div>
 </div>
-<button onclick="topFunction()" id="tab1_next" type="button" class="nexttab btn-primary btn next">Next</button>
+<button onclick="topFunction()" id="tab1_next" type="button" class="nexttab btn-primary btn next">Weiter</button>
   </div>
 
 
@@ -305,6 +304,7 @@ p{
 <br>
     <div class="alert alert-primary" role="alert">
  <strong> Bevor Sie mit der Aufgabe fortfahren, bitten wir Sie, die folgenden Verständnisfragen zu beantworten.
+     Falls Sie die Anweisungen zu Teil 2.) erneut lesen möchten, können Sie auf "Zurück" am Ende der Seite klicken.
      Sollten Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird sich an Sie wenden.</strong>
 </div>
 <br>
@@ -341,11 +341,11 @@ p{
     7.) Angenommen, in einer Schätzaufgabe ist die Zahl x gleich 1520, und Sie geben 1520 als Ihre Schätzung der Zahl x an.
             Wie hoch sind Ihre Chancen, die zusätzliche Auzahlung zu erhalten?</p>
 {{ formfield 'comprq14' }}
-<br><hr>
+
     </div>
 </div>
-  <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
-<button class="nexttab btn-primary btn next">Next</button>
+  <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Zurück</button>
+<button class="nexttab btn-primary btn next">Weiter</button>
   </div>
 </div>
 

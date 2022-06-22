@@ -23,11 +23,11 @@
 {{ endblock }}
 {{ block content }}
 <div class="card bg-light instructions">
-        <div class="card-header">
-        Teil 5.)
-    </div>
+ <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 5.)
+ </h3>
+        </div>
     <div class="card-body">
-
 
 
     <table>
@@ -38,7 +38,6 @@
             {% if round > 2 %}
                 <td colspan="10" height="50%" width="50%" align="center">
             {% endif %}
-
                     {% if round == 1 %}
                         <img class="pic" style="transform: rotate(-0.5deg);" src="{% static "3.png" %}"/>
                     {% endif %}
@@ -83,4 +82,6 @@
             <td width="15%"></td>
         </tr>
     </table>
+    </div>
+</div>
 {% endblock %}
