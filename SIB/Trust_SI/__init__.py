@@ -693,18 +693,20 @@ def payout_calc(subsession: Subsession):
             corrections = [corrections_1, corrections_2, corrections_3, corrections_4, corrections_5, corrections_6]
             corrections = [list for list in corrections if any(list)]
             if any(corrections):
-                random_correction = random.choice(corrections[0])
-                #random_correction = [round, correction, sender)
-                temp_signal = estimates_all_rounds[(random_correction[0]-1)*6 + (random_correction[2]-1)]
-                diff = pow((temp_signal - random_correction[1]), 2)
+                random_sender = random.choice(corrections)
+                random_correction = random.choice(random_sender)
+                # random_correction = [round, correction, sender)
+                # temp_signal = estimates_all_rounds[(random_correction[0]-1)*6 + (random_correction[2]-1)]
+                actual_signal = subsession.session.config['Signals'][random_correction[2] - 1][random_correction[0] - 1]
+                diff = pow((actual_signal - random_correction[1]), 2)
                 if diff <= subsession.x:
-                    correction_payoff = subsession.session.config['Trust_payoff_2']
+                    correction_payoff = subsession.session.config['Trust_payoff_3']
                 else:
                     correction_payoff = 0
             else:
                 correction_payoff = 0
-                # participants get rewards for precision in TiS + fixed payment for Confidence_2 + rewards for precision in Confidence_4
-            p.payoff = random.choice(temp) + subsession.session.config['Trust_payoff_1'] + correction_payoff
+                # participants get rewards for precision in TiS (temp) + fixed payment for Confidence_2 + rewards for precision in Confidence_4
+            p.payoff = random.choice(temp) + subsession.session.config['Trust_payoff_2'] + correction_payoff
         participant.Trust_payoff = p.payoff
 
 

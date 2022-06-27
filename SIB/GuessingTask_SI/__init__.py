@@ -15,8 +15,6 @@ class Constants(BaseConstants):
     num_rounds = 20
     players_per_group = None
     num_senders = 6
-    true_state = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-    sd = 3
 
 
 class Subsession(BaseSubsession):
@@ -296,7 +294,7 @@ class Signals(Page):
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        diff = pow((Constants.true_state[int(player.round_number) - 1] - player.sent_signal), 2)
+        diff = pow((player.true_state - player.sent_signal), 2)
         if diff <= player.subsession.x:
             player.payoff = player.session.config['GT_sender_payoff']
         else:
@@ -468,7 +466,7 @@ class Guess(Page):
     timeout_seconds = 240
     @staticmethod
     def before_next_page(player, timeout_happened):
-        diff = pow((Constants.true_state[int(player.round_number - Constants.num_rounds / 2) - 1] - player.posterior), 2)
+        diff = pow((player.true_state - player.posterior), 2)
         if diff <= player.subsession.x:
             player.payoff = player.session.config['GT_receiver_payoff']
         else:
