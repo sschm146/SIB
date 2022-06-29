@@ -10,6 +10,7 @@
     </h3>
 <br>
     <p>
+        {{ if identity != 'neutral' }}
         In diesem Teil tritt Ihre Gruppe {{ identity }} bei der folgenden Aufgabe gegen die Gruppe
         {{ if identity == "Blau" }}
         Gelb
@@ -18,9 +19,13 @@
         Blau
         {{ endif }}
         an.
+        {{ endif }}
+        {{ if identity == 'neutral' }}
+        In diesem Teil werden Sie die folgende Aufgabe bearbeiten.
+        {{ endif }}
         Zunächst werden allen Teilnehmern 10 Gemälde von zwei Künstlern gezeigt.
         Sie haben 4 Minuten Zeit, um diese Gemälde zu betrachten.
-        Anschließend werden alle Teilnehmer gebeten, Fragen zu 4 anderen Gemälden zu beantworten.
+        Anschließend werden alle TeilnehmerInnen gebeten, Fragen zu 4 anderen Gemälden zu beantworten.
         Wir werden die Gesamtzahl der richtigen Antworten für jede Gruppe berechnen.
         Alle Mitglieder der Gruppe, die mehr richtige Antworten als die jeweils andere Gruppe eingereicht hat, gewinnen einen Geldpreis von 16€.
         Alle Mitglieder der Gruppe, die weniger richtige Antworten als die jeweils andere Gruppe eingereicht hat, gewinnen keinen Geldpreis.

@@ -28,11 +28,12 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     Role = models.StringField()
     identity = models.StringField()  # the identity from the previous apps
-    sent_signal = models.IntegerField()  # signal sent by the sender
+    sent_signal = models.IntegerField(min=0, max=10000)  # signal sent by the sender
     estimate = models.IntegerField()  # the estimate sent by the estimation device which is observed by senders
-    posterior = models.FloatField()  # the posterior belief of the receiver
+    posterior = models.FloatField(min=0, max=10000)  # the posterior belief of the receiver
     true_state = models.IntegerField()
     signal_order = models.IntegerField()
+    chosen_round = models.IntegerField()
     received_signal_1 = models.IntegerField() #saving received signals across rounds for analyses
     received_signal_2 = models.IntegerField() #saving received signals across rounds for analyses
     received_signal_3 = models.IntegerField() #saving received signals across rounds for analyses
@@ -94,6 +95,13 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
         label='')
     comprq8 = models.IntegerField(
+        choices=[[1, 'Ich werde die Schätzung von 1 zufällig gezogenen Schätzgerät beobachten.'],
+                 [2, 'Ich werde die Schätzungen von 6 zufällig ausgewählten Schätzgeräten beobachten.'],
+                 [3,
+                  'Ich werde die Schätzungen von 6 Sendern beobachten: Sender A, Sender B, Sender C, Sender D, Sender E, und Sender F.']],
+        widget=widgets.RadioSelect,
+        label='')
+    comprq8_2 = models.IntegerField(
         choices=[[1, 'Sender A, Sender E und Sender F sind Mitglieder der Gruppe Blau, während Sender D, Sender B und Sender C Mitglieder der Gruppe Gelb sind.'],
                  [2, 'Sender D, Sender B und Sender F sind Mitglieder der Gruppe Blau, während Sender A, Sender E und Sender C Mitglieder der Gruppe Gelb sind.'],
                  [3, 'Sender A, Sender B und Sender C sind Mitglieder der Gruppe Blau, während Sender D, Sender E und Sender F Mitglieder der Gruppe Gelb sind.']],
@@ -350,7 +358,7 @@ class Instructions_GT_senders(Page):
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 error_messages[
-                    field_name] = 'Falsche Antwort - Bitte korrigiere deine Angabe oder hebe deine Hand zur Klärung mit dem Laborpersonal.'
+                    field_name] = 'Falsche Antwort - Bitte korrigieren Sie Ihre Angabe oder heben Sie Ihre Hand zur Klärung mit dem Laborpersonal.'
 
         return error_messages
 
@@ -376,6 +384,7 @@ class Instructions_GT_receivers(Page):
         solutions = dict(
             comprq7=1,
             comprq8=3,
+            comprq8_2=3,
             comprq9=3,
             comprq10=2,
             comprq12=3,
@@ -387,7 +396,7 @@ class Instructions_GT_receivers(Page):
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 error_messages[
-                    field_name] = 'Falsche Antwort - Bitte korrigiere deine Angabe oder hebe deine Hand zur Klärung mit dem Laborpersonal.'
+                    field_name] = 'Falsche Antwort - Bitte korrigieren Sie Ihre Angabe oder heben Sie Ihre Hand zur Klärung mit dem Laborpersonal.'
 
         return error_messages
 
@@ -530,11 +539,13 @@ def save_signals_payoff(subsession: Subsession):
         participant.signals_all_rounds = signals_all_rounds
         if p.Role == "sender":
             i = random.randint(1, int(Constants.num_rounds / 2))
+            p.chosen_round = i
             prev_player = p.in_round(i)
             participant = p.participant
             participant.GuessingTask_payoff = prev_player.payoff
         if p.Role == "receiver":
             i = random.randint(int(Constants.num_rounds / 2) + 1, Constants.num_rounds)
+            p.chosen_round = i
             prev_player = p.in_round(i)
             participant = p.participant
             participant.GuessingTask_payoff = prev_player.payoff

@@ -29,12 +29,13 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     Role = models.StringField()
-    sent_signal = models.IntegerField()  # signal sent by the sender
+    sent_signal = models.IntegerField(min=0, max=10000)  # signal sent by the sender
     estimate = models.IntegerField()  # the estimate sent by the estimation device which is observed by senders
-    posterior = models.FloatField()  # the posterior belief of the receiver
+    posterior = models.FloatField(min=0, max=10000)  # the posterior belief of the receiver
     prior = models.IntegerField()
     true_state = models.IntegerField()
     signal_order = models.IntegerField()
+    chosen_round = models.IntegerField()
     received_signal_0 = models.IntegerField()
     received_signal_1 = models.IntegerField()
     received_signal_2 = models.IntegerField()
@@ -302,7 +303,7 @@ class Instructions_GT_senders(Page):
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 error_messages[
-                    field_name] = 'Falsche Antwort - Bitte korrigiere deine Angabe oder hebe deine Hand zur Klärung mit dem Laborpersonal.'
+                    field_name] = 'Falsche Antwort - Bitte korrigieren Sie Ihre Angabe oder heben Sie Ihre Hand zur Klärung mit dem Laborpersonal.'
 
         return error_messages
 
@@ -332,7 +333,7 @@ class Instructions_GT_receivers(Page):
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 error_messages[
-                    field_name] = 'Falsche Antwort - Bitte korrigiere deine Angabe oder hebe deine Hand zur Klärung mit dem Laborpersonal.'
+                    field_name] = 'Falsche Antwort - Bitte korrigieren Sie Ihre Angabe oder heben Sie Ihre Hand zur Klärung mit dem Laborpersonal.'
 
         return error_messages
 
@@ -469,11 +470,13 @@ def save_signals_payoff(subsession: Subsession):
         participant.signals_all_rounds = signals_all_rounds
         if p.Role == "sender" or p.Role == "prior_sender":
             i = random.randint(1, int(Constants.num_rounds / 2))
+            p.chosen_round = i
             prev_player = p.in_round(i)
             participant = p.participant
             participant.GuessingTask_payoff = prev_player.payoff
         if p.Role == "receiver":
             i = random.randint(int(Constants.num_rounds / 2) + 1, Constants.num_rounds)
+            p.chosen_round = i
             prev_player = p.in_round(i)
             participant = p.participant
             participant.GuessingTask_payoff = prev_player.payoff

@@ -80,6 +80,7 @@ class Instructions_all(Page):
             part_fee=part_fee
         )
 
+
 class Instructions_sender(Page):
     @staticmethod
     def is_displayed(player):

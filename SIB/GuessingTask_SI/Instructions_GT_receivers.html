@@ -209,8 +209,8 @@ p{
         Dies ist die genaue Formel für die Berechnung Ihrer Auszahlung:
         <br>
          <ul>
-          <li>Ihre Auszahlung = 13, if (x - Schätzung)&#178; &#8924;y </li>
-          <li>Ihre Auszahlung = 0, if (x - Schätzung)&#178; &#62;y </li>
+          <li>Ihre Auszahlung = 13, wenn (x - Schätzung)&#178; &le; y </li>
+          <li>Ihre Auszahlung = 0, wenn (x - Schätzung)&#178; &#62; y </li>
       </ul>
 
         <p>Betrachten Sie die folgenden Beispiele.
@@ -286,19 +286,23 @@ p{
 {{ formfield 'comprq7' }}
 <br><hr>
         <p style="font-weight: bold">
-    2.) Welche Sender sind Mitglieder der Gruppe Blau {{ if identity == "Blau" }} (Ihrer Gruppe) {{ endif }} und welche sind Mitglieder der Gruppe Gelb {{ if identity == "Gelb" }} (Ihrer Gruppe) {{ endif }}?</p>
+    2.) Welche Informationen erhalten Sie bei jeder Schätzaufgabe, um die Zahl x zu schätzen?</p>
 {{ formfield 'comprq8' }}
 <br><hr>
         <p style="font-weight: bold">
-    3.) Bitte geben Sie an, welche dieser Aussagen zutrifft.</p>
-{{ formfield 'comprq9' }}
+    3.) Welche Sender sind Mitglieder der Gruppe Blau {{ if identity == "Blau" }} (Ihrer Gruppe) {{ endif }} und welche sind Mitglieder der Gruppe Gelb {{ if identity == "Gelb" }} (Ihrer Gruppe) {{ endif }}?</p>
+{{ formfield 'comprq8_2' }}
 <br><hr>
         <p style="font-weight: bold">
     4.) Bitte geben Sie an, welche dieser Aussagen zutrifft.</p>
+{{ formfield 'comprq9' }}
+<br><hr>
+        <p style="font-weight: bold">
+    5.) Bitte geben Sie an, welche dieser Aussagen zutrifft.</p>
 {{ formfield 'comprq10' }}
 <br><hr>
         <p style="font-weight: bold">
-    5.) Angenommen, in einer Schätzaufgabe hat das von einem Sender beobachtete Schätzgerät eine Schätzung von 19 angegeben.
+    6.) Angenommen, in einer Schätzaufgabe hat das von einem Sender beobachtete Schätzgerät eine Schätzung von 19 angegeben.
             Welche Schätzung hätte der Sender angesichts dieser Information angeben sollen, um seine Chancen auf eine zusätzliche Zahlung zu maximieren?</p>
 {{ formfield 'comprq12' }}
 <br><hr>

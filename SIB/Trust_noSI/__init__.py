@@ -28,6 +28,8 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     Role = models.StringField()
+    chosen_round = models.IntegerField()
+    chosen_sender = models.IntegerField()
     trust_sender_1 = models.IntegerField(min=0, max=10)
     trust_sender_2 = models.IntegerField(min=0, max=10)
     trust_sender_3 = models.IntegerField(min=0, max=10)
@@ -226,26 +228,44 @@ class Trust_in_Senders(Page):
         )
 
     @staticmethod
+    def js_vars(player: Player):
+        participant = player.participant
+        return dict(
+            n_rec_signals_sender_1=10 - participant.signals_all_rounds[0:55:6].count('-'),
+            n_rec_signals_sender_2=10 - participant.signals_all_rounds[1:56:6].count('-'),
+            n_rec_signals_sender_3=10 - participant.signals_all_rounds[2:57:6].count('-'),
+            n_rec_signals_sender_4=10 - participant.signals_all_rounds[3:58:6].count('-'),
+            n_rec_signals_sender_5=10 - participant.signals_all_rounds[4:59:6].count('-'),
+            n_rec_signals_sender_6=10 - participant.signals_all_rounds[5:60:6].count('-'),
+        )
+
+    @staticmethod
     def error_message(player, values):
         participant = player.participant
         if values['trust_sender_1'] > 10 - participant.signals_all_rounds[0:55:6].count('-'):
-            return 'Error for Sender A: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[0:55:6].count('-')) + ' (amount of received signals Sender A)!'
+            return 'Fehler für Sender A: Bitte geben Sie eine Nummer zwischen 0 und ' + str(
+                10 - participant.signals_all_rounds[0:55:6].count(
+                    '-')) + ' ein (Anzahl der erhaltenen Schätzungen von Sender A)!'
         if values['trust_sender_2'] > 10 - participant.signals_all_rounds[1:56:6].count('-'):
-            return 'Error for Sender B: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[1:56:6].count('-')) + ' (amount of received signals Sender B)!'
+            return 'Fehler für Sender B: Bitte geben Sie eine Nummer zwischen 0 und ' + str(
+                10 - participant.signals_all_rounds[1:56:6].count(
+                    '-')) + ' ein (Anzahl der erhaltenen Schätzungen von Sender B)!'
         if values['trust_sender_3'] > 10 - participant.signals_all_rounds[2:57:6].count('-'):
-            return 'Error for Sender C: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[2:57:6].count('-')) + ' (amount of received signals Sender C)!'
+            return 'Fehler für Sender C: Bitte geben Sie eine Nummer zwischen 0 und ' + str(
+                10 - participant.signals_all_rounds[2:57:6].count(
+                    '-')) + ' ein (Anzahl der erhaltenen Schätzungen von Sender C)!'
         if values['trust_sender_4'] > 10 - participant.signals_all_rounds[3:58:6].count('-'):
-            return 'Error for Sender D: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[3:58:6].count('-')) + ' (amount of received signals Sender D)!'
+            return 'Fehler für Sender D: Bitte geben Sie eine Nummer zwischen 0 und ' + str(
+                10 - participant.signals_all_rounds[3:58:6].count(
+                    '-')) + ' ein (Anzahl der erhaltenen Schätzungen von Sender D)!'
         if values['trust_sender_5'] > 10 - participant.signals_all_rounds[4:59:6].count('-'):
-            return 'Error for Sender E: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[4:59:6].count('-')) + ' (amount of received signals Sender E)!'
+            return 'Fehler für Sender E: Bitte geben Sie eine Nummer zwischen 0 und ' + str(
+                10 - participant.signals_all_rounds[4:59:6].count(
+                    '-')) + ' ein (Anzahl der erhaltenen Schätzungen von Sender E)!'
         if values['trust_sender_6'] > 10 - participant.signals_all_rounds[5:60:6].count('-'):
-            return 'Error for Sender F: Please enter a number between 0 and ' + str(
-                10 - participant.signals_all_rounds[5:60:6].count('-')) + ' (amount of received signals Sender F)!'
+            return 'Fehler für Sender F: Bitte geben Sie eine Nummer zwischen 0 und ' + str(
+                10 - participant.signals_all_rounds[5:60:6].count(
+                    '-')) + ' ein (Anzahl der erhaltenen Schätzungen von Sender F)!'
 
 
     form_model = "player"
@@ -683,6 +703,7 @@ def payout_calc(subsession: Subsession):
                 #random_correction = [round, correction, sender)
                 # temp_signal = estimates_all_rounds[(random_correction[0]-1)*6 + (random_correction[2]-1)]
                 actual_signal = subsession.session.config['Signals'][random_correction[2] - 1][random_correction[0] - 1]
+                p.chosen_round = random_correction[0]
                 diff = pow((actual_signal - random_correction[1]), 2)
                 if diff <= subsession.x:
                     correction_payoff = subsession.session.config['Trust_payoff_3']
@@ -691,7 +712,8 @@ def payout_calc(subsession: Subsession):
             else:
                 correction_payoff = 0
                 # participants get rewards for precision in TiS (temp) + fixed payment for Confidence_2 + rewards for precision in Confidence_4
-            p.payoff = random.choice(temp) + subsession.session.config['Trust_payoff_2'] + correction_payoff
+            p.chosen_sender = random.choice(list(range(1, 7)))
+            p.payoff = temp[p.chosen_sender - 1] + subsession.session.config['Trust_payoff_2'] + correction_payoff
             participant.Trust_payoff = p.payoff
 
 page_sequence = [Instructions_Trust_in_Senders, Trust_in_Senders, Confidence_2, Confidence_3, ThirdWaitPage, Payout_calc]

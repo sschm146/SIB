@@ -162,10 +162,10 @@ p{
     <br>
         Für eine genaue Schätzung der Zahl x ist es wichtig, dass Sie wissen, wessen Schätzungen Sie beobachten werden.
         Bei jeder Aufgabe werden sie die Schätzungen von Sender A, Sender B und Sender C und die höchste der drei Schätzungen von Sender D, Sender E und Sender F beobachten.
-        Ausgehend von den Schätzungen, die Sender D, Sender E und Sender F bei den 10 Schätzaufgaben angegeben haben, haben wir festgestellt, dass die zweithöchste der drei Schätzungen im Durchschnitt y niedriger ist als die höchste und die niedrigste im Durchschnitt x niedriger als die höchste.
+        Ausgehend von den Schätzungen, die Sender D, Sender E und Sender F bei den 10 Schätzaufgaben angegeben haben, haben wir festgestellt, dass die zweithöchste der drei Schätzungen im Durchschnitt {{ diff_high_mid }} niedriger ist als die höchste und die niedrigste im Durchschnitt {{ diff_high_low }} niedriger als die höchste.
         Nehmen Sie als Beispiel an, dass Sender F 49, Sender D die zweithöchste Schätzung und Sender E die niedrigste der drei Schätzungen angegeben hat.
-        Dann wäre die Schätzung von Sender D im Durchschnitt um y niedriger als die Schätzung von Sender F und die Schätzung von Sender E um x niedriger.
-        Demnach wäre die Schätzung von Sender D 49-y und die Schätzung von Sender E wäre 49-x.
+        Dann wäre die Schätzung von Sender D im Durchschnitt um {{ diff_high_mid }} niedriger als die Schätzung von Sender F und die Schätzung von Sender E um {{ diff_high_low }} niedriger.
+        Demnach wäre die Schätzung von Sender D 49-{{ diff_high_mid }} und die Schätzung von Sender E wäre 49-{{ diff_high_low }}.
         <br>
         <br>
         Nun stellen wir Ihnen ein Beispiel vor, um die Informationsstruktur zu verdeutlichen.
@@ -208,8 +208,8 @@ p{
         Dies ist die genaue Formel für die Berechnung Ihrer Auszahlung:
         <br>
          <ul>
-          <li>Ihre Auszahlung = Z, if (x - Schätzung)&#178; &#8924;y </li>
-          <li>Ihre Auszahlung =  0, if (x - Schätzung)&#178; &#62;y </li>
+          <li>Ihre Auszahlung = 13€, wenn (x - Schätzung)&#178; &le; y </li>
+          <li>Ihre Auszahlung = 0€, wenn (x - Schätzung)&#178; &#62; y </li>
       </ul>
 
         <p>Betrachten Sie die folgenden Beispiele.

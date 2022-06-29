@@ -1,5 +1,5 @@
 from otree.api import *
-
+import time
 c = Currency
 
 doc = """
@@ -26,9 +26,8 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     identity = models.StringField()
     input_field = models.IntegerField(label="Welches Puzzlestück passt?", min=1)
-    win = models.IntegerField()
-    time_spend = models.FloatField(initial=0)
-    total_points = models.IntegerField()
+    time_started = models.FloatField()
+    time_needed = models.FloatField()
     sisi = models.IntegerField(
         choices=[
             [1, ''],
@@ -44,14 +43,14 @@ class Player(BasePlayer):
         label="", )
     Abitur = models.IntegerField(
         choices=[
-            [7, "3,5-4,0"],
-            [6, "3,0-3,4"],
-            [5, "2,5-2,9"],
-            [4, "2,0-2,4"],
-            [3, "1,5-1,9"],
-            [2, "1,0-1,5"],
-            [1, "Weiß ich nicht mehr."],
-            [0, "Ich habe kein Abitur."]],
+            [8, "3,5-4,0"],
+            [7, "3,0-3,4"],
+            [6, "2,5-2,9"],
+            [5, "2,0-2,4"],
+            [4, "1,5-1,9"],
+            [3, "1,0-1,5"],
+            [2, "Weiß ich nicht mehr."],
+            [1, "Ich habe kein Abitur."]],
         label="", )
 
 
@@ -108,10 +107,24 @@ class Task(Page):
 
     @staticmethod
     def get_timeout_seconds(player):
+        import time
+        if player.round_number == 1:
+            player.time_started = time.time()
         if player.round_number > 0:
             participant = player.participant
-            import time
             return participant.expiry - time.time()
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        first_round_player = player.in_round(1)
+        if player.round_number == 1:
+            player.time_needed = time.time() - player.time_started
+        if player.round_number > 1:
+            time_deduct = 0
+            for i in list(range(1, player.round_number, 1)):
+                prev_player = player.in_round(i)
+                time_deduct += prev_player.time_needed
+            player.time_needed = time.time() - first_round_player.time_started - time_deduct
 
     @staticmethod
     def vars_for_template(player: Player):

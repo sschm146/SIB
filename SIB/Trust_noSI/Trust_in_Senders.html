@@ -62,7 +62,7 @@
     <li class="list-group-item">{{ formfield 'trust_sender_4' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_4}}</i> beobachteten Schätzungen </li>
       {{ endif }}
       {{ if n_rec_signals_sender_4 == 0 }}
-    <li class="list-group-item"> Keine Schätzungen beobachtet </li>
+    <li class="list-group-item"> Keine Schätzungen beobachtet <input type="hidden" name="trust_sender_4" id="trust_sender_4"> </li>
       {{ endif }}
   </ul>
 </div>
@@ -77,7 +77,7 @@
     <li class="list-group-item">{{ formfield 'trust_sender_5' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_5}}</i> beobachteten Schätzungen </li>
       {{ endif }}
       {{ if n_rec_signals_sender_5 == 0 }}
-    <li class="list-group-item"> Keine Schätzungen beobachtet </li>
+    <li class="list-group-item"> Keine Schätzungen beobachtet <input type="hidden" name="trust_sender_5" id="trust_sender_5"></li>
       {{ endif }}
   </ul>
 </div>
@@ -92,7 +92,7 @@
     <li class="list-group-item">{{ formfield 'trust_sender_6' label=''}} von <i style="font-weight: bold">{{n_rec_signals_sender_6}}</i> beobachteten Schätzungen </li>
       {{ endif }}
       {{ if n_rec_signals_sender_6 == 0 }}
-    <li class="list-group-item"> Keine Schätzungen beobachtet </li>
+    <li class="list-group-item"> Keine Schätzungen beobachtet <input type="hidden" name="trust_sender_6" id="trust_sender_6"></li>
       {{ endif }}
   </ul>
 </div>

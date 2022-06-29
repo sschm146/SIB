@@ -235,8 +235,8 @@ p{
         Dies ist die genaue Formel für die Berechnung Ihrer Auszahlung:
         <br>
          <ul>
-          <li>Ihre Auszahlung = Z, if (x - Schätzung)&#178; &#8924;y </li>
-          <li>Ihre Auszahlung =  0, if (x - Schätzung)&#178; &#62;y </li>
+          <li>Ihre Auszahlung = 13€, wenn (x - Schätzung)&#178; &le; y </li>
+          <li>Ihre Auszahlung = 0€, wenn (x - Schätzung)&#178; &#62; y </li>
       </ul>
 
         <p>Betrachten Sie die folgenden Beispiele.
@@ -320,11 +320,11 @@ p{
 {{ formfield 'comprq8' }}
 <br><hr>
         <p style="font-weight: bold">
-    3.) Welche Sender sind Mitglieder der Gruppe Blau {{ if identity == "Blau" }} (Ihrer Gruppe) {{ endif }} und welche sind Mitglieder der Gruppe Gelb {{ if identity == "Gelb" }} (Ihrer Gruppe) {{ endif }}?</p>
+    3.) Welche Informationen erhalten Sie bei jeder Schätzaufgabe, um die Zahl x zu schätzen?</p>
 {{ formfield 'comprq9' }}
 <br><hr>
         <p style="font-weight: bold">
-    4.) Bitte geben Sie an, welche dieser Aussagen zu den Schätzungen der Schätzgeräte zutreffen.</p>
+    4.) Welche Sender sind Mitglieder der Gruppe Blau {{ if identity == "Blau" }} (Ihrer Gruppe) {{ endif }} und welche sind Mitglieder der Gruppe Gelb {{ if identity == "Gelb" }} (Ihrer Gruppe) {{ endif }}?</p>
 {{ formfield 'comprq10' }}
 <br><hr>
         <p style="font-weight: bold">
@@ -332,13 +332,17 @@ p{
 {{ formfield 'comprq11' }}
 <br><hr>
         <p style="font-weight: bold">
-    6.) Stellen Sie sich folgendes Szenario vor:
+    6.) Bitte geben Sie an, welche dieser Aussagen zu den Schätzungen der Schätzgeräte zutreffen.</p>
+{{ formfield 'comprq12' }}
+<br><hr>
+        <p style="font-weight: bold">
+    7.) Stellen Sie sich folgendes Szenario vor:
             Bei einer Schätzaufgabe gibt das Schätzgerät von Sender A eine Schätzung von 19 an, das Schätzgerät von Sender C gibt 20 an und Sender F beobachtet eine Schätzung von 22.
             Welche Schätzungen hätten die Sender in Anbetracht der Informationen, die sie erhalten haben, abgeben sollen, um ihre Chancen auf eine zusätzliche Zahlung zu maximieren?</p>
 {{ formfield 'comprq13' }}
 <br><hr>
         <p style="font-weight: bold">
-    7.) Angenommen, in einer Schätzaufgabe ist die Zahl x gleich 1520, und Sie geben 1520 als Ihre Schätzung der Zahl x an.
+    8.) Angenommen, in einer Schätzaufgabe ist die Zahl x gleich 1520, und Sie geben 1520 als Ihre Schätzung der Zahl x an.
             Wie hoch sind Ihre Chancen, die zusätzliche Auzahlung zu erhalten?</p>
 {{ formfield 'comprq14' }}
 

@@ -31,11 +31,12 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     Role = models.StringField()
     identity = models.StringField()  # the identity from the previous apps
-    sent_signal = models.IntegerField()  # signal sent by the sender
+    sent_signal = models.IntegerField(min=0, max=10000)  # signal sent by the sender
     estimate = models.IntegerField()  # the estimate sent by the estimation device which is observed by senders
-    posterior = models.FloatField()  # the posterior belief of the receiver
+    posterior = models.FloatField(min=0, max=10000)  # the posterior belief of the receiver
     true_state = models.IntegerField()
     signal_order = models.IntegerField()
+    chosen_round = models.IntegerField()
     SB_sender_4 = models.StringField()
     SB_received_signal_1 = models.IntegerField() #saving received signals across rounds for analyses
     SB_received_signal_2 = models.IntegerField() #saving received signals across rounds for analyses
@@ -284,7 +285,49 @@ def creating_session(subsession: Subsession):
                 p.true_state = p.session.config['True_state'][int(p.round_number - Constants.num_rounds / 2) - 1]
         p.identity = participant.identity
 
+def comprq8_choices(player):
+    if player.round_number == 11:
+        subsession = player.subsession
+        players = subsession.get_players()
+        all = [0, 0, 0, 0, 0, 0]
+        highest = []
+        mid = []
+        lowest = []
+        for i in list(range(1, 11, 1)):
+            all_signals = []
+            for p in players:
+                prev_player = p.in_round(i)
+                prev_players = prev_player.group.get_players()
+                all_signals = [prev.sent_signal for prev in prev_players if prev.Role == 'sender']
+            all = np.vstack([all, all_signals])
+            if i == 1:
+                all = np.delete(all, 0, 0)
+        for i in list(range(0, 10, 1)):
+            highest.append(sorted(all[i, :], reverse=True)[0])
+            mid.append(sorted(all[i, :], reverse=True)[1])
+            lowest.append(sorted(all[i, :], reverse=True)[2])
+        diff_high_mid = int(round(sum(highest) / len(highest) - sum(mid) / len(mid), 0))
+        diff_high_low = int(round(sum(highest) / len(highest) - sum(lowest) / len(lowest), 0))
 
+        choice_1 = 'Ich werde die Schätzungen von 4 Sendern beobachten. ' \
+                   'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die niedrigste Schätzung der folgenden 3 Sender betrachten: ' \
+                   'Sender D, Sender E und Sender F. ' \
+                   'Die niedrigste der drei Schätzungen ist im Durchschnitt ' + str(diff_high_low) + ' niedriger als die zweitniedrigste und ' + str(diff_high_mid) + ' niedriger als die höchste.'
+        choice_2 = 'Ich werde die Schätzungen von 4 Sendern beobachten. ' \
+                   'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die höchste Schätzung der folgenden 3 Sender sehen: ' \
+                   'Sender D, Sender E und Sender F. ' \
+                   'Die zweithöchste Schätzung ist im Durchschnitt ' + str(diff_high_mid) + ' niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt ' + str(diff_high_low) + ' niedriger als die höchste.'
+        diff_high_low += 2
+        diff_high_mid += 2
+        choice_3 = 'Ich werde die Schätzungen von 4 Sendern beobachten. ' \
+                   'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die höchste Schätzung der folgenden 3 Sender sehen: ' \
+                   'Sender D, Sender E und Sender F. ' \
+                   'Die zweithöchste Schätzung ist im Durchschnitt ' + str(diff_high_mid) + ' niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt ' + str(diff_high_low) + ' niedriger als die höchste.'
+
+        choices = [[1, choice_1],
+                   [2, choice_2],
+                   [3, choice_3]]
+        return choices
 # PAGES
 
 
@@ -343,7 +386,7 @@ class Instructions_GT_senders(Page):
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 error_messages[
-                    field_name] = 'Falsche Antwort - Bitte korrigiere deine Angabe oder hebe deine Hand zur Klärung mit dem Laborpersonal.'
+                    field_name] = 'Falsche Antwort - Bitte korrigieren Sie Ihre Angabe oder heben Sie Ihre Hand zur Klärung mit dem Laborpersonal.'
 
         return error_messages
 
@@ -360,9 +403,33 @@ class Instructions_GT_receivers(Page):
     def vars_for_template(player: Player):
         participant = player.participant
         identity = participant.identity
+        subsession = player.subsession
+        players = subsession.get_players()
+        all = [0, 0, 0, 0, 0, 0]
+        highest = []
+        mid = []
+        lowest = []
+        for i in list(range(1, 11, 1)):
+            all_signals = []
+            for p in players:
+                prev_player = p.in_round(i)
+                prev_players = prev_player.group.get_players()
+                all_signals = [prev.sent_signal for prev in prev_players if prev.Role == 'sender']
+            all = np.vstack([all, all_signals])
+            if i == 1:
+                all = np.delete(all, 0, 0)
+        for i in list(range(0, 10, 1)):
+            highest.append(sorted(all[i, :], reverse=True)[0])
+            mid.append(sorted(all[i, :], reverse=True)[1])
+            lowest.append(sorted(all[i, :], reverse=True)[2])
+        diff_high_mid = round(sum(highest) / len(highest) - sum(mid) / len(mid), 0)
+        diff_high_low = round(sum(highest) / len(highest) - sum(lowest) / len(lowest), 0)
+
         return dict(
-            identity=identity
-        )
+            diff_high_mid=int(diff_high_mid),
+            diff_high_low=int(diff_high_low),
+            identity=identity)
+
 
     @staticmethod
     def error_message(player, values):
@@ -381,7 +448,7 @@ class Instructions_GT_receivers(Page):
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 error_messages[
-                    field_name] = 'Falsche Antwort - Bitte korrigiere deine Angabe oder hebe deine Hand zur Klärung mit dem Laborpersonal.'
+                    field_name] = 'Falsche Antwort - Bitte korrigieren Sie Ihre Angabe oder heben Sie Ihre Hand zur Klärung mit dem Laborpersonal.'
 
         return error_messages
 
@@ -438,7 +505,7 @@ def set_signals(subsession: Subsession):
                     np.random.shuffle(SB_list)
                     max_index = SB_list[:, 1].argmax()
                     fut_player.SB_received_signal_4 = int(SB_list[max_index][1])
-                    fut_player.SB_sender_4 = SB_list[max_index][0]
+                    fut_player.SB_sender_4 = str(SB_list[max_index][0])
                     fut_player.received_signal_4_identity = SB_list[max_index][2]
                     fut_player.true_state = p.session.config['True_state'][signal_order[i]]
 
@@ -569,11 +636,13 @@ def save_signals_payoff(subsession: Subsession): # Difficulty for SB: Every play
         participant.signals_all_rounds = signals_all_rounds
         if p.Role == "sender":
             i = random.randint(1, int(Constants.num_rounds / 2))
+            p.chosen_round = i
             prev_player = p.in_round(i)
             participant = p.participant
             participant.GuessingTask_payoff = prev_player.payoff
         if p.Role == "receiver":
             i = random.randint(int(Constants.num_rounds / 2) + 1, Constants.num_rounds)
+            p.chosen_round = i
             prev_player = p.in_round(i)
             participant = p.participant
             participant.GuessingTask_payoff = prev_player.payoff
