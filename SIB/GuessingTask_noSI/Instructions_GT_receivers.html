@@ -164,10 +164,14 @@ p{
         Nun stellen wir Ihnen ein Beispiel vor, um die Informationsstruktur zu verdeutlichen.
         Bitte beachten Sie die folgende Abbildung.
         Stellen Sie sich vor, dass in einer Schätzaufgabe das Schätzgerät von Sender A die Zahl 510, das Schätzgerät von Sender B die Zahl 520, das Schätzgerät von Sender C die Zahl 502, das Schätzgerät von Sender D die Zahl 512, das Schätzgerät von Sender E die Zahl 528 und das Schätzgerät von Sender F die Zahl 504 angegeben hat.
-        Die Schätzung jedes Schätzgerätes wird nur von dem Sender beobachtet, der diesem Schätzgerät zugewiesen ist (wie in der Abbildung veranschaulicht).
+        D Schätzung jedes Schätzgerätes wird nur von dem Sender beobachtet, der diesem Schätzgerät zugewiesen ist (wie in der Abbildung veranschaulicht).
         Nachdem jeder Sender die Schätzung des jeweils zugeordneten Schätzgerätes erhalten hat, gibt jeder Sender eine persönliche Schätzung der Zahl x an.
         Sie werden alle 6 Schätzungen der insgesamt 6 Sender beobachten.
         <br>
+         <br>
+                        <div style="margin: auto; width: 80%; height: auto">
+        <img src="{{ static 'control.png' }}" style="height: 100%; width:100%"/>
+            </div>
         <br>
         Um weiterhin zu verdeutlichen, was Sie tatsächlich beobachten werden und wie eine Schätzaufgabe auf Ihrem Bildschirm aussehen wird, stellen Sie sich ein weiteres Beispiel vor.
         Nehmen Sie an, dass jeder Sender die Schätzung des jeweils zugeordneten Schätzgerätes erhalten hat.
@@ -175,9 +179,10 @@ p{
         In diesem Fall würden Sie das folgende Bild auf Ihrem Bildschirm sehen.
                 <br>
         <br>
-                <div style="margin: auto; width: 80%; height: auto">
-        <img src="{{ static 'control.png' }}" style="height: 100%; width:100%"/>
+                                <div style="margin: auto; width: 100%; height: auto">
+        <img src="{{ static 'noSI_signals.png' }}" style="height: 100%; width:100%"/>
             </div>
+        <br>
         <br>
     <h4>
         Auszahlung
@@ -196,7 +201,7 @@ p{
         Der Computer wird eine zufällige Zahl y zwischen 0 und 50 ziehen.
         Jede Zahl zwischen 0 und 50 kann mit gleicher Wahrscheinlichkeit gezogen werden.
         Sie erhalten 13€, wenn der quadratische Abstand zwischen Ihrer Schätzung und der tatsächlichen Zahl x kleiner oder gleich y ist.
-        Ansonsten erhalten Sie 0 €.
+        Ansonsten erhalten Sie 0€.
         Dies ist die genaue Formel für die Berechnung Ihrer Auszahlung:
         <br>
          <ul>

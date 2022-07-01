@@ -86,12 +86,6 @@ SESSION_CONFIGS = [
         app_sequence=["Intro_SI_all", "SIM_SI", "GuessingTask_SI_CN", "BigFive","Trust_SI", "Final_Questionnaire", "MU", "Payout"],
         prior_sender=False,
     ),
-dict(
-        name="MU_Test",
-        display_name="MU_Test",
-        num_demo_participants=2,
-        app_sequence=["MU"],
-    ),
 ]
 
 PARTICIPANT_FIELDS = ["Role", "identity", "SIM_payoff", "GuessingTask_payoff", "Trust_payoff", "signals_all_rounds",

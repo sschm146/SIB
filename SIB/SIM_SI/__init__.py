@@ -17,7 +17,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+    tie_breaker = models.StringField()
 
 
 class Group(BaseGroup):
@@ -73,6 +73,7 @@ class MyWaitPage(WaitPage):
     # Winner is determined by amount of solved paintings (or at random if amount of solved paintings is equal)
 
 def payout_calc(subsession: Subsession):
+    subsession.tie_breaker = random.choice(["Gelb", "Blau"])
     players = subsession.get_players()
     for p in players:
         if p.artist1 == "Paul Klee":
@@ -83,34 +84,24 @@ def payout_calc(subsession: Subsession):
             p.artist_points += 1
         if p.artist4 == "Wassily Kandinsky":
             p.artist_points += 1
+    correct_yellow = sum([a.artist_points for a in players if a.identity == 'Gelb'])
+    correct_blue = sum([a.artist_points for a in players if a.identity == 'Blau'])
     for p in players:
         participant = p.participant
         if p.identity != "neutral":
-            correct_yellow = 0
-            correct_blue = 0
-            for p in players:
-                if p.identity == "Yellow":
-                    correct_yellow += p.artist_points
-                if p.identity == "Blue":
-                    correct_blue += p.artist_points
-            for p in players:
-                participant = p.participant
-                if correct_yellow > correct_blue and p.identity == "Yellow":
-                    p.payoff = subsession.session.config['SIM_payoff']
-                    participant.SIM_payoff = p.payoff
-                if correct_yellow < correct_blue and p.identity == "Blue":
-                    p.payoff = subsession.session.config['SIM_payoff']
-                    participant.SIM_payoff = p.payoff
+            if correct_yellow > correct_blue and p.identity == "Gelb":
+                p.payoff = subsession.session.config['SIM_payoff']
+                participant.SIM_payoff = p.payoff
+            if correct_yellow < correct_blue and p.identity == "Blau":
+                p.payoff = subsession.session.config['SIM_payoff']
+                participant.SIM_payoff = p.payoff
             if correct_yellow == correct_blue:
-                winner = random.choice(["Yellow", "Blue"])
-                for p in players:
-                    participant = p.participant
-                    if p.identity == winner:
-                        p.payoff = subsession.session.config['SIM_payoff']
-                        participant.SIM_payoff = p.payoff
-                    else:
-                        p.payoff = 0
-                        participant.SIM_payoff = p.payoff
+                if p.identity == subsession.tie_breaker:
+                    p.payoff = subsession.session.config['SIM_payoff']
+                    participant.SIM_payoff = p.payoff
+                else:
+                    p.payoff = 0
+                    participant.SIM_payoff = p.payoff
         if p.identity == "neutral":
             others = [g.artist_points for g in players if g != p]
             competitor = random.choice(others)

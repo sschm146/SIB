@@ -8,7 +8,13 @@
     float: right;
     margin: 40px auto;
     }
-
+.text-primary {
+color: #322b7b!important;
+    font-weight: bold;
+}
+.text-warning{
+    font-weight: bold;
+}
  .back{
     float: left;
     margin: 40px auto;
@@ -83,12 +89,12 @@ p{
         Jeder Sender hat einen eindeutigen Namen:
         Sender A, Sender B, Sender C, Sender D, Sender E und Sender F.
         {{ if identity == "Blau" }}
-                Wichtig ist, dass Sender A, B und C zu Ihrer Gruppe Blau gehören und Sie die Aufgabe mit den Gemälden in Teil 1 gemeinsam gelöst haben.
-        Sie sind gegen Sender D, E und F angetreten, die zur Gruppe Gelb gehören.
+                Wichtig ist, dass Sender A, B und C zu Ihrer <span class="text-primary">Gruppe Blau</span> gehören und Sie die Aufgabe mit den Gemälden in Teil 1 gemeinsam gelöst haben.
+        Sie sind gegen Sender D, E und F angetreten, die zur <span class="text-warning">Gruppe Gelb</span> gehören.
             {{ endif }}
             {{ if identity == "Gelb" }}
-                Wichtig ist, dass Sender D, E und F zu Ihrer Gruppe Gelb gehören und Sie die Aufgabe mit den Gemälden in Teil 1 gemeinsam gelöst haben.
-        Sie sind gegen Sender A, B und C angetreten, die zur Gruppe Blau gehören.
+                Wichtig ist, dass Sender D, E und F zu Ihrer <span class="text-warning">Gruppe Gelb</span> gehören und Sie die Aufgabe mit den Gemälden in Teil 1 gemeinsam gelöst haben.
+        Sie sind gegen Sender A, B und C angetreten, die zur <span class="text-primary">Gruppe Blau</span> gehören.
             {{ endif }}
         <br>
         Die Sender haben die 10 Schätzaufgaben bereits gelöst.
@@ -191,7 +197,11 @@ p{
         Sender A schätzt daraufhin die Zahl x auf 823, Sender B schätzt diese auf 831, Sender C schätzt diese auf 825 und Sender F schätzt diese auf 835.
         Sender D und E haben Schätzungen angegeben, die niedriger als die Schätzung von Sender F sind.
         In diesem Fall würden Sie das folgende Bild auf Ihrem Bildschirm sehen.
-
+                        <br>
+        <br>
+                <div style="margin: auto; width: 100%; height: auto">
+        <img src="{{ static 'SI_signals_SB.png' }}" style="height: 100%; width:100%"/>
+            </div>
         <br>
         <br>
     <h4>
@@ -211,7 +221,7 @@ p{
         Der Computer wird eine zufällige Zahl y zwischen 0 und 50 ziehen.
         Jede Zahl zwischen 0 und 50 kann mit gleicher Wahrscheinlichkeit gezogen werden.
         Sie erhalten 13€, wenn der quadratische Abstand zwischen Ihrer Schätzung und der tatsächlichen Zahl x kleiner oder gleich y ist.
-        Ansonsten erhalten Sie 0 €.
+        Ansonsten erhalten Sie 0€.
         Dies ist die genaue Formel für die Berechnung Ihrer Auszahlung:
         <br>
          <ul>
@@ -246,11 +256,11 @@ p{
                 Das heißt, Sie werden die Schätzungen von Sender A, Sender B, Sender C und die höchste der Schätzungen von Sender D, Sender E und Sender F beobachten.
                 Basierend auf den Schätzungen von Sender D, Sender E und Sender F in den 10 Schätzaufgaben ist die zweithöchste Schätzung im Durchschnitt y niedriger als die höchste und die niedrigste Schätzung ist im Durchschnitt x niedriger als die höchste Schätzung.</li>
             <li>{{ if identity == "Blau" }}
-                Die Sender A, B und C sind Mitglieder Ihrer Gruppe Blau, während die Sender D, E und F Mitglieder der Gruppe Gelb sind.
+                Die Sender A, B und C sind Mitglieder Ihrer <span class="text-primary">Gruppe Blau</span>, während die Sender D, E und F Mitglieder der <span class="text-warning">Gruppe Gelb</span> sind.
                 In Teil 1 des Experiments sind Sie und die Sender A, B, C gegen die Sender D, E und F angetreten.
             {{ endif }}
             {{ if identity == "Gelb" }}
-                Die Sender D, E und F sind Mitglieder Ihrer Gruppe Gelb, während die Sender A, B und C Mitglieder der Gruppe Blau sind.
+                Die Sender D, E und F sind Mitglieder Ihrer <span class="text-warning">Gruppe Gelb</span>, während die Sender A, B und C Mitglieder der <span class="text-primary">Gruppe Blau</span> sind.
                 In Teil 1 des Experiments sind Sie und die Sender D, E, F gegen die Sender A, B und C angetreten.
             {{ endif }}</li>
             <li>Jeder Sender hat die Zahl x geschätzt und wurde entsprechend seiner Genauigkeit bezahlt.</li>

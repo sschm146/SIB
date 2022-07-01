@@ -1,6 +1,16 @@
 {{ load otree staticfiles }}
 {{block styles }}
     <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+<style type="text/css">
+
+.text-primary {
+color: #322b7b!important;
+    font-weight: bold;
+}
+.text-warning{
+    font-weight: bold;
+}
+    </style>
 {{ endblock }}
 {{ block content }}
 <div class="card bg-light instructions">
@@ -30,8 +40,10 @@
 
 
         {{ if SI == True }}
-        <strong>Bitte lesen Sie folgende Aussage und geben Sie an, inwiefern Sie dieser Aussage zustimmen/nicht zustimmen: <br> <br><div align="center" style="font-style: italic">
-            "Ich identifiziere mich mit meiner Gruppe '{{ identity }}'"</div> </strong>
+        <strong>Bitte lesen Sie folgende Aussage und geben Sie an, inwiefern Sie dieser Aussage zustimmen/nicht zustimmen:</strong> <br> <br><div align="center" style="font-style: italic; font-weight: bold">
+            {{ if identity == "Blau" }} "Ich identifiziere mich mit meiner <span class="text-primary"> Gruppe {{ identity }}</span>"{{ endif }}
+            {{ if identity == "Gelb" }} "Ich identifiziere mich mit meiner <span class="text-warning"> Gruppe {{ identity }}</span>"{{ endif }}
+        </div>
                 <table class="table">
         <tr>
             <br>

@@ -47,11 +47,13 @@ def payout_calc(subsession: Subsession):
             p.payoff_urn = str(payoff_urn)
             p.payoff_ball = random.choice([0, 1, 2])
             p.payoff = payoff_urn[p.payoff_ball] + p.session.config['participation_fee']
+            participant.payoff = payoff_urn[p.payoff_ball]
         if participant.Role == 'sender' or participant.Role == 'prior_sender':
             payoff_urn = [SIM_payoff, GuessingTask_payoff]
             p.payoff_urn = str(payoff_urn)
             p.payoff_ball = random.choice([0, 1])
             p.payoff = payoff_urn[p.payoff_ball] + p.session.config['participation_fee']
+            participant.payoff = payoff_urn[p.payoff_ball]
 
 
 

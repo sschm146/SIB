@@ -369,7 +369,7 @@ class Instructions_GT_receivers(Page):
         return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
 
     form_model = "player"
-    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10",  "comprq12", "comprq13"]
+    form_fields = ["comprq7", "comprq8","comprq8_2", "comprq9", "comprq10",  "comprq12", "comprq13"]
 
     @staticmethod
     def vars_for_template(player: Player):

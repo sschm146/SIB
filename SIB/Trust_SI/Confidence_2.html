@@ -113,11 +113,11 @@ input[type=range]:focus::-ms-fill-upper {
 <br>
 <br>
  {{ if CN_treatment == False }}
-        In Frage 1 haben Sie erraten, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die genaue Zahl angegeben hat, die er/sie gesehen hat (d. h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde).
+        In Frage 1 haben Sie erraten, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die genaue Zahl angegeben hat, die er gesehen hat (d. h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde).
         Dies waren Ihre Schätzungen:
 {{ endif }}
         {{ if CN_treatment == True }}
-        In Frage 1 haben Sie erraten, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die genaue Zahl angegeben hat, die er/sie gesehen hat (d.h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde (für die Sender A, B, C und D) oder den Durchschnitt von zwei davon (für die Sender E und F)).
+        In Frage 1 haben Sie erraten, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die genaue Zahl angegeben hat, die er gesehen hat (d.h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde (für die Sender A, B, C und D) oder den Durchschnitt von zwei davon (für die Sender E und F)).
         Dies waren Ihre Schätzungen:
         {{ endif }}
       <br>
@@ -196,7 +196,7 @@ input[type=range]:focus::-ms-fill-upper {
       <p>
         Nun bitten wir Sie, für jeden Sender anzugeben, wie sicher Sie sich bei Ihrer Einschätzung sind.
         Benutzen Sie dazu bitte die Schieberegler, um die folgenden Aussagen zu vervollständigen.
-        Wenn Sie sich die Angaben der Absender in allen 10 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie sich die Tabelle am unteren Bildschirmrand ansehen.
+        Wenn Sie sich die Angaben der Sender in allen 10 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie sich die Tabelle am unteren Bildschirmrand ansehen.
         </p>
 
 
@@ -438,10 +438,10 @@ input[type=range]:focus::-ms-fill-upper {
             function update1(value){
                 check1 = 1
                  if (value === js_vars.n_rec_signals_sender_1){
-                    document.getElementById("label_slider1").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender A der Zahl, die er/sie gesehen hat, genau " + js_vars.trust_sender_1 +" mal entspricht."
+                    document.getElementById("label_slider1").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender A der Zahl, die er gesehen hat, genau " + js_vars.trust_sender_1 +" mal entspricht."
                 }
                 else {
-                    document.getElementById("label_slider1").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender A der Zahl, die er/sie gesehen hat, zwischen " +
+                    document.getElementById("label_slider1").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender A der Zahl, die er gesehen hat, zwischen " +
                         Math.max(0, js_vars.trust_sender_1 - (js_vars.n_rec_signals_sender_1 - value)) + " und "
                         + Math.min(js_vars.trust_sender_1 + (js_vars.n_rec_signals_sender_1 - value) , js_vars.n_rec_signals_sender_1) + " mal entspricht."
                 }
@@ -449,10 +449,10 @@ input[type=range]:focus::-ms-fill-upper {
             function update2(value){
                 check2 = 1
                 if (value === js_vars.n_rec_signals_sender_2){
-                    document.getElementById("label_slider2").innerHTML =  "Ich bin mir sicher, dass die Angabe von Sender B der Zahl, die er/sie gesehen hat, genau " + js_vars.trust_sender_2 +" mal entspricht"
+                    document.getElementById("label_slider2").innerHTML =  "Ich bin mir sicher, dass die Angabe von Sender B der Zahl, die er gesehen hat, genau " + js_vars.trust_sender_2 +" mal entspricht"
                 }
                 else {
-                    document.getElementById("label_slider2").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender B der Zahl, die er/sie gesehen hat, zwischen " +
+                    document.getElementById("label_slider2").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender B der Zahl, die er gesehen hat, zwischen " +
                         Math.max(0,js_vars.trust_sender_2 - (js_vars.n_rec_signals_sender_2 - value)) + " und "
                         + Math.min(js_vars.trust_sender_2 + (js_vars.n_rec_signals_sender_2 - value) , js_vars.n_rec_signals_sender_2) + " mal entspricht."
                 }
@@ -461,10 +461,10 @@ input[type=range]:focus::-ms-fill-upper {
             function update3(value){
                 check3 = 1
                  if (value === js_vars.n_rec_signals_sender_3){
-                    document.getElementById("label_slider3").innerHTML =  "Ich bin mir sicher, dass die Angabe von Sender C der Zahl, die er/sie gesehen hat, genau " + js_vars.trust_sender_3 +" mal entspricht"
+                    document.getElementById("label_slider3").innerHTML =  "Ich bin mir sicher, dass die Angabe von Sender C der Zahl, die er gesehen hat, genau " + js_vars.trust_sender_3 +" mal entspricht"
                 }
                 else {
-                    document.getElementById("label_slider3").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender C der Zahl, die er/sie gesehen hat, zwischen " +
+                    document.getElementById("label_slider3").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender C der Zahl, die er gesehen hat, zwischen " +
                         Math.max(0,js_vars.trust_sender_3 - (js_vars.n_rec_signals_sender_3 - value)) + " und "
                         + Math.min(js_vars.trust_sender_3 + (js_vars.n_rec_signals_sender_3 - value) , js_vars.n_rec_signals_sender_3) + " mal entspricht."
                 }
@@ -472,10 +472,10 @@ input[type=range]:focus::-ms-fill-upper {
             function update4(value){
                 check4 = 1
                 if (value === js_vars.n_rec_signals_sender_4){
-                    document.getElementById("label_slider4").innerHTML =  "Ich bin mir sicher, dass die Angabe von Sender D der Zahl, die er/sie gesehen hat, genau " + js_vars.trust_sender_4 +" mal entspricht"
+                    document.getElementById("label_slider4").innerHTML =  "Ich bin mir sicher, dass die Angabe von Sender D der Zahl, die er gesehen hat, genau " + js_vars.trust_sender_4 +" mal entspricht"
                 }
                 else {
-                    document.getElementById("label_slider4").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender D der Zahl, die er/sie gesehen hat, zwischen " +
+                    document.getElementById("label_slider4").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender D der Zahl, die er gesehen hat, zwischen " +
                         Math.max(0,js_vars.trust_sender_4 - (js_vars.n_rec_signals_sender_4 - value)) + " und "
                         + Math.min(js_vars.trust_sender_4 + (js_vars.n_rec_signals_sender_4 - value) , js_vars.n_rec_signals_sender_4) + " mal entspricht."
                 }
@@ -484,10 +484,10 @@ input[type=range]:focus::-ms-fill-upper {
             function update5(value){
                 check5 = 1
                 if (value === js_vars.n_rec_signals_sender_5){
-                    document.getElementById("label_slider5").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender E der Zahl, die er/sie gesehen hat, genau " + js_vars.trust_sender_5 +" mal entspricht"
+                    document.getElementById("label_slider5").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender E der Zahl, die er gesehen hat, genau " + js_vars.trust_sender_5 +" mal entspricht"
                 }
                 else {
-                    document.getElementById("label_slider5").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender E der Zahl, die er/sie gesehen hat, zwischen " +
+                    document.getElementById("label_slider5").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender E der Zahl, die er gesehen hat, zwischen " +
                         Math.max(0,js_vars.trust_sender_5 - (js_vars.n_rec_signals_sender_5 - value)) + " und "
                         + Math.min(js_vars.trust_sender_5 + (js_vars.n_rec_signals_sender_5 - value) , js_vars.n_rec_signals_sender_5) + " mal entspricht."
                 }
@@ -495,17 +495,17 @@ input[type=range]:focus::-ms-fill-upper {
             function update6(value){
                 check6 = 1
                 if (value === js_vars.n_rec_signals_sender_6){
-                    document.getElementById("label_slider6").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender F der Zahl, die er/sie gesehen hat, genau " + js_vars.trust_sender_6 +" mal entspricht"
+                    document.getElementById("label_slider6").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender F der Zahl, die er gesehen hat, genau " + js_vars.trust_sender_6 +" mal entspricht"
                 }
                 else {
-                    document.getElementById("label_slider6").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender F der Zahl, die er/sie gesehen hat, zwischen " +
+                    document.getElementById("label_slider6").innerHTML = "Ich bin mir sicher, dass die Angabe von Sender F der Zahl, die er gesehen hat, zwischen " +
                         Math.max(0,js_vars.trust_sender_6 - (js_vars.n_rec_signals_sender_6 - value)) + " und "
                         + Math.min(js_vars.trust_sender_6 + (js_vars.n_rec_signals_sender_6 - value) , js_vars.n_rec_signals_sender_6) + " mal entspricht."
                 }
             }
             function update(){
-                 if (check1 === 1 && check2 === 1 && check3 === 1 && (check4 === 1 || js_vars.n_rec_signals_sender_4 === 0) && (check5 === 1 || js_vars.n_rec_signals_sender_5 === 0
-                     && (check6 === 1 || js_vars.n_rec_signals_sender_6 === 0))) {
+                 if (check1 === 1 && check2 === 1 && check3 === 1 && (check4 === 1 || js_vars.n_rec_signals_sender_4 === 0) && (check5 === 1 || js_vars.n_rec_signals_sender_5 === 0)
+                     && (check6 === 1 || js_vars.n_rec_signals_sender_6 === 0)) {
             document.getElementById("nextbtn").style.visibility="visible";}}
         </script>
 {% endblock %}
