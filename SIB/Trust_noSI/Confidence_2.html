@@ -100,9 +100,7 @@ input[type=range]:focus::-ms-fill-upper {
 {{ block content }}
 <div class="card bg-light instructions">
     <div class="card-body">
-    <h3>
-        Teil 4 - Frage 2
-    </h3>
+    <h3>        Teil 4 - Frage 2    </h3>
 <br>
 <br>
  {{ if CN_treatment == False }}
@@ -191,8 +189,10 @@ input[type=range]:focus::-ms-fill-upper {
 
 
         <h4> Auszahlung </h4>
-        Wenn dieser Teil der Studie (Teil 4) für die Bezahlung gewählt wird, erhalten Sie für die Beantwortung von Frage 2 eine zusätzliche Auszahlung von 2€.
-        Dieser Betrag wird zusätzlich zu Ihrem Verdienst aus Frage 1 gezahlt.
+        <p>
+            Wenn dieser Teil der Studie (Teil 4) für die Bezahlung gewählt wird, erhalten Sie für die Beantwortung von Frage 2 eine zusätzliche Auszahlung von 2€.
+            Diese Auszahlung wird zu Ihrer Auszahlung aus der Frage 1 hinzuaddiert.
+        </p>
 
         <br><hr>
         <br>
@@ -393,9 +393,9 @@ Achtung: Sie können erst auf "Weiter" klicken, sobald Sie eine Auswahl bei alle
             check4 = 0
             check5 = 0
             check6 = 0
-            document.getElementById("label_slider1").innerHTML= "Bitte hier eine Auswahl treffen."
-            document.getElementById("label_slider2").innerHTML= "Bitte hier eine Auswahl treffen."
-            document.getElementById("label_slider3").innerHTML= "Bitte hier eine Auswahl treffen."
+            document.getElementById("label_slider1").innerHTML= "Ich bin mir sicher, dass die Angabe von Sender A der Zahl, die er gesehen hat, ... <b>bitte hier eine Auswahl treffen!</b>"
+            document.getElementById("label_slider2").innerHTML= "Ich bin mir sicher, dass die Angabe von Sender B der Zahl, die er gesehen hat, ... <b>bitte hier eine Auswahl treffen!</b>"
+            document.getElementById("label_slider3").innerHTML= "Ich bin mir sicher, dass die Angabe von Sender C der Zahl, die er gesehen hat, ... <b>bitte hier eine Auswahl treffen!</b>"
             document.getElementById("slider1").max = js_vars.n_rec_signals_sender_1
             document.getElementById("slider1").min = Math.min(js_vars.trust_sender_1, js_vars.n_rec_signals_sender_1 - js_vars.trust_sender_1)
             document.getElementById("slider1").value = js_vars.n_rec_signals_sender_1
@@ -406,17 +406,17 @@ Achtung: Sie können erst auf "Weiter" klicken, sobald Sie eine Auswahl bei alle
             document.getElementById("slider3").min = Math.min(js_vars.trust_sender_3, js_vars.n_rec_signals_sender_3 - js_vars.trust_sender_3)
             document.getElementById("slider3").value = js_vars.n_rec_signals_sender_3
             if (js_vars.n_rec_signals_sender_4>0) {
-            document.getElementById("label_slider4").innerHTML= "Bitte hier eine Auswahl treffen."
+            document.getElementById("label_slider4").innerHTML= "Ich bin mir sicher, dass die Angabe von Sender D der Zahl, die er gesehen hat, ... <b>bitte hier eine Auswahl treffen!</b>"
             document.getElementById("slider4").max = js_vars.n_rec_signals_sender_4
                 document.getElementById("slider4").min = Math.min(js_vars.trust_sender_4, js_vars.n_rec_signals_sender_4 - js_vars.trust_sender_4)
             document.getElementById("slider4").value = js_vars.n_rec_signals_sender_4}
             if (js_vars.n_rec_signals_sender_5>0) {
-            document.getElementById("label_slider5").innerHTML= "Bitte hier eine Auswahl treffen."
+            document.getElementById("label_slider5").innerHTML= "Ich bin mir sicher, dass die Angabe von Sender E der Zahl, die er gesehen hat, ... <b>bitte hier eine Auswahl treffen!</b>"
             document.getElementById("slider5").max = js_vars.n_rec_signals_sender_5
                 document.getElementById("slider5").min = Math.min(js_vars.trust_sender_5, js_vars.n_rec_signals_sender_5 - js_vars.trust_sender_5)
             document.getElementById("slider5").value = js_vars.n_rec_signals_sender_5}
             if (js_vars.n_rec_signals_sender_6>0) {
-            document.getElementById("label_slider6").innerHTML= "Bitte hier eine Auswahl treffen."
+            document.getElementById("label_slider6").innerHTML= "Ich bin mir sicher, dass die Angabe von Sender F der Zahl, die er gesehen hat, ... <b>bitte hier eine Auswahl treffen!</b>"
             document.getElementById("slider6").max = js_vars.n_rec_signals_sender_6
             document.getElementById("slider6").min = Math.min(js_vars.trust_sender_6, js_vars.n_rec_signals_sender_6 - js_vars.trust_sender_6)
                 document.getElementById("slider6").value = js_vars.n_rec_signals_sender_6

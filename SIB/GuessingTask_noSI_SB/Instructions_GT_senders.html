@@ -65,99 +65,102 @@ p{
  </h3>
     </div>
     <div class="card-body">
-
+<p>
         Dieser Teil besteht aus 10 separaten Schätzaufgaben.
-        Bei jeder Aufgabe <b>müssen Sie eine unbekannte Zahl x schätzen. Sie werden nach der Genauigkeit Ihrer Schätzung bezahlt</b> (wie unten beschrieben).
-
+        Bei jeder Aufgabe <b>müssen Sie eine unbekannte Zahl <i>x</i> schätzen. Sie werden nach der Genauigkeit Ihrer Schätzung bezahlt</b> (wie unten beschrieben).
+</p>
 <br><br>
 
 <h4>
    Schätzaufgaben
 </h4>
         <p>
-            Bei jeder der 10 Aufgaben wird vom Computer eine neue Zahl x festgelegt.
+            Bei jeder der 10 Aufgaben wird vom Computer eine neue Zahl <i>x</i> festgelegt.
             Alle 10 Schätzaufgaben haben zwar die gleiche Struktur, sind aber völlig unabhängig voneinander.
             Das bedeutet, dass die Zahlen in den einzelnen Aufgaben in keiner Weise miteinander verbunden sind.
         </p>
         <p>
-            Sie werden nie mit Sicherheit wissen, was die genaue Zahl x ist.
+            Sie werden nie mit Sicherheit wissen, was die genaue Zahl <i>x</i> ist.
             Stattdessen werden Sie Informationen, die von einem Computer generiert werden, erhalten.
             Diese helfen Ihnen, x zu schätzen.
-            Bei jeder Aufgabe werden Sie diese Informationen erhalten und werden dann Ihre eigene Schätzung von x angeben.
+            Bei jeder Aufgabe werden Sie diese Informationen erhalten und werden dann Ihre eigene Schätzung von <i>x</i> angeben.
+            Die Zahlen <i>x</i> und die Informationen für die 10 Aufgaben wurden bereits vor der Studie ermittelt.
             Im Folgenden wird Ihnen erklärt, wie die informationen generiert werden und welche davon Sie erhalten werden.
         </p>
         <p>
             Der Computer simuliert Geräte, die die gleiche Aufgabe lösen wie Sie.
         Wir werden diese Geräte "Schätzgeräte" nennen.
-        Für jede Aufgabe machen 10000 Schätzgeräte ihre Schätzung der Zahl x.
+        Für jede Aufgabe machen 10000 Schätzgeräte ihre Schätzung der Zahl <i>x</i>.
         Die Geräte sind gut darin, diese Schätzungen zu machen.
-        Sie sind unabhängig voneinander und haben alle die gleiche Qualität, d. h., sie sind gleich gut in der Schätzung der Zahl x.
+        Sie sind unabhängig voneinander und haben alle die gleiche Qualität, d. h., sie sind gleich gut in der Schätzung der Zahl <i>x</i>.
         Die Geräte haben die folgenden Eigenschaften:
         </p>
 <br>
         <ul>
-            <li>Die Schätzung eines zufällig ausgewählten Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der tatsächlichen Zahl x als jede andere Zahl.</li>
-            <li>Je weiter man sich von der Zahl x entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.
-                Die Wahrscheinlichkeit, dass ein Schätzgerät eine Schätzung angibt, die um 10 größer oder kleiner ist als die Zahl x, ist sehr gering.</li>
-            <li>Der Durchschnitt der 10000 Schätzungen entspricht genau (oder fast genau) der Zahl x.
+            <li>Die Schätzung eines zufällig ausgewählten Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der tatsächlichen Zahl <i>x</i> als jede andere Zahl.</li>
+            <li>Je weiter man sich von der Zahl <i>x</i> entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.
+                Die Wahrscheinlichkeit, dass ein Schätzgerät eine Schätzung angibt, die um 10 größer oder kleiner ist als die Zahl <i>x</i>, ist sehr gering.</li>
+            <li>Der Durchschnitt der 10000 Schätzungen entspricht genau (oder fast genau) der Zahl <i>x</i>.
                 Das bedeutet, dass die Schätzgeräte im Durchschnitt richtig liegen.</li>
         </ul>
 
         <p>
         Betrachten Sie bitte das folgende Beispiel.
-        Stellen Sie sich vor, der Computer hat 280 als die tatsächliche Zahl x gezogen.
+        Stellen Sie sich vor, der Computer hat 280 als die tatsächliche Zahl <i>x</i> gezogen.
         Die folgende Abbildung zeigt ein Beispiel für die 10000 Schätzgeräte und ihre Schätzungen.
             </p>
 
         <div style="margin: auto; width: 80%; height: auto">
         <img src="{{ static 'Distr.png' }}" style="height: 100%; width:100%"/>
-            </div>
-        <br>
-
+            </div><br>
         <p>
         Wie Sie sehen können, bilden die Schätzungen eine typische Glockenkurve.
         Die häufigste Schätzung ist genau 280.
-        Es ist also wahrscheinlicher, dass die Schätzung eines zufällig gezogenen Schätzgerätes der tatsächlichen Zahl x entspricht als jede andere Zahl.
+        Es ist also wahrscheinlicher, dass die Schätzung eines zufällig gezogenen Schätzgerätes der tatsächlichen Zahl <i>x</i> entspricht als jede andere Zahl.
         Je weiter man sich von 280 entfernt, desto unwahrscheinlicher ist es, dass eine solche Schätzung von einem Schätzgerät angegeben wird, und Schätzungen größer als 290 und kleiner als 270 werden fast nie angegeben.
         Der Durchschnitt aller 10000 Schätzungen, der durch die blaue gestrichelte Linie dargestellt wird, beträgt 280.
-        Der Durchschnitt ist also korrekt, d. h. er entspricht der Zahl x.
+        Der Durchschnitt ist also korrekt, d. h. er entspricht der Zahl <i>x</i>.
             </p>
 
         <p>
-            Um Ihnen bei der Schätzung der Zahl x zu helfen, wird das folgende Verfahren angewendet.
+            Um Ihnen bei der Schätzung der Zahl <i>x</i> zu helfen, wird das folgende Verfahren angewendet.
             Bei jeder Schätzaufgabe wird ein Schätzgerät zufällig gezogen.
             Sie werden die Schätzung dieses Schätzgeräts beobachten.
             Das bedeutet, dass Sie sich für Ihre eigene Schätzung nur auf die Schätzung eines einzigen Schätzgeräts verlassen werden.
-            Um die Informationen des Schätzgeräts bestmöglich zu nutzen, sollten Sie bedenken, dass die Schätzung eines zufällig ausgewählten Schätzgeräters mit größerer Wahrscheinlichkeit der tatsächlichen Zahl x entspricht als jeder andere Zahl.
-            <b>Um Ihre Chancen auf eine korrekte Schätzung der Zahl x zu maximieren, sollten Sie daher bei jeder Schätzaufgabe genau die vom Schätzgerät angegebene Zahl angeben.</b>
+            Um die Informationen des Schätzgeräts bestmöglich zu nutzen, sollten Sie bedenken, dass die Schätzung eines zufällig ausgewählten Schätzgerätes mit größerer Wahrscheinlichkeit der tatsächlichen Zahl <i>x</i> entspricht als jeder anderen Zahl.
+            <b>Sie können also ihre Chancen für die Auszahlung maximieren, indem Sie in jeder Schätzaufgabe genau die vom Schätzgerät angegebene Zahl angeben.</b>
         </p>
 
         <h4>Auszahlung</h4>
-        Wenn dieser Teil der Studie (Teil 2) für die Bezahlung ausgewählt wird, wird eine der 10 Schätzaufgaben zufällig ausgewählt und <b>Sie werden entsprechend der Genauigkeit Ihrer Schätzung bei dieser Aufgabe bezahlt.</b>
-        Da jede Aufgabe für ihre Auszahlung ausgewählt werden kann, sollten Sie jede Aufgabe sorgfältig bearbeiten.
-        Ihre Auszahlung wird durch der folgenden Regel bestimmt werden:
-        <b>Je näher Ihre Schätzung an der Zahl x liegt, desto höher ist die Wahrscheinlichkeit, dass Sie eine zusätzliche Auszahlung von 13€ erhalten.
-            Wenn Ihre Schätzung genau der Zahl x entspricht, werden Sie auf jeden Fall 13€ erhalten. </b>
-        Die Regel ist so gestaltet, dass Sie sich die größte Chance auf die 13€ sichern können, indem Sie Ihre genaueste Schätzung angeben.
-        Falls Sie an den Einzelheiten der Regel interessiert sind, beschreiben wir sie im Folgenden:
-        Der Computer zieht zufällig eine Zahl zwischen 0 und 50.
-        Wenn der quadratische Abstand zwischen Ihrer Schätzung und der Zahl x gleich oder kleiner als diese zufällig gezogene Zahl ist, erhalten Sie 13€. Ist er größer,
-        erhalten Sie 0€. Beachten Sie, dass Ihre Gewinnchancen vom quadratischen Abstand zur tatsächlichen Zahl x abhängen.
-        Es macht also keinen Unterschied, ob Sie die Zahl x unter- oder überschätzen.
-        Auch wenn diese Regel kompliziert erscheinen mag, ist das zugrunde liegende Prinzip sehr einfach:
-        Je präziser Ihre Schätzung ist (d. h. je geringer der Abstand zwischen Ihrer Schätzung und der Zahl x), desto höher ist die Wahrscheinlichkeit, dass Sie die 13€ erhalten.
-        <br>
-        <br>
+        <p>
+            Wenn dieser Teil der Studie (Teil 2) für die Bezahlung ausgewählt wird, wird eine der 10 Schätzaufgaben zufällig ausgewählt, und <b>Sie werden entsprechend der Genauigkeit Ihrer Schätzung bei dieser Aufgabe bezahlt</b>.
+            Da jede Aufgabe für ihre Auszahlung ausgewählt werden kann, sollten Sie jede Aufgabe sorgfältig bearbeiten.
+            Ihre Auszahlung wird durch folgende Regel bestimmt werden:
+            <b>Je näher Ihre Schätzung an der Zahl <i>x</i> liegt, desto höher ist die Wahrscheinlichkeit, dass Sie eine zusätzliche Auszahlung von 13 € erhalten.
+            Wenn Ihre Schätzung genau der Zahl <i>x</i> entspricht, werden Sie auf jeden Fall 13 € erhalten.</b>
+            Die Regel ist so gestaltet, dass Sie sich die größte Chance auf die 13 € sichern können, indem Sie <b>Ihre genaueste Schätzung angeben</b>.
+        </p>
+        <p>
+            Falls Sie an den Einzelheiten der Regel interessiert sind, beschreiben wir sie im Folgenden:
+            Der Computer zieht zufällig eine Zahl zwischen 0 und 50.
+            Wenn der quadratische Abstand zwischen Ihrer Schätzung und der Zahl <i>x</i> gleich oder kleiner als diese zufällig gezogene Zahl ist, erhalten Sie 13€.
+            Ist er größer, erhalten Sie 0 €. Beachten Sie, dass Ihre Gewinnchancen vom quadratischen Abstand zur tatsächlichen Zahl <i>x</i> abhängen.
+            Es macht also keinen Unterschied, ob Sie die Zahl <i>x</i> unter- oder überschätzen.
+        </p>
+        <p>
+            Auch wenn diese Regel kompliziert erscheinen mag, ist das zugrunde liegende Prinzip sehr einfach:
+            Je präziser Ihre Schätzung ist (d. h. je geringer der Abstand zwischen Ihrer Schätzung und der Zahl <i>x</i>), desto höher ist die Wahrscheinlichkeit, dass Sie die 13 € erhalten.
+        </p>
        <h4>Zusammenfassung:</h4>
         <ul>
-            <li>In diesem Teil werden Sie 10 unabhängige Schätzaufgaben lösen. Bei jeder Aufgabe müssen Sie eine unbekannte Zahl x schätzen.</li>
+            <li>In diesem Teil werden Sie 10 unabhängige Schätzaufgaben lösen. Bei jeder Aufgabe müssen Sie eine unbekannte Zahl <i>x</i> schätzen.</li>
             <li>In jeder Aufgabe werden Sie eine Schätzung eines zufällig gezogenen Schätzgeräts beobachten.</li>
             <li>Sie werden nach der Genauigkeit Ihrer Schätzungen bezahlt.</li>
         </ul>
-
+        <p>
         Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
         Wenn Sie die Anweisungen verstanden haben und bereit sind, fortzufahren, klicken Sie bitte auf "Weiter".
-        <br>
+      </p>
   </div>
 </div>
 <button onclick="topFunction()" id="tab1_next" type="button" class="nexttab btn-primary btn next">Weiter</button>
@@ -189,7 +192,7 @@ p{
 {{ formfield 'comprq2' }}
 <br><hr>
         <p style="font-weight: bold">
-    3.) Welche Informationen erhalten Sie bei jeder Schätzaufgabe, um die Zahl x zu schätzen?</p>
+    3.) Welche Informationen erhalten Sie bei jeder Schätzaufgabe, um die Zahl <i>x</i> zu schätzen?</p>
 {{ formfield 'comprq3' }}
 <br><hr>
         <p style="font-weight: bold">

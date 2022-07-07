@@ -2,6 +2,7 @@
 {{block styles }}
     <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
 <style type="text/css">
+
 #fadeIn {
             animation-name: fade;
             animation-duration: 4s;
@@ -16,16 +17,18 @@
 {% block content %}
 <div class="card bg-light instructions">
     <div class="card-header bg-transparent mainheader" >
- <h3 class="card-title font-weight-bold"> Teil 2
- </h3>
+ <h3 class="card-title font-weight-bold"> Teil 2 </h3>
         </div>
     <div class="card-body">
 <h3 style="text-align: center"> Schätzaufgabe <b id="fadeIn">{{ round }} von 10</b></h3>
 <br>
 <br>
-        <div style="text-align: center"> Unten finden Sie die Schätzung Ihres zufällig zugewiesenen Schätzgerätes.</div>
+        <div style="text-align: center"> Im Folgenden sehen Sie die Schätzung Ihres zufällig zugewiesenen Schätzgerätes. Bitte machen Sie Ihre Eingabe innerhalb von 2 Minuten:</div>
 <br>
 <br>
+        <div class="alert alert-warning" role="alert" id="timer_warning" style="visibility: hidden">
+  Bitte machen Sie nun Ihre Eingabe und bestätigen Sie mit "Weiter".
+    </div>
 <br>
 <div class="row" align="center">
   <div class="col">
@@ -43,7 +46,7 @@
 <br>
 <br>
 <div align="center">
-    Bitte geben Sie nun Ihre eigene Schätzung zum tatsächlichen Wert der Zahl x ab und bestätigen Sie mit weiter:
+    Bitte geben Sie nun Ihre eigene Schätzung zum tatsächlichen Wert der Zahl <i>x</i> ab und bestätigen Sie mit weiter:
     <br>
     <br>
 {{ formfield 'sent_signal' label=""}}
@@ -54,4 +57,21 @@
 <div align="center">
     {% next_button %}
 </div>
+
+<script>
+
+function warning(){
+  document.getElementById("timer_warning").style.visibility = "visible"
+}
+setTimeout(warning, 2000);
+
+</script>
+<script>
+
+function warning(){
+  document.getElementById("timer_warning").style.visibility = "visible"
+}
+setTimeout(warning, 90000);
+
+</script>
 {% endblock %}

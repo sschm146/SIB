@@ -40,7 +40,7 @@ class Player(BasePlayer):
     received_signal_5 = models.IntegerField()
     received_signal_6 = models.IntegerField()
     comprq1 = models.IntegerField(choices=[[1,
-                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts kann mit gleicher Wahrscheinlichkeit der Zahl x oder einer andere Zahl entsprechen.'],
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts kann mit gleicher Wahrscheinlichkeit der Zahl x oder einer anderen Zahl entsprechen.'],
                                            [2,
                                             'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der Zahl x als jede andere Zahl. '
                                             'Je weiter man sich von der Zahl x entfernt, desto wahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.'],
@@ -58,7 +58,7 @@ class Player(BasePlayer):
                                   label='')
     comprq3 = models.IntegerField(choices=[[1, 'Ich werde die Schätzung von 1 zufällig gezogenen Schätzgerät beobachten.'],
                                            [2, 'Ich werde die Schätzungen von 2 zufällig gezogenen Schätzgeräten beobachten.'],
-                                           [3, 'Ich werde die Schätzungen von 3 zufällig ausgewählten Schätzgeräten beobachten.']],
+                                           [3, 'Ich werde die Schätzungen von 3 zufällig gezogenen Schätzgeräten beobachten.']],
                                   widget=widgets.RadioSelect,
                                   label='')
     comprq4 = models.IntegerField(choices=[[1, 'A randomly drawn estimation device shows me an estimate of 490.'],
@@ -88,7 +88,7 @@ class Player(BasePlayer):
                                   widget=widgets.RadioSelect,
                                   label='')
     comprq8 = models.IntegerField(choices=[[1, 'Ich werde die Schätzung von 1 zufällig gezogenen Schätzgerät beobachten.'],
-                                           [2, 'Ich werde die Schätzungen von 6 zufällig ausgewählten Schätzgeräten beobachten.'],
+                                           [2, 'Ich werde die Schätzungen von 6 zufällig gezogenen Schätzgeräten beobachten.'],
                                            [3, 'Ich werde die Schätzungen von 6 Sendern beobachten: Sender A, Sender B, Sender C, Sender D, Sender E, und Sender F.']],
                                   widget=widgets.RadioSelect,
                                   label='')
@@ -128,7 +128,16 @@ class Player(BasePlayer):
                                            [3, 'Only one of the parts in which additional money can be earned will be randomly chosen and paid out. If it happens that part 3 is chosen, then one of the 10 estimation tasks will be randomly chosen, and my additional payment will depend only on my precision on that particular estimation task.']],
                                   widget=widgets.RadioSelect,
                                   label='')
-
+    error_comprq1 = models.IntegerField(initial=0)
+    error_comprq2 = models.IntegerField(initial=0)
+    error_comprq3 = models.IntegerField(initial=0)
+    error_comprq5 = models.IntegerField(initial=0)
+    error_comprq7 = models.IntegerField(initial=0)
+    error_comprq8 = models.IntegerField(initial=0)
+    error_comprq9 = models.IntegerField(initial=0)
+    error_comprq10 = models.IntegerField(initial=0)
+    error_comprq12 = models.IntegerField(initial=0)
+    error_comprq13 = models.IntegerField(initial=0)
     q1 = models.IntegerField(label='')
     q2 = models.IntegerField(label='')
     q3 = models.IntegerField(
@@ -164,7 +173,7 @@ class Player(BasePlayer):
         )
     q7 = models.StringField(label='', blank=True)
     q8 = models.IntegerField(label='')
-    q9 = models.IntegerField(label='')
+    q9 = models.IntegerField(min=0, label='')
     q10 = models.IntegerField(
         choices=[[1, "Schlecht"],
                  [2, "Durchschnittlich"],
@@ -192,16 +201,16 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect, label=''
         )
     q14 = models.IntegerField(
-        choices=[[1, "Keine Haushaltsplanung"],
-                 [2, "Kosten für lebensnotwendige Dinge zu hoch"],
-                 [3, "Zu sorglos mit Geld"],
-                 [4, "Andere Prioritäten wie Shopping und Nachtleben haben Vorrang"],
-                 [5, "Ich habe keine Schwierigkeiten"],
+        choices=[[1, "Ich habe keine Schwierigkeiten"],
+                 [2, "Keine Haushaltsplanung"],
+                 [3, "Kosten für lebensnotwendige Dinge zu hoch"],
+                 [4, "Zu sorglos mit Geld"],
+                 [5, "Andere Prioritäten wie Shopping und Nachtleben haben Vorrang"],
                  [6, "Ich bin gut im Haushalten"],
                  [7, "Ich weiß es nicht"]],
         widget=widgets.RadioSelect, label=''
         )
-    q15 = models.StringField(label='')
+    q15 = models.LongStringField(label='')
     q16 = models.IntegerField(
         choices=[[1, "Ja"],
                  [2, "Nein"]],
@@ -241,9 +250,9 @@ class Player(BasePlayer):
                  [6, "Sonstige"]],
         widget=widgets.RadioSelect, label=''
         )
-    q23 = models.StringField(label='', blank=True)
-    q24 = models.StringField(label='')
-    q25 = models.StringField(label='')
+    q23 = models.LongStringField(label='', blank=True)
+    q24 = models.LongStringField(label='')
+    q25 = models.LongStringField(label='')
 
 
 
@@ -298,6 +307,7 @@ class Signals(Page):
 
 
 class Instructions_GT_senders(Page):
+
     @staticmethod
     def is_displayed(player):
         return player.Role == "sender" and player.round_number == 1
@@ -316,11 +326,18 @@ class Instructions_GT_senders(Page):
         )
 
         error_messages = dict()
-
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
-                error_messages[
+                    error_messages[
                     field_name] = 'Falsche Antwort - Bitte korrigieren Sie Ihre Angabe oder heben Sie Ihre Hand zur Klärung mit dem Laborpersonal.'
+                    if field_name == "comprq1":
+                        player.error_comprq1 += 1
+                    if field_name == "comprq2":
+                        player.error_comprq2 += 1
+                    if field_name == "comprq3":
+                        player.error_comprq3 += 1
+                    if field_name == "comprq5":
+                        player.error_comprq5 += 1
 
         return error_messages
 
@@ -352,7 +369,18 @@ class Instructions_GT_receivers(Page):
             if values[field_name] != solutions[field_name]:
                 error_messages[
                     field_name] = 'Falsche Antwort - Bitte korrigieren Sie Ihre Angabe oder heben Sie Ihre Hand zur Klärung mit dem Laborpersonal.'
-
+                if field_name == "comprq7":
+                    player.error_comprq7 += 1
+                if field_name == "comprq8":
+                    player.error_comprq8 += 1
+                if field_name == "comprq9":
+                    player.error_comprq9 += 1
+                if field_name == "comprq10":
+                    player.error_comprq10 += 1
+                if field_name == "comprq12":
+                    player.error_comprq12 += 1
+                if field_name == "comprq13":
+                    player.error_comprq13 += 1
         return error_messages
 
 

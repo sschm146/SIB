@@ -47,7 +47,7 @@ class Player(BasePlayer):
         label="",
     )
     artist_points = models.IntegerField(initial=0)
-
+    competitor_id = models.IntegerField(blank=True)
 # PAGES
 class Instructions(Page):
     pass
@@ -73,8 +73,11 @@ def payout_calc(subsession: Subsession):
             p.artist_points += 1
     for p in players:
         participant = p.participant
-        others = [g.artist_points for g in players if g != p]
-        competitor = random.choice(others)
+        others_points = [g.artist_points for g in players if g != p]
+        others_ids = [g.id_in_group for g in players if g != p]
+        temp = random.choice(others_ids) - 2
+        p.competitor_id = others_ids[temp]
+        competitor = others_points[temp]
         if p.artist_points > competitor:
             p.payoff = subsession.session.config['SIM_payoff']
             participant.SIM_payoff = p.payoff
