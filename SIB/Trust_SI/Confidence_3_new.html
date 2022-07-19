@@ -1,0 +1,272 @@
+{% load otree %}
+
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+<style type="text/css">
+    .bg-primary {
+background-color: #3f51b5!important;
+color: white;
+}
+
+
+table {
+    font-family: arial, sans-serif;
+    border: none;
+    width: 800px;
+    margin: auto;
+    border: lightgrey;
+    font-size: medium;
+    border-collapse:separate;
+    border-spacing:10px;
+}
+td {
+    height: 45px;
+    width: 50px;
+    }
+
+
+input{
+    border: none;
+    height: 100%;
+    width: 100%;
+    font-size: medium;
+}
+.row_header{
+    font-weight: bold;
+    width: 150px;
+}
+</style>
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 3 - Frage 3</h3>
+        </div>
+    <div class="card-body">
+      <br>
+        <p>
+        {{ if CN_treatment == False }}
+        In Frage 1 haben Sie Ihre Einschätzung darüber abgegeben, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die selbe Zahl angegeben hat, die er gesehen hat (d. h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde).
+        Für die folgenden Sender haben Sie angegeben, dass diese nicht immer die selbe Zahl angegeben haben, die sie gesehen haben.
+        {{ endif }}
+        {{ if CN_treatment == True }}
+        In Frage 1 haben Sie Ihre Einschätzung darüber abgegeben, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die selbe Zahl angegeben hat, die er gesehen hat (d. h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde (für die Sender A, B, C und D) oder den Durchschnitt von zwei davon (für die Sender E und F)).
+        Für die folgenden Sender haben Sie angegeben, dass sie nicht immer die Zahl angegeben haben, die sie gesehen haben.
+        {{ endif }}
+</p>
+        <ul>
+        {{ if trust_sender_1 < 10}}
+            <li>Sender A hat ihrer Einschätzung nach {{ mistrust_sender_1 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
+        {{ endif }}
+        {{ if trust_sender_2 < 10}}
+        <li>Sender B hat ihrer Einschätzung nach {{ mistrust_sender_2 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
+        {{ endif }}
+        {{ if trust_sender_3 < 10}}
+        <li>Sender C hat ihrer Einschätzung nach {{ mistrust_sender_3 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
+        {{ endif }}
+        {{ if trust_sender_4 < 10}}
+        <li>Sender D hat ihrer Einschätzung nach {{ mistrust_sender_4 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
+        {{ endif }}
+        {{ if trust_sender_5 < 10}}
+        <li>Sender E hat ihrer Einschätzung nach {{ mistrust_sender_5 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
+        {{ endif }}
+        {{ if trust_sender_6 < 10}}
+        <li>Sender F hat ihrer Einschätzung nach {{ mistrust_sender_6 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
+        {{ endif }}
+            </ul>
+        <hr>
+        <p>
+            Bitte betrachten Sie die unten angezeigte Tabelle.
+            Darin sehen Sie die abgegebenen Schätzungen aller Sender über die 10 Schätzaufgaben.
+            Treffen Sie per Klick auf die gezeigten Schätzungen eine Auswahl <b>in welcher Runde die oben aufgeführten Sender nicht angegeben haben, was sie gesehen haben.</b>
+            Durch ihre Auswahl erscheint die ausgewählte Schätzung in roter Farbe.
+            Laut Ihren Angaben oben haben bestimmte Sender bei insgesamt {{ mistrust }} angegebenen Schätzungen, nicht genau das angegeben, was sie gesehen haben.
+            Solange Sie mehr oder weniger als {{ mistrust }} Schätzungen in der Tabelle rot markiert haben, können Sie nicht mit der nächsten Seite fortfahren.
+            Sobald Sie genau {{ mistrust }} Schätzungen der entsprechenden Sender in der Tabelle rot markiert haben, können Sie Ihre Angaben mit "Weiter" am unteren Ende der Seite bestätigen.
+            Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
+        </p>
+
+
+<table width='100%' align="center" id="trust_table" class="table table-hover ">
+    <thead>
+    <tr>
+        <th></th>
+        <th class="bg-primary">Sender A</th>
+        <th class="bg-primary">Sender B</th>
+        <th class="bg-primary">Sender C</th>
+        <th class="bg-warning">Sender D</th>
+        <th class="bg-warning">Sender E</th>
+        <th class="bg-warning">Sender F</th>
+      </tr>
+    </thead>
+      <tr>
+          <td class="row_header">Schätzaufgabe 1</td>
+           <td><input required type=button id="sender_1_1" style="width:100%; background: white;" onclick="color_update('sender_1_1');"></td>
+           <td><input required type=button id="sender_1_2" style="width:100%; background: white;" onclick="color_update('sender_1_2');"></td>
+           <td><input required type=button id="sender_1_3" style="width:100%; background: white;" onclick="color_update('sender_1_3');"></td>
+           <td><input required type=button id="sender_1_4" style="width:100%; background: white;" onclick="color_update('sender_1_4');"></td>
+           <td><input required type=button id="sender_1_5" style="width:100%; background: white;" onclick="color_update('sender_1_5');"></td>
+           <td><input required type=button id="sender_1_6" style="width:100%; background: white;" onclick="color_update('sender_1_6');"></td>
+      </tr>
+    <tr>
+    <td class="row_header">Schätzaufgabe 2</td>
+           <td><input required type=button id="sender_2_1" style="width:100%; background: white;" onclick="color_update('sender_2_1');"></td>
+           <td><input required type=button id="sender_2_2" style="width:100%; background: white;" onclick="color_update('sender_2_2');"></td>
+           <td><input required type=button id="sender_2_3" style="width:100%; background: white;" onclick="color_update('sender_2_3');"></td>
+           <td><input required type=button id="sender_2_4" style="width:100%; background: white;" onclick="color_update('sender_2_4');"></td>
+           <td><input required type=button id="sender_2_5" style="width:100%; background: white;" onclick="color_update('sender_2_5');"></td>
+           <td><input required type=button id="sender_2_6" style="width:100%; background: white;" onclick="color_update('sender_2_6');"></td>
+      </tr>
+    <tr>
+    <td class="row_header">Schätzaufgabe 3</td>
+           <td><input required type=button id="sender_3_1" style="width:100%; background: white;" onclick="color_update('sender_3_1');"></td>
+           <td><input required type=button id="sender_3_2" style="width:100%; background: white;" onclick="color_update('sender_3_2');"></td>
+           <td><input required type=button id="sender_3_3" style="width:100%; background: white;" onclick="color_update('sender_3_3');"></td>
+           <td><input required type=button id="sender_3_4" style="width:100%; background: white;" onclick="color_update('sender_3_4');"></td>
+           <td><input required type=button id="sender_3_5" style="width:100%; background: white;" onclick="color_update('sender_3_5');"></td>
+           <td><input required type=button id="sender_3_6" style="width:100%; background: white;" onclick="color_update('sender_3_6');"></td>
+      </tr>
+    <tr>
+    <td class="row_header">Schätzaufgabe 4</td>
+           <td><input required type=button id="sender_4_1" style="width:100%; background: white;" onclick="color_update('sender_4_1');"></td>
+           <td><input required type=button id="sender_4_2" style="width:100%; background: white;" onclick="color_update('sender_4_2');"></td>
+           <td><input required type=button id="sender_4_3" style="width:100%; background: white;" onclick="color_update('sender_4_3');"></td>
+           <td><input required type=button id="sender_4_4" style="width:100%; background: white;" onclick="color_update('sender_4_4');"></td>
+           <td><input required type=button id="sender_4_5" style="width:100%; background: white;" onclick="color_update('sender_4_5');"></td>
+           <td><input required type=button id="sender_4_6" style="width:100%; background: white;" onclick="color_update('sender_4_6');"></td>
+      </tr>
+    <tr>
+    <td class="row_header">Schätzaufgabe 5</td>
+           <td><input required type=button id="sender_5_1" style="width:100%; background: white;" onclick="color_update('sender_5_1');"></td>
+           <td><input required type=button id="sender_5_2" style="width:100%; background: white;" onclick="color_update('sender_5_2');"></td>
+           <td><input required type=button id="sender_5_3" style="width:100%; background: white;" onclick="color_update('sender_5_3');"></td>
+           <td><input required type=button id="sender_5_4" style="width:100%; background: white;" onclick="color_update('sender_5_4');"></td>
+           <td><input required type=button id="sender_5_5" style="width:100%; background: white;" onclick="color_update('sender_5_5');"></td>
+           <td><input required type=button id="sender_5_6" style="width:100%; background: white;" onclick="color_update('sender_5_6');"></td>
+      </tr>
+    <tr>
+    <td class="row_header">Schätzaufgabe 6</td>
+           <td><input required type=button id="sender_6_1" style="width:100%; background: white;" onclick="color_update('sender_6_1');"></td>
+           <td><input required type=button id="sender_6_2" style="width:100%; background: white;" onclick="color_update('sender_6_2');"></td>
+           <td><input required type=button id="sender_6_3" style="width:100%; background: white;" onclick="color_update('sender_6_3');"></td>
+           <td><input required type=button id="sender_6_4" style="width:100%; background: white;" onclick="color_update('sender_6_4');"></td>
+           <td><input required type=button id="sender_6_5" style="width:100%; background: white;" onclick="color_update('sender_6_5');"></td>
+           <td><input required type=button id="sender_6_6" style="width:100%; background: white;" onclick="color_update('sender_6_6');"></td>
+      </tr>
+    <tr>
+    <td class="row_header">Schätzaufgabe 7</td>
+           <td><input required type=button id="sender_7_1" style="width:100%; background: white;" onclick="color_update('sender_7_1');"></td>
+           <td><input required type=button id="sender_7_2" style="width:100%; background: white;" onclick="color_update('sender_7_2');"></td>
+           <td><input required type=button id="sender_7_3" style="width:100%; background: white;" onclick="color_update('sender_7_3');"></td>
+           <td><input required type=button id="sender_7_4" style="width:100%; background: white;" onclick="color_update('sender_7_4');"></td>
+           <td><input required type=button id="sender_7_5" style="width:100%; background: white;" onclick="color_update('sender_7_5');"></td>
+           <td><input required type=button id="sender_7_6" style="width:100%; background: white;" onclick="color_update('sender_7_6');"></td>
+      </tr>
+    <tr>
+    <td class="row_header">Schätzaufgabe 8</td>
+           <td><input required type=button id="sender_8_1" style="width:100%; background: white;" onclick="color_update('sender_8_1');"></td>
+           <td><input required type=button id="sender_8_2" style="width:100%; background: white;" onclick="color_update('sender_8_2');"></td>
+           <td><input required type=button id="sender_8_3" style="width:100%; background: white;" onclick="color_update('sender_8_3');"></td>
+           <td><input required type=button id="sender_8_4" style="width:100%; background: white;" onclick="color_update('sender_8_4');"></td>
+           <td><input required type=button id="sender_8_5" style="width:100%; background: white;" onclick="color_update('sender_8_5');"></td>
+           <td><input required type=button id="sender_8_6" style="width:100%; background: white;" onclick="color_update('sender_8_6');"></td>
+      </tr>
+    <tr>
+    <td class="row_header">Schätzaufgabe 9</td>
+           <td><input required type=button id="sender_9_1" style="width:100%; background: white;" onclick="color_update('sender_9_1');"></td>
+           <td><input required type=button id="sender_9_2" style="width:100%; background: white;" onclick="color_update('sender_9_2');"></td>
+           <td><input required type=button id="sender_9_3" style="width:100%; background: white;" onclick="color_update('sender_9_3');"></td>
+           <td><input required type=button id="sender_9_4" style="width:100%; background: white;" onclick="color_update('sender_9_4');"></td>
+           <td><input required type=button id="sender_9_5" style="width:100%; background: white;" onclick="color_update('sender_9_5');"></td>
+           <td><input required type=button id="sender_9_6" style="width:100%; background: white;" onclick="color_update('sender_9_6');"></td>
+      </tr>
+    <tr>
+    <td class="row_header">Schätzaufgabe 10</td>
+           <td><input required type=button id="sender_10_1" style="width:100%; background: white;" onclick="color_update('sender_10_1');"></td>
+           <td><input required type=button id="sender_10_2" style="width:100%; background: white;" onclick="color_update('sender_10_2');"></td>
+           <td><input required type=button id="sender_10_3" style="width:100%; background: white;" onclick="color_update('sender_10_3');"></td>
+           <td><input required type=button id="sender_10_4" style="width:100%; background: white;" onclick="color_update('sender_10_4');"></td>
+           <td><input required type=button id="sender_10_5" style="width:100%; background: white;" onclick="color_update('sender_10_5');"></td>
+           <td><input required type=button id="sender_10_6" style="width:100%; background: white;" onclick="color_update('sender_10_6');"></td>
+      </tr>
+
+    </table>
+        <div><script>
+    for(var r = 1; r <= 10; ++r){
+        for(var s = 1; s <= 6; ++s) {
+            document.write(["<input required value=\"0\" name=\"trust_sender_",r,"_", s,"\" id=\"trust_sender_",r,"_", s,"\" type=\"hidden\">"].join(''));
+        }}
+</script></div>
+<p id="warning" style="visibility: hidden" class="alert-warning">
+    Sie haben zu viele/wenige Schätzungen markiert! Im oberen Teil der Seite finden Sie eine Auflistung Ihre Angaben, in wie vielen Runden die jeweiligen Sender nicht genau das angegeben haben, was sie gesehen haben.
+    Sie dürfen die Gesamtzahl dieser Runden nicht überschreiten. Sollten Sie eine Frage haben, heben Sie bitte Ihre Hand.
+</p>
+    </div>
+</div>
+    <div align="center">
+    <button  class="otree-btn-next btn btn-primary" id="nextbtn">Weiter</button>
+</div>
+
+<script>
+
+function color_update(id) {
+    // update colors
+
+    if (document.getElementById(id).style.backgroundColor === "white") {
+        document.getElementById(id).parentElement.style.background = "indianred";
+        document.getElementById(id).style.backgroundColor = "indianred"
+        document.getElementById(["trust_", id].join('')).value = 1
+    } else {
+        document.getElementById(id).parentElement.style.background = "white";
+        document.getElementById(id).style.backgroundColor = "white"
+        document.getElementById(["trust_", id].join('')).value = 0
+    }
+    // Check whether inputs match previous entries
+    let counter_sender_1 = 0
+    let counter_sender_2 = 0
+    let counter_sender_3 = 0
+    let counter_sender_4 = 0
+    let counter_sender_5 = 0
+    let counter_sender_6 = 0
+    for(var r = 1; r <= 10; r++){
+         counter_sender_1 += parseInt(document.getElementById(["trust_sender_", r, "_1"].join('')).value)
+         counter_sender_2 += parseInt(document.getElementById(["trust_sender_", r, "_2"].join('')).value)
+         counter_sender_3 += parseInt(document.getElementById(["trust_sender_", r, "_3"].join('')).value)
+         counter_sender_4 += parseInt(document.getElementById(["trust_sender_", r, "_4"].join('')).value)
+         counter_sender_5 += parseInt(document.getElementById(["trust_sender_", r, "_5"].join('')).value)
+         counter_sender_6 += parseInt(document.getElementById(["trust_sender_", r, "_6"].join('')).value)
+         }
+    if (counter_sender_1!==js_vars.mistrust_sender_1 ||
+    counter_sender_2!==js_vars.mistrust_sender_2 ||
+    counter_sender_3!==js_vars.mistrust_sender_3 ||
+    counter_sender_4!==js_vars.mistrust_sender_4 ||
+    counter_sender_5!==js_vars.mistrust_sender_5 ||
+    counter_sender_6!==js_vars.mistrust_sender_6){
+             document.getElementById("nextbtn").style.visibility = "hidden"
+        if (performance.now() > 10000) {
+            document.getElementById("warning").style.visibility = "visible"
+        }
+         } else {
+         document.getElementById("warning").style.visibility = "hidden"
+         document.getElementById("nextbtn").style.visibility = "visible"
+        }}
+
+window.onload = function(){
+    let signals = [js_vars.signals_round_1,js_vars.signals_round_2,js_vars.signals_round_3,js_vars.signals_round_4,js_vars.signals_round_5,
+    js_vars.signals_round_6,js_vars.signals_round_7,js_vars.signals_round_8,js_vars.signals_round_9,js_vars.signals_round_10]
+    for(var r = 1; r <= 10; r++){
+        for(var s = 1; s <= 6; s++){
+            document.getElementById(["sender_", r, "_", s].join('')).value = signals[r-1][s-1];
+            document.getElementById(["trust_sender_", r, "_", s].join('')).value = 0
+            if (document.getElementById(["sender_", r, "_", s].join('')).value === '-'){
+                //document.getElementById(["sender_", r, "_", s].join('')).disabled = true
+                document.getElementById(["sender_", r, "_", s].join('')).style.visibility = "hidden"
+            }
+    }}
+    document.getElementById("nextbtn").style.visibility = "hidden"
+}
+
+</script>
+
+{% endblock %}
+

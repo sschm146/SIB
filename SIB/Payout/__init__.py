@@ -66,6 +66,7 @@ class Payout(Page):
     @staticmethod
     def vars_for_template(player: Player):
         participant = player.participant
+
         SIM_payoff = participant.SIM_payoff
         GuessingTask_payoff = participant.GuessingTask_payoff
 
@@ -75,7 +76,8 @@ class Payout(Page):
                 SIM_payoff=SIM_payoff,
                 GuessingTask_payoff=GuessingTask_payoff,
                 total_payoff=player.payoff,
-                payoff_ball=player.payoff_ball
+                payoff_ball=player.payoff_ball,
+                role = participant.Role
             )
         if participant.Role == 'receiver':
             Trust_payoff = participant.Trust_payoff
@@ -85,7 +87,8 @@ class Payout(Page):
                 GuessingTask_payoff=GuessingTask_payoff,
                 Trust_payoff=Trust_payoff,
                 total_payoff=player.payoff,
-                payoff_ball=player.payoff_ball
+                payoff_ball=player.payoff_ball,
+                role=participant.Role
             )
 
 

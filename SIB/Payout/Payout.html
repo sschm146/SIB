@@ -50,8 +50,14 @@
 
         </li>
         {{ if payoff_ball == 1 }}
+            {{ if role == 'sender'}}
             <li>Teil 2 wurde für Ihre Auszahlung ausgewählt.
         <u>Auszahlung aus Teil 2:</u> <b> {{GuessingTask_payoff}}</b></li>
+            {{ endif }}
+            {{ if role == 'receiver'}}
+            <li>Teil 3 wurde für Ihre Auszahlung ausgewählt.
+        <u>Auszahlung aus Teil 3:</u> <b> {{GuessingTask_payoff}}</b></li>
+            {{ endif }}
             {{ endif }}
         {{ if payoff_ball == 2 }}
             <li>Teil 4 wurde für Ihre Auszahlung ausgewählt.
