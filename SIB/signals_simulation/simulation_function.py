@@ -21,6 +21,30 @@ def simulation(x, n_estimates):
     out = pd.DataFrame({"round":list(),"sender":list(), "estimate":list(), "mean" : list(),"avABC-avDEF":list(),
     "avEF-D":list(),"avDE":list(),"avDF":list()})
 
+    #######################################################################
+    ############## MAIN Parameters to adapt signal structure ##############
+    #######################################################################
+    #Characteristics for the Distribution - also adapt in function 'finish_round' at end of page!!!!:
+    # EDIT STEFAN: In theory, 99.7% of values should fall within 3*SD (95% within 2*SD). If we want it "quasi-bounded" within -100/+100 we should set SD to 33
+    # EDIT STEFAN: Also, we should increase the sample size in order to smooth the distribution a bit. I suggest to use at least 100.000 draws.
+    distr_SD = 33
+    distr_N = 1000000
+    # CONDITION 1: Average of A, B, C (AvABC) should be higher or lower than average of D, E, and F (AvDEF) at least by 1 (preferably more). One should be larger than the other half of the times, and vice-versa.
+    # EDIT STEFAN: As we now use an SD of 33 in our distribution (instead of 3) I increased the conditions from 1 to 10
+    cond_1_diff = 10
+    # CONDITION 2: Signal for subject D should be at least 6 higher or lower (preferably more) from the average of signals E and F. It should be higher half of the time when AvABC>AvDEF, and half of the time when AvDEF>AvABC.
+    # EDIT STEFAN: I increased the conditions from 9 (former edit) to 20
+    cond_2_diff = 20
+    # CONDITION 3: Second lowest signal of D, E, and F should be on average at least 3 lower (preferably a bit more) than the highest signal across the 10 rounds.
+    # EDIT STEFAN: I increased the conditions from 3 (former edit) to 10
+    cond_3_diff = 10
+    # CONDITION 5: If AvABC>AvDEF and signal of sender 1 is close to AvABC, then the signal is i) >AvABC, ii) exactly AvABC, or iii) marginally smaller than AvABC but then AvABC>>AvDEF (difference between AvABC and AvDEF should be much larger than 1 in that case)
+    # EDIT STEFAN: I increased the conditions from 1 to 3 (i.e., the defition of when signals are 'close' to each other)
+    cond_5_diff = 3
+    #######################################################################
+    #######################################################################
+
+
 
     # COUNTERS: AvABC VS AvDEF
     count_avABC_large = 0
@@ -44,8 +68,7 @@ def simulation(x, n_estimates):
 
 
     # initialize the data for the first round (afterwards: updated for the next round when current round is finished)
-    data = np.random.normal(loc = x[n_rounds], scale = 3, size = 10000).round().astype(int)
-
+    data = np.random.normal(loc=x[n_rounds], scale=distr_SD, size=distr_N).round().astype(int)
 
 
     while lowest_DEF<1:
@@ -69,16 +92,17 @@ def simulation(x, n_estimates):
             av_DF = np.mean([signals_set[key] for key in ['D','F']])
 
     
-            # CONDITIONS
+            # CONDITIONS -
+            # EDIT ZVON: we additionally changed this condition to be bigger/smaller than 9, instead of 6
             # CONDITION 1. 
-            cond_avABC_vs_avDEF = av_ABC - av_DEF > 1 and count_avABC_large<total_rounds/2
-            cond_avDEF_vs_avABC = av_DEF - av_ABC > 1 and count_avDEF_large<total_rounds/2
+            cond_avABC_vs_avDEF = av_ABC - av_DEF > cond_1_diff and count_avABC_large<total_rounds/2
+            cond_avDEF_vs_avABC = av_DEF - av_ABC > cond_1_diff and count_avDEF_large<total_rounds/2
             # CONDITION 2.
-            cond_avEF_vs_D_ABC_large = av_EF - signals_set["D"] > 6 and count_avEF_large_ABC_large < total_rounds/4
-            cond_avEF_vs_D_DEF_large = av_EF - signals_set["D"] > 6 and count_avEF_large_DEF_large < total_rounds/4
+            cond_avEF_vs_D_ABC_large = av_EF - signals_set["D"] > cond_2_diff and count_avEF_large_ABC_large < total_rounds/4
+            cond_avEF_vs_D_DEF_large = av_EF - signals_set["D"] > cond_2_diff and count_avEF_large_DEF_large < total_rounds/4
 
-            cond_D_vs_avEF_ABC_large = av_EF - signals_set["D"] < -6 and count_D_large_ABC_large < total_rounds/4
-            cond_D_vs_avEF_DEF_large = av_EF - signals_set["D"] < -6 and count_D_large_DEF_large < total_rounds/4
+            cond_D_vs_avEF_ABC_large = av_EF - signals_set["D"] < -cond_2_diff and count_D_large_ABC_large < total_rounds/4
+            cond_D_vs_avEF_DEF_large = av_EF - signals_set["D"] < -cond_2_diff and count_D_large_DEF_large < total_rounds/4
 
             # CONDITION 3.  The averages of D&E and D&F should never be a decimal number.
             cond_avDE_and_avDF = (av_DE).is_integer() and (av_DF).is_integer()
@@ -93,7 +117,7 @@ def simulation(x, n_estimates):
                 #than 1 in that case). 
                 cond_closeABC_ABC_large = (signals_set["signal_7"]>av_ABC 
                 or signals_set["signal_7"]==av_ABC or
-                (signals_set["signal_7"] - av_ABC < 0 and signals_set["signal_7"] - av_ABC > -1 and av_ABC-av_DEF > 1)
+                (signals_set["signal_7"] - av_ABC < 0 and signals_set["signal_7"] - av_ABC > -cond_5_diff and av_ABC-av_DEF > cond_5_diff)
                 ) and count_closeABC_ABC_large < total_rounds/4
                 #If AvABC<AvDEF, then the signal is 
                 #i) <AvABC , 
@@ -103,17 +127,17 @@ def simulation(x, n_estimates):
                 #than 1 in that case).   
                 cond_closeABC_DEF_large = (signals_set["signal_7"]<av_ABC 
                 or signals_set["signal_7"]==av_ABC or
-                (signals_set["signal_7"] - av_ABC > 0 and signals_set["signal_7"] - av_ABC < 1 and av_DEF - av_ABC > 1)
+                (signals_set["signal_7"] - av_ABC > 0 and signals_set["signal_7"] - av_ABC < cond_5_diff and av_DEF - av_ABC > cond_5_diff)
                 ) and count_closeABC_DEF_large < total_rounds/4
 
                 cond_closeDEF_ABC_large = (signals_set["signal_7"]<av_DEF 
                 or signals_set["signal_7"]==av_DEF or
-                (signals_set["signal_7"] - av_DEF > 0 and signals_set["signal_7"] - av_DEF < 1 and av_ABC - av_DEF > 1)
+                (signals_set["signal_7"] - av_DEF > 0 and signals_set["signal_7"] - av_DEF < cond_5_diff and av_ABC - av_DEF > cond_5_diff)
                 ) and count_closeDEF_ABC_large < total_rounds/4
         
                 cond_closeDEF_DEF_large = (signals_set["signal_7"]>av_DEF 
                 or signals_set["signal_7"]==av_DEF or
-                (signals_set["signal_7"] - av_DEF < 0 and signals_set["signal_7"] - av_DEF > -1 and av_DEF-av_ABC > 1)
+                (signals_set["signal_7"] - av_DEF < 0 and signals_set["signal_7"] - av_DEF > -cond_5_diff and av_DEF-av_ABC > cond_5_diff)
                 ) and count_closeDEF_DEF_large < total_rounds/4
 
 
@@ -181,14 +205,17 @@ def simulation(x, n_estimates):
 
         # after 10 rounds end check 2 lowest VS highest (D,E,F) condition
         temp = out.query("sender == 'D' or sender == 'E' or sender == 'F'")
+        av_highest = temp.groupby('mean')['estimate'].max().mean()
         av_lowest = temp.groupby('mean')['estimate'].min().mean()
         av_s_lowest = temp.groupby('mean')['estimate'].nsmallest(2).groupby(level="mean").last().mean() 
-        # CONDITION 4. Lowest signal of D, E, and F should be on average at least 6 lower (preferably a bit more, e.g., 7)
-        # than the second lowest signal across the 10 rounds.
-        if av_s_lowest - av_lowest > 6:
+        # CONDITION 4. second lowest signal of D, E, and F should be on average at least 3 lower (preferably a bit more)
+        # than the highest signal across the 10 rounds.
+        #IMPORTANT - THIS CONDITION WAS CHANGED AFTER AIDA WROTE THE CODE. IT WAS ADDITIONALLY IMPLEMENTED HERE IN THE CODE
+        if av_highest - av_s_lowest > cond_3_diff:
             lowest_DEF = 1
         # save info to the df to verify condition
-        out['2nd_lowest-lowest_DEF'] = [av_s_lowest - av_lowest for i in range(n_estimates * total_rounds)]
+        out['highest-second_lowest_DEF'] = [av_highest - av_s_lowest for i in range(n_estimates * total_rounds)]
+        out['highest-lowest_DEF'] = [av_highest - av_lowest for i in range(n_estimates * total_rounds)]
 
     return out
 
@@ -242,14 +269,16 @@ def finish_round(x, n_estimates, total_rounds,round_out,out,n_rounds,av_ABC,av_D
                  next rounds number and new generated draws data.
                  In the case of the final round: only the df
     '''
-
+    # !!!!Conditions for the Distribution:
+    distr_SD = 33
+    distr_N = 100000
     out = save_data(x, n_estimates, round_out,out,n_rounds,av_ABC,av_DEF,avEF,D,avDE,avDF)
     print("FINISHED ROUND NUMBER: "+str(n_rounds+1))
 
     if n_rounds <= total_rounds-2:
         # new data (mean) for the next round
         n_rounds += 1
-        data = np.random.normal(loc = x[n_rounds], scale = 3, size = 10000).round().astype(int)
+        data = np.random.normal(loc=x[n_rounds], scale=distr_SD, size=distr_N).round().astype(int)
         return out, n_rounds, data
 
     else:
