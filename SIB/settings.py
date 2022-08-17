@@ -26,7 +26,8 @@ SESSION_CONFIG_DEFAULTS = dict(
     signal_order_1=[0,1,8,2,3,4,5,9,6,7],
     signal_order_2=[6,7,9,4,2,5,4,1,8,0],
     signal_order_3=[3,2,4,9,5,1,8,7,0,6],
-    timeout_guess=240
+    timeout_guess=240,
+    entry_warning_border=10
 )
 
 SESSION_CONFIGS = [

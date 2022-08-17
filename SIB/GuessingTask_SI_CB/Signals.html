@@ -55,12 +55,24 @@
 <div align="center">
     {% next_button %}
 </div>
+        <div class="alert alert-warning" role="alert" id="entry_warning" style="visibility: hidden" align="center">
+  <b>Achtung!</b> Ihr Eingabe weicht um mehr als 10 von der Schätzung Ihres zufällig zugewiesenen Schätzgerätes ab.
+            Sie können ihre Chancen für die Auszahlung maximieren, indem Sie in jeder Schätzaufgabe genau die vom Schätzgerät angegebene Zahl angeben.
+    </div>
 <script>
 
-function warning(){
+function timer_warning(){
   document.getElementById("timer_warning").style.visibility = "visible"
 }
-setTimeout(warning, 90000);
+setTimeout(timer_warning, 90000);
 
+forminputs.sent_signal.oninput = function() {
+   setTimeout(checkInput, 2000)}
+function checkInput() {
+    if (Math.abs(forminputs.sent_signal.value - js_vars.estimate) > js_vars.entry_warning_border) {
+  document.getElementById("entry_warning").style.visibility = "visible"}
+  else {
+  document.getElementById("entry_warning").style.visibility = "hidden"}
+}
 </script>
 {% endblock %}

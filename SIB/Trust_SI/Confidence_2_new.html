@@ -1,0 +1,471 @@
+{% load otree %}
+
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+
+ <style>
+
+.bg-primary {
+background-color: #3f51b5!important;
+color: white;
+}
+
+
+   input[type=range] {
+  height: 26px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 75%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 75%;
+  height: 14px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #50555C;
+  background: #50555C;
+  border-radius: 14px;
+  border: 0px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 40px;
+  border-radius: 12px;
+  background: #529DE1;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #50555C;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 14px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #50555C;
+  background: #50555C;
+  border-radius: 14px;
+  border: 0px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 40px;
+  border-radius: 12px;
+  background: #529DE1;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 14px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #50555C;
+  border: 0px solid #000000;
+  border-radius: 28px;
+  box-shadow: 1px 1px 1px #50555C;
+}
+input[type=range]::-ms-fill-upper {
+  background: #50555C;
+  border: 0px solid #000000;
+  border-radius: 28px;
+  box-shadow: 1px 1px 1px #50555C;
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 40px;
+  border-radius: 12px;
+  background: #529DE1;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #50555C;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #50555C;
+}
+    </style>
+
+
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Teil 4 - Frage 2
+    </h3>
+<br>
+<br>
+ {{ if CN_treatment == False }}
+        In Frage 1 haben Sie erraten, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die genaue Zahl angegeben hat, die er gesehen hat (d. h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde).
+        Dies waren Ihre Schätzungen:
+{{ endif }}
+        {{ if CN_treatment == True }}
+        In Frage 1 haben Sie erraten, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die genaue Zahl angegeben hat, die er gesehen hat (d.h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde (für die Sender A, B, C und D) oder den Durchschnitt von zwei davon (für die Sender E und F)).
+        Dies waren Ihre Schätzungen:
+        {{ endif }}
+      <br>
+      <br>
+
+<div class="row row-cols-1 row-cols-md-6 g-2" align="center">
+  <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header bg-primary" style="font-weight: bold">
+    Sender A
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{trust_sender_1}} von {{n_rec_signals_sender_1}}</li>
+  </ul>
+</div>
+    </div>
+
+    <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header bg-primary" style="font-weight: bold">
+    Sender B
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{trust_sender_2}} von {{n_rec_signals_sender_2}}</li>
+  </ul>
+</div>
+    </div>
+
+    <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header bg-primary" style="font-weight: bold">
+    Sender C
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{trust_sender_3}} von {{n_rec_signals_sender_3}}</li>
+  </ul>
+</div>
+    </div>
+
+    <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header bg-warning" style="font-weight: bold">
+    Sender D
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{trust_sender_4}} von {{n_rec_signals_sender_4}}</li>
+  </ul>
+</div>
+    </div>
+        <div class="col">
+<div class="card" style="width: auto">
+  <div class="card-header bg-warning" style="font-weight: bold">
+    Sender E
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{trust_sender_5}} von {{n_rec_signals_sender_5}}</li>
+  </ul>
+
+</div>
+    </div>
+        <div class="col">
+
+<div class="card" style="width: auto">
+  <div class="card-header bg-warning" style="font-weight: bold">
+       Sender F
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ trust_sender_6}} von {{n_rec_signals_sender_6}}</li>
+  </ul>
+</div>
+    </div>
+</div>
+
+<br>
+<br>
+      <p>
+        Nun bitten wir Sie, für jeden Sender anzugeben, wie sicher Sie sich bei Ihrer Einschätzung sind.
+        Benutzen Sie dazu bitte die Schieberegler, um die folgenden Aussagen zu vervollständigen.
+        Wenn Sie sich die Angaben der Sender in allen 10 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie sich die Tabelle am unteren Bildschirmrand ansehen.
+        </p>
+
+
+        <h4> Auszahlung </h4>
+        <p>
+            Wenn dieser Teil der Studie (Teil 4) für die Bezahlung gewählt wird, erhalten Sie für die Beantwortung von Frage 2 eine zusätzliche Auszahlung von 3€.
+            Diese Auszahlung wird zu Ihrer Auszahlung aus der Frage 1 hinzuaddiert.
+        </p>
+
+        <br>
+        <br><hr>
+        <br>
+        <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-primary" style="font-weight: bold">
+             Sender A
+            </div>
+            </div>
+            <br>
+            <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
+          <input type="range" id="slider1" name="trust_sender_1_conf" min="0" step="1"  oninput="update1(parseInt(this.value)); update()">
+            <br>
+             <br>
+
+            <div id="label_slider1"></div>
+        </div>
+        <br>
+<hr>
+        <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-primary" style="font-weight: bold">
+            <b>Sender B</b>
+                </div></div>
+            <br>
+            <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
+          <input type="range" id="slider2" name="trust_sender_2_conf" min="0" step="1"  oninput="update2(parseInt(this.value)); update()">
+            <br>
+            <br>
+            <div id="label_slider2"></div>
+        </div>
+        <br>
+        <hr>
+        <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-primary" style="font-weight: bold">
+            <b>Sender C</b>
+                </div></div>
+            <br>
+            <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
+          <input type="range" id="slider3" name="trust_sender_3_conf" min="0" step="1"  oninput="update3(parseInt(this.value)); update()">
+            <br>
+            <br>
+            <div id="label_slider3"></div>
+        </div>
+        <br>
+        <hr>
+        {{ if n_rec_signals_sender_4 > 0}}
+        <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-warning" style="font-weight: bold">
+            <b>Sender D</b>
+                </div></div>
+            <br>
+            <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
+          <input type="range" id="slider4" name="trust_sender_4_conf" min="0" step="1"  oninput="update4(parseInt(this.value)); update()">
+            <br>
+            <br>
+            <div id="label_slider4"></div>
+        </div>
+        {{ endif }}
+        <br>
+        <hr>
+        {{ if n_rec_signals_sender_5 > 0}}
+        <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-warning" style="font-weight: bold">
+            <b>Sender E</b>
+                </div></div>
+            <br>
+            <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
+          <input type="range" id="slider5" name="trust_sender_5_conf" min="0" step="1"  oninput="update5(parseInt(this.value)); update()">
+
+            <br>
+            <br>
+            <div id="label_slider5"></div>
+        </div>
+        {{ endif }}
+        <br>
+        <hr>
+        {{ if n_rec_signals_sender_6 > 0}}
+        <div align="center">
+            <div class="card" style="width: 20%">
+            <div class="card-header bg-warning" style="font-weight: bold">
+            <b>Sender F</b>
+                </div></div>
+            <br>
+            <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
+          <input type="range" id="slider6" name="trust_sender_6_conf" min="0" step="1"  oninput="update6(parseInt(this.value)); update()">
+            <br>
+            <br>
+            <div id="label_slider6"></div>
+        </div>
+        {{ endif }}
+        <br>
+        <br>
+        <br>
+
+
+        Achtung: Sie können erst auf "Weiter" klicken, sobald Sie eine Auswahl bei allen Schiebereglern getroffen haben!
+        Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
+    <br>
+      <br>
+<div align="center">
+    <button  class="otree-btn-next btn btn-primary" id="nextbtn" style="visibility:hidden">Weiter</button>
+</div>
+          </div>
+</div>
+
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+    <h3>
+        Historie der beobachteten Schätzungen
+    </h3>
+<table class="table table-hover table-striped ">
+  <thead>
+    <tr>
+      <th scope="col">Schätzaufgabe</th>
+      <th scope="col">Sender A</th>
+      <th scope="col">Sender B</th>
+      <th scope="col">Sender C</th>
+      <th scope="col">Sender D</th>
+      <th scope="col">Sender E</th>
+      <th scope="col">Sender F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+    {{ for p in signals_round_1 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+      <tr>
+      <th scope="row">2</th>
+    {{ for p in signals_round_2 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
+      <th scope="row">3</th>
+    {{ for p in signals_round_3 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
+      <th scope="row">4</th>
+    {{ for p in signals_round_4 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
+      <th scope="row">5</th>
+    {{ for p in signals_round_5 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+        <tr>
+      <th scope="row">6</th>
+    {{ for p in signals_round_6 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+  <tr>
+      <th scope="row">7</th>
+    {{ for p in signals_round_7 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">8</th>
+    {{ for p in signals_round_8 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">9</th>
+    {{ for p in signals_round_9 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+          <tr>
+      <th scope="row">10</th>
+    {{ for p in signals_round_10 }}
+              <td> {{ p  }}</td>
+            {{ endfor }}
+          </tr>
+  </tbody>
+</table>
+
+    </div>
+</div>
+<script>
+        window.onload = function setInitials() {
+            check1 = 0
+            check2 = 0
+            check3 = 0
+            check4 = 0
+            check5 = 0
+            check6 = 0
+            document.getElementById("label_slider1").innerHTML= "Ich bin mir sicher, dass meine Einschätzung bei ... <b>bitte hier eine Auswahl treffen!</b>"
+            document.getElementById("label_slider2").innerHTML= "Ich bin mir sicher, dass meine Einschätzung bei ... <b>bitte hier eine Auswahl treffen!</b>"
+            document.getElementById("label_slider3").innerHTML= "Ich bin mir sicher, dass meine Einschätzung bei ... <b>bitte hier eine Auswahl treffen!</b>"
+            document.getElementById("slider1").max = js_vars.n_rec_signals_sender_1
+            document.getElementById("slider1").value = js_vars.n_rec_signals_sender_1
+            document.getElementById("slider2").max = js_vars.n_rec_signals_sender_2
+            document.getElementById("slider2").value = js_vars.n_rec_signals_sender_2
+            document.getElementById("slider3").max = js_vars.n_rec_signals_sender_3
+            document.getElementById("slider3").value = js_vars.n_rec_signals_sender_3
+            if (js_vars.n_rec_signals_sender_4>0) {
+            document.getElementById("label_slider4").innerHTML= "Ich bin mir sicher, dass meine Einschätzung bei ... <b>bitte hier eine Auswahl treffen!</b>"
+            document.getElementById("slider4").max = js_vars.n_rec_signals_sender_4
+            document.getElementById("slider4").value = js_vars.n_rec_signals_sender_4}
+            if (js_vars.n_rec_signals_sender_5>0) {
+            document.getElementById("label_slider5").innerHTML= "Ich bin mir sicher, dass meine Einschätzung bei ... <b>bitte hier eine Auswahl treffen!</b>"
+            document.getElementById("slider5").max = js_vars.n_rec_signals_sender_5
+            document.getElementById("slider5").value = js_vars.n_rec_signals_sender_5}
+            if (js_vars.n_rec_signals_sender_6>0) {
+            document.getElementById("label_slider6").innerHTML= "Ich bin mir sicher, dass meine Einschätzung bei ... <b>bitte hier eine Auswahl treffen!</b>"
+            document.getElementById("slider6").max = js_vars.n_rec_signals_sender_6
+                document.getElementById("slider6").value = js_vars.n_rec_signals_sender_6
+            }}
+
+
+            function update1(value){
+                check1 = 1
+                document.getElementById("label_slider1").innerHTML = "Ich bin mir sicher, dass meine Einschätzung bei <b>" + (js_vars.n_rec_signals_sender_1 - (js_vars.n_rec_signals_sender_1-value)) + " von " + js_vars.n_rec_signals_sender_1 +
+                        "</b> beobachteten Schätzungen von Sender A korrekt ist."
+            }
+            function update2(value){
+                check2 = 1
+                document.getElementById("label_slider2").innerHTML = "Ich bin mir sicher, dass meine Einschätzung bei <b>" + (js_vars.n_rec_signals_sender_2 - (js_vars.n_rec_signals_sender_2-value)) + " von " + js_vars.n_rec_signals_sender_1 +
+                        "</b> beobachteten Schätzungen von Sender B korrekt ist."
+            }
+            function update3(value){
+                check3 = 1
+                 document.getElementById("label_slider3").innerHTML = "Ich bin mir sicher, dass meine Einschätzung bei <b>" + (js_vars.n_rec_signals_sender_3 - (js_vars.n_rec_signals_sender_3-value)) + " von " + js_vars.n_rec_signals_sender_1 +
+                        "</b> beobachteten Schätzungen von Sender C korrekt ist."
+            }
+            function update4(value){
+                check4 = 1
+                document.getElementById("label_slider4").innerHTML = "Ich bin mir sicher, dass meine Einschätzung bei <b>" + (js_vars.n_rec_signals_sender_4 - (js_vars.n_rec_signals_sender_4-value)) + " von " + js_vars.n_rec_signals_sender_1 +
+                        "</b> beobachteten Schätzungen von Sender D korrekt ist."
+            }
+
+            function update5(value){
+                check5 = 1
+                document.getElementById("label_slider5").innerHTML = "Ich bin mir sicher, dass meine Einschätzung bei <b>" + (js_vars.n_rec_signals_sender_5 - (js_vars.n_rec_signals_sender_5-value)) + " von " + js_vars.n_rec_signals_sender_1 +
+                        "</b> beobachteten Schätzungen von Sender E korrekt ist."
+            }
+            function update6(value){
+                check6 = 1
+                document.getElementById("label_slider6").innerHTML = "Ich bin mir sicher, dass meine Einschätzung bei <b>" + (js_vars.n_rec_signals_sender_6 - (js_vars.n_rec_signals_sender_6-value)) + " von " + js_vars.n_rec_signals_sender_1 +
+                        "</b> beobachteten Schätzungen von Sender F korrekt ist."
+            }
+
+            function update(){
+                 if (check1 === 1 && check2 === 1 && check3 === 1 && (check4 === 1 || js_vars.n_rec_signals_sender_4 === 0) && (check5 === 1 || js_vars.n_rec_signals_sender_5 === 0)
+                     && (check6 === 1 || js_vars.n_rec_signals_sender_6 === 0)) {
+            document.getElementById("nextbtn").style.visibility="visible";}}
+        </script>
+{% endblock %}

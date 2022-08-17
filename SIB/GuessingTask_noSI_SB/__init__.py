@@ -351,10 +351,12 @@ class Signals(Page):
 
     @staticmethod
     def js_vars(player: Player):
+        estimate = player.estimate
         return dict(
             round=player.round_number,
+            estimate=estimate,
+            entry_warning_border=player.session.config['entry_warning_border']
         )
-
 
 class Instructions_GT_senders(Page):
     @staticmethod
