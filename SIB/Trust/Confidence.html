@@ -103,82 +103,7 @@ input[type=range]:focus::-ms-fill-upper {
     <h3>        Teil 4 - Frage 2    </h3>
 <br>
 <br>
- {{ if CN_treatment == False }}
-        In Frage 1 haben Sie erraten, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die genaue Zahl angegeben hat, die er gesehen hat (d. h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde).
-        Dies waren Ihre Schätzungen:
-{{ endif }}
-        {{ if CN_treatment == True }}
-        In Frage 1 haben Sie erraten, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die genaue Zahl angegeben hat, die er gesehen hat (d.h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde (für die Sender A, B, C und D) oder den Durchschnitt von zwei davon (für die Sender E und F)).
-        Dies waren Ihre Schätzungen:
-        {{ endif }}
-      <br>
-      <br>
 
-<div class="row row-cols-1 row-cols-md-6 g-2" align="center">
-  <div class="col">
-<div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
-    Sender A
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{trust_sender_1}} von {{n_rec_signals_sender_1}}</li>
-  </ul>
-</div>
-    </div>
-
-    <div class="col">
-<div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
-    Sender B
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{trust_sender_2}} von {{n_rec_signals_sender_2}}</li>
-  </ul>
-</div>
-    </div>
-
-    <div class="col">
-<div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
-    Sender C
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{trust_sender_3}} von {{n_rec_signals_sender_3}}</li>
-  </ul>
-</div>
-    </div>
-
-    <div class="col">
-<div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
-    Sender D
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{trust_sender_4}} von {{n_rec_signals_sender_4}}</li>
-  </ul>
-</div>
-    </div>
-        <div class="col">
-<div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
-    Sender E
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{trust_sender_5}} von {{n_rec_signals_sender_5}}</li>
-  </ul>
-</div>
-    </div>
-        <div class="col">
-<div class="card" style="width: auto">
-  <div class="card-header" style="font-weight: bold">
-    Sender F
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ trust_sender_6}} von {{n_rec_signals_sender_6}}</li>
-  </ul>
-</div>
-    </div>
-</div>
 
 <br>
         <p>
@@ -198,7 +123,12 @@ input[type=range]:focus::-ms-fill-upper {
         <br>
         <div align="center">
             <div class="card" style="width: 20%">
-            <div class="card-header" style="font-weight: bold">
+                {{ if SI_treatment == True}}
+                <div class="card-header bg-primary" style="font-weight: bold">
+                    {{ endif }}
+            {{ if SI_treatment == False }}
+                <div class="card-header" style="font-weight: bold">
+                    {{ endif }}
              Sender A
             </div></div>
             <br>
@@ -213,7 +143,12 @@ input[type=range]:focus::-ms-fill-upper {
         <hr>
         <div align="center">
             <div class="card" style="width: 20%">
-            <div class="card-header" style="font-weight: bold">
+            {{ if SI_treatment == True}}
+                <div class="card-header bg-primary" style="font-weight: bold">
+                    {{ endif }}
+            {{ if SI_treatment == False }}
+                <div class="card-header" style="font-weight: bold">
+                    {{ endif }}
             <b>Sender B</b>
                 </div></div>
             <br>
@@ -227,7 +162,12 @@ input[type=range]:focus::-ms-fill-upper {
         <hr>
         <div align="center">
             <div class="card" style="width: 20%">
-            <div class="card-header" style="font-weight: bold">
+            {{ if SI_treatment == True}}
+                <div class="card-header bg-primary" style="font-weight: bold">
+                    {{ endif }}
+            {{ if SI_treatment == False }}
+                <div class="card-header" style="font-weight: bold">
+                    {{ endif }}
             <b>Sender C</b>
                 </div></div>
             <br>
@@ -242,7 +182,12 @@ input[type=range]:focus::-ms-fill-upper {
         {{ if n_rec_signals_sender_4 > 0}}
         <div align="center">
             <div class="card" style="width: 20%">
-            <div class="card-header" style="font-weight: bold">
+            {{ if SI_treatment == True}}
+                <div class="card-header bg-warning" style="font-weight: bold">
+                    {{ endif }}
+            {{ if SI_treatment == False }}
+                <div class="card-header" style="font-weight: bold">
+                    {{ endif }}
             <b>Sender D</b>
                 </div></div>
             <br>
@@ -259,7 +204,12 @@ input[type=range]:focus::-ms-fill-upper {
         {{ if n_rec_signals_sender_5 > 0}}
         <div align="center">
             <div class="card" style="width: 20%">
-            <div class="card-header" style="font-weight: bold">
+            {{ if SI_treatment == True}}
+                <div class="card-header bg-warning" style="font-weight: bold">
+                    {{ endif }}
+            {{ if SI_treatment == False }}
+                <div class="card-header" style="font-weight: bold">
+                    {{ endif }}
             <b>Sender E</b>
                 </div></div>
             <br>
@@ -275,7 +225,12 @@ input[type=range]:focus::-ms-fill-upper {
          {{ if n_rec_signals_sender_6 > 0}}
         <div align="center">
             <div class="card" style="width: 20%">
-            <div class="card-header" style="font-weight: bold">
+            {{ if SI_treatment == True}}
+                <div class="card-header bg-warning" style="font-weight: bold">
+                    {{ endif }}
+            {{ if SI_treatment == False }}
+                <div class="card-header" style="font-weight: bold">
+                    {{ endif }}
             <b>Sender F</b>
                 </div></div>
             <br>
@@ -310,6 +265,16 @@ Achtung: Sie können erst auf "Weiter" klicken, sobald Sie eine Auswahl bei alle
 <table class="table table-hover table-striped ">
   <thead>
     <tr>
+        {{ if SI_treatment == True }}
+      <th scope="col">Schätzaufgabe</th>
+      <th scope="col" class="bg-primary">Sender A</th>
+      <th scope="col" class="bg-primary">Sender B</th>
+      <th scope="col" class="bg-primary">Sender C</th>
+      <th scope="col" class="bg-warning">Sender D</th>
+      <th scope="col" class="bg-warning">Sender E</th>
+      <th scope="col" class="bg-warning">Sender F</th>
+        {{ endif }}
+        {{ if SI_treatment == False }}
       <th scope="col">Schätzaufgabe</th>
       <th scope="col">Sender A</th>
       <th scope="col">Sender B</th>
@@ -317,6 +282,7 @@ Achtung: Sie können erst auf "Weiter" klicken, sobald Sie eine Auswahl bei alle
       <th scope="col">Sender D</th>
       <th scope="col">Sender E</th>
       <th scope="col">Sender F</th>
+        {{ endif }}
     </tr>
   </thead>
   <tbody>

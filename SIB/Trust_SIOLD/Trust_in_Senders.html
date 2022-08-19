@@ -47,35 +47,12 @@ input{
         Für die folgenden Sender haben Sie angegeben, dass sie nicht immer die Zahl angegeben haben, die sie gesehen haben.
         {{ endif }}
 </p>
-        <ul>
-        {{ if trust_sender_1 < 10}}
-            <li>Sender A hat ihrer Einschätzung nach {{ mistrust_sender_1 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
-        {{ endif }}
-        {{ if trust_sender_2 < 10}}
-        <li>Sender B hat ihrer Einschätzung nach {{ mistrust_sender_2 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
-        {{ endif }}
-        {{ if trust_sender_3 < 10}}
-        <li>Sender C hat ihrer Einschätzung nach {{ mistrust_sender_3 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
-        {{ endif }}
-        {{ if trust_sender_4 < 10}}
-        <li>Sender D hat ihrer Einschätzung nach {{ mistrust_sender_4 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
-        {{ endif }}
-        {{ if trust_sender_5 < 10}}
-        <li>Sender E hat ihrer Einschätzung nach {{ mistrust_sender_5 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
-        {{ endif }}
-        {{ if trust_sender_6 < 10}}
-        <li>Sender F hat ihrer Einschätzung nach {{ mistrust_sender_6 }} mal nicht die Zahl angegeben, die er gesehen hat.</li>
-        {{ endif }}
-            </ul>
         <hr>
         <p>
             Bitte betrachten Sie die unten angezeigte Tabelle.
             Darin sehen Sie die abgegebenen Schätzungen aller Sender über die 10 Schätzaufgaben.
             Treffen Sie per Klick auf die gezeigten Schätzungen eine Auswahl <b>in welcher Runde die oben aufgeführten Sender nicht angegeben haben, was sie gesehen haben.</b>
             Durch ihre Auswahl erscheint die ausgewählte Schätzung in roter Farbe.
-            Laut Ihren Angaben oben haben bestimmte Sender bei insgesamt {{ mistrust }} angegebenen Schätzungen, nicht genau das angegeben, was sie gesehen haben.
-            Solange Sie mehr oder weniger als {{ mistrust }} Schätzungen in der Tabelle rot markiert haben, können Sie nicht mit der nächsten Seite fortfahren.
-            Sobald Sie genau {{ mistrust }} Schätzungen der entsprechenden Sender in der Tabelle rot markiert haben, können Sie Ihre Angaben mit "Weiter" am unteren Ende der Seite bestätigen.
             Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
         </p>
 
@@ -213,36 +190,36 @@ function color_update(id) {
         document.getElementById(id).parentElement.style.background = "white";
         document.getElementById(id).style.backgroundColor = "white"
         document.getElementById(["trust_", id].join('')).value = 0
-    }
+    }}
     // Check whether inputs match previous entries
-    let counter_sender_1 = 0
-    let counter_sender_2 = 0
-    let counter_sender_3 = 0
-    let counter_sender_4 = 0
-    let counter_sender_5 = 0
-    let counter_sender_6 = 0
-    for(var r = 1; r <= 10; r++){
-         counter_sender_1 += parseInt(document.getElementById(["trust_sender_", r, "_1"].join('')).value)
-         counter_sender_2 += parseInt(document.getElementById(["trust_sender_", r, "_2"].join('')).value)
-         counter_sender_3 += parseInt(document.getElementById(["trust_sender_", r, "_3"].join('')).value)
-         counter_sender_4 += parseInt(document.getElementById(["trust_sender_", r, "_4"].join('')).value)
-         counter_sender_5 += parseInt(document.getElementById(["trust_sender_", r, "_5"].join('')).value)
-         counter_sender_6 += parseInt(document.getElementById(["trust_sender_", r, "_6"].join('')).value)
-         }
-    if (counter_sender_1!==js_vars.mistrust_sender_1 ||
-    counter_sender_2!==js_vars.mistrust_sender_2 ||
-    counter_sender_3!==js_vars.mistrust_sender_3 ||
-    counter_sender_4!==js_vars.mistrust_sender_4 ||
-    counter_sender_5!==js_vars.mistrust_sender_5 ||
-    counter_sender_6!==js_vars.mistrust_sender_6){
-             document.getElementById("nextbtn").style.visibility = "hidden"
-        if (performance.now() > 10000) {
-            document.getElementById("warning").style.visibility = "visible"
-        }
-         } else {
-         document.getElementById("warning").style.visibility = "hidden"
-         document.getElementById("nextbtn").style.visibility = "visible"
-        }}
+    // let counter_sender_1 = 0
+    // let counter_sender_2 = 0
+    // let counter_sender_3 = 0
+    // let counter_sender_4 = 0
+    // let counter_sender_5 = 0
+    // let counter_sender_6 = 0
+    // for(var r = 1; r <= 10; r++){
+    //      counter_sender_1 += parseInt(document.getElementById(["trust_sender_", r, "_1"].join('')).value)
+    //      counter_sender_2 += parseInt(document.getElementById(["trust_sender_", r, "_2"].join('')).value)
+    //      counter_sender_3 += parseInt(document.getElementById(["trust_sender_", r, "_3"].join('')).value)
+    //      counter_sender_4 += parseInt(document.getElementById(["trust_sender_", r, "_4"].join('')).value)
+    //      counter_sender_5 += parseInt(document.getElementById(["trust_sender_", r, "_5"].join('')).value)
+    //      counter_sender_6 += parseInt(document.getElementById(["trust_sender_", r, "_6"].join('')).value)
+    //      }
+    // if (counter_sender_1!==js_vars.mistrust_sender_1 ||
+    // counter_sender_2!==js_vars.mistrust_sender_2 ||
+    // counter_sender_3!==js_vars.mistrust_sender_3 ||
+    // counter_sender_4!==js_vars.mistrust_sender_4 ||
+    // counter_sender_5!==js_vars.mistrust_sender_5 ||
+    // counter_sender_6!==js_vars.mistrust_sender_6){
+    //          document.getElementById("nextbtn").style.visibility = "hidden"
+    //     if (performance.now() > 10000) {
+    //         document.getElementById("warning").style.visibility = "visible"
+    //     }
+    //      } else {
+    //      document.getElementById("warning").style.visibility = "hidden"
+    //      document.getElementById("nextbtn").style.visibility = "visible"
+    //     }}
 
 window.onload = function(){
     let signals = [js_vars.signals_round_1,js_vars.signals_round_2,js_vars.signals_round_3,js_vars.signals_round_4,js_vars.signals_round_5,
@@ -256,7 +233,6 @@ window.onload = function(){
                 document.getElementById(["sender_", r, "_", s].join('')).style.visibility = "hidden"
             }
     }}
-    document.getElementById("nextbtn").style.visibility = "hidden"
 }
 
 </script>
