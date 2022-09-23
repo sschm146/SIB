@@ -17,44 +17,41 @@
         {{ if CN_treatment == False }}
         <p>
             Bevor ein Sender bei jeder Schätzaufgabe seine Schätzung angegeben hat, hat er die Schätzung eines zufällig ausgewählten Schätzgeräts gesehen.
-            Jedem Sender war bewusst, dass die erhaltene Schätzung eines Schätzgerätes mit größerer Wahrscheinlichkeit der tatsächlichen Zahl <i>x</i> entspricht als jeder andere Zahl.
+            Jedem Sender war bewusst, dass die erhaltene Schätzung eines Schätzgerätes mit größerer Wahrscheinlichkeit der tatsächlichen Zahl <i>x</i> entspricht als jeder anderen Zahl.
             Zudem werden Schätzungen unwahrscheinlicher, je weiter diese von der Zahl <i>x</i> entfernt sind.
             Die Sender wurden ausdrücklich darauf hingewiesen, dass sie bei jeder Aufgabe genau die Zahl, die sie sahen, angeben sollten, um ihre Chancen zu maximieren, die Zahl <i>x</i> richtig zu schätzen.
+            Falls deren Schätzung deutlich von der Schätzung des jeweils zufällig gezogenen Schätzgeräts abwich, wurden sie daran erinnert, dass Abweichungen deren Chancen auf eine zusätzliche Auszahlung verringern.
+            Daraufhin konnten sie ihre Angaben korrigieren.
         </p>
-        <p><b>Ihre Aufgabe lautet wie folgt:
-            Erraten Sie bei wie vielen der 10 Schätzaufgaben jeder der 6 Sender genau die Zahl angegeben hat, die er in der jeweiligen Schätzaufgabe gesehen hat. </b>
-            Wenn Sie sich während des Erratens die Angaben der Sender in allen 10 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie diese am unteren Rand des Bildschirms finden.</p>
         {{ endif }}
         {{ if CN_treatment == True }}
         <p>
             Bevor ein Sender bei jeder Schätzaufgabe seine Schätzung angegeben hat, hat er die Schätzung eines zufällig ausgewählten Schätzgeräts gesehen (für Sender A, B, C und D) oder den Durchschnitt von zwei zufällig gezogenen Schätzgeräten (für Sender E und F).
-            Jedem Sender war bewusst, dass die erhaltene Schätzung eines Schätzgerätes mit größerer Wahrscheinlichkeit der tatsächlichen Zahl <i>x</i> entspricht als jeder andere Zahl.
+            Jedem Sender war bewusst, dass die erhaltene Schätzung eines Schätzgerätes mit größerer Wahrscheinlichkeit der tatsächlichen Zahl <i>x</i> entspricht als jeder anderen Zahl.
             Zudem werden Schätzungen unwahrscheinlicher, je weiter diese von der Zahl <i>x</i> entfernt sind.
             Die Sender wurden ausdrücklich darauf hingewiesen, dass sie bei jeder Aufgabe genau die Zahl, die sie sahen, angeben sollten, um ihre Chancen zu maximieren, die Zahl <i>x</i> richtig zu schätzen.
-        </p>
-        <p>
-            <b>Ihre Aufgabe lautet wie folgt:
-                Erraten Sie bei wie vielen der 10 Schätzaufgaben jeder der 6 Sender genau die Zahl, die er gesehen hat, angegeben hat. </b>
-            Wenn Sie sich während des Erratens die Angaben der Sender in allen 10 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie diese am unteren Rand des Bildschirms finden.
+            Falls deren Schätzung deutlich von der Schätzung des jeweils zufällig gezogenen Schätzgeräts abwich, wurden sie daran erinnert, dass Abweichungen deren Chancen auf eine zusätzliche Auszahlung verringern.
+            Daraufhin konnten sie ihre Angaben korrigieren.
         </p>
         {{ endif }}
+        <p>
+            Auf der nächsten Seite werden Sie eine Tabelle sehen, die für jeden Sender anzeigt, welche Schätzung er in jeder einzelnen Schätzaufgabe gemacht hat.
+            <b>Ihre Aufgabe lautet wie folgt: Geben Sie in der Tabelle an, bei welchen Schätzaufgaben Sie denken, dass ein Sender die Zahl, die er gesehen hat, nicht angegeben hat.
+                Klicken Sie dabei einfach auf die jeweiligen Schätzungen der Sender.</b>
+            Klicken Sie allerdings <b>nicht</b> auf Schätzungen, bei denen Sie denken, dass ein Sender die Zahl angegeben hat, die er gesehen hat.
+        </p>
+
         <br>
 <h4>
     Auszahlung
 </h4>
 
         <p>
-        Falls dieser Teil der Studie (Teil 4) für die Auszahlung ausgewählt werden sollte, <b>werden Sie entsprechend Ihrer Einschätzung zu der Genauigkeit eines zufällig bestimmten Senders bezahlt.</b>
-        Da jede ihrer Einschätzungen bezüglich der Genauigkeit der Sender über Ihre Bezahlung entscheiden kann, sollten Sie jede ihrer abgegebenen Einschätzungen ernst nehmen.
-            </p>
-        <p>
-            Die folgende Regel wird verwendet, um Ihre Auszahlung zu bestimmen:
-            <b>Falls ihre Einschätzung - wie oft ein Sender die jeweils erhaltene Schätzung des Schätzgeräts genau weitergegeben hat - der Wahrheit entspricht, erhalten Sie eine zusätzliche Auszahlung von 10€.
-                Ist Ihre Einschätzung falsch, erhalten Sie 0€. </b>
-            Sie sollten also die korrekte Anzahl erraten, um die Zusatzzahlung zu erhalten.
-            Eine Einschätzung, die nicht der Wahrheit entspricht, bringt Ihnen keine Auszahlung.
+            Falls dieser Teil der Studie (Teil 4) für die Auszahlung ausgewählt werden sollte, wird eine Schätzaufgabe von einem Sender zufällig ausgewählt.<b>Wenn Ihre Angabe bei dieser Schätzaufgabe der Wahrheit entspricht, d.h., wenn sie richtig erraten haben, dass der Sender bei der Schätzaufgabe die Zahl, die er gesehen hat, angegeben hat bzw. nicht angegeben hat, erhalten Sie eine zusätzliche Auszahlung von
+            {{ Trust_in_Senders_payoff }} €.</b>
+            Ist Ihre Angabe falsch, erhalten Sie 0 €.
+            Da jede der Schätzaufgaben über Ihre Bezahlung entscheiden kann, sollten Sie jede Ihrer Angaben ernst nehmen.
         </p>
-
         <p>
             Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
             Wenn Sie bereit sind, fortzufahren, drücken Sie bitte auf "Weiter".

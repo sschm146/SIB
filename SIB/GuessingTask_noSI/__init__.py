@@ -42,10 +42,10 @@ class Player(BasePlayer):
     comprq1 = models.IntegerField(choices=[[1,
                                             'Die Schätzung eines zufällig gezogenen Schätzgeräts kann mit gleicher Wahrscheinlichkeit der Zahl x oder einer anderen Zahl entsprechen.'],
                                            [2,
-                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der Zahl x als jede andere Zahl. '
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der Zahl x als jeder anderen Zahl. '
                                             'Je weiter man sich von der Zahl x entfernt, desto wahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.'],
                                            [3,
-                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der Zahl x als jede andere Zahl. '
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der Zahl x als jeder anderen Zahl. '
                                             'Je weiter man sich von der Zahl x entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.']],
                                   widget=widgets.RadioSelect,
                                   label='')
@@ -66,12 +66,7 @@ class Player(BasePlayer):
                                            [3, 'A randomly drawn estimation device shows me an estimate of 555.']],
                                   widget=widgets.RadioSelect,
                                   label='')
-    comprq5 = models.IntegerField(choices=[[1, '9'],
-                                           [2, '18'],
-                                           [3, '19'],
-                                           [4, '24']],
-                                  widget=widgets.RadioSelect,
-                                  label='')
+    comprq5 = models.IntegerField(label='')
     comprq6 = models.IntegerField(
         choices=[[1, 'All parts of the experiment in which additional money can be earned will be paid out.'],
                  [2,
@@ -93,9 +88,9 @@ class Player(BasePlayer):
                                   widget=widgets.RadioSelect,
                                   label='')
     comprq9 = models.IntegerField(choices=[[1, 'Die Schätzung eines zufällig gezogenen Schätzgeräts kann mit gleicher Wahrscheinlichkeit der Zahl x oder einer andere Zahl entsprechen.'],
-                                           [2, 'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der Zahl x als jede andere Zahl. '
+                                           [2, 'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der Zahl x als jeder anderen Zahl. '
                                                'Je weiter man sich von der Zahl x entfernt, desto wahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.'],
-                                           [3, 'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der Zahl x als jede andere Zahl. '
+                                           [3, 'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der Zahl x als jeder anderen Zahl. '
                                                'Je weiter man sich von der Zahl x entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.']],
                                   widget=widgets.RadioSelect,
                                   label='')
@@ -110,12 +105,7 @@ class Player(BasePlayer):
                                            [3, 'A sender’s randomly drawn estimation device showed an estimate of 555.']],
                                   widget=widgets.RadioSelect,
                                   label='')
-    comprq12 = models.IntegerField(choices=[[1, '9'],
-                                           [2, '18'],
-                                           [3, '19'],
-                                           [4, '24']],
-                                  widget=widgets.RadioSelect,
-                                  label='')
+    comprq12 = models.IntegerField(label='')
     comprq13 = models.IntegerField(choices=[[1, '0%'],
                                            [2, '50%'],
                                            [3, '67%'],
@@ -261,8 +251,8 @@ class Player(BasePlayer):
 #roles allocation and mu_signals (true) simulaion for each sender
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
-    subsession.x = random.randint(0, 50)
-    for p in players: #Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
+    for p in players:
+        subsession.x = random.randint(0, p.session.config['QSR_cutoff']) #Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
         participant = p.participant
         p.Role = participant.Role
         if p.Role == "sender":
@@ -296,7 +286,9 @@ class Signals(Page):
         round = player.round_number
         return dict(
             estimate=estimate,
-            round=round
+            round=round,
+            border=player.session.config['entry_warning_border'],
+            GT_sender_payoff=player.session.config['GT_sender_payoff']
         )
 
     @staticmethod
@@ -315,6 +307,12 @@ class Instructions_GT_senders(Page):
     def is_displayed(player):
         return player.Role == "sender" and player.round_number == 1
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            GT_receiver_payoff=player.session.config['GT_receiver_payoff'],
+            GT_sender_payoff=player.session.config['GT_sender_payoff']
+        )
 
     form_model = "player"
     form_fields = ["comprq1", "comprq2", "comprq3", "comprq5"]
@@ -350,7 +348,12 @@ class Instructions_GT_receivers(Page):
     def is_displayed(player):
         return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
 
-
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            GT_receiver_payoff=player.session.config['GT_receiver_payoff'],
+            GT_sender_payoff=player.session.config['GT_sender_payoff']
+        )
     form_model = "player"
     form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq12", "comprq13"]
 

@@ -10,24 +10,27 @@ from os import environ
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=8.00, doc="",
     SIM_payoff=20, #Payoff for winning the Klee/Kandinsky contest in SIM
-    GT_sender_payoff=16, #Payoff for precision of sent signal (QSR)
-    GT_receiver_payoff=16, #Payoff for precision of submitted estimate (QSR)
-    Trust_in_Senders_payoff=10, #Payoff for receivers based on precision TiS
+    GT_sender_payoff=13, #Payoff for precision of sent signal (QSR)
+    GT_receiver_payoff=13, #Payoff for precision of submitted estimate (QSR)
+    Trust_in_Senders_payoff=14, #Payoff for receivers based on precision TiS
     Confidence_payoff=3, #Fixed Payoff for receivers based on Confidence_3_new
-    True_state=[531, 233, 4495, 6713, 69, 7114, 1823, 2892, 1200, 4353],
-    Signals=[[538, 244, 4506, 6706, 75, 7102, 1813, 2883, 1203, 4362],
-             [539, 241, 4505, 6704, 72, 7106, 1817, 2884, 1204, 4343],
-             [532, 234, 4503, 6713, 79, 7107, 1818, 2889, 1188, 4342],
-             [534, 235, 4490, 6712, 61, 7126, 1821, 2890, 1200, 4346],
-             [524, 229, 4504, 6724, 69, 7120, 1831, 2892, 1198, 4348],
-             [520, 221, 4498, 6722, 73, 7108, 1833, 2898, 1196, 4349],
-             [541, 247, 4492, 6703, 77, 7104, 1815, 2899, 1193, 4351]],
-    signal_order_1=[0,1,8,2,3,4,5,9,6,7],
-    signal_order_2=[6,7,9,4,2,5,4,1,8,0],
-    signal_order_3=[3,2,4,9,5,1,8,7,0,6],
+    True_state=[135, 343, 675, 328, 684, 267, 544, 452, 511, 303],
+    Signals=[[211, 382, 703, 374, 610, 220, 515, 411, 474, 342], # Signals for Sender A
+             [187, 432, 713, 405, 589, 188, 468, 367, 492, 292], # Signals for Sender B
+             [236, 357, 771, 433, 593, 198, 454, 389, 519, 301], # Signals for Sender C
+             [59, 249, 583, 258, 765, 372, 650, 557, 503, 308], # Signals for Sender D
+             [169, 351, 683, 360, 651, 254, 548, 437, 495, 312], # Signals for Sender E
+             [151, 361, 697, 378, 665, 268, 548, 441, 471, 306], # Signals for Sender F
+             [207, 388, 728, 408, 602, 191, 478, 388, 524, 311]], # Signals for Sender 1 (CB-treatment)
+    signal_order_1=[0,1,8,2,3,5,4,9,6,7],
+    signal_order_2=[6,7,9,4,2,4,5,1,8,0],
+    signal_order_3=[3,2,5,9,4,1,8,7,0,6],
     timeout_guess=240,
-    entry_warning_border=10
+    entry_warning_border=10,
+    QSR_cutoff=5000
 )
+
+
 
 SESSION_CONFIGS = [
     dict(

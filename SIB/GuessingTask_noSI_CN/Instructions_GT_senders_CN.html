@@ -66,7 +66,8 @@ p{
     <div class="card-body">
         <p>
         Dieser Teil besteht aus 10 separaten Schätzaufgaben.
-        Bei jeder Aufgabe <b>müssen Sie eine unbekannte Zahl <i>x</i> schätzen. Sie werden nach der Genauigkeit Ihrer Schätzung bezahlt</b> (wie unten beschrieben).
+        Bei jeder Aufgabe <b>müssen Sie eine unbekannte Zahl <i>x</i> schätzen.
+        Sie werden nach der Genauigkeit Ihrer Schätzung bezahlt: Sie können {{ GT_sender_payoff }} € erhalten, falls Ihre Schätzung nahe genug an der Zahl x liegt</b> (wie unten beschrieben).
         </p>
 <br><br>
 
@@ -96,38 +97,40 @@ p{
         </p>
 <br>
         <ul>
-            <li>Die Schätzung eines zufällig ausgewählten Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der tatsächlichen Zahl <i>x</i> als jede andere Zahl.</li>
+            <li>Die Schätzung eines zufällig ausgewählten Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der tatsächlichen Zahl <i>x</i> als jeder anderen Zahl.</li>
             <li>Je weiter man sich von der Zahl <i>x</i> entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.
-                Die Wahrscheinlichkeit, dass ein Schätzgerät eine Schätzung angibt, die um 10 größer oder kleiner ist als die Zahl <i>x</i>, ist sehr gering.</li>
+                Die Wahrscheinlichkeit, dass ein Schätzgerät eine Schätzung angibt, die um 100  größer oder kleiner ist als die Zahl <i>x</i>, ist gering.</li>
             <li>Der Durchschnitt der 10000 Schätzungen entspricht genau (oder fast genau) der Zahl <i>x</i>.
                 Das bedeutet, dass die Schätzgeräte im Durchschnitt richtig liegen.</li>
         </ul>
-
         <p>
         Betrachten Sie bitte das folgende Beispiel.
-        Stellen Sie sich vor, der Computer hat 280 als die tatsächliche Zahl <i>x</i> gezogen.
-        Die folgende Abbildung zeigt ein Beispiel für die 10000 Schätzgeräte und ihre Schätzungen.
-            </p>
+            Stellen Sie sich vor, der Computer hat 580 als die tatsächliche Zahl <i>x</i> gezogen.
+            Die folgende Abbildung zeigt ein Beispiel für die 10000 Schätzgeräte und ihre Schätzungen.
 
+            </p>
         <div style="margin: auto; width: 80%; height: auto">
         <img src="{{ static 'Distr.png' }}" style="height: 100%; width:100%"/>
             </div><br>
+
+        <br>
         <p>
         Wie Sie sehen können, bilden die Schätzungen eine typische Glockenkurve.
-        Die häufigste Schätzung ist genau 280.
-        Es ist also wahrscheinlicher, dass die Schätzung eines zufällig gezogenen Schätzgerätes der tatsächlichen Zahl <i>x</i> entspricht als jede andere Zahl.
-        Je weiter man sich von 280 entfernt, desto unwahrscheinlicher ist es, dass eine solche Schätzung von einem Schätzgerät angegeben wird, und Schätzungen größer als 290 und kleiner als 270 werden fast nie angegeben.
-        Der Durchschnitt aller 10000 Schätzungen, der durch die blaue gestrichelte Linie dargestellt wird, beträgt 280.
+        Die häufigste Schätzung ist genau 580.
+        Es ist also wahrscheinlicher, dass die Schätzung eines zufällig gezogenen Schätzgerätes der tatsächlichen Zahl <i>x</i> entspricht als jeder anderen Zahl.
+        Je weiter man sich von 580 entfernt, desto unwahrscheinlicher ist es, dass eine solche Schätzung von einem Schätzgerät angegeben wird, und Schätzungen größer als 680 und kleiner als 480 werden selten angegeben.
+        Der Durchschnitt aller 10000 Schätzungen, der durch die blaue gestrichelte Linie dargestellt wird, beträgt 580.
         Der Durchschnitt ist also korrekt, d. h. er entspricht der Zahl <i>x</i>.
-            </p>
+        </p>
 
         <p>
             Um Ihnen bei der Schätzung der Zahl <i>x</i> zu helfen, wird das folgende Verfahren angewendet.
             Bei jeder Schätzaufgabe werden zwei Schätzgeräte zufällig gezogen.
             Sie werden den Durchschnitt der Schätzungen dieser beiden Schätzgeräte beobachten.
             Das bedeutet, dass Sie sich für Ihre eigene Schätzung auf den Durchschnitt der Schätzungen von zwei Schätzgeräten stützen.
-            Um die Informationen der beiden Schätzer optimal zu nutzen, sollten Sie bedenken, dass die Schätzung eines zufällig gezogenen Schätzers mit größerer Wahrscheinlichkeit die tatsächliche Zahl <i>x</i> ist als jede andere Zahl und dass die Schätzgeräte im Durchschnitt richtig liegen.
-            <b>Um Ihre Chancen zu maximieren, die Zahl <i>x</i> richtig zu schätzen, sollten Sie daher bei jeder Schätzaufgabe genau die Zahl angeben, die als Durchschnitt der Schätzungen der beiden Schätzgeräte angegeben ist.</b>
+            Um die Informationen des Schätzgeräts bestmöglich zu nutzen, sollten Sie die oben genannten Eigenschaften der Schätzgeräte beachten.
+            Gegeben dieser Eigenschaften, <b>können Sie Ihre Chancen auf die Auszahlung maximieren, indem Sie in jeder Schätzaufgabe genau die Zahl angeben, die als Durchschnitt der Schätzungen der beiden Schätzgeräte angegeben wird. </b>
+            Je weiter Ihre Schätzung vom Durchschnitt der zwei Schätzungen abweicht, desto geringer ist die Wahrscheinlichkeit, dass Sie die zusätzliche Auszahlung von {{ GT_sender_payoff }} € erhalten.
         </p>
 
         <h4>Auszahlung</h4>
@@ -135,20 +138,20 @@ p{
             Wenn dieser Teil der Studie (Teil 2) für die Bezahlung ausgewählt wird, wird eine der 10 Schätzaufgaben zufällig ausgewählt, und <b>Sie werden entsprechend der Genauigkeit Ihrer Schätzung bei dieser Aufgabe bezahlt</b>.
             Da jede Aufgabe für ihre Auszahlung ausgewählt werden kann, sollten Sie jede Aufgabe sorgfältig bearbeiten.
             Ihre Auszahlung wird durch folgende Regel bestimmt werden:
-            <b>Je näher Ihre Schätzung an der Zahl <i>x</i> liegt, desto höher ist die Wahrscheinlichkeit, dass Sie eine zusätzliche Auszahlung von 13 € erhalten.
-            Wenn Ihre Schätzung genau der Zahl <i>x</i> entspricht, werden Sie auf jeden Fall 13 € erhalten.</b>
-            Die Regel ist so gestaltet, dass Sie sich die größte Chance auf die 13 € sichern können, indem Sie <b>Ihre genaueste Schätzung angeben</b>.
+            <b>Je näher Ihre Schätzung an der Zahl <i>x</i> liegt, desto höher ist die Wahrscheinlichkeit, dass Sie eine zusätzliche Auszahlung von {{ GT_sender_payoff }} € erhalten.
+            Wenn Ihre Schätzung genau der Zahl <i>x</i> entspricht, werden Sie auf jeden Fall {{ GT_sender_payoff }} € erhalten.</b>
+            Die Regel ist so gestaltet, dass Sie sich die größte Chance auf die {{ GT_sender_payoff }} € sichern können, indem Sie <b>Ihre genaueste Schätzung angeben</b>.
         </p>
         <p>
             Falls Sie an den Einzelheiten der Regel interessiert sind, beschreiben wir sie im Folgenden:
-            Der Computer zieht zufällig eine Zahl zwischen 0 und 50.
-            Wenn der quadratische Abstand zwischen Ihrer Schätzung und der Zahl <i>x</i> gleich oder kleiner als diese zufällig gezogene Zahl ist, erhalten Sie 13€.
+            Der Computer zieht zufällig eine Zahl zwischen 0 und 5000.
+            Wenn der quadratische Abstand zwischen Ihrer Schätzung und der Zahl <i>x</i> gleich oder kleiner als diese zufällig gezogene Zahl ist, erhalten Sie {{ GT_sender_payoff }} €.
             Ist er größer, erhalten Sie 0 €. Beachten Sie, dass Ihre Gewinnchancen vom quadratischen Abstand zur tatsächlichen Zahl <i>x</i> abhängen.
             Es macht also keinen Unterschied, ob Sie die Zahl <i>x</i> unter- oder überschätzen.
         </p>
         <p>
             Auch wenn diese Regel kompliziert erscheinen mag, ist das zugrunde liegende Prinzip sehr einfach:
-            Je präziser Ihre Schätzung ist (d. h. je geringer der Abstand zwischen Ihrer Schätzung und der Zahl <i>x</i>), desto höher ist die Wahrscheinlichkeit, dass Sie die 13 € erhalten.
+            Je präziser Ihre Schätzung ist (d. h. je geringer der Abstand zwischen Ihrer Schätzung und der Zahl <i>x</i>), desto höher ist die Wahrscheinlichkeit, dass Sie die {{ GT_sender_payoff }} € erhalten.
         </p>
        <h4>Zusammenfassung:</h4>
         <ul>
@@ -195,11 +198,15 @@ p{
 {{ formfield 'comprq3_CN' }}
 <br><hr>
                 <p style="font-weight: bold">
-    4.) Nehmen wir für eine Schätzaufgabe an, dass der angezeigte Durchschnitt der zwei zufällig gezogenen Schätzgeräte 19 beträgt.
-                    Welche Zahl sollten Sie angesichts dieser Information angeben, um Ihre Chancen auf die zusätzliche Zahlung von <b>13€</b> zu maximieren?</p>
+    4.) Nehmen wir für eine Schätzaufgabe an, dass der angezeigte Durchschnitt der zwei zufällig gezogenen Schätzgeräte 190 beträgt.
+                    Welche Zahl sollten Sie angesichts dieser Information angeben, um Ihre Chancen auf die zusätzliche Zahlung von <b>{{ GT_sender_payoff }} €</b> zu maximieren?</p>
 {{ formfield 'comprq5_CN' }}
+        <br><hr>
+                <p style="font-weight: bold">
+    5.) Falls Ihre Schätzung deutlich von der Schätzung des zufällig gezogenen Schätzgerätes abweicht, was bedeutet dies für Ihre Auszahlung für Teil 2?</p>
+{{ formfield 'comprq6_CN' }}
 
-</div>
+    </div>
     </div>
   <button onclick="topFunction()"  type="button" class="prevtab btn-primary btn back">Zurück</button>
 <button class="nexttab btn-primary btn next">Weiter</button>

@@ -41,10 +41,10 @@ class Player(BasePlayer):
     comprq1 = models.IntegerField(choices=[[1,
                                             'Die Schätzung eines zufällig gezogenen Schätzgeräts kann mit gleicher Wahrscheinlichkeit der Zahl x oder einer andere Zahl entsprechen.'],
                                            [2,
-                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der Zahl x als jede andere Zahl. '
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der Zahl x als jeder anderen Zahl. '
                                             'Je weiter man sich von der Zahl x entfernt, desto wahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.'],
                                            [3,
-                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der Zahl x als jede andere Zahl. '
+                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der Zahl x als jeder anderen Zahl. '
                                             'Je weiter man sich von der Zahl x entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.']],
                                   widget=widgets.RadioSelect,
                                   label='')
@@ -67,12 +67,7 @@ class Player(BasePlayer):
                                            [3, 'A randomly drawn estimation device shows me an estimate of 555.']],
                                   widget=widgets.RadioSelect,
                                   label='')
-    comprq5 = models.IntegerField(choices=[[1, '9'],
-                                           [2, '18'],
-                                           [3, '19'],
-                                           [4, '24']],
-                                  widget=widgets.RadioSelect,
-                                  label='')
+    comprq5 = models.IntegerField(label='')
     comprq6 = models.IntegerField(
         choices=[[1, 'All parts of the experiment in which additional money can be earned will be paid out.'],
                  [2,
@@ -103,9 +98,9 @@ class Player(BasePlayer):
                                   widget=widgets.RadioSelect,
                                   label='')
     comprq9 = models.IntegerField(choices=[[1, 'Die Schätzung eines zufällig gezogenen Schätzgeräts ist mit gleicher Wahrscheinlichkeit die tatsächliche Zahl x oder eine andere Zahl.'],
-                                           [2, 'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der tatsächlichen Zahl als jede andere Zahl. '
+                                           [2, 'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der tatsächlichen Zahl als jeder anderen Zahl. '
                                                'Je weiter man sich von Zahl x entfernt, desto wahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung meldet.'],
-                                           [3, ' Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der tatsächlichen Zahl als jede andere Zahl. '
+                                           [3, ' Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der tatsächlichen Zahl als jeder anderen Zahl. '
                                                'Je weiter man sich von Zahl x entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung meldet.']],
                                   widget=widgets.RadioSelect,
                                   label='')
@@ -266,8 +261,8 @@ class Player(BasePlayer):
 #roles allocation and mu_signals (true) simulaion for each sender
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
-    subsession.x = random.randint(0, 50)
-    for p in players: #Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
+    for p in players:
+        subsession.x = random.randint(0, p.session.config['QSR_cutoff']) #Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
         participant = p.participant
         p.Role = participant.Role
         if p.Role == "sender":
@@ -346,7 +341,8 @@ class Signals(Page):
         round = player.round_number
         return dict(
             estimate=estimate,
-            round=round
+            round=round,
+            border=player.session.config['entry_warning_border']
         )
 
     @staticmethod
@@ -355,7 +351,8 @@ class Signals(Page):
         return dict(
             round=player.round_number,
             estimate=estimate,
-            entry_warning_border=player.session.config['entry_warning_border']
+            entry_warning_border=player.session.config['entry_warning_border'],
+            GT_sender_payoff=player.session.config['GT_sender_payoff']
         )
 
 class Instructions_GT_senders(Page):
@@ -366,6 +363,13 @@ class Instructions_GT_senders(Page):
 
     form_model = "player"
     form_fields = ["comprq1", "comprq2", "comprq3", "comprq5"]
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            GT_receiver_payoff=player.session.config['GT_receiver_payoff'],
+            GT_sender_payoff=player.session.config['GT_sender_payoff']
+        )
 
     @staticmethod
     def error_message(player, values):
@@ -423,10 +427,16 @@ class Instructions_GT_receivers(Page):
         diff_high_low = round(sum(highest) / len(highest) - sum(lowest) / len(lowest), 0)
         return dict(
             diff_high_mid=int(diff_high_mid),
-            diff_high_low=int(diff_high_low))
+            diff_high_low=int(diff_high_low),
+            GT_receiver_payoff = player.session.config['GT_receiver_payoff'],
+            GT_sender_payoff = player.session.config['GT_sender_payoff']
+    )
 
     form_model = "player"
     form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq12", "comprq13"]
+
+
+
 
     @staticmethod
     def error_message(player, values):

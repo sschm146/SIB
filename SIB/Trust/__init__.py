@@ -30,78 +30,78 @@ class Player(BasePlayer):
     Role = models.StringField()
     chosen_round = models.IntegerField()
     chosen_sender = models.IntegerField()
-    trust_sender_1 = models.IntegerField(min=0, max=10)
-    trust_sender_2 = models.IntegerField(min=0, max=10)
-    trust_sender_3 = models.IntegerField(min=0, max=10)
-    trust_sender_4 = models.IntegerField(min=0, max=10)
-    trust_sender_5 = models.IntegerField(min=0, max=10)
-    trust_sender_6 = models.IntegerField(min=0, max=10)
-    trust_sender_1_1 = models.IntegerField(min=0, max=1)
-    trust_sender_1_2 = models.IntegerField(min=0, max=1)
-    trust_sender_1_3 = models.IntegerField(min=0, max=1)
-    trust_sender_1_4 = models.IntegerField(min=0, max=1)
-    trust_sender_1_5 = models.IntegerField(min=0, max=1)
-    trust_sender_1_6 = models.IntegerField(min=0, max=1)
-    trust_sender_2_1 = models.IntegerField(min=0, max=1)
-    trust_sender_2_2 = models.IntegerField(min=0, max=1)
-    trust_sender_2_3 = models.IntegerField(min=0, max=1)
-    trust_sender_2_4 = models.IntegerField(min=0, max=1)
-    trust_sender_2_5 = models.IntegerField(min=0, max=1)
-    trust_sender_2_6 = models.IntegerField(min=0, max=1)
-    trust_sender_3_1 = models.IntegerField(min=0, max=1)
-    trust_sender_3_2 = models.IntegerField(min=0, max=1)
-    trust_sender_3_3 = models.IntegerField(min=0, max=1)
-    trust_sender_3_4 = models.IntegerField(min=0, max=1)
-    trust_sender_3_5 = models.IntegerField(min=0, max=1)
-    trust_sender_3_6 = models.IntegerField(min=0, max=1)
-    trust_sender_4_1 = models.IntegerField(min=0, max=1)
-    trust_sender_4_2 = models.IntegerField(min=0, max=1)
-    trust_sender_4_3 = models.IntegerField(min=0, max=1)
-    trust_sender_4_4 = models.IntegerField(min=0, max=1)
-    trust_sender_4_5 = models.IntegerField(min=0, max=1)
-    trust_sender_4_6 = models.IntegerField(min=0, max=1)
-    trust_sender_5_1 = models.IntegerField(min=0, max=1)
-    trust_sender_5_2 = models.IntegerField(min=0, max=1)
-    trust_sender_5_3 = models.IntegerField(min=0, max=1)
-    trust_sender_5_4 = models.IntegerField(min=0, max=1)
-    trust_sender_5_5 = models.IntegerField(min=0, max=1)
-    trust_sender_5_6 = models.IntegerField(min=0, max=1)
-    trust_sender_6_1 = models.IntegerField(min=0, max=1)
-    trust_sender_6_2 = models.IntegerField(min=0, max=1)
-    trust_sender_6_3 = models.IntegerField(min=0, max=1)
-    trust_sender_6_4 = models.IntegerField(min=0, max=1)
-    trust_sender_6_5 = models.IntegerField(min=0, max=1)
-    trust_sender_6_6 = models.IntegerField(min=0, max=1)
-    trust_sender_7_1 = models.IntegerField(min=0, max=1)
-    trust_sender_7_2 = models.IntegerField(min=0, max=1)
-    trust_sender_7_3 = models.IntegerField(min=0, max=1)
-    trust_sender_7_4 = models.IntegerField(min=0, max=1)
-    trust_sender_7_5 = models.IntegerField(min=0, max=1)
-    trust_sender_7_6 = models.IntegerField(min=0, max=1)
-    trust_sender_8_1 = models.IntegerField(min=0, max=1)
-    trust_sender_8_2 = models.IntegerField(min=0, max=1)
-    trust_sender_8_3 = models.IntegerField(min=0, max=1)
-    trust_sender_8_4 = models.IntegerField(min=0, max=1)
-    trust_sender_8_5 = models.IntegerField(min=0, max=1)
-    trust_sender_8_6 = models.IntegerField(min=0, max=1)
-    trust_sender_9_1 = models.IntegerField(min=0, max=1)
-    trust_sender_9_2 = models.IntegerField(min=0, max=1)
-    trust_sender_9_3 = models.IntegerField(min=0, max=1)
-    trust_sender_9_4 = models.IntegerField(min=0, max=1)
-    trust_sender_9_5 = models.IntegerField(min=0, max=1)
-    trust_sender_9_6 = models.IntegerField(min=0, max=1)
-    trust_sender_10_1 = models.IntegerField(min=0, max=1)
-    trust_sender_10_2 = models.IntegerField(min=0, max=1)
-    trust_sender_10_3 = models.IntegerField(min=0, max=1)
-    trust_sender_10_4 = models.IntegerField(min=0, max=1)
-    trust_sender_10_5 = models.IntegerField(min=0, max=1)
-    trust_sender_10_6 = models.IntegerField(min=0, max=1)
-    trust_sender_1_conf = models.IntegerField()
-    trust_sender_2_conf = models.IntegerField()
-    trust_sender_3_conf = models.IntegerField()
-    trust_sender_4_conf = models.IntegerField()## adjust to blank=True for old Confidence_2 version
-    trust_sender_5_conf = models.IntegerField()## adjust to blank=True for old Confidence_2 version
-    trust_sender_6_conf = models.IntegerField()## adjust to blank=True for old Confidence_2 version
+    mistrust_sender_1 = models.IntegerField(min=0, max=10)
+    mistrust_sender_2 = models.IntegerField(min=0, max=10)
+    mistrust_sender_3 = models.IntegerField(min=0, max=10)
+    mistrust_sender_4 = models.IntegerField(min=0, max=10)
+    mistrust_sender_5 = models.IntegerField(min=0, max=10)
+    mistrust_sender_6 = models.IntegerField(min=0, max=10)
+    mistrust_sender_1_1 = models.IntegerField(min=0, max=1)
+    mistrust_sender_1_2 = models.IntegerField(min=0, max=1)
+    mistrust_sender_1_3 = models.IntegerField(min=0, max=1)
+    mistrust_sender_1_4 = models.IntegerField(min=0, max=1)
+    mistrust_sender_1_5 = models.IntegerField(min=0, max=1)
+    mistrust_sender_1_6 = models.IntegerField(min=0, max=1)
+    mistrust_sender_2_1 = models.IntegerField(min=0, max=1)
+    mistrust_sender_2_2 = models.IntegerField(min=0, max=1)
+    mistrust_sender_2_3 = models.IntegerField(min=0, max=1)
+    mistrust_sender_2_4 = models.IntegerField(min=0, max=1)
+    mistrust_sender_2_5 = models.IntegerField(min=0, max=1)
+    mistrust_sender_2_6 = models.IntegerField(min=0, max=1)
+    mistrust_sender_3_1 = models.IntegerField(min=0, max=1)
+    mistrust_sender_3_2 = models.IntegerField(min=0, max=1)
+    mistrust_sender_3_3 = models.IntegerField(min=0, max=1)
+    mistrust_sender_3_4 = models.IntegerField(min=0, max=1)
+    mistrust_sender_3_5 = models.IntegerField(min=0, max=1)
+    mistrust_sender_3_6 = models.IntegerField(min=0, max=1)
+    mistrust_sender_4_1 = models.IntegerField(min=0, max=1)
+    mistrust_sender_4_2 = models.IntegerField(min=0, max=1)
+    mistrust_sender_4_3 = models.IntegerField(min=0, max=1)
+    mistrust_sender_4_4 = models.IntegerField(min=0, max=1)
+    mistrust_sender_4_5 = models.IntegerField(min=0, max=1)
+    mistrust_sender_4_6 = models.IntegerField(min=0, max=1)
+    mistrust_sender_5_1 = models.IntegerField(min=0, max=1)
+    mistrust_sender_5_2 = models.IntegerField(min=0, max=1)
+    mistrust_sender_5_3 = models.IntegerField(min=0, max=1)
+    mistrust_sender_5_4 = models.IntegerField(min=0, max=1)
+    mistrust_sender_5_5 = models.IntegerField(min=0, max=1)
+    mistrust_sender_5_6 = models.IntegerField(min=0, max=1)
+    mistrust_sender_6_1 = models.IntegerField(min=0, max=1)
+    mistrust_sender_6_2 = models.IntegerField(min=0, max=1)
+    mistrust_sender_6_3 = models.IntegerField(min=0, max=1)
+    mistrust_sender_6_4 = models.IntegerField(min=0, max=1)
+    mistrust_sender_6_5 = models.IntegerField(min=0, max=1)
+    mistrust_sender_6_6 = models.IntegerField(min=0, max=1)
+    mistrust_sender_7_1 = models.IntegerField(min=0, max=1)
+    mistrust_sender_7_2 = models.IntegerField(min=0, max=1)
+    mistrust_sender_7_3 = models.IntegerField(min=0, max=1)
+    mistrust_sender_7_4 = models.IntegerField(min=0, max=1)
+    mistrust_sender_7_5 = models.IntegerField(min=0, max=1)
+    mistrust_sender_7_6 = models.IntegerField(min=0, max=1)
+    mistrust_sender_8_1 = models.IntegerField(min=0, max=1)
+    mistrust_sender_8_2 = models.IntegerField(min=0, max=1)
+    mistrust_sender_8_3 = models.IntegerField(min=0, max=1)
+    mistrust_sender_8_4 = models.IntegerField(min=0, max=1)
+    mistrust_sender_8_5 = models.IntegerField(min=0, max=1)
+    mistrust_sender_8_6 = models.IntegerField(min=0, max=1)
+    mistrust_sender_9_1 = models.IntegerField(min=0, max=1)
+    mistrust_sender_9_2 = models.IntegerField(min=0, max=1)
+    mistrust_sender_9_3 = models.IntegerField(min=0, max=1)
+    mistrust_sender_9_4 = models.IntegerField(min=0, max=1)
+    mistrust_sender_9_5 = models.IntegerField(min=0, max=1)
+    mistrust_sender_9_6 = models.IntegerField(min=0, max=1)
+    mistrust_sender_10_1 = models.IntegerField(min=0, max=1)
+    mistrust_sender_10_2 = models.IntegerField(min=0, max=1)
+    mistrust_sender_10_3 = models.IntegerField(min=0, max=1)
+    mistrust_sender_10_4 = models.IntegerField(min=0, max=1)
+    mistrust_sender_10_5 = models.IntegerField(min=0, max=1)
+    mistrust_sender_10_6 = models.IntegerField(min=0, max=1)
+    mistrust_sender_1_conf = models.IntegerField()
+    mistrust_sender_2_conf = models.IntegerField()
+    mistrust_sender_3_conf = models.IntegerField()
+    mistrust_sender_4_conf = models.IntegerField()## adjust to blank=True for old Confidence_2 version
+    mistrust_sender_5_conf = models.IntegerField()## adjust to blank=True for old Confidence_2 version
+    mistrust_sender_6_conf = models.IntegerField()## adjust to blank=True for old Confidence_2 version
 
 
 # FUNCTIONs
@@ -135,7 +135,8 @@ class Instructions_Trust_in_Senders(Page):
         if "correlation" in player.session.config['name']:
             CN_treatment = True
         return dict(
-            CN_treatment=CN_treatment
+            CN_treatment=CN_treatment,
+            Trust_in_Senders_payoff=player.session.config['Trust_in_Senders_payoff']
         )
 
 class Confidence(Page):
@@ -153,12 +154,12 @@ class Confidence(Page):
         SI_treatment = False
         if "control" not in player.session.config['name']: #using control as SI shows up in SIB
             SI_treatment = True
-        player.trust_sender_1 = player.trust_sender_1_1 + player.trust_sender_2_1 + player.trust_sender_3_1 + player.trust_sender_4_1 + player.trust_sender_5_1 + player.trust_sender_6_1 + player.trust_sender_7_1 + player.trust_sender_8_1 + player.trust_sender_9_1 + player.trust_sender_10_1
-        player.trust_sender_2 = player.trust_sender_1_2 + player.trust_sender_2_2 + player.trust_sender_3_2 + player.trust_sender_4_2 + player.trust_sender_5_2 + player.trust_sender_6_2 + player.trust_sender_7_2 + player.trust_sender_8_2 + player.trust_sender_9_2 + player.trust_sender_10_2
-        player.trust_sender_3 = player.trust_sender_1_3 + player.trust_sender_2_3 + player.trust_sender_3_3 + player.trust_sender_4_3 + player.trust_sender_5_3 + player.trust_sender_6_3 + player.trust_sender_7_3 + player.trust_sender_8_3 + player.trust_sender_9_3 + player.trust_sender_10_3
-        player.trust_sender_4 = player.trust_sender_1_4 + player.trust_sender_2_4 + player.trust_sender_3_4 + player.trust_sender_4_4 + player.trust_sender_5_4 + player.trust_sender_6_4 + player.trust_sender_7_4 + player.trust_sender_8_4 + player.trust_sender_9_4 + player.trust_sender_10_4
-        player.trust_sender_5 = player.trust_sender_1_5 + player.trust_sender_2_5 + player.trust_sender_3_5 + player.trust_sender_4_5 + player.trust_sender_5_5 + player.trust_sender_6_5 + player.trust_sender_7_5 + player.trust_sender_8_5 + player.trust_sender_9_5 + player.trust_sender_10_5
-        player.trust_sender_6 = player.trust_sender_1_6 + player.trust_sender_2_6 + player.trust_sender_3_6 + player.trust_sender_4_6 + player.trust_sender_5_6 + player.trust_sender_6_6 + player.trust_sender_7_6 + player.trust_sender_8_6 + player.trust_sender_9_6 + player.trust_sender_10_6
+        player.mistrust_sender_1 = player.mistrust_sender_1_1 + player.mistrust_sender_2_1 + player.mistrust_sender_3_1 + player.mistrust_sender_4_1 + player.mistrust_sender_5_1 + player.mistrust_sender_6_1 + player.mistrust_sender_7_1 + player.mistrust_sender_8_1 + player.mistrust_sender_9_1 + player.mistrust_sender_10_1
+        player.mistrust_sender_2 = player.mistrust_sender_1_2 + player.mistrust_sender_2_2 + player.mistrust_sender_3_2 + player.mistrust_sender_4_2 + player.mistrust_sender_5_2 + player.mistrust_sender_6_2 + player.mistrust_sender_7_2 + player.mistrust_sender_8_2 + player.mistrust_sender_9_2 + player.mistrust_sender_10_2
+        player.mistrust_sender_3 = player.mistrust_sender_1_3 + player.mistrust_sender_2_3 + player.mistrust_sender_3_3 + player.mistrust_sender_4_3 + player.mistrust_sender_5_3 + player.mistrust_sender_6_3 + player.mistrust_sender_7_3 + player.mistrust_sender_8_3 + player.mistrust_sender_9_3 + player.mistrust_sender_10_3
+        player.mistrust_sender_4 = player.mistrust_sender_1_4 + player.mistrust_sender_2_4 + player.mistrust_sender_3_4 + player.mistrust_sender_4_4 + player.mistrust_sender_5_4 + player.mistrust_sender_6_4 + player.mistrust_sender_7_4 + player.mistrust_sender_8_4 + player.mistrust_sender_9_4 + player.mistrust_sender_10_4
+        player.mistrust_sender_5 = player.mistrust_sender_1_5 + player.mistrust_sender_2_5 + player.mistrust_sender_3_5 + player.mistrust_sender_4_5 + player.mistrust_sender_5_5 + player.mistrust_sender_6_5 + player.mistrust_sender_7_5 + player.mistrust_sender_8_5 + player.mistrust_sender_9_5 + player.mistrust_sender_10_5
+        player.mistrust_sender_6 = player.mistrust_sender_1_6 + player.mistrust_sender_2_6 + player.mistrust_sender_3_6 + player.mistrust_sender_4_6 + player.mistrust_sender_5_6 + player.mistrust_sender_6_6 + player.mistrust_sender_7_6 + player.mistrust_sender_8_6 + player.mistrust_sender_9_6 + player.mistrust_sender_10_6
 
         return dict(
             signals_round_1=participant.signals_all_rounds[0:6],
@@ -171,18 +172,18 @@ class Confidence(Page):
             signals_round_8=participant.signals_all_rounds[42:48],
             signals_round_9=participant.signals_all_rounds[48:54],
             signals_round_10=participant.signals_all_rounds[54:60],
-            trust_sender_1=player.trust_sender_1,
-            trust_sender_2=player.trust_sender_2,
-            trust_sender_3=player.trust_sender_3,
-            trust_sender_4=player.trust_sender_4,
-            trust_sender_5=player.trust_sender_5,
-            trust_sender_6=player.trust_sender_6,
-            mistrust_sender_1=10 - participant.signals_all_rounds[0:55:6].count('-') - player.trust_sender_1,
-            mistrust_sender_2=10 - participant.signals_all_rounds[1:56:6].count('-') - player.trust_sender_2,
-            mistrust_sender_3=10 - participant.signals_all_rounds[2:57:6].count('-') - player.trust_sender_3,
-            mistrust_sender_4=10 - participant.signals_all_rounds[3:58:6].count('-') - player.trust_sender_4,
-            mistrust_sender_5=10 - participant.signals_all_rounds[4:59:6].count('-') - player.trust_sender_5,
-            mistrust_sender_6=10 - participant.signals_all_rounds[5:60:6].count('-') - player.trust_sender_6,
+            mistrust_sender_1=player.mistrust_sender_1,
+            mistrust_sender_2=player.mistrust_sender_2,
+            mistrust_sender_3=player.mistrust_sender_3,
+            mistrust_sender_4=player.mistrust_sender_4,
+            mistrust_sender_5=player.mistrust_sender_5,
+            mistrust_sender_6=player.mistrust_sender_6,
+            trust_sender_1=10 - participant.signals_all_rounds[0:55:6].count('-') - player.mistrust_sender_1,
+            trust_sender_2=10 - participant.signals_all_rounds[1:56:6].count('-') - player.mistrust_sender_2,
+            trust_sender_3=10 - participant.signals_all_rounds[2:57:6].count('-') - player.mistrust_sender_3,
+            trust_sender_4=10 - participant.signals_all_rounds[3:58:6].count('-') - player.mistrust_sender_4,
+            trust_sender_5=10 - participant.signals_all_rounds[4:59:6].count('-') - player.mistrust_sender_5,
+            trust_sender_6=10 - participant.signals_all_rounds[5:60:6].count('-') - player.mistrust_sender_6,
             n_rec_signals_sender_1=10 - participant.signals_all_rounds[0:55:6].count('-'),
             n_rec_signals_sender_2=10 - participant.signals_all_rounds[1:56:6].count('-'),
             n_rec_signals_sender_3=10 - participant.signals_all_rounds[2:57:6].count('-'),
@@ -206,7 +207,7 @@ class Confidence(Page):
         )
 
     form_model = "player"
-    form_fields = ["trust_sender_1_conf", "trust_sender_2_conf", "trust_sender_3_conf", "trust_sender_4_conf", "trust_sender_5_conf", "trust_sender_6_conf"]
+    form_fields = ["mistrust_sender_1_conf", "mistrust_sender_2_conf", "mistrust_sender_3_conf", "mistrust_sender_4_conf", "mistrust_sender_5_conf", "mistrust_sender_6_conf"]
 
 class Trust_in_Senders(Page):
 
@@ -286,26 +287,26 @@ class Trust_in_Senders(Page):
         )
 
     form_model = "player"
-    form_fields = ["trust_sender_1_1", "trust_sender_1_2", "trust_sender_1_3",
-                   "trust_sender_1_4", "trust_sender_1_5", "trust_sender_1_6",
-                   "trust_sender_2_1", "trust_sender_2_2", "trust_sender_2_3",
-                   "trust_sender_2_4", "trust_sender_2_5", "trust_sender_2_6",
-                   "trust_sender_3_1", "trust_sender_3_2", "trust_sender_3_3",
-                   "trust_sender_3_4", "trust_sender_3_5", "trust_sender_3_6",
-                   "trust_sender_4_1", "trust_sender_4_2", "trust_sender_4_3",
-                   "trust_sender_4_4", "trust_sender_4_5", "trust_sender_4_6",
-                   "trust_sender_5_1", "trust_sender_5_2", "trust_sender_5_3",
-                   "trust_sender_5_4", "trust_sender_5_5", "trust_sender_5_6",
-                   "trust_sender_6_1", "trust_sender_6_2", "trust_sender_6_3",
-                   "trust_sender_6_4", "trust_sender_6_5", "trust_sender_6_6",
-                   "trust_sender_7_1", "trust_sender_7_2", "trust_sender_7_3",
-                   "trust_sender_7_4", "trust_sender_7_5", "trust_sender_7_6",
-                   "trust_sender_8_1", "trust_sender_8_2", "trust_sender_8_3",
-                   "trust_sender_8_4", "trust_sender_8_5", "trust_sender_8_6",
-                   "trust_sender_9_1", "trust_sender_9_2", "trust_sender_9_3",
-                   "trust_sender_9_4", "trust_sender_9_5", "trust_sender_9_6",
-                   "trust_sender_10_1", "trust_sender_10_2", "trust_sender_10_3",
-                   "trust_sender_10_4", "trust_sender_10_5", "trust_sender_10_6",
+    form_fields = ["mistrust_sender_1_1", "mistrust_sender_1_2", "mistrust_sender_1_3",
+                   "mistrust_sender_1_4", "mistrust_sender_1_5", "mistrust_sender_1_6",
+                   "mistrust_sender_2_1", "mistrust_sender_2_2", "mistrust_sender_2_3",
+                   "mistrust_sender_2_4", "mistrust_sender_2_5", "mistrust_sender_2_6",
+                   "mistrust_sender_3_1", "mistrust_sender_3_2", "mistrust_sender_3_3",
+                   "mistrust_sender_3_4", "mistrust_sender_3_5", "mistrust_sender_3_6",
+                   "mistrust_sender_4_1", "mistrust_sender_4_2", "mistrust_sender_4_3",
+                   "mistrust_sender_4_4", "mistrust_sender_4_5", "mistrust_sender_4_6",
+                   "mistrust_sender_5_1", "mistrust_sender_5_2", "mistrust_sender_5_3",
+                   "mistrust_sender_5_4", "mistrust_sender_5_5", "mistrust_sender_5_6",
+                   "mistrust_sender_6_1", "mistrust_sender_6_2", "mistrust_sender_6_3",
+                   "mistrust_sender_6_4", "mistrust_sender_6_5", "mistrust_sender_6_6",
+                   "mistrust_sender_7_1", "mistrust_sender_7_2", "mistrust_sender_7_3",
+                   "mistrust_sender_7_4", "mistrust_sender_7_5", "mistrust_sender_7_6",
+                   "mistrust_sender_8_1", "mistrust_sender_8_2", "mistrust_sender_8_3",
+                   "mistrust_sender_8_4", "mistrust_sender_8_5", "mistrust_sender_8_6",
+                   "mistrust_sender_9_1", "mistrust_sender_9_2", "mistrust_sender_9_3",
+                   "mistrust_sender_9_4", "mistrust_sender_9_5", "mistrust_sender_9_6",
+                   "mistrust_sender_10_1", "mistrust_sender_10_2", "mistrust_sender_10_3",
+                   "mistrust_sender_10_4", "mistrust_sender_10_5", "mistrust_sender_10_6",
                    ]
 
 
@@ -322,36 +323,36 @@ def payout_calc(subsession: Subsession):
         if p.Role == "sender":
             p.payoff = 0
         if p.Role == "receiver":
-            corrections_1 = [p.field_maybe_none('trust_sender_1_1'), p.field_maybe_none('trust_sender_2_1'),
-                             p.field_maybe_none('trust_sender_3_1'), p.field_maybe_none('trust_sender_4_1'),
-                             p.field_maybe_none('trust_sender_5_1'), p.field_maybe_none('trust_sender_6_1'),
-                             p.field_maybe_none('trust_sender_7_1'), p.field_maybe_none('trust_sender_8_1'),
-                             p.field_maybe_none('trust_sender_9_1'), p.field_maybe_none('trust_sender_10_1')]
-            corrections_2 = [p.field_maybe_none('trust_sender_1_2'), p.field_maybe_none('trust_sender_2_2'),
-                             p.field_maybe_none('trust_sender_3_2'), p.field_maybe_none('trust_sender_4_2'),
-                             p.field_maybe_none('trust_sender_5_2'), p.field_maybe_none('trust_sender_6_2'),
-                             p.field_maybe_none('trust_sender_7_2'), p.field_maybe_none('trust_sender_8_2'),
-                             p.field_maybe_none('trust_sender_9_2'), p.field_maybe_none('trust_sender_10_2')]
-            corrections_3 = [p.field_maybe_none('trust_sender_1_3'), p.field_maybe_none('trust_sender_2_3'),
-                             p.field_maybe_none('trust_sender_3_3'), p.field_maybe_none('trust_sender_4_3'),
-                             p.field_maybe_none('trust_sender_5_3'), p.field_maybe_none('trust_sender_6_3'),
-                             p.field_maybe_none('trust_sender_7_3'), p.field_maybe_none('trust_sender_8_3'),
-                             p.field_maybe_none('trust_sender_9_3'), p.field_maybe_none('trust_sender_10_3')]
-            corrections_4 = [p.field_maybe_none('trust_sender_1_4'), p.field_maybe_none('trust_sender_2_4'),
-                             p.field_maybe_none('trust_sender_3_4'), p.field_maybe_none('trust_sender_4_4'),
-                             p.field_maybe_none('trust_sender_5_4'), p.field_maybe_none('trust_sender_6_4'),
-                             p.field_maybe_none('trust_sender_7_4'), p.field_maybe_none('trust_sender_8_4'),
-                             p.field_maybe_none('trust_sender_9_4'), p.field_maybe_none('trust_sender_10_4')]
-            corrections_5 = [p.field_maybe_none('trust_sender_1_5'), p.field_maybe_none('trust_sender_2_5'),
-                             p.field_maybe_none('trust_sender_3_5'), p.field_maybe_none('trust_sender_4_5'),
-                             p.field_maybe_none('trust_sender_5_5'), p.field_maybe_none('trust_sender_6_5'),
-                             p.field_maybe_none('trust_sender_7_5'), p.field_maybe_none('trust_sender_8_5'),
-                             p.field_maybe_none('trust_sender_9_5'), p.field_maybe_none('trust_sender_10_5')]
-            corrections_6 = [p.field_maybe_none('trust_sender_1_6'), p.field_maybe_none('trust_sender_2_6'),
-                             p.field_maybe_none('trust_sender_3_6'), p.field_maybe_none('trust_sender_4_6'),
-                             p.field_maybe_none('trust_sender_5_6'), p.field_maybe_none('trust_sender_6_6'),
-                             p.field_maybe_none('trust_sender_7_6'), p.field_maybe_none('trust_sender_8_6'),
-                             p.field_maybe_none('trust_sender_9_6'), p.field_maybe_none('trust_sender_10_6')]
+            corrections_1 = [p.field_maybe_none('mistrust_sender_1_1'), p.field_maybe_none('mistrust_sender_2_1'),
+                             p.field_maybe_none('mistrust_sender_3_1'), p.field_maybe_none('mistrust_sender_4_1'),
+                             p.field_maybe_none('mistrust_sender_5_1'), p.field_maybe_none('mistrust_sender_6_1'),
+                             p.field_maybe_none('mistrust_sender_7_1'), p.field_maybe_none('mistrust_sender_8_1'),
+                             p.field_maybe_none('mistrust_sender_9_1'), p.field_maybe_none('mistrust_sender_10_1')]
+            corrections_2 = [p.field_maybe_none('mistrust_sender_1_2'), p.field_maybe_none('mistrust_sender_2_2'),
+                             p.field_maybe_none('mistrust_sender_3_2'), p.field_maybe_none('mistrust_sender_4_2'),
+                             p.field_maybe_none('mistrust_sender_5_2'), p.field_maybe_none('mistrust_sender_6_2'),
+                             p.field_maybe_none('mistrust_sender_7_2'), p.field_maybe_none('mistrust_sender_8_2'),
+                             p.field_maybe_none('mistrust_sender_9_2'), p.field_maybe_none('mistrust_sender_10_2')]
+            corrections_3 = [p.field_maybe_none('mistrust_sender_1_3'), p.field_maybe_none('mistrust_sender_2_3'),
+                             p.field_maybe_none('mistrust_sender_3_3'), p.field_maybe_none('mistrust_sender_4_3'),
+                             p.field_maybe_none('mistrust_sender_5_3'), p.field_maybe_none('mistrust_sender_6_3'),
+                             p.field_maybe_none('mistrust_sender_7_3'), p.field_maybe_none('mistrust_sender_8_3'),
+                             p.field_maybe_none('mistrust_sender_9_3'), p.field_maybe_none('mistrust_sender_10_3')]
+            corrections_4 = [p.field_maybe_none('mistrust_sender_1_4'), p.field_maybe_none('mistrust_sender_2_4'),
+                             p.field_maybe_none('mistrust_sender_3_4'), p.field_maybe_none('mistrust_sender_4_4'),
+                             p.field_maybe_none('mistrust_sender_5_4'), p.field_maybe_none('mistrust_sender_6_4'),
+                             p.field_maybe_none('mistrust_sender_7_4'), p.field_maybe_none('mistrust_sender_8_4'),
+                             p.field_maybe_none('mistrust_sender_9_4'), p.field_maybe_none('mistrust_sender_10_4')]
+            corrections_5 = [p.field_maybe_none('mistrust_sender_1_5'), p.field_maybe_none('mistrust_sender_2_5'),
+                             p.field_maybe_none('mistrust_sender_3_5'), p.field_maybe_none('mistrust_sender_4_5'),
+                             p.field_maybe_none('mistrust_sender_5_5'), p.field_maybe_none('mistrust_sender_6_5'),
+                             p.field_maybe_none('mistrust_sender_7_5'), p.field_maybe_none('mistrust_sender_8_5'),
+                             p.field_maybe_none('mistrust_sender_9_5'), p.field_maybe_none('mistrust_sender_10_5')]
+            corrections_6 = [p.field_maybe_none('mistrust_sender_1_6'), p.field_maybe_none('mistrust_sender_2_6'),
+                             p.field_maybe_none('mistrust_sender_3_6'), p.field_maybe_none('mistrust_sender_4_6'),
+                             p.field_maybe_none('mistrust_sender_5_6'), p.field_maybe_none('mistrust_sender_6_6'),
+                             p.field_maybe_none('mistrust_sender_7_6'), p.field_maybe_none('mistrust_sender_8_6'),
+                             p.field_maybe_none('mistrust_sender_9_6'), p.field_maybe_none('mistrust_sender_10_6')]
             corrections = [corrections_1, corrections_2, corrections_3, corrections_4, corrections_5, corrections_6]
 
             i = random.randint(0, 5)  # random sender

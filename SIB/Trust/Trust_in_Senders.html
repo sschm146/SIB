@@ -33,27 +33,13 @@ input{
 {{ block content }}
 <div class="card bg-light instructions">
     <div class="card-header bg-transparent mainheader" >
- <h3 class="card-title font-weight-bold"> Teil 3 - Frage 3</h3>
+ <h3 class="card-title font-weight-bold"> Teil 4 - Frage 1</h3>
         </div>
     <div class="card-body">
       <br>
         <p>
-        {{ if CN_treatment == False }}
-        In Frage 1 haben Sie Ihre Einschätzung darüber abgegeben, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die selbe Zahl angegeben hat, die er gesehen hat (d. h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde).
-        Für die folgenden Sender haben Sie angegeben, dass diese nicht immer die selbe Zahl angegeben haben, die sie gesehen haben.
-        {{ endif }}
-        {{ if CN_treatment == True }}
-        In Frage 1 haben Sie Ihre Einschätzung darüber abgegeben, in wie vielen der 10 Schätzaufgaben jeder der 6 Sender die selbe Zahl angegeben hat, die er gesehen hat (d. h. die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde (für die Sender A, B, C und D) oder den Durchschnitt von zwei davon (für die Sender E und F)).
-        Für die folgenden Sender haben Sie angegeben, dass sie nicht immer die Zahl angegeben haben, die sie gesehen haben.
-        {{ endif }}
-</p>
-        <hr>
-        <p>
-            Bitte betrachten Sie die unten angezeigte Tabelle.
-            Darin sehen Sie die abgegebenen Schätzungen aller Sender über die 10 Schätzaufgaben.
-            Treffen Sie per Klick auf die gezeigten Schätzungen eine Auswahl <b>in welcher Runde die oben aufgeführten Sender nicht angegeben haben, was sie gesehen haben.</b>
-            Durch ihre Auswahl erscheint die ausgewählte Schätzung in roter Farbe.
-            Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
+        Die Tabelle zeigt die Schätzungen aller Sender in den 10 Schätzungsaufgaben.
+            Bitte klicken Sie auf alle Schätzungen, bei denen Sie glauben, dass ein Sender nicht die Zahl angegeben hat, die er gesehen hat.
         </p>
 
 
@@ -172,16 +158,17 @@ input{
       </tr>
 
     </table>
-        <div><script>
+        <div>
+            <script>
     for(var r = 1; r <= 10; ++r){
         for(var s = 1; s <= 6; ++s) {
-            document.write(["<input required value=\"0\" name=\"trust_sender_",r,"_", s,"\" id=\"trust_sender_",r,"_", s,"\" type=\"hidden\">"].join(''));
+            document.write(["<input required value=\"0\" name=\"mistrust_sender_",r,"_", s,"\" id=\"mistrust_sender_",r,"_", s,"\" type=\"hidden\">"].join(''));
         }}
 </script></div>
-<p id="warning" style="visibility: hidden" class="alert-warning">
-    Sie haben zu viele/wenige Schätzungen markiert! Im oberen Teil der Seite finden Sie eine Auflistung Ihre Angaben, in wie vielen Runden die jeweiligen Sender nicht genau das angegeben haben, was sie gesehen haben.
-    Sie dürfen die Gesamtzahl dieser Runden nicht überschreiten. Sollten Sie eine Frage haben, heben Sie bitte Ihre Hand.
-</p>
+        <p>
+            Wenn Sie mit der Beantwortung von Frage 1 fertig sind, drücken Sie bitte auf "Weiter".
+            Wenn Sie Fragen haben, heben Sie bitte die Hand und ein Laborassistent wird zu Ihnen kommen.
+        </p>
     </div>
 </div>
     <div align="center">
@@ -196,11 +183,11 @@ function color_update(id) {
     if (document.getElementById(id).style.backgroundColor === "white") {
         document.getElementById(id).parentElement.style.background = "indianred";
         document.getElementById(id).style.backgroundColor = "indianred"
-        document.getElementById(["trust_", id].join('')).value = 1
+        document.getElementById(["mistrust_", id].join('')).value = 1
     } else {
         document.getElementById(id).parentElement.style.background = "white";
         document.getElementById(id).style.backgroundColor = "white"
-        document.getElementById(["trust_", id].join('')).value = 0
+        document.getElementById(["mistrust_", id].join('')).value = 0
     }}
     // Check whether inputs match previous entries
     // let counter_sender_1 = 0
@@ -238,7 +225,7 @@ window.onload = function(){
     for(var r = 1; r <= 10; r++){
         for(var s = 1; s <= 6; s++){
             document.getElementById(["sender_", r, "_", s].join('')).value = signals[r-1][s-1];
-            document.getElementById(["trust_sender_", r, "_", s].join('')).value = 0
+            document.getElementById(["mistrust_sender_", r, "_", s].join('')).value = 0
             if (document.getElementById(["sender_", r, "_", s].join('')).value === '-'){
                 //document.getElementById(["sender_", r, "_", s].join('')).disabled = true
                 document.getElementById(["sender_", r, "_", s].join('')).style.visibility = "hidden"

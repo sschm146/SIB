@@ -55,24 +55,42 @@
       </div>
     </div>
 
-<br>
-<br>
+           <div class="alert alert-warning" role="alert" id="timer_warning" style="visibility: hidden" align="center">
+  <b>Achtung!</b> Bitte machen Sie nun Ihre Eingabe und bestätigen Sie mit "Weiter".
+    </div>
 
 
 <div align="center">
-    Bitte geben Sie nun Ihre eigene Schätzung zum tatsächlichen Wert der Zahl <i>x</i> ab und bestätigen Sie mit "Weiter":
+    Bitte geben Sie nun Ihre eigene Schätzung zum tatsächlichen Wert der Zahl <i>x</i> ab und bestätigen Sie mit weiter:
     <br>
-    {{ formfield 'prior' label=""}}
+    <br>
+{{ formfield 'prior' label=""}}
+    <br>
 </div>
-</div></div>
+        </div>
+        </div>
 <div align="center">
-    {{ next_button }}
+    {% next_button %}
 </div>
-<!--<script>
-window.onload = function progressbar_update() {
-    bar = document.getElementById("progress");
-    bar.style.width =  parseInt(js_vars.round - 10 )*9 + "%";
-    bar.innerHTML = "<big><b> Round " + parseInt(js_vars.round - 10) + " of 10</b></big>";
+        <div class="alert alert-warning" role="alert" id="entry_warning" style="visibility: hidden" align="center">
+  <b>Achtung!</b> Sie haben eine Schätzung angegeben, die um {{ border }} von der Schätzung des zufällig gezogenen Schätzgerätes abweicht.
+            Je weiter Ihre Schätzung von der Schätzung des zufällig gezogenen Schätzgerätes abweicht, desto geringer ist die Wahrscheinlichkeit, dass Sie nahe an der Zahl x liegen und damit die zusätzliche Zahlung von {{ GT_sender_payoff}} € verdienen.
+    </div>
+<script>
+
+function timer_warning(){
+  document.getElementById("timer_warning").style.visibility = "visible"
 }
-</script>-->
+setTimeout(timer_warning, 90000);
+
+forminputs.sent_signal.oninput = function() {
+   setTimeout(checkInput, 500)}
+function checkInput() {
+    if (Math.abs(forminputs.sent_signal.value - js_vars.estimate) > js_vars.entry_warning_border) {
+  document.getElementById("entry_warning").style.visibility = "visible"}
+  else {
+  document.getElementById("entry_warning").style.visibility = "hidden"}
+}
+</script>
 {% endblock %}
+
