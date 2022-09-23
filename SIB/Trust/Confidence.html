@@ -228,9 +228,6 @@ input[type=range]:focus::-ms-fill-upper {
             Oberhalb der Schieberegler für jeden Sender sehen Sie ihre Angaben aus Frage 1 noch einmal zusammengefasst.
             Wenn Sie sich die Angaben der Sender in allen 10 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie sich die Tabelle am unteren Bildschirmrand ansehen.
         </p>
-        <p>
-            Nun bitten wir Sie um folgende Einschätzung: Wie sicher sind Sie sich, dass Ihre Angaben aus Frage 1 stimmen?
-        </p>
 
         <h4> Auszahlung </h4>
         <p>
@@ -255,7 +252,7 @@ input[type=range]:focus::-ms-fill-upper {
                 Die restlichen {{ trust_sender_1 }} Schätzungen entsprachen der Zahl, die er zuvor gesehen hat.
                 <br>
             <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
-          <input type="range" id="slider1" name="trust_sender_1_conf" min="0" step="1"  oninput="update1(parseInt(this.value)); update()">
+          <input type="range" id="slider1" name="mistrust_sender_1_conf" min="0" step="1"  oninput="update1(parseInt(this.value)); update()">
             <br>
              <br>
 
@@ -278,7 +275,7 @@ input[type=range]:focus::-ms-fill-upper {
                 Die restlichen {{ trust_sender_2 }} Schätzungen entsprachen der Zahl, die er zuvor gesehen hat.
             <br>
             <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
-          <input type="range" id="slider2" name="trust_sender_2_conf" min="0" step="1"  oninput="update2(parseInt(this.value)); update()">
+          <input type="range" id="slider2" name="mistrust_sender_2_conf" min="0" step="1"  oninput="update2(parseInt(this.value)); update()">
             <br>
             <br>
             <div id="label_slider2"></div>
@@ -300,7 +297,7 @@ input[type=range]:focus::-ms-fill-upper {
                 Die restlichen {{ trust_sender_3 }} Schätzungen entsprachen der Zahl, die er zuvor gesehen hat.
             <br>
             <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
-          <input type="range" id="slider3" name="trust_sender_3_conf" min="0" step="1"  oninput="update3(parseInt(this.value)); update()">
+          <input type="range" id="slider3" name="mistrust_sender_3_conf" min="0" step="1"  oninput="update3(parseInt(this.value)); update()">
             <br>
             <br>
             <div id="label_slider3"></div>
@@ -323,7 +320,7 @@ input[type=range]:focus::-ms-fill-upper {
                 Die restlichen {{ trust_sender_4 }} Schätzungen entsprachen der Zahl, die er zuvor gesehen hat.
             <br>
             <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
-          <input type="range" id="slider4" name="trust_sender_4_conf" min="0" step="1"  oninput="update4(parseInt(this.value)); update()">
+          <input type="range" id="slider4" name="mistrust_sender_4_conf" min="0" step="1"  oninput="update4(parseInt(this.value)); update()">
 
             <br>
             <br>
@@ -348,7 +345,7 @@ input[type=range]:focus::-ms-fill-upper {
                 Die restlichen {{ trust_sender_5 }} Schätzungen entsprachen der Zahl, die er zuvor gesehen hat.
             <br>
             <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
-          <input type="range" id="slider5" name="trust_sender_5_conf" min="0" step="1"  oninput="update5(parseInt(this.value)); update()">
+          <input type="range" id="slider5" name="mistrust_sender_5_conf" min="0" step="1"  oninput="update5(parseInt(this.value)); update()">
             <br>
             <br>
             <div id="label_slider5"></div>
@@ -372,7 +369,7 @@ input[type=range]:focus::-ms-fill-upper {
                 Die restlichen {{ trust_sender_6 }} Schätzungen entsprachen der Zahl, die er zuvor gesehen hat.
             <br>
             <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
-          <input type="range" id="slider6" name="trust_sender_6_conf" min="0" step="1"  oninput="update6(parseInt(this.value)); update()">
+          <input type="range" id="slider6" name="mistrust_sender_6_conf" min="0" step="1"  oninput="update6(parseInt(this.value)); update()">
             <br>
             <br>
             <div id="label_slider6"></div>

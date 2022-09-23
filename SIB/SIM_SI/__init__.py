@@ -47,7 +47,6 @@ class Player(BasePlayer):
         label="",
     )
     artist_points = models.IntegerField(initial=0)
-    competitor_id = models.IntegerField(blank=True)
 
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
@@ -62,7 +61,9 @@ class Instructions(Page):
         participant = player.participant
         identity = participant.identity
         return dict(
-            identity=identity
+            identity=identity,
+            SIM_payoff=player.session.config['SIM_payoff'],
+            SIM_labelled_time=int(player.session.config['SIM_labelled_time'] / 60)
         )
 
 
@@ -92,43 +93,54 @@ def payout_calc(subsession: Subsession):
         if p.identity != "neutral":
             if correct_yellow > correct_blue and p.identity == "Gelb":
                 p.payoff = subsession.session.config['SIM_payoff']
-                participant.SIM_payoff = p.payoff
-            if correct_yellow < correct_blue and p.identity == "Blau":
+            elif correct_yellow < correct_blue and p.identity == "Blau":
                 p.payoff = subsession.session.config['SIM_payoff']
-                participant.SIM_payoff = p.payoff
-            if correct_yellow == correct_blue:
-                if p.identity == subsession.tie_breaker:
-                    p.payoff = subsession.session.config['SIM_payoff']
-                    participant.SIM_payoff = p.payoff
-                else:
-                    p.payoff = 0
-                    participant.SIM_payoff = p.payoff
+            elif correct_yellow == correct_blue and p.identity == subsession.tie_breaker:
+                p.payoff = subsession.session.config['SIM_payoff']
+            else:
+                p.payoff = 0
+            participant.SIM_payoff = p.payoff
         if p.identity == "neutral":
             others_points = [g.artist_points for g in players if g != p]
             others_ids = [g.id_in_group for g in players if g != p]
-            temp = random.choice(others_ids) - 2
-            p.competitor_id = others_ids[temp]
+            temp = random.choice(others_ids) - 1
             competitor = others_points[temp]
             if p.artist_points > competitor:
                 p.payoff = subsession.session.config['SIM_payoff']
-                participant.SIM_payoff = p.payoff
-            if p.artist_points < competitor:
-                p.payoff = 0
-                participant.SIM_payoff = p.payoff
-            if p.artist_points == competitor:
+            elif p.artist_points == competitor:
                 p.payoff = random.choice([subsession.session.config['SIM_payoff'], 0])
-                participant.SIM_payoff = p.payoff
+            else:
+                p.payoff = 0
+            participant.SIM_payoff = p.payoff
 
 
 
 class Paintings_labelled(Page):
-    if Constants.use_timeout:
-        timeout_seconds = Constants.labelled_time
+
+    @staticmethod
+    def get_timeout_seconds(player: Player):
+        return player.session.config['SIM_labelled_time']
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            SIM_payoff=player.session.config['SIM_payoff'],
+            SIM_labelled_time=int(player.session.config['SIM_labelled_time'] / 60)
+        )
 
 
 class Paintings_guess(Page):
-    if Constants.use_timeout:
-        timeout_seconds = Constants.guess_time
+
+    @staticmethod
+    def get_timeout_seconds(player: Player):
+        return player.session.config['SIM_guess_time']
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            SIM_guess_time=int(player.session.config['SIM_guess_time'] / 60),
+            SIM_payoff=player.session.config['SIM_payoff']
+        )
     form_model = 'player'
     form_fields = ['artist1', 'artist2', 'artist3', 'artist4']
 

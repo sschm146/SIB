@@ -45,9 +45,8 @@ class Instructions_all(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        part_fee = player.session.config['participation_fee']
         return dict(
-            part_fee=part_fee
+            participation_fee=player.session.config['participation_fee']
         )
 
 class Instructions_sender(Page):
@@ -55,10 +54,22 @@ class Instructions_sender(Page):
     def is_displayed(player):
         return player.Role == "sender" or player.Role == "prior_sender"
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            participation_fee=player.session.config['participation_fee']
+        )
+
 class Instructions_receiver(Page):
     @staticmethod
     def is_displayed(player):
         return player.Role == "receiver"
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            participation_fee=player.session.config['participation_fee']
+        )
 
 
 

@@ -29,9 +29,9 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     Role = models.StringField()
     identity = models.StringField()  # the identity from the previous apps
-    sent_signal = models.IntegerField(min=0, max=10000)  # signal sent by the sender
+    sent_signal = models.IntegerField(min=0, max=1000)  # signal sent by the sender
     estimate = models.IntegerField()  # the estimate sent by the estimation device which is observed by senders
-    posterior = models.FloatField(min=0, max=10000)  # the posterior belief of the receiver
+    posterior = models.FloatField(min=0, max=1000)  # the posterior belief of the receiver
     prior = models.IntegerField()
     true_state = models.IntegerField()
     signal_order = models.IntegerField()
@@ -150,12 +150,7 @@ class Player(BasePlayer):
                  [3, 'A sender’s randomly drawn estimation device showed an estimate of 555.']],
         widget=widgets.RadioSelect,
         label='')
-    comprq13 = models.IntegerField(choices=[[1, '9'],
-                                            [2, '18'],
-                                            [3, '19'],
-                                            [4, '24']],
-                                   widget=widgets.RadioSelect,
-                                   label='')
+    comprq13 = models.IntegerField(label='')
     comprq14 = models.IntegerField(choices=[[1, '0%'],
                                             [2, '50%'],
                                             [3, '67%'],
@@ -369,7 +364,7 @@ class Instructions_GT_senders(Page):
             comprq1=3,
             comprq2=2,
             comprq3=1,
-            comprq5=3,
+            comprq5=190,
         )
 
         error_messages = dict()
@@ -404,7 +399,8 @@ class Instructions_GT_receivers(Page):
         return dict(
             identity=identity,
             GT_receiver_payoff=player.session.config['GT_receiver_payoff'],
-            GT_sender_payoff=player.session.config['GT_sender_payoff']
+            GT_sender_payoff=player.session.config['GT_sender_payoff'],
+            GT_guess_time=int(player.session.config['GT_guess_time']/60)
         )
 
     @staticmethod
@@ -416,7 +412,7 @@ class Instructions_GT_receivers(Page):
             comprq9=1,
             comprq10=3,
             comprq11=2,
-            comprq13=3,
+            comprq13=190,
             comprq14=4,
         )
 

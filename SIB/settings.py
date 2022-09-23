@@ -8,12 +8,15 @@ from os import environ
 
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=1.00, participation_fee=8.00, doc="",
-    SIM_payoff=20, #Payoff for winning the Klee/Kandinsky contest in SIM
+    real_world_currency_per_point=1.00, participation_fee=7, doc="",
+    SIM_payoff=16, #Payoff for winning the Klee/Kandinsky contest in SIM
+    SIM_labelled_time=240, #Time for Paintings_labelled
+    SIM_guess_time=120, #Time for Paintings_guess
     GT_sender_payoff=13, #Payoff for precision of sent signal (QSR)
     GT_receiver_payoff=13, #Payoff for precision of submitted estimate (QSR)
+    GT_guess_time=240, #Time to submit a guess on the Signals page
     Trust_in_Senders_payoff=14, #Payoff for receivers based on precision TiS
-    Confidence_payoff=3, #Fixed Payoff for receivers based on Confidence_3_new
+    Confidence_payoff=2, #Fixed Payoff for receivers based on Confidence_3_new
     True_state=[135, 343, 675, 328, 684, 267, 544, 452, 511, 303],
     Signals=[[211, 382, 703, 374, 610, 220, 515, 411, 474, 342], # Signals for Sender A
              [187, 432, 713, 405, 589, 188, 468, 367, 492, 292], # Signals for Sender B

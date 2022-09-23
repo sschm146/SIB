@@ -27,9 +27,9 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     Role = models.StringField()
-    sent_signal = models.IntegerField(min=0, max=10000)  # signal sent by the sender
+    sent_signal = models.IntegerField(min=0, max=1000)  # signal sent by the sender
     estimate = models.IntegerField()  # the estimate sent by the estimation device which is observed by senders
-    posterior = models.FloatField(min=0, max=10000)  # the posterior belief of the receiver
+    posterior = models.FloatField(min=0, max=1000)  # the posterior belief of the receiver
     true_state = models.IntegerField()
     signal_order = models.IntegerField()
     chosen_round = models.IntegerField()
@@ -323,7 +323,7 @@ class Instructions_GT_senders(Page):
             comprq1=3,
             comprq2=2,
             comprq3=1,
-            comprq5=3,
+            comprq5=190,
         )
 
         error_messages = dict()
@@ -352,7 +352,8 @@ class Instructions_GT_receivers(Page):
     def vars_for_template(player: Player):
         return dict(
             GT_receiver_payoff=player.session.config['GT_receiver_payoff'],
-            GT_sender_payoff=player.session.config['GT_sender_payoff']
+            GT_sender_payoff=player.session.config['GT_sender_payoff'],
+            GT_guess_time=int(player.session.config['GT_guess_time']/60)
         )
     form_model = "player"
     form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq12", "comprq13"]
@@ -365,7 +366,7 @@ class Instructions_GT_receivers(Page):
             comprq8=3,
             comprq9=3,
             comprq10=2,
-            comprq12=3,
+            comprq12=190,
             comprq13=4,
         )
 

@@ -75,9 +75,8 @@ class Instructions_all(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        part_fee = player.session.config['participation_fee']
         return dict(
-            part_fee=part_fee
+            participation_fee=player.session.config['participation_fee']
         )
 
 
@@ -91,7 +90,8 @@ class Instructions_sender(Page):
         participant = player.participant
         identity = participant.identity
         return dict(
-            identity=identity
+            identity=identity,
+            participation_fee=player.session.config['participation_fee']
         )
 
 class Instructions_receiver(Page):
@@ -104,9 +104,8 @@ class Instructions_receiver(Page):
         participant = player.participant
         identity = participant.identity
         return dict(
-            identity=identity
+            identity=identity,
+            participation_fee=player.session.config['participation_fee']
         )
-
-
 
 page_sequence = [Instructions_all, Instructions_sender, Instructions_receiver]

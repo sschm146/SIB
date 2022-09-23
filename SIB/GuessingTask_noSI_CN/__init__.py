@@ -27,9 +27,9 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     Role = models.StringField()
-    sent_signal = models.IntegerField(min=0, max=10000)  # signal sent by the sender
+    sent_signal = models.IntegerField(min=0, max=1000)  # signal sent by the sender
     estimate = models.IntegerField()  # the estimate sent by the estimation device which is observed by senders
-    posterior = models.FloatField(min=0, max=10000)  # the posterior belief of the receiver
+    posterior = models.FloatField(min=0, max=1000)  # the posterior belief of the receiver
     true_state = models.IntegerField()
     signal_order = models.IntegerField()
     chosen_round = models.IntegerField()
@@ -125,12 +125,7 @@ class Player(BasePlayer):
                                            [3, 'Sender B’s randomly drawn estimation device showed an estimate of  555.']],
                                   widget=widgets.RadioSelect,
                                   label='')
-    comprq13 = models.IntegerField(choices=[[1, 'Sender A: 20, Sender C: 22, Sender F: 28'],
-                                           [2, 'Sender A: 19, Sender C: 20, Sender F: 22'],
-                                           [3, 'Sender A: 19, Sender C: 19, Sender F: 22'],
-                                            [4, 'Sender A: 20, Sender C: 20, Sender F: 20']],
-                                  widget=widgets.RadioSelect,
-                                  label='')
+    comprq13 = models.IntegerField(label='')
     comprq14 = models.IntegerField(choices=[[1, '0%'],
                                            [2, '50%'],
                                            [3, '67%'],
@@ -350,7 +345,7 @@ class Instructions_GT_senders_CN(Page):
             comprq1=3,
             comprq2=2,
             comprq3_CN=1,
-            comprq5_CN=3,
+            comprq5_CN=190,
             comprq6_CN=3,
         )
 
@@ -396,7 +391,7 @@ class Instructions_GT_senders_noCN(Page):
             comprq1=3,
             comprq2=2,
             comprq3=1,
-            comprq5=3,
+            comprq5=190,
             comprq6=3,
         )
 
@@ -432,7 +427,8 @@ class Instructions_GT_receivers(Page):
     def vars_for_template(player: Player):
         return dict(
             GT_receiver_payoff=player.session.config['GT_receiver_payoff'],
-            GT_sender_payoff=player.session.config['GT_sender_payoff']
+            GT_sender_payoff=player.session.config['GT_sender_payoff'],
+            GT_guess_time=int(player.session.config['GT_guess_time']/60)
         )
 
     @staticmethod
@@ -443,7 +439,7 @@ class Instructions_GT_receivers(Page):
             comprq9=3,
             comprq10=3,
             comprq11=2,
-            comprq13=2,
+            comprq13=190,
             comprq14=4,
         )
 
