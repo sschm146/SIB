@@ -33,7 +33,7 @@
 <br>
 <br>
 
-        <div align="center">Im Folgenden sehen Sie die Schätzung von Sender 1.</div>
+        <div align="center">Im Folgenden sehen Sie die Schätzung von Sender 1. Bitte machen Sie Ihre Eingabe innerhalb von 1 Minute:</div>
 
 
 <br>
@@ -73,7 +73,7 @@
     {% next_button %}
 </div>
         <div class="alert alert-warning" role="alert" id="entry_warning" style="visibility: hidden" align="center">
-  <b>Achtung!</b> Sie haben eine Schätzung angegeben, die um {{ border }} von der Schätzung des zufällig gezogenen Schätzgerätes abweicht.
+  <b>Achtung!</b> Sie haben eine Schätzung angegeben, die um mehr als {{ border }} von der Schätzung des zufällig gezogenen Schätzgerätes abweicht.
             Je weiter Ihre Schätzung von der Schätzung des zufällig gezogenen Schätzgerätes abweicht, desto geringer ist die Wahrscheinlichkeit, dass Sie nahe an der Zahl x liegen und damit die zusätzliche Zahlung von {{ GT_sender_payoff}} € verdienen.
     </div>
 <script>
@@ -81,7 +81,7 @@
 function timer_warning(){
   document.getElementById("timer_warning").style.visibility = "visible"
 }
-setTimeout(timer_warning, 90000);
+setTimeout(timer_warning, 45000);
 
 forminputs.sent_signal.oninput = function() {
    setTimeout(checkInput, 500)}

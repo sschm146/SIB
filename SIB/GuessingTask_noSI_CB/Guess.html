@@ -31,7 +31,7 @@
 <br>
 <br>
 
-        <div style="text-align: center">Im Folgenden sehen Sie die Schätzungen der übrigen Sender:</div>
+        <div style="text-align: center">Im Folgenden sehen Sie die Schätzungen der übrigen Sender.</div>
 
 <br>
 <br>
@@ -107,10 +107,10 @@
 
 <br>
 <br>
-<br>
-<br>
 
-
+<div class="alert alert-warning" role="alert" id="timer_warning" style="visibility: hidden" align="center">
+    <b>Die vorgegebene Zeit läuft ab!</b> Bitte machen Sie nun Ihre Eingabe und bestätigen Sie mit "Weiter".
+    </div>
 <div align="center">
     Bitte geben Sie nun Ihre eigene Schätzung zum tatsächlichen Wert der Zahl <i>x</i> an und bestätigen Sie mit "Weiter":
     <br>
@@ -130,4 +130,11 @@ window.onload = function progressbar_update() {
     bar.innerHTML = "<big><b> Round " + parseInt(js_vars.round) + " of 10</b></big>";
 }
 </script>-->
+<script>
+
+function timer_warning(){
+  document.getElementById("timer_warning").style.visibility = "visible"
+}
+setTimeout(timer_warning, 210000);
+</script>
 {% endblock %}

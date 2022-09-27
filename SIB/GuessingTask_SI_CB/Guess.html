@@ -113,9 +113,9 @@ color: white;
 
 <br>
 <br>
-        <br>
-<br>
-
+<div class="alert alert-warning" role="alert" id="timer_warning" style="visibility: hidden" align="center">
+    <b>Die vorgegebene Zeit läuft ab!</b> Bitte machen Sie nun Ihre Eingabe und bestätigen Sie mit "Weiter".
+    </div>
 
 <div align="center">
     Bitte geben Sie nun Ihre eigene Schätzung zum tatsächlichen Wert der Zahl <i>x</i> ab und bestätigen Sie mit "Weiter":
@@ -129,6 +129,13 @@ color: white;
 <div align="center">
     {{ next_button }}
 </div>
+<script>
+
+function timer_warning(){
+  document.getElementById("timer_warning").style.visibility = "visible"
+}
+setTimeout(timer_warning, 210000);
+</script>
 <!--<script>
 window.onload = function progressbar_update() {
     bar = document.getElementById("progress");
