@@ -645,7 +645,10 @@ def save_signals_payoff(subsession: Subsession):
             prev_player = p.in_round(i)
             participant = p.participant
             participant.GuessingTask_payoff = prev_player.payoff
-
+    for p in players:
+        for i in list(range(1, int(Constants.num_rounds + 1))):
+            prev_player = p.in_round(i)
+            prev_player.payoff = 0
 
 
 

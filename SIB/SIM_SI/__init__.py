@@ -92,26 +92,24 @@ def payout_calc(subsession: Subsession):
         participant = p.participant
         if p.identity != "neutral":
             if correct_yellow > correct_blue and p.identity == "Gelb":
-                p.payoff = subsession.session.config['SIM_payoff']
+                participant.SIM_payoff = subsession.session.config['SIM_payoff']
             elif correct_yellow < correct_blue and p.identity == "Blau":
-                p.payoff = subsession.session.config['SIM_payoff']
+                participant.SIM_payoff = subsession.session.config['SIM_payoff']
             elif correct_yellow == correct_blue and p.identity == subsession.tie_breaker:
-                p.payoff = subsession.session.config['SIM_payoff']
+                participant.SIM_payoff = subsession.session.config['SIM_payoff']
             else:
-                p.payoff = 0
-            participant.SIM_payoff = p.payoff
+                participant.SIM_payoff = 0
         if p.identity == "neutral":
             others_points = [g.artist_points for g in players if g != p]
             others_ids = [g.id_in_group for g in players if g != p]
             temp = random.choice(others_ids) - 1
             competitor = others_points[temp]
             if p.artist_points > competitor:
-                p.payoff = subsession.session.config['SIM_payoff']
+                participant.SIM_payoff = subsession.session.config['SIM_payoff']
             elif p.artist_points == competitor:
-                p.payoff = random.choice([subsession.session.config['SIM_payoff'], 0])
+                participant.SIM_payoff = random.choice([subsession.session.config['SIM_payoff'], 0])
             else:
-                p.payoff = 0
-            participant.SIM_payoff = p.payoff
+                participant.SIM_payoff = 0
 
 
 

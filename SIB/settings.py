@@ -17,16 +17,16 @@ SESSION_CONFIG_DEFAULTS = dict(
     GT_guess_time=240, #Time to submit a guess on the Signals page
     Trust_in_Senders_payoff=14, #Payoff for receivers based on precision TiS
     Confidence_payoff=2, #Fixed Payoff for receivers based on Confidence_3_new
-    True_state=[135, 343, 675, 328, 684, 267, 544, 452, 511, 303],
-    Signals=[[211, 382, 703, 374, 610, 220, 515, 411, 474, 342], # Signals for Sender A
-             [187, 432, 713, 405, 589, 188, 468, 367, 492, 292], # Signals for Sender B
-             [236, 357, 771, 433, 593, 198, 454, 389, 519, 301], # Signals for Sender C
-             [59, 249, 583, 258, 765, 372, 650, 557, 503, 308], # Signals for Sender D
-             [169, 351, 683, 360, 651, 254, 548, 437, 495, 312], # Signals for Sender E
-             [151, 361, 697, 378, 665, 268, 548, 441, 471, 306], # Signals for Sender F
-             [207, 388, 728, 408, 602, 191, 478, 388, 524, 311]], # Signals for Sender 1 (CB-treatment)
+    True_state=[369, 860, 624, 492, 528, 257, 137, 649, 486, 491],
+    Signals=[[315, 858, 607, 486, 582, 365, 230, 680, 570, 592], # Signals for Sender A
+             [305, 793, 592, 467, 603, 277, 156, 743, 465, 454], # Signals for Sender B
+             [371, 805, 531, 374, 533, 287, 145, 664, 425, 427], # Signals for Sender C
+             [489, 973, 745, 596, 431, 148, 40, 552, 473, 482], # Signals for Sender D
+             [337, 891, 657, 530, 519, 236, 128, 630, 509, 500], # Signals for Sender E
+             [401, 843, 617, 488, 497, 224, 126, 634, 463, 480], # Signals for Sender F
+             [321, 820, 581, 446, 579, 319, 178, 707, 484, 489]], # Signals for Sender 1 (CB-treatment)
     signal_order_1=[0,1,8,2,3,5,4,9,6,7],
-    signal_order_2=[6,7,9,4,2,4,5,1,8,0],
+    signal_order_2=[6,7,9,3,2,4,5,1,8,0],
     signal_order_3=[3,2,5,9,4,1,8,7,0,6],
     timeout_guess=240,
     entry_warning_border=10,
@@ -94,7 +94,7 @@ SESSION_CONFIGS = [
     ),
 ]
 
-PARTICIPANT_FIELDS = ["Role", "identity", "SIM_payoff", "GuessingTask_payoff", "Trust_payoff", "signals_all_rounds",
+PARTICIPANT_FIELDS = ["Role", "identity", "SIM_payoff", "GuessingTask_payoff", "Trust_payoff", "chosen_payoff", "total_payoff", "signals_all_rounds",
                       "estimates_all_rounds", "task_rounds", "expiry"]
 SESSION_FIELDS = []
 

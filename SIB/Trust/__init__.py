@@ -102,6 +102,8 @@ class Player(BasePlayer):
     mistrust_sender_4_conf = models.IntegerField()## adjust to blank=True for old Confidence_2 version
     mistrust_sender_5_conf = models.IntegerField()## adjust to blank=True for old Confidence_2 version
     mistrust_sender_6_conf = models.IntegerField()## adjust to blank=True for old Confidence_2 version
+    payoff_urn = models.StringField()
+    payoff_ball = models.IntegerField()
 
 
 # FUNCTIONs
@@ -374,8 +376,37 @@ def payout_calc(subsession: Subsession):
                 else:
                     correction_payoff = subsession.session.config['Trust_in_Senders_payoff']
 
-            p.payoff = subsession.session.config['Confidence_payoff'] + correction_payoff
-            participant.Trust_payoff = p.payoff
+            #p.payoff = subsession.session.config['Confidence_payoff'] + correction_payoff
+            participant.Trust_payoff = subsession.session.config['Confidence_payoff'] + correction_payoff
 
-page_sequence = [Instructions_Trust_in_Senders, Trust_in_Senders, Confidence, ThirdWaitPage, Payout_calc]
+
+
+# PAGES
+class Payout_calc_final(WaitPage):
+    wait_for_all_groups = True
+    after_all_players_arrive = 'payout_calc_final'
+
+def payout_calc_final(subsession: Subsession):
+    for p in subsession.get_players():
+        participant = p.participant
+        SIM_payoff = participant.SIM_payoff
+        GuessingTask_payoff = participant.GuessingTask_payoff
+        if participant.Role == 'receiver':
+            Trust_payoff = participant.Trust_payoff
+            payoff_urn = [SIM_payoff, GuessingTask_payoff, Trust_payoff]
+            p.payoff_urn = str(payoff_urn)
+            p.payoff_ball = random.choice([0, 1, 2])
+            p.payoff = payoff_urn[p.payoff_ball]
+            participant.total_payoff = p.payoff
+            participant.chosen_payoff = p.payoff_ball
+        if participant.Role == 'sender' or participant.Role == 'prior_sender':
+            payoff_urn = [SIM_payoff, GuessingTask_payoff]
+            p.payoff_urn = str(payoff_urn)
+            p.payoff_ball = random.choice([0, 1])
+            p.payoff = payoff_urn[p.payoff_ball]
+            participant.total_payoff = p.payoff
+            participant.chosen_payoff = p.payoff_ball
+
+
+page_sequence = [Instructions_Trust_in_Senders, Trust_in_Senders, Confidence, ThirdWaitPage, Payout_calc, Payout_calc_final]
 

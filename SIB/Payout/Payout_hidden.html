@@ -1,0 +1,19 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{% block content %}
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Auszahlungsseite
+ </h3>
+        </div>
+    <div class="card-body">
+ <h5>Vielen Dank für die Teilnahme an der heutigen Studie.
+     Bitte bleiben Sie noch einen Moment sitzen.
+     Wenn Ihre Platznummer aufgerufen wird, gehen Sie bitte zum Ausgang.
+     Dort erhalten Sie Ihre Auszahlung.</h5>
+</div>
+</div>
+
+{{ endblock }}

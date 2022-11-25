@@ -85,12 +85,11 @@ def payout_calc(subsession: Subsession):
         p.competitor_id = others_ids[temp]
         competitor = others_points[temp]
         if p.artist_points > competitor:
-            p.payoff = subsession.session.config['SIM_payoff']
+            participant.SIM_payoff = subsession.session.config['SIM_payoff']
         elif p.artist_points == competitor:
-            p.payoff = random.choice([subsession.session.config['SIM_payoff'], 0])
+            participant.SIM_payoff = random.choice([subsession.session.config['SIM_payoff'], 0])
         else:
-            p.payoff = 0
-        participant.SIM_payoff = p.payoff
+            participant.SIM_payoff = 0
 
 
 class Paintings_labelled(Page):
