@@ -65,7 +65,7 @@ p{
     </div>
     <div class="card-body">
 
-        Dieser Teil besteht aus 10 separaten Schätzaufgaben.
+        Dieser Teil besteht aus 11 separaten Schätzaufgaben.
         Bei jeder Aufgabe <b>müssen Sie eine unbekannte Zahl <i>x</i> schätzen.
         Sie werden nach der Genauigkeit Ihrer Schätzung bezahlt: Sie können {{ GT_sender_payoff }} € erhalten, falls Ihre Schätzung nahe genug an der Zahl <i>x</i> liegt</b> (wie unten beschrieben).
 
@@ -75,8 +75,8 @@ p{
    Schätzaufgaben
 </h4>
         <p>
-            Bei jeder der 10 Aufgaben wird vom Computer eine neue Zahl <i>x</i> festgelegt.
-            Alle 10 Schätzaufgaben haben zwar die gleiche Struktur, sind aber völlig unabhängig voneinander.
+            Bei jeder der 11 Aufgaben wird vom Computer eine neue Zahl <i>x</i> festgelegt.
+            Alle 11 Schätzaufgaben haben zwar die gleiche Struktur, sind aber völlig unabhängig voneinander.
             Das bedeutet, dass die Zahlen in den einzelnen Aufgaben in keiner Weise miteinander verbunden sind.
         </p>
         <p>
@@ -84,7 +84,7 @@ p{
             Stattdessen werden Sie Informationen, die von einem Computer generiert werden, erhalten.
             Diese helfen Ihnen, x zu schätzen.
             Bei jeder Aufgabe werden Sie diese Informationen erhalten und werden dann Ihre eigene Schätzung von <i>x</i> angeben.
-            Die Zahlen <i>x</i> und die Informationen für die 10 Aufgaben wurden bereits vor der Studie ermittelt.
+            Die Zahlen <i>x</i> und die Informationen für die 11 Aufgaben wurden bereits vor der Studie ermittelt.
             Im Folgenden wird Ihnen erklärt, wie die informationen generiert werden und welche davon Sie erhalten werden.
         </p>
         <p>
@@ -135,7 +135,7 @@ p{
 
         <h4>Auszahlung</h4>
         <p>
-            Wenn dieser Teil der Studie (Teil 2) für die Bezahlung ausgewählt wird, wird eine der 10 Schätzaufgaben zufällig ausgewählt, und <b>Sie werden entsprechend der Genauigkeit Ihrer Schätzung bei dieser Aufgabe bezahlt</b>.
+            Wenn dieser Teil der Studie (Teil 2) für die Bezahlung ausgewählt wird, wird eine der 11 Schätzaufgaben zufällig ausgewählt, und <b>Sie werden entsprechend der Genauigkeit Ihrer Schätzung bei dieser Aufgabe bezahlt</b>.
             Da jede Aufgabe für ihre Auszahlung ausgewählt werden kann, sollten Sie jede Aufgabe sorgfältig bearbeiten.
             Ihre Auszahlung wird durch folgende Regel bestimmt werden:
             <b>Je näher Ihre Schätzung an der Zahl <i>x</i> liegt, desto höher ist die Wahrscheinlichkeit, dass Sie eine zusätzliche Auszahlung von {{ GT_sender_payoff }} € erhalten.
@@ -155,7 +155,7 @@ p{
         </p>
        <h4>Zusammenfassung:</h4>
         <ul>
-            <li>In diesem Teil werden Sie 10 unabhängige Schätzaufgaben lösen. Bei jeder Aufgabe müssen Sie eine unbekannte Zahl <i>x</i> schätzen.</li>
+            <li>In diesem Teil werden Sie 11 unabhängige Schätzaufgaben lösen. Bei jeder Aufgabe müssen Sie eine unbekannte Zahl <i>x</i> schätzen.</li>
             <li>In jeder Aufgabe werden Sie eine Schätzung eines zufällig gezogenen Schätzgeräts beobachten.</li>
             <li>Sie werden nach der Genauigkeit Ihrer Schätzungen bezahlt.</li>
         </ul>
@@ -202,7 +202,10 @@ p{
             Welche Zahl sollten Sie angesichts dieser Information angeben, um Ihre Chancen auf die zusätzliche Zahlung von {{ GT_sender_payoff }} € zu maximieren?
         </p>
 {{ formfield 'comprq5' }}
-
+<br><hr>
+        <p style="font-weight: bold">
+    5.) Bitte geben Sie an, welche dieser Aussagen zutrifft.</p>
+{{ formfield 'comprq15' }}
 </div>
     </div>
   <button onclick="topFunction()"  type="button" class="prevtab btn-primary btn back">Zurück</button>

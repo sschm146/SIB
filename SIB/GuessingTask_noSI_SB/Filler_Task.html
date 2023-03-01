@@ -134,25 +134,32 @@
 
         <br><hr><br>
 
-        <strong>22. Wenn Sie morgen eine Finanzberatung bräuchten, an wen würden Sie sich wenden? </strong>
+      <strong>22. Wenn Sie morgen eine Finanzberatung bräuchten, an wen würden Sie sich wenden? </strong>
                 {{formfield 'q22'}}
 
         <br><hr><br>
-
+        {{ if player.Role == 'sender' }}
         <strong>23. Falls Ihre Antwort auf die vorhergehende Frage "Sonstige" war, geben Sie dies bitte genauer an. </strong>
                 {{formfield 'q23'}}
-
         <br><hr><br>
-
         <strong>24. Welche Vorteile würden Sie sich davon versprechen, Ihr Geld besser verwalten zu können?</strong>
                 {{formfield 'q24'}}
-
         <br><hr><br>
-
         <strong>25. Gibt es etwas, das Ihnen helfen würde, Ihr Geld besser zu verwalten?</strong>
                 {{formfield 'q25'}}
-
         <br><br>
+        {{ endif }}
+        {{ if player.Role == 'prior_sender' }}
+        <strong>23. Falls Ihre Antwort auf die vorhergehende Frage "Sonstige" war, geben Sie dies bitte genauer an. </strong>
+                {{formfield 'q23'}}
+        <br><hr><br>
+        <strong>24. Welche Vorteile würden Sie sich davon versprechen, Ihr Geld besser verwalten zu können?</strong>
+                {{formfield 'q24'}}
+        <br><hr><br>
+        <strong>25. Gibt es etwas, das Ihnen helfen würde, Ihr Geld besser zu verwalten?</strong>
+                {{formfield 'q25'}}
+        <br><br>
+        {{ endif }}
         <strong>Sobald Sie alle Fragen oben beantwortet haben, klicken Sie bitte auf "Weiter".</strong>
    </div>
 </div>

@@ -105,12 +105,12 @@ input[type=range]:focus::-ms-fill-upper {
 <br>
         {{ if CN_treatment == False }}
         <p>
-            In Frage 1 haben Sie erraten, bei welcher der 10 Schätzaufgaben jeder der Sender die genaue Zahl angegeben hat, die er gesehen hat (d. h. die Zahl, die von einem zufällig gezogenen Schätzgerät ihn angegeben wurde).
+            In Frage 1 haben Sie erraten, bei welcher der 11 Schätzaufgaben jeder der Sender die genaue Zahl angegeben hat, die er gesehen hat (d. h. die Zahl, die von einem zufällig gezogenen Schätzgerät ihn angegeben wurde).
         </p>
         {{ endif }}
         {{ if CN_treatment == True }}
         <p>
-            In Frage 1 haben Sie erraten, bei welcher der 10 Schätzaufgaben jeder der Sender die genaue Zahl angegeben hat, die er gesehen hat (d.h., die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde (für die Sender A, B, C und D) oder den Durchschnitt von zwei davon (für die Sender E und F)). </p>
+            In Frage 1 haben Sie erraten, bei welcher der 11 Schätzaufgaben jeder der Sender die genaue Zahl angegeben hat, die er gesehen hat (d.h., die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde (für die Sender A, B, C und D) oder den Durchschnitt von zwei davon (für die Sender E und F)). </p>
         {{ endif }}
 
 <!--        <div class="row row-cols-md-6 g-2 " align="center">
@@ -226,7 +226,7 @@ input[type=range]:focus::-ms-fill-upper {
             Nun bitten wir Sie um folgende Einschätzung: Wie sicher sind Sie sich, dass Ihre Angaben aus Frage 1 stimmen?
             Benutzen Sie dazu bitte die Schieberegler, um die folgenden Aussagen zu vervollständigen.
             Oberhalb der Schieberegler für jeden Sender sehen Sie ihre Angaben aus Frage 1 zusammengefasst.
-            Wenn Sie sich die Angaben der Sender in allen 10 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie sich die Tabelle am unteren Bildschirmrand ansehen.
+            Wenn Sie sich die Angaben der Sender in allen 11 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie sich die Tabelle am unteren Bildschirmrand ansehen.
         </p>
 
         <h4> Auszahlung </h4>
@@ -383,6 +383,10 @@ input[type=range]:focus::-ms-fill-upper {
             Achtung: Sie können erst auf "Weiter" klicken, sobald Sie eine Auswahl bei allen Schiebereglern getroffen haben!
     <br>
       <br>
+            <div class="alert alert-warning" role="alert" id="timer_warning" style="visibility: hidden" align="center">
+  <b>Achtung!</b> Bitte machen Sie nun Ihre Eingaben und bestätigen Sie mit "Weiter".
+            <br>
+    </div>
 <div align="center">
     <button  class="otree-btn-next btn btn-primary" id="nextbtn" style="visibility:hidden">Weiter</button>
 </div>
@@ -486,7 +490,14 @@ input[type=range]:focus::-ms-fill-upper {
     </div>
 </div>
 
+
 <script>
+
+    function timer_warning(){
+  document.getElementById("timer_warning").style.visibility = "visible"
+}
+setTimeout(timer_warning, 150000);
+
         window.onload = function setInitials() {
             check1 = 0
             check2 = 0

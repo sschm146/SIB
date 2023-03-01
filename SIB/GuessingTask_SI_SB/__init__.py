@@ -3,8 +3,6 @@ import numpy as np
 import random
 import pandas as pd
 
-import settings
-
 c = Currency
 
 doc = """
@@ -14,7 +12,7 @@ GuessingTask_SI_SB
 
 class Constants(BaseConstants):
     name_in_url = "GuessingTask_SI_SB"
-    num_rounds = 20
+    num_rounds = 22
     players_per_group = None
     num_senders = 6
 
@@ -139,6 +137,16 @@ class Player(BasePlayer):
                                             [4, '100%']],
                                    widget=widgets.RadioSelect,
                                    label='')
+    comprq15 = models.IntegerField(
+        choices=[[1, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von allen vorherigen Schätzaufgaben. '
+                     'Zahlen aus allen vorherigen Schätzaufgaben sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                 [2, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von der letzten Schätzaufgabe. '
+                     'Zahlen aus der letzten Schätzaufgabe sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                 [3, 'Alle 11 Schätzaufgaben haben zwar die gleiche Struktur, sind aber völlig unabhängig voneinander. '
+                     'Das bedeutet, dass die Zahl x, die Schätzungen der Schätzgeräte und die Schätzungen der Sender über die 11 Schätzaufgaben hinweg in keiner Weise miteinander verbunden sind. '
+                     'Die Zahl x, die Schätzungen der Schätzgeräte und die Schätzungen der Sender sind ausschließlich für die jeweils aktuelle Schätzaufgabe von Bedeutung.']],
+        widget=widgets.RadioSelect,
+        label='')
     error_comprq1 = models.IntegerField(initial=0)
     error_comprq2 = models.IntegerField(initial=0)
     error_comprq3 = models.IntegerField(initial=0)
@@ -150,6 +158,7 @@ class Player(BasePlayer):
     error_comprq11 = models.IntegerField(initial=0)
     error_comprq12 = models.IntegerField(initial=0)
     error_comprq13 = models.IntegerField(initial=0)
+    error_comprq15 = models.IntegerField(initial=0)
     q1 = models.IntegerField(label='')
     q2 = models.IntegerField(label='')
     q3 = models.IntegerField(
@@ -263,8 +272,8 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect, label=''
     )
     q23 = models.LongStringField(label='', blank=True)
-    q24 = models.LongStringField(label='')
-    q25 = models.LongStringField(label='')
+    q24 = models.LongStringField(label='', blank=True)
+    q25 = models.LongStringField(label='', blank=True)
 
 
 
@@ -331,7 +340,23 @@ def comprq8_choices(player):
         return choices
 # PAGES
 
+class Next_Round(Page):
+    @staticmethod
+    def is_displayed(player):
+        return (player.Role == "sender" and player.round_number > 1 and player.round_number <= Constants.num_rounds/2) or (player.Role == "receiver" and player.round_number > Constants.num_rounds/2 + 1)
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        if player.Role == "sender":
+            return dict(
+                round=player.round_number,
+                last_round=player.round_number - 1
+            )
+        if player.Role == "receiver":
+            return dict(
+                round=player.round_number - int(Constants.num_rounds/2),
+                last_round=player.round_number - 1 - int(Constants.num_rounds/2)
+            )
 # senders see estimate and send signal
 class Signals(Page):
     form_model = "player"
@@ -376,7 +401,7 @@ class Instructions_GT_senders(Page):
         return player.Role == "sender" and player.round_number == 1
 
     form_model = "player"
-    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5"]
+    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5", "comprq15"]
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -392,6 +417,7 @@ class Instructions_GT_senders(Page):
             comprq2=2,
             comprq3=1,
             comprq5=190,
+            comprq15=3,
         )
 
         error_messages = dict()
@@ -408,6 +434,8 @@ class Instructions_GT_senders(Page):
                     player.error_comprq3 += 1
                 if field_name == "comprq5":
                     player.error_comprq5 += 1
+                if field_name == "comprq15":
+                    player.error_comprq15 += 1
         return error_messages
 
 
@@ -417,7 +445,7 @@ class Instructions_GT_receivers(Page):
         return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
 
     form_model = "player"
-    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq11", "comprq12", "comprq13"]
+    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq11", "comprq12", "comprq13", "comprq15"]
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -465,6 +493,7 @@ class Instructions_GT_receivers(Page):
             comprq11=3,
             comprq12=190,
             comprq13=4,
+            comprq15=3,
         )
 
         error_messages = dict()
@@ -487,6 +516,8 @@ class Instructions_GT_receivers(Page):
                     player.error_comprq12 += 1
                 if field_name == "comprq13":
                     player.error_comprq13 += 1
+                if field_name == "comprq15":
+                    player.error_comprq15 += 1
         return error_messages
 
 
@@ -504,7 +535,7 @@ def set_signals(subsession: Subsession):
 
     if subsession.round_number == Constants.num_rounds / 2:
         all = [0,0,0,0,0,0]
-        for i in list(range(1, 11, 1)):
+        for i in list(range(1, 12, 1)):
             all_signals = []
             all_senders = []
             all_identities = []
@@ -527,7 +558,7 @@ def set_signals(subsession: Subsession):
                 temp = [1, 2, 3] * 100
                 p.signal_order = temp[p.id_in_group - 1]
                 signal_order = orders[p.signal_order - 1]
-                for i in list(range(0, 10, 1)):
+                for i in list(range(0, 11, 1)):
                     fut_player = p.in_round(Constants.num_rounds/2 + i + 1)
                     fut_player.signal_order = p.signal_order
                     fut_player.SB_received_signal_1 = int(all[3 * signal_order[i]][0])
@@ -613,7 +644,7 @@ class Guess(Page):
             signal_4=player.SB_received_signal_4,
             sender_4=sender_4,
             sender_4_identity=player.received_signal_4_identity,
-            round=player.round_number - 10
+            round=player.round_number -int(Constants.num_rounds/2)
         )
 
     form_model = "player"
@@ -690,5 +721,5 @@ def save_signals_payoff(subsession: Subsession): # Difficulty for SB: Every play
 
 
 
-page_sequence = [Instructions_GT_senders, Signals, Filler_Task, Instructions_GT_receivers, StartWaitPage,
+page_sequence = [Instructions_GT_senders, Next_Round, Signals, Filler_Task, Instructions_GT_receivers, StartWaitPage,
                  Guess, SecondWaitPage]

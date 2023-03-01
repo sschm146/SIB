@@ -1,3 +1,5 @@
+import random
+
 from otree.api import *
 import time
 c = Currency
@@ -28,7 +30,7 @@ class Player(BasePlayer):
     input_field = models.IntegerField(label="Welches Puzzlestück passt?", min=1)
     time_started = models.FloatField()
     time_needed = models.FloatField()
-    sisi = models.IntegerField(
+    sisi_in = models.IntegerField(
         choices=[
             [1, ''],
             [2, ''],
@@ -37,10 +39,21 @@ class Player(BasePlayer):
             [5, ''],
             [6, ''],
             [7, ''],
-
         ],
         widget=widgets.RadioSelectHorizontal,
-        label="", )
+        label="")
+    sisi_out = models.IntegerField(
+        choices=[
+            [1, ''],
+            [2, ''],
+            [3, ''],
+            [4, ''],
+            [5, ''],
+            [6, ''],
+            [7, ''],
+        ],
+        widget=widgets.RadioSelectHorizontal,
+        label="")
     Abitur = models.IntegerField(
         choices=[
             [8, "3,5-4,0"],
@@ -65,21 +78,24 @@ class SiSi(Page):
             player.identity = participant.identity
             return dict(
                 SI=True,
-                identity=player.identity
+                identity=player.identity,
+                random=random.randint(0, 1)
             )
         else:
             return dict(
                 SI=False
             )
-
-
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(
+            SI="SI" in player.session.config['name']
+        )
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
 
-
     form_model = 'player'
-    form_fields = ["sisi"]
+    form_fields = ["sisi_in", "sisi_out"]
 
 
 class IQ_Instructions(Page):

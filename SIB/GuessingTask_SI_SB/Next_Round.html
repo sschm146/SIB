@@ -1,0 +1,47 @@
+{% load otree %}
+{{ block styles }}
+<link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+<style type="text/css">
+#fadeIn {
+            animation-name: fade;
+            animation-duration: 4s;
+        }
+        @keyframes fade{
+            0% {background-color: cyan;border-radius: 5px;}
+            50% {background-color: #58FAAC;border-radius: 5px;}
+            100% {background-color: transparent}
+        }
+</style>
+
+{{ endblock }}
+{% block content %}
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 3 </h3>
+        </div>
+    <div class="card-body">
+        <br>
+
+        <h3 style="text-align: center"> Schätzaufgabe <b id="fadeIn">{{ round }} von 11</b></h3>
+<br>
+<br>
+
+
+        <div style="text-align: center; font-weight: bold" >Schätzaufgabe {{ last_round }} ist abgeschlossen.
+            Nun beginnt Schätzaufgabe {{ round }}!
+        </div>
+        <br>
+<br>
+        <div style="text-align: center">
+            <b>Bitte beachten Sie:</b> Alle 11 Schätzaufgaben haben zwar die gleiche Struktur, sind aber völlig unabhängig voneinander.
+            Das bedeutet, dass die Zahlen in den einzelnen Schätzaufgaben in keiner Weise miteinander verbunden sind.
+        </div>
+<br>
+<br>
+    </div>
+</div>
+<div align="center">
+    {{ next_button }}
+</div>
+
+{% endblock %}

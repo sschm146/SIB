@@ -41,8 +41,9 @@ input{
         Die Tabelle zeigt die Schätzungen aller Sender in den 10 Schätzungsaufgaben.
             Bitte klicken Sie auf alle Schätzungen, bei denen Sie glauben, dass ein Sender nicht die Zahl angegeben hat, die er gesehen hat.
         </p>
-
-
+<div class="alert alert-warning" role="alert" id="timer_warning" style="visibility: hidden" align="center">
+  <b>Achtung!</b> Bitte machen Sie nun Ihre Eingaben und bestätigen Sie mit "Weiter".
+    </div>
 <table width='100%' align="center" id="trust_table" class="table table-hover ">
     <thead>
     <tr>
@@ -171,11 +172,18 @@ input{
         </p>
     </div>
 </div>
+
     <div align="center">
     <button  class="otree-btn-next btn btn-primary" id="nextbtn">Weiter</button>
 </div>
 
 <script>
+
+    function timer_warning(){
+  document.getElementById("timer_warning").style.visibility = "visible"
+}
+setTimeout(timer_warning, 180000);
+
 
 function color_update(id) {
     // update colors
