@@ -1,6 +1,11 @@
 {{ load otree staticfiles }}
 {{block styles }}
     <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+<style>
+    .text-primary {
+color: #322b7b!important;
+}
+</style>
 {{ endblock }}
 {{ block content }}
 <div class="card bg-light instructions">
@@ -11,14 +16,9 @@
 <br>
     <p>
         {{ if identity != 'neutral' }}
-        In diesem Teil tritt Ihre Gruppe {{ identity }} bei der folgenden Aufgabe gegen die Gruppe
-        {{ if identity == "Blau" }}
-        Gelb
-        {{ endif }}
-        {{ if identity == "Gelb" }}
-        Blau
-        {{ endif }}
-        an.
+        In diesem Teil tritt Ihre
+        {{ if identity == "Blau" }}<span class="text-primary"  style="font-weight: bold">Gruppe Blau</span> bei der folgenden Aufgabe gegen <span class="text-warning" style="font-weight: bold">Gruppe Gelb</span> an.{{ endif }}
+        {{ if identity == "Gelb" }}<span class="text-warning" style="font-weight: bold">Gruppe Gelb</span> bei der folgenden Aufgabe gegen <span class="text-primary" style="font-weight: bold">Gruppe Blau</span> an.{{ endif }}
         {{ endif }}
         {{ if identity == 'neutral' }}
         In diesem Teil werden Sie die folgende Aufgabe bearbeiten.

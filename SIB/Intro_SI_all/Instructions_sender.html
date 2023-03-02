@@ -1,6 +1,17 @@
 {{ load otree staticfiles }}
 {{block styles }}
     <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+
+<style type="text/css">
+.text-primary {
+color: #322b7b!important;
+    font-weight: bold;
+}
+.text-warning{
+    font-weight: bold;
+}
+</style>
+
 {{ endblock }}
 {{ block content }}
 <div class="card bg-light instructions">
@@ -11,9 +22,15 @@
 <br><br>
         {{ if identity != 'neutral' }}
      <p>
-        In dieser Studie gibt es zwei Gruppen: die Gruppe Gelb und die Gruppe Blau.
+        In dieser Studie gibt es zwei Gruppen: die <span class="text-warning" style="font-weight: bold">Gruppe Gelb</span> und die <span class="text-primary" style="font-weight: bold">Gruppe Blau</span>.
         Eine gleiche Anzahl von TeilnehmerInnen wurde zufällig jeder Gruppe zugewiesen.
-         <b>Sie wurden nach dem Zufallsprinzip der Gruppe {{ identity }} zugewiesen</b>. Sie werden für den Rest des Experiments in der Gruppe {{ identity }} bleiben.
+         <b>Sie wurden nach dem Zufallsprinzip der
+             {{ if identity == "Blau" }} <span class="text-primary">Gruppe Blau</span> {{ endif }}
+             {{ if identity == "Gelb" }} <span class="text-warning">Gruppe Gelb</span> {{ endif }}
+             zugewiesen</b>. Sie werden für den Rest des Experiments in der
+         {{ if identity == "Blau" }} <span class="text-primary" style="font-weight: bold">Gruppe Blau</span> {{ endif }}
+             {{ if identity == "Gelb" }} <span class="text-warning" style="font-weight: bold">Gruppe Gelb</span> {{ endif }}
+         bleiben.
         </p>
         {{ endif }}
     <p>
