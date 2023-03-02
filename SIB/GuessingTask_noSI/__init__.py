@@ -502,7 +502,7 @@ class Guess(Page):
             signal_4=player.received_signal_4,
             signal_5=player.received_signal_5,
             signal_6=player.received_signal_6,
-            round=player.round_number -int(Constants.num_rounds/2)
+            round=player.round_number - int(Constants.num_rounds/2)
         )
 
     form_model = "player"

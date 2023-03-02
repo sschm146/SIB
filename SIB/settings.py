@@ -45,7 +45,7 @@ SESSION_CONFIGS = [
     dict(
         name="testSI",
         display_name="testSI",
-        num_demo_participants=1,
+        num_demo_participants=5,
         app_sequence=["Intro_SI_all", "Final_Questionnaire"],
         prior_sender=False
     ),

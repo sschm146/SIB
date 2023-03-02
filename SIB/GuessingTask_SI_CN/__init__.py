@@ -579,8 +579,8 @@ def set_signals(subsession: Subsession):
                     fut_player.received_signal_2 = int(all[3 * signal_order[i]][1])
                     fut_player.received_signal_3 = int(all[3 * signal_order[i]][2])
                     fut_player.received_signal_4 = int(all[3 * signal_order[i]][3])
-                    fut_player.received_signal_5 = int(((int(all[3 * signal_order[i]][4])) + int(fut_player.received_signal_4))/2)
-                    fut_player.received_signal_6 = int(((int(all[3 * signal_order[i]][5])) + int(fut_player.received_signal_4))/2)
+                    fut_player.received_signal_5 = int(all[3 * signal_order[i]][4])
+                    fut_player.received_signal_6 = int(all[3 * signal_order[i]][5])
                     fut_player.received_signal_1_identity = all[3 * signal_order[i] + 2][0]
                     fut_player.received_signal_2_identity = all[3 * signal_order[i] + 2][1]
                     fut_player.received_signal_3_identity = all[3 * signal_order[i] + 2][2]

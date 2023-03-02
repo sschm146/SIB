@@ -38,7 +38,7 @@ input{
     <div class="card-body">
       <br>
         <p>
-        Die Tabelle zeigt die Schätzungen aller Sender in den 10 Schätzungsaufgaben.
+        Die Tabelle zeigt die Schätzungen aller Sender in den 11 Schätzungsaufgaben.
             Bitte klicken Sie auf alle Schätzungen, bei denen Sie glauben, dass ein Sender nicht die Zahl angegeben hat, die er gesehen hat.
         </p>
 <div class="alert alert-warning" role="alert" id="timer_warning" style="visibility: hidden" align="center">
@@ -157,11 +157,19 @@ input{
            <td><input required type=button id="sender_10_5" style="width:100%; background: white;" onclick="color_update('sender_10_5');"></td>
            <td><input required type=button id="sender_10_6" style="width:100%; background: white;" onclick="color_update('sender_10_6');"></td>
       </tr>
-
+    <tr>
+    <td class="row_header">Schätzaufgabe 11</td>
+           <td><input required type=button id="sender_11_1" style="width:100%; background: white;" onclick="color_update('sender_11_1');"></td>
+           <td><input required type=button id="sender_11_2" style="width:100%; background: white;" onclick="color_update('sender_11_2');"></td>
+           <td><input required type=button id="sender_11_3" style="width:100%; background: white;" onclick="color_update('sender_11_3');"></td>
+           <td><input required type=button id="sender_11_4" style="width:100%; background: white;" onclick="color_update('sender_11_4');"></td>
+           <td><input required type=button id="sender_11_5" style="width:100%; background: white;" onclick="color_update('sender_11_5');"></td>
+           <td><input required type=button id="sender_11_6" style="width:100%; background: white;" onclick="color_update('sender_11_6');"></td>
+      </tr>
     </table>
         <div>
             <script>
-    for(var r = 1; r <= 10; ++r){
+    for(var r = 1; r <= 11; ++r){
         for(var s = 1; s <= 6; ++s) {
             document.write(["<input required value=\"0\" name=\"mistrust_sender_",r,"_", s,"\" id=\"mistrust_sender_",r,"_", s,"\" type=\"hidden\">"].join(''));
         }}
@@ -184,6 +192,11 @@ input{
 }
 setTimeout(timer_warning, 180000);
 
+document.addEventListener('keypress', function (e) {
+    if (e.keyCode === 13 || e.which === 13) {
+        e.preventDefault();
+        return false;
+    }});
 
 function color_update(id) {
     // update colors
@@ -229,8 +242,8 @@ function color_update(id) {
 
 window.onload = function(){
     let signals = [js_vars.signals_round_1,js_vars.signals_round_2,js_vars.signals_round_3,js_vars.signals_round_4,js_vars.signals_round_5,
-    js_vars.signals_round_6,js_vars.signals_round_7,js_vars.signals_round_8,js_vars.signals_round_9,js_vars.signals_round_10]
-    for(var r = 1; r <= 10; r++){
+    js_vars.signals_round_6,js_vars.signals_round_7,js_vars.signals_round_8,js_vars.signals_round_9,js_vars.signals_round_10,js_vars.signals_round_11]
+    for(var r = 1; r <= 11; r++){
         for(var s = 1; s <= 6; s++){
             document.getElementById(["sender_", r, "_", s].join('')).value = signals[r-1][s-1];
             document.getElementById(["mistrust_sender_", r, "_", s].join('')).value = 0

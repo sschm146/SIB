@@ -541,8 +541,8 @@ def set_signals(subsession: Subsession):
                     fut_player.received_signal_2 = int(all[2 * signal_order[i]][1])
                     fut_player.received_signal_3 = int(all[2 * signal_order[i]][2])
                     fut_player.received_signal_4 = int(all[2 * signal_order[i]][3])
-                    fut_player.received_signal_5 = int(((all[2 * signal_order[i]][4]) + fut_player.received_signal_4)/2)
-                    fut_player.received_signal_6 = int(((all[2 * signal_order[i]][5]) + fut_player.received_signal_4)/2)
+                    fut_player.received_signal_5 = int(all[2 * signal_order[i]][4])
+                    fut_player.received_signal_6 = int(all[2 * signal_order[i]][5])
                     fut_player.true_state = p.session.config['True_state'][signal_order[i]]
 
 

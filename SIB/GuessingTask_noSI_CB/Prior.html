@@ -75,7 +75,7 @@
 
         <div class="alert alert-warning" role="alert" id="entry_warning" style="visibility: hidden" align="center">
   <b>Achtung!</b> Sie haben eine Schätzung angegeben, die um mehr als {{ border }} von der Schätzung des zufällig gezogenen Schätzgerätes abweicht.
-            Je weiter Ihre Schätzung von der Schätzung des zufällig gezogenen Schätzgerätes abweicht, desto geringer ist die Wahrscheinlichkeit, dass Sie nahe an der Zahl x liegen und damit die zusätzliche Zahlung von {{ GT_sender_payoff}} € verdienen.
+            Je weiter Ihre Schätzung von der Schätzung des zufällig gezogenen Schätzgerätes abweicht, desto geringer ist die Wahrscheinlichkeit, dass Sie nahe an der Zahl x liegen und damit die zusätzliche Zahlung von {{ GT_sender_payoff}} € verdienen. Bitte klicken Sie auf "Verstanden!", wenn Sie das verstanden haben.
             <br><br>
             <button type="button" class="btn btn-warning" id="entry_warning_button">
                 Verstanden!
@@ -87,8 +87,14 @@ function timer_warning(){
   document.getElementById("timer_warning").style.visibility = "visible"}
 setTimeout(timer_warning, 45000);
 
+document.addEventListener('keypress', function (e) {
+        if (e.keyCode === 13 || e.which === 13) {
+            e.preventDefault();
+            return false;
+        }});
+
 forminputs.sent_signal.oninput = function() {
-   setTimeout(checkInput, 1200)}
+   setTimeout(checkInput, 1000)}
 var index = false
 function checkInput() {
     if (Math.abs(forminputs.sent_signal.value - js_vars.prior_estimate) > js_vars.entry_warning_border) {

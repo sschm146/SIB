@@ -287,7 +287,7 @@ def comprq8_choices(player):
         highest = []
         mid = []
         lowest = []
-        for i in list(range(1, 11, 1)):
+        for i in list(range(1, int(Constants.num_rounds/2), 1)):
             all_signals = []
             for p in players:
                 prev_player = p.in_round(i)
@@ -437,7 +437,7 @@ class Instructions_GT_receivers(Page):
         highest = []
         mid = []
         lowest = []
-        for i in list(range(1, 11, 1)):
+        for i in list(range(1, int(Constants.num_rounds/2), 1)):
             all_signals = []
             for p in players:
                 prev_player = p.in_round(i)
@@ -446,7 +446,7 @@ class Instructions_GT_receivers(Page):
             all = np.vstack([all, all_signals])
             if i == 1:
                 all = np.delete(all, 0, 0)
-        for i in list(range(0,10,1)):
+        for i in list(range(0,11,1)):
             highest.append(sorted(all[i, :], reverse=True)[0])
             mid.append(sorted(all[i, :], reverse=True)[1])
             lowest.append(sorted(all[i, :], reverse=True)[2])
@@ -591,7 +591,7 @@ class Guess(Page):
                 signal_3=player.SB_received_signal_3,
                 signal_4=player.SB_received_signal_4,
                 sender_4=sender_4,
-                round=player.round_number-10
+                round=player.round_number - int(Constants.num_rounds/2)
             )
 
     form_model = "player"
@@ -625,7 +625,7 @@ def save_signals_payoff(subsession: Subsession): # Difficulty for SB: Every play
     estimates_all_rounds = []
     for p in players:
         signals_all_rounds = []
-        for i in list(range(1, 11, 1)):
+        for i in list(range(1, int(Constants.num_rounds/2), 1)):
             prev_player = p.in_round(i)
             prev_players = prev_player.group.get_players()
             if p.Role == 'sender':
