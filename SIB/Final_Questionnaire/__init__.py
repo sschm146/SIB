@@ -30,27 +30,49 @@ class Player(BasePlayer):
     input_field = models.IntegerField(label="Welches Puzzlestück passt?", min=1)
     time_started = models.FloatField()
     time_needed = models.FloatField()
-    sisi_in = models.IntegerField(
+    random = models.IntegerField()
+    si = models.IntegerField(
         choices=[
-            [1, ''],
-            [2, ''],
-            [3, ''],
-            [4, ''],
-            [5, ''],
-            [6, ''],
-            [7, ''],
+            [1, '1'],
+            [2, '2'],
+            [3, '3'],
+            [4, '4'],
+            [5, '5'],
+            [6, '6'],
+            [7, '7'],
+            [8, '8'],
+            [9, '9'],
+            [10, '10'],
         ],
         widget=widgets.RadioSelectHorizontal,
         label="")
-    sisi_out = models.IntegerField(
+    si_in = models.IntegerField(
         choices=[
-            [1, ''],
-            [2, ''],
-            [3, ''],
-            [4, ''],
-            [5, ''],
-            [6, ''],
-            [7, ''],
+            [1, '1'],
+            [2, '2'],
+            [3, '3'],
+            [4, '4'],
+            [5, '5'],
+            [6, '6'],
+            [7, '7'],
+            [8, '8'],
+            [9, '9'],
+            [10, '10'],
+        ],
+        widget=widgets.RadioSelectHorizontal,
+        label="")
+    si_out = models.IntegerField(
+        choices=[
+            [1, '1'],
+            [2, '2'],
+            [3, '3'],
+            [4, '4'],
+            [5, '5'],
+            [6, '6'],
+            [7, '7'],
+            [8, '8'],
+            [9, '9'],
+            [10, '10'],
         ],
         widget=widgets.RadioSelectHorizontal,
         label="")
@@ -70,32 +92,54 @@ class Player(BasePlayer):
 
 
 # PAGES
-class SiSi(Page):
-    @staticmethod
-    def vars_for_template(player: Player):
-        if "SI" in player.session.config['name']:
-            participant = player.participant
-            player.identity = participant.identity
-            return dict(
-                SI=True,
-                identity=player.identity,
-                random=random.randint(0, 1)
-            )
-        else:
-            return dict(
-                SI=False
-            )
-    @staticmethod
-    def js_vars(player: Player):
-        return dict(
-            SI="SI" in player.session.config['name']
-        )
+def creating_session(subsession: Subsession):
+    if subsession.round_number == 1:
+        for p in subsession.get_players():
+            p.random = random.randint(1, 2)
+
+class SI(Page):
     @staticmethod
     def is_displayed(player):
-        return player.round_number == 1
+        return player.round_number == 1 and "SI" not in player.session.config['name']
 
     form_model = 'player'
-    form_fields = ["sisi_in", "sisi_out"]
+    form_fields = ["si"]
+
+
+class SI_in1(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1 and player.random == 1 and "SI" in player.session.config['name']
+
+    form_model = 'player'
+    form_fields = ["si_in"]
+
+
+class SI_out1(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1 and player.random == 1 and "SI" in player.session.config['name']
+
+    form_model = 'player'
+    form_fields = ["si_out"]
+
+
+class SI_in2(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1 and player.random == 2 and "SI" in player.session.config['name']
+
+    form_model = 'player'
+    form_fields = ["si_in"]
+
+
+class SI_out2(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1 and player.random == 2 and "SI" in player.session.config['name']
+
+    form_model = 'player'
+    form_fields = ["si_out"]
 
 
 class IQ_Instructions(Page):
@@ -109,6 +153,7 @@ class IQ_Instructions(Page):
         participant = player.participant
         import time
         participant.expiry = time.time() + Constants.IQ_time
+
 
 class Task(Page):
     if Constants.use_timeout:
@@ -151,6 +196,7 @@ class Task(Page):
     form_model = 'player'
     form_fields = ['input_field']
 
+
 class Abitur(Page):
 
     @staticmethod
@@ -160,4 +206,5 @@ class Abitur(Page):
     form_model = 'player'
     form_fields = ["Abitur"]
 
-page_sequence = [SiSi, IQ_Instructions, Task, Abitur]
+
+page_sequence = [SI, SI_in1, SI_out1, SI_out2, SI_in2, IQ_Instructions, Task, Abitur]

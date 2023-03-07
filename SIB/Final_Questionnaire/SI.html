@@ -1,0 +1,46 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+<style type="text/css">
+
+.text-primary {
+color: #322b7b!important;
+    font-weight: bold;
+}
+.text-warning{
+    font-weight: bold;
+}
+    </style>
+{{ endblock }}
+{{ block content }}
+<div class="card bg-light instructions">
+ <div class="card-header bg-transparent mainheader" >
+ <h3 class="card-title font-weight-bold"> Teil 5
+ </h3>
+        </div>
+    <div class="card-body">
+        In Teil 5 bitten wir Sie, mehrere kurze Fragebögen und Aufgaben zu bearbeiten. Bitte füllen Sie diese aus.
+        <br><br>
+        <strong>Bitte bewerten Sie auf einer Skala von 1 bis 10, wie eng Sie sich während des Experiments mit den anderen TeilnehmerInnen verbunden fühlten,
+            wobei 1 "überhaupt nicht verbunden" bedeutet.</strong>
+        <br><br><br>
+                <div style="display: flex">
+                    überhaupt nicht <br> verbunden&nbsp;&nbsp;
+        {{ for choice in form.si }}
+        <div style="flex: 1; text-align: center">
+            {{ choice }}
+            <br>
+            <span style="text-align: center">{{ choice.label }}</span>
+        </div>
+        {{ endfor }}
+                    &nbsp;&nbsp;sehr verbunden
+</div>
+        <br><hr><br>
+        <strong>Wenn Sie die Frage beantwortet haben, drücken Sie bitte auf "Weiter".</strong>
+   </div>
+</div>
+<br>
+<div align="center">
+    {{ next_button }}
+</div>
+{% endblock %}

@@ -17,7 +17,12 @@
 {% block content %}
 <div class="card bg-light instructions">
     <div class="card-header bg-transparent mainheader" >
+        {{ if role == "sender" }}
+ <h3 class="card-title font-weight-bold"> Teil 2 </h3>
+        {{ endif }}
+        {{ if role == "receiver" }}
  <h3 class="card-title font-weight-bold"> Teil 3 </h3>
+        {{ endif }}
         </div>
     <div class="card-body">
         <br>

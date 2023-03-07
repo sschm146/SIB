@@ -18,13 +18,13 @@ SESSION_CONFIG_DEFAULTS = dict(
     Trust_in_Senders_payoff=14, #Payoff for receivers based on precision TiS
     Confidence_payoff=2, #Fixed Payoff for receivers based on Confidence_3_new
     True_state=[369, 860, 624, 492, 528, 257, 137, 649, 486, 491, 162],
-    Signals=[[327, 861, 607, 456, 568, 345, 230, 680, 453, 592, 99 ], # Signals for Sender A
+    Signals=[[327, 861, 607, 456, 568, 345, 230, 680, 453, 592, 99], # Signals for Sender A
              [293, 813, 572, 473, 617, 267, 168, 743, 570, 451, 216], # Signals for Sender B
              [371, 782, 551, 398, 533, 317, 133, 664, 425, 427, 173], # Signals for Sender C
-             [489, 973, 745, 596, 431, 148, 40,  552, 481, 491, 163], # Signals for Sender D
-             [337, 891, 657, 530, 519, 236, 128, 630, 552, 411, 85 ], # Signals for Sender E
-             [401, 843, 617, 488, 497, 224, 126, 634, 408, 574, 231], # Signals for Sender F
-             [321, 820, 581, 446, 579, 319, 178, 707, 484, 489, 163]], # Signals for Sender 1 (CB-treatment)
+             [489, 973, 745, 596, 431, 148, 40, 552, 481, 491, 163], # Signals for Sender D
+             [337, 891, 657, 530, 519, 236, 128, 630, 542, 424, 93], # Signals for Sender E
+             [401, 843, 617, 488, 497, 224, 126, 634, 419, 562, 225], # Signals for Sender F
+             [325, 820, 581, 446, 576, 314, 178, 701, 484, 489, 163]], # Signals for Sender 1 (CB-treatment)
     signal_order_1=[0, 1, 8, 2, 3, 10, 5, 4, 9, 6, 7],
     signal_order_2=[6, 7, 9, 3, 2, 10, 4, 5, 8, 1, 0],
     signal_order_3=[3, 2, 10, 5, 4, 9, 1, 7, 8, 0, 6],
@@ -36,8 +36,8 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 SESSION_CONFIGS = [
     dict(
-        name="version_010323",
-        display_name="version_010323",
+        name="version_070323",
+        display_name="version_070323",
         num_demo_participants=1,
         app_sequence=["Intro_noSI_all"],
         prior_sender=False

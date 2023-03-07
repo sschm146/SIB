@@ -24,7 +24,12 @@
 <h3 style="text-align: center"> Schätzaufgabe <b id="fadeIn">{{ round }} von 11</b></h3>
 <br>
 <br>
-        <div style="text-align: center"> Im Folgenden sehen Sie die Schätzung Ihres zufällig zugewiesenen Schätzgerätes. Bitte machen Sie Ihre Eingabe innerhalb von 1 Minute:</div>
+        {{ if player.id_in_group < 5 }}
+        <div style="text-align: center"> Im Folgenden sehen Sie die Schätzung Ihres zufällig gezogenen Schätzgerätes. Bitte machen Sie Ihre Eingabe innerhalb von 1 Minute:</div>
+        {{ endif }}
+        {{ if player.id_in_group > 4 }}
+        <div style="text-align: center"> Im Folgenden sehen Sie den Durchschnitt der Schätzungen der beiden zufällig gezogenen Schätzgeräte. Bitte machen Sie Ihre Eingabe innerhalb von 1 Minute:</div>
+        {{ endif }}
 <br>
 
 <br>
@@ -80,7 +85,7 @@ document.addEventListener('keypress', function (e) {
         }});
 
 forminputs.sent_signal.oninput = function() {
-   setTimeout(checkInput, 1000)}
+   setTimeout(checkInput, 500)}
 var index = false
 function checkInput() {
     if (Math.abs(forminputs.sent_signal.value - js_vars.estimate) > js_vars.entry_warning_border) {

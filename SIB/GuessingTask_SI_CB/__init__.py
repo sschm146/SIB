@@ -80,13 +80,9 @@ class Player(BasePlayer):
                                   label='')
     comprq5 = models.IntegerField(label='')
     comprq6 = models.IntegerField(
-        choices=[[1, 'All parts of the experiment in which additional money can be earned will be paid out.'],
-                 [2,
-                  'Only one of the parts in which additional money can be earned will be randomly chosen and paid out. '
-                  'If it happens that part 2 is chosen, then the earnings from each of the 10 estimation tasks will be paid out.'],
-                 [3,
-                  'Only one of the parts in which additional money can be earned will be randomly chosen and paid out. '
-                  'If it happens that part 2 is chosen, then one of the 10 estimation tasks will be randomly chosen, and my additional payment will depend only on my precision on that particular estimation task.']],
+        choices=[[1, 'Meine Chancen auf die zusätzliche Auszahlung von 13€ sind so am höchsten. '],
+                 [2, 'Dies hat keinen Einfluss auf meine Auszahlung.'],
+                 [3, 'Meine Chancen auf die zusätzliche Auszahlung von 13€ sind sehr gering.']],
         widget=widgets.RadioSelect,
         label='')
     comprq7 = models.IntegerField(
@@ -167,10 +163,22 @@ class Player(BasePlayer):
                      'Die Zahl x, die Schätzungen der Schätzgeräte und die Schätzungen der Sender sind ausschließlich für die jeweils aktuelle Schätzaufgabe von Bedeutung.']],
         widget=widgets.RadioSelect,
         label='')
+    comprq15_sender = models.IntegerField(
+        choices=[[1, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von allen vorherigen Schätzaufgaben. '
+                     'Zahlen aus allen vorherigen Schätzaufgaben sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                 [2, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von der letzten Schätzaufgabe. '
+                     'Zahlen aus der letzten Schätzaufgabe sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                 [3, 'Alle 11 Schätzaufgaben haben zwar die gleiche Struktur, sind aber völlig unabhängig voneinander. '
+                     'Das bedeutet, dass die Zahl x und die Schätzungen der Schätzgeräte über die 11 Schätzaufgaben hinweg in keiner Weise miteinander verbunden sind. '
+                     'Die Zahl x und die Schätzungen der Schätzgeräte sind ausschließlich für die jeweils aktuelle Schätzaufgabe von Bedeutung.']],
+        widget=widgets.RadioSelect,
+        label='')
+    error_comprq15_sender = models.IntegerField(initial=0)
     error_comprq1 = models.IntegerField(initial=0)
     error_comprq2 = models.IntegerField(initial=0)
     error_comprq3 = models.IntegerField(initial=0)
     error_comprq5 = models.IntegerField(initial=0)
+    error_comprq6 = models.IntegerField(initial=0)
     error_comprq7 = models.IntegerField(initial=0)
     error_comprq8 = models.IntegerField(initial=0)
     error_comprq8_2 = models.IntegerField(initial=0)
@@ -325,12 +333,14 @@ class Next_Round(Page):
         if player.Role == "sender":
             return dict(
                 round=player.round_number,
-                last_round=player.round_number - 1
+                last_round=player.round_number - 1,
+                role=player.Role
             )
         if player.Role == "receiver":
             return dict(
                 round=player.round_number - int(Constants.num_rounds/2),
-                last_round=player.round_number - 1 - int(Constants.num_rounds/2)
+                last_round=player.round_number - 1 - int(Constants.num_rounds/2),
+                role=player.Role
             )
 # senders see estimate and send signal
 class Signals(Page):
@@ -375,7 +385,7 @@ class Instructions_GT_senders(Page):
         return (player.Role == "sender" or player.Role =="prior_sender") and player.round_number == 1
 
     form_model = "player"
-    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5", "comprq15"]
+    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5", "comprq6", "comprq15_sender"]
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -391,7 +401,8 @@ class Instructions_GT_senders(Page):
             comprq2=2,
             comprq3=1,
             comprq5=190,
-            comprq15=3,
+            comprq6=3,
+            comprq15_sender=3,
         )
 
         error_messages = dict()
@@ -408,8 +419,10 @@ class Instructions_GT_senders(Page):
                     player.error_comprq3 += 1
                 if field_name == "comprq5":
                     player.error_comprq5 += 1
-                if field_name == "comprq15":
-                    player.error_comprq15 += 1
+                if field_name == "comprq6":
+                    player.error_comprq6 += 1
+                if field_name == "comprq15_sender":
+                    player.error_comprq15_sender += 1
         return error_messages
 
 
