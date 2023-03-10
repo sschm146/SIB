@@ -476,7 +476,7 @@ class Instructions_GT_receivers(Page):
                 if field_name == "comprq10":
                     player.error_comprq10 += 1
                 if field_name == "comprq11":
-                    player.error_comprq12 += 1
+                    player.error_comprq11 += 1
                 if field_name == "comprq13":
                     player.error_comprq13 += 1
                 if field_name == "comprq14":

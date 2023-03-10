@@ -36,8 +36,8 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 SESSION_CONFIGS = [
     dict(
-        name="version_070323",
-        display_name="version_070323",
+        name="version_100323",
+        display_name="version_100323",
         num_demo_participants=1,
         app_sequence=["Intro_noSI_all"],
         prior_sender=False
