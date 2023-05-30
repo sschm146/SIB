@@ -1,0 +1,62 @@
+{{ load otree staticfiles }}
+{{block styles }}
+    <link href="{{ static 'global/Instructions.css' }}" rel="stylesheet">
+{{ endblock }}
+{% block content %}
+<div class="card bg-light instructions">
+    <div class="card-header bg-transparent mainheader" >
+        <h3 class="card-title font-weight-bold">Vielen Dank für die Teilnahme an der heutigen Studie.</h3>
+        </div>
+    <div class="card-body">
+        Auf der nächsten Seite erhalten Sie Ihre Auszahlung.
+        Wie in der Einladung angekündigt, wird Ihre Auszahlung aus der heutigen Studie an Sie überwiesen werden.
+        In den Eingabefeldern unten, bitten wir Sie Ihre IBAN und Ihren vollständigen Namen anzugeben.
+        Ebenso fragen wir Sie nach einer Kombination aus Sicherheitsfrage und Antwort.
+        Sollte die Überweisung fehlschlagen, können wir darüber sicherstellen, dass Sie Ihre Auszahlung definitiv erhalten werden.
+        Bitte beachten Sie, dass wir Ihre Daten ausschließlich für die Auszahlung abfragen.
+        Die Entscheidungen, die Sie in dieser Studie getroffen haben, werden nicht mit Ihren persönlichen Daten verbunden und werden stets getrennt gespeichert.
+        Sobald die Auszahlung abgeschlossen ist, löschen wir Ihre persönlichen Daten.
+</div>
+</div>
+<br>
+<strong>Bitte geben Sie hier Ihre IBAN ein:</strong>
+<!--  <input id="IBAN" name="IBAN" type="text" pattern="\b[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?!(?:[ ]?[0-9]){3})(?:[ ]?[0-9]{1,2})?\b" size="25" oninput="resetFeedback()">-->
+<!--    <button onclick="validateIBAN();return false;">IBAN validieren</button>-->
+{{ formfield 'iban' label="" }}
+<br>
+<!--<p id="IBAN_feedback"></p>-->
+<p>
+    Falls Sie Ihre IBAN vergessen haben oder nicht validieren können, melden Sie sich bitte beim Laborpersonal!
+</p>
+<hr>
+<br>
+<strong>Bitte geben Sie hier Ihren Vornamen ein:</strong>
+  {{formfield 'name' label=""}}
+<br>
+<hr>
+<br>
+<strong>Bitte geben Sie hier Ihren Nachnamen ein:</strong>
+  {{formfield 'surname' label=""}}
+<br>
+<hr>
+<br>
+<strong>Bitte wählen Sie hier Ihre Sicherheitsfrage:</strong>
+  {{formfield 'safety_question' label=""}}
+<br>
+<hr>
+<br>
+<strong>Bitte geben Sie hier Ihre Antwort auf die oben gewählte Sicherheitsfrage ein:</strong>
+  {{formfield 'safety_answer' label=""}}
+<br>
+<br>
+ {{ next_button }}
+<!--<button  class="otree-btn-next btn btn-primary" id="nextbtn" style="visibility:hidden">Bestätigen</button>-->
+
+<script>
+        document.addEventListener('mouseup', function (e) {
+        if (e.button === 3 || e.button === 4) {
+            e.preventDefault();
+            return false;
+        }});
+</script>
+{{ endblock }}

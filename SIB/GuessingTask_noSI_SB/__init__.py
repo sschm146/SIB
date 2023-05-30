@@ -450,7 +450,7 @@ class Instructions_GT_receivers(Page):
         highest = []
         mid = []
         lowest = []
-        for i in list(range(1, int(Constants.num_rounds/2), 1)):
+        for i in list(range(1, int(Constants.num_rounds/2) + 1, 1)):
             all_signals = []
             for p in players:
                 prev_player = p.in_round(i)
@@ -569,6 +569,11 @@ class Filler_Task(Page):
     form_model = "player"
     form_fields = ["q"+str(i) for i in range(1, 26)]
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
 
     @staticmethod
     def is_displayed(player):
@@ -638,7 +643,7 @@ def save_signals_payoff(subsession: Subsession): # Difficulty for SB: Every play
     estimates_all_rounds = []
     for p in players:
         signals_all_rounds = []
-        for i in list(range(1, int(Constants.num_rounds/2), 1)):
+        for i in list(range(1, int(Constants.num_rounds/2) + 1, 1)):
             prev_player = p.in_round(i)
             prev_players = prev_player.group.get_players()
             if p.Role == 'sender':
@@ -646,7 +651,7 @@ def save_signals_payoff(subsession: Subsession): # Difficulty for SB: Every play
             if p.Role == 'receiver':
                 signals_1_3 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group <= 3]
                 pre_signals_4_6 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group > 3]
-                prev_receiver = p.in_round(i + 10)
+                prev_receiver = p.in_round(i + 11)
                 max_signal_sender = prev_receiver.SB_sender_4
                 signals_4_6 = ['-', '-', '-']
                 signals_4_6[int(max_signal_sender) - 3 - 1] = pre_signals_4_6[int(max_signal_sender) - 3 - 1]

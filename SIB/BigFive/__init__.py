@@ -83,6 +83,11 @@ class Big5_1(Page):
     form_model = 'player'
     form_fields = ['B_1','B_2','B_3','B_4','B_5','B_6','B_7','B_8','B_9','B_10','B_11','B_12']
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
 
 class Big5_2(Page):
     form_model = 'player'

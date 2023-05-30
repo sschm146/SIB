@@ -630,6 +630,12 @@ class Filler_Task(Page):
     form_fields = ["q"+str(i) for i in range(1, 26)]
 
     @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
+
+    @staticmethod
     def is_displayed(player):
         return (player.Role == "receiver" and player.round_number == 1) or ((player.Role == "sender" or player.Role == "prior_sender") and player.round_number == Constants.num_rounds/2 + 1)
 

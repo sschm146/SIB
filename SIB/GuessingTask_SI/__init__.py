@@ -542,6 +542,11 @@ class Filler_Task(Page):
     form_model = "player"
     form_fields = ["q"+str(i) for i in range(1, 26)]
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
 
     @staticmethod
     def is_displayed(player):

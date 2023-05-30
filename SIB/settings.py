@@ -17,6 +17,7 @@ SESSION_CONFIG_DEFAULTS = dict(
     GT_guess_time=240, #Time to submit a guess on the Signals page
     Trust_in_Senders_payoff=14, #Payoff for receivers based on precision TiS
     Confidence_payoff=2, #Fixed Payoff for receivers based on Confidence_3_new
+    Questionnaire_payoff=4,
     True_state=[369, 860, 624, 492, 528, 257, 137, 649, 486, 491, 162],
     Signals=[[327, 861, 607, 456, 568, 345, 230, 680, 453, 592, 99], # Signals for Sender A
              [293, 813, 572, 473, 617, 267, 168, 743, 570, 451, 216], # Signals for Sender B
@@ -36,17 +37,17 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 SESSION_CONFIGS = [
     dict(
-        name="version_100323",
-        display_name="version_100323",
+        name="version_300523",
+        display_name="version_300523",
         num_demo_participants=1,
         app_sequence=["Intro_noSI_all"],
         prior_sender=False
     ),
     dict(
-        name="testSI",
-        display_name="testSI",
-        num_demo_participants=5,
-        app_sequence=["Intro_SI_all", "Final_Questionnaire"],
+        name="testing",
+        display_name="testing",
+        num_demo_participants=10,
+        app_sequence=["Intro_noSI_all", "Final_Questionnaire"],
         prior_sender=False
     ),
     dict(

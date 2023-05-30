@@ -91,7 +91,8 @@ class Instructions_sender(Page):
         identity = participant.identity
         return dict(
             identity=identity,
-            participation_fee=player.session.config['participation_fee']
+            participation_fee=player.session.config['participation_fee'],
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
         )
 
 class Instructions_receiver(Page):
@@ -105,7 +106,8 @@ class Instructions_receiver(Page):
         identity = participant.identity
         return dict(
             identity=identity,
-            participation_fee=player.session.config['participation_fee']
+            participation_fee=player.session.config['participation_fee'],
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
         )
 
 page_sequence = [Instructions_all, Instructions_sender, Instructions_receiver]

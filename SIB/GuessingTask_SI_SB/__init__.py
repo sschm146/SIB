@@ -40,10 +40,6 @@ class Player(BasePlayer):
     SB_received_signal_2 = models.IntegerField() #saving received signals across rounds for analyses
     SB_received_signal_3 = models.IntegerField() #saving received signals across rounds for analyses
     SB_received_signal_4 = models.IntegerField() #saving received signals across rounds for analyses
-    received_signal_1_identity = models.StringField() #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
-    received_signal_2_identity = models.StringField() #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
-    received_signal_3_identity = models.StringField() #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
-    received_signal_4_identity = models.StringField() #saving senders identity across rounds for analyses - 1 if sender and receiver have same identity
     comprq1 = models.IntegerField(choices=[[1,
                                             'Die Schätzung eines zufällig gezogenen Schätzgeräts kann mit gleicher Wahrscheinlichkeit der Zahl x oder einer andere Zahl entsprechen.'],
                                            [2,
@@ -470,7 +466,7 @@ class Instructions_GT_receivers(Page):
         highest = []
         mid = []
         lowest = []
-        for i in list(range(1, int(Constants.num_rounds/2), 1)):
+        for i in list(range(1, int(Constants.num_rounds/2) + 1, 1)):
             all_signals = []
             for p in players:
                 prev_player = p.in_round(i)
@@ -551,16 +547,13 @@ def set_signals(subsession: Subsession):
         for i in list(range(1, 12, 1)):
             all_signals = []
             all_senders = []
-            all_identities = []
             for p in players:
                 prev_player = p.in_round(i)
                 prev_players = prev_player.group.get_players()
                 all_signals = [prev.sent_signal for prev in prev_players if prev.Role == 'sender']
                 all_senders = [prev.id_in_group for prev in prev_players if prev.Role == 'sender']
-                all_identities = [prev.identity for prev in prev_players if prev.Role == 'sender']
             all = np.vstack([all, all_signals])
             all = np.vstack([all, all_senders])
-            all = np.vstack([all, all_identities])
             if i == 1:
                 all = np.delete(all, 0, 0)
 
@@ -574,53 +567,29 @@ def set_signals(subsession: Subsession):
                 for i in list(range(0, 11, 1)):
                     fut_player = p.in_round(Constants.num_rounds/2 + i + 1)
                     fut_player.signal_order = p.signal_order
-                    fut_player.SB_received_signal_1 = int(all[3 * signal_order[i]][0])
-                    fut_player.SB_received_signal_2 = int(all[3 * signal_order[i]][1])
-                    fut_player.SB_received_signal_3 = int(all[3 * signal_order[i]][2])
-                    fut_player.received_signal_1_identity = all[3 * signal_order[i] + 2][0]
-                    fut_player.received_signal_2_identity = all[3 * signal_order[i] + 2][1]
-                    fut_player.received_signal_3_identity = all[3 * signal_order[i] + 2][2]
-                    SB_list = np.array([[int(all[3 * signal_order[i] + 1][3]), int(all[3 * signal_order[i]][3]), all[3 * signal_order[i] + 2][3]],
-                                        [int(all[3 * signal_order[i] + 1][4]), int(all[3 * signal_order[i]][4]), all[3 * signal_order[i] + 2][4]],
-                                        [int(all[3 * signal_order[i] + 1][5]), int(all[3 * signal_order[i]][5]), all[3 * signal_order[i] + 2][5]]])
+                    fut_player.SB_received_signal_1 = int(all[2 * signal_order[i]][0])
+                    fut_player.SB_received_signal_2 = int(all[2 * signal_order[i]][1])
+                    fut_player.SB_received_signal_3 = int(all[2 * signal_order[i]][2])
+                    SB_list = np.array([[int(all[2 * signal_order[i] + 1][3]), int(all[2 * signal_order[i]][3])],
+                                        [int(all[2 * signal_order[i] + 1][4]), int(all[2 * signal_order[i]][4])],
+                                        [int(all[2 * signal_order[i] + 1][5]), int(all[2 * signal_order[i]][5])]])
                     np.random.shuffle(SB_list)
                     max_index = SB_list[:, 1].argmax()
                     fut_player.SB_received_signal_4 = int(SB_list[max_index][1])
                     fut_player.SB_sender_4 = str(SB_list[max_index][0])
-                    fut_player.received_signal_4_identity = SB_list[max_index][2]
                     fut_player.true_state = p.session.config['True_state'][signal_order[i]]
 
-
-        # for i in list(range(Constants.num_senders - 3, Constants.num_senders)):
-        #     all.append([all_signals[i], all_senders[i], all_identities[i]])
-        # random.shuffle(temp) #important to solve ties at random
-        # temp = sorted(temp, key=lambda x: int(x[0]))
-        # #temp.sort(reverse=True) #alternative is to sort first at signal size and then by id_in_group to preserve order at ties:
-        #                             # temp = sorted(temp, key=lambda x:(int(x[0]), x[1]))
-        # subsession.censored_signal = str(temp[0]) + str(temp[1])
-        # del temp[0]
-        # del temp[0]
-        # temp = sorted(temp, key=lambda x: int(x[1]))
-        # if temp[0][1] == 4:
-        #     temp[0][1] = 'D'
-        # if temp[0][1] == 5:
-        #     temp[0][1] = 'E'
-        # if temp[0][1] == 6:
-        #     temp[0][1] = 'F'
-        # for p in players:
-        #     if p.Role == "receiver":
-        #         p.SB_sender_4 = temp[0][1]
-        #         p.SB_sender_4_identity = temp[0][2]
-        #         p.SB_received_signal_1 = signals[0]
-        #         p.SB_received_signal_2 = signals[1]
-        #         p.SB_received_signal_3 = signals[2]
-        #         p.SB_received_signal_4 = temp[0][0]
 
 
 class Filler_Task(Page):
     form_model = "player"
     form_fields = ["q"+str(i) for i in range(1, 26)]
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
 
     @staticmethod
     def is_displayed(player):
@@ -656,7 +625,6 @@ class Guess(Page):
             signal_3=player.SB_received_signal_3,
             signal_4=player.SB_received_signal_4,
             sender_4=sender_4,
-            sender_4_identity=player.received_signal_4_identity,
             round=player.round_number -int(Constants.num_rounds/2)
         )
 
@@ -691,7 +659,7 @@ def save_signals_payoff(subsession: Subsession): # Difficulty for SB: Every play
     estimates_all_rounds = []
     for p in players:
         signals_all_rounds = []
-        for i in list(range(1, int(Constants.num_rounds/2), 1)):
+        for i in list(range(1, int(Constants.num_rounds/2) + 1, 1)):
             prev_player = p.in_round(i)
             prev_players = prev_player.group.get_players()
             if p.Role == 'sender':
@@ -699,7 +667,7 @@ def save_signals_payoff(subsession: Subsession): # Difficulty for SB: Every play
             if p.Role == 'receiver':
                 signals_1_3 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group <= 3]
                 pre_signals_4_6 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group > 3]
-                prev_receiver = p.in_round(i + 10)
+                prev_receiver = p.in_round(i + 11)
                 max_signal_sender = prev_receiver.SB_sender_4
                 signals_4_6 = ['-', '-', '-']
                 signals_4_6[int(max_signal_sender) - 3 - 1] = pre_signals_4_6[int(max_signal_sender) - 3 - 1]

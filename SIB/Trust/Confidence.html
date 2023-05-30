@@ -277,7 +277,7 @@ input[type=range]:focus::-ms-fill-upper {
             <b>Sender B</b>
                 </div></div>
                 <br>
-                Ihre Angaben: Von {{ n_rec_signals_sender_2 }} beobachteten Signalen von Sender A {{ if mistrust_sender_2 == 1}} entsprach {{ mistrust_sender_2 }} Schätzung {{ else }} entsprachen {{ mistrust_sender_2 }} Schätzungen {{ endif }} NICHT der Zahl, die er gesehen hat.
+                Ihre Angaben: Von {{ n_rec_signals_sender_2 }} beobachteten Signalen von Sender B {{ if mistrust_sender_2 == 1}} entsprach {{ mistrust_sender_2 }} Schätzung {{ else }} entsprachen {{ mistrust_sender_2 }} Schätzungen {{ endif }} NICHT der Zahl, die er gesehen hat.
                 Die restlichen {{ trust_sender_2 }} Schätzungen entsprachen der Zahl, die er gesehen hat.
             <br>
             <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
@@ -299,7 +299,7 @@ input[type=range]:focus::-ms-fill-upper {
             <b>Sender C</b>
                 </div></div>
                 <br>
-                Ihre Angaben: Von {{ n_rec_signals_sender_3 }} beobachteten Signalen von Sender A {{ if mistrust_sender_3 == 1}} entsprach {{ mistrust_sender_3 }} Schätzung {{ else }} entsprachen {{ mistrust_sender_3 }} Schätzungen {{ endif }} NICHT der Zahl, die er gesehen hat.
+                Ihre Angaben: Von {{ n_rec_signals_sender_3 }} beobachteten Signalen von Sender C {{ if mistrust_sender_3 == 1}} entsprach {{ mistrust_sender_3 }} Schätzung {{ else }} entsprachen {{ mistrust_sender_3 }} Schätzungen {{ endif }} NICHT der Zahl, die er gesehen hat.
                 Die restlichen {{ trust_sender_3 }} Schätzungen entsprachen der Zahl, die er gesehen hat.
             <br>
             <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
@@ -322,7 +322,7 @@ input[type=range]:focus::-ms-fill-upper {
             <b>Sender D</b>
                 </div></div>
                 <br>
-                Ihre Angaben: Von {{ n_rec_signals_sender_4 }} beobachteten Signalen von Sender A {{ if mistrust_sender_4 == 1}} entsprach {{ mistrust_sender_4 }} Schätzung {{ else }} entsprachen {{ mistrust_sender_4 }} Schätzungen {{ endif }} NICHT der Zahl, die er gesehen hat.
+                Ihre Angaben: Von {{ n_rec_signals_sender_4 }} beobachteten Signalen von Sender D {{ if mistrust_sender_4 == 1}} entsprach {{ mistrust_sender_4 }} Schätzung {{ else }} entsprachen {{ mistrust_sender_4 }} Schätzungen {{ endif }} NICHT der Zahl, die er gesehen hat.
                 Die restlichen {{ trust_sender_4 }} Schätzungen entsprachen der Zahl, die er gesehen hat.
             <br>
             <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
@@ -347,7 +347,7 @@ input[type=range]:focus::-ms-fill-upper {
             <b>Sender E</b>
                 </div></div>
                 <br>
-                Ihre Angaben: Von {{ n_rec_signals_sender_5 }} beobachteten Signalen von Sender A {{ if mistrust_sender_5 == 1}} entsprach {{ mistrust_sender_5 }} Schätzung {{ else }} entsprachen {{ mistrust_sender_5 }} Schätzungen {{ endif }} NICHT der Zahl, die er gesehen hat.
+                Ihre Angaben: Von {{ n_rec_signals_sender_5 }} beobachteten Signalen von Sender E {{ if mistrust_sender_5 == 1}} entsprach {{ mistrust_sender_5 }} Schätzung {{ else }} entsprachen {{ mistrust_sender_5 }} Schätzungen {{ endif }} NICHT der Zahl, die er gesehen hat.
                 Die restlichen {{ trust_sender_5 }} Schätzungen entsprachen der Zahl, die er gesehen hat.
             <br>
             <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
@@ -371,7 +371,7 @@ input[type=range]:focus::-ms-fill-upper {
             <b>Sender F</b>
                 </div></div>
                 <br>
-                Ihre Angaben: Von {{ n_rec_signals_sender_6 }} beobachteten Signalen von Sender A {{ if mistrust_sender_6 == 1}} entsprach {{ mistrust_sender_6 }} Schätzung {{ else }} entsprachen {{ mistrust_sender_6 }} Schätzungen {{ endif }} NICHT der Zahl, die er gesehen hat.
+                Ihre Angaben: Von {{ n_rec_signals_sender_6 }} beobachteten Signalen von Sender F {{ if mistrust_sender_6 == 1}} entsprach {{ mistrust_sender_6 }} Schätzung {{ else }} entsprachen {{ mistrust_sender_6 }} Schätzungen {{ endif }} NICHT der Zahl, die er gesehen hat.
                 Die restlichen {{ trust_sender_6 }} Schätzungen entsprachen der Zahl, die er gesehen hat.
             <br>
             <i style="font-weight: bold; float: left">sehr <br> unsicher</i> <i style="font-weight: bold; float: right">sehr <br> sicher</i>
@@ -381,6 +381,7 @@ input[type=range]:focus::-ms-fill-upper {
             <div id="label_slider6"></div>
         </div>
          {{ endif }}
+
         <br>
         <br>
         <br>
@@ -498,7 +499,15 @@ input[type=range]:focus::-ms-fill-upper {
           </tr>
   </tbody>
 </table>
-
+        {{ if n_rec_signals_sender_4 == 0}}
+        <input type="hidden" name="mistrust_sender_4_conf">
+        {{ endif }}
+        {{ if n_rec_signals_sender_5 == 0}}
+        <input type="hidden" name="mistrust_sender_5_conf">
+        {{ endif }}
+        {{ if n_rec_signals_sender_6 == 0}}
+        <input type="hidden" name="mistrust_sender_6_conf">
+        {{ endif }}
     </div>
 </div>
 
@@ -536,20 +545,27 @@ document.addEventListener('keypress', function (e) {
             document.getElementById("label_slider4").innerHTML= "Ich bin mir sicher, dass mindestens ... <b>bitte hier eine Auswahl treffen!</b>"
             document.getElementById("slider4").max = js_vars.n_rec_signals_sender_4
             document.getElementById("slider4").value = js_vars.n_rec_signals_sender_4}
+            if (js_vars.n_rec_signals_sender_4 === 0) {
+            forminputs.mistrust_sender_4_conf.value = 0}
             if (js_vars.n_rec_signals_sender_5>0) {
             document.getElementById("label_slider5").innerHTML= "Ich bin mir sicher, dass mindestens ... <b>bitte hier eine Auswahl treffen!</b>"
             document.getElementById("slider5").max = js_vars.n_rec_signals_sender_5
             document.getElementById("slider5").value = js_vars.n_rec_signals_sender_5}
+            if (js_vars.n_rec_signals_sender_5 === 0) {
+            forminputs.mistrust_sender_5_conf.value = 0}
             if (js_vars.n_rec_signals_sender_6>0) {
             document.getElementById("label_slider6").innerHTML= "Ich bin mir sicher, dass mindestens ... <b>bitte hier eine Auswahl treffen!</b>"
             document.getElementById("slider6").max = js_vars.n_rec_signals_sender_6
-                document.getElementById("slider6").value = js_vars.n_rec_signals_sender_6
-            }}
+                document.getElementById("slider6").value = js_vars.n_rec_signals_sender_6}
+            if (js_vars.n_rec_signals_sender_6 === 0) {
+            forminputs.mistrust_sender_6_conf.value = 0}
+
+        }
 
 
             function update1(value){
                 check1 = 1
-                document.getElementById("label_slider1").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + (js_vars.n_rec_signals_sender_1 - (js_vars.n_rec_signals_sender_1-value)) + " von " + js_vars.n_rec_signals_sender_1 +
+                document.getElementById("label_slider1").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + value + " von " + js_vars.n_rec_signals_sender_1 +
                         "</b> meiner Angaben zu Sender A richtig sind."
                 if (document.getElementById("slider1").value===document.getElementById("slider1").max) {
                     document.getElementById("label_slider1").innerHTML= document.getElementById("label_slider1").innerHTML.replace("mindestens", "");
@@ -557,24 +573,24 @@ document.addEventListener('keypress', function (e) {
             }
             function update2(value){
                 check2 = 1
-                document.getElementById("label_slider2").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + (js_vars.n_rec_signals_sender_2 - (js_vars.n_rec_signals_sender_2-value)) + " von " + js_vars.n_rec_signals_sender_1 +
-                        "</b> meiner Angaben zu Sender A richtig sind."
+                document.getElementById("label_slider2").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + value + " von " + js_vars.n_rec_signals_sender_2 +
+                        "</b> meiner Angaben zu Sender B richtig sind."
                 if (document.getElementById("slider2").value===document.getElementById("slider2").max) {
                     document.getElementById("label_slider2").innerHTML= document.getElementById("label_slider2").innerHTML.replace("mindestens", "");
                 }
             }
             function update3(value){
                 check3 = 1
-                 document.getElementById("label_slider3").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + (js_vars.n_rec_signals_sender_3 - (js_vars.n_rec_signals_sender_3-value)) + " von " + js_vars.n_rec_signals_sender_1 +
-                        "</b> meiner Angaben zu Sender A richtig sind."
+                 document.getElementById("label_slider3").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + value + " von " + js_vars.n_rec_signals_sender_3 +
+                        "</b> meiner Angaben zu Sender C richtig sind."
                 if (document.getElementById("slider3").value===document.getElementById("slider3").max) {
                     document.getElementById("label_slider3").innerHTML= document.getElementById("label_slider3").innerHTML.replace("mindestens", "");
                 }
             }
             function update4(value){
                 check4 = 1
-                document.getElementById("label_slider4").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + (js_vars.n_rec_signals_sender_4 - (js_vars.n_rec_signals_sender_4-value)) + " von " + js_vars.n_rec_signals_sender_1 +
-                        "</b> meiner Angaben zu Sender A richtig sind."
+                document.getElementById("label_slider4").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + value + " von " + js_vars.n_rec_signals_sender_4 +
+                        "</b> meiner Angaben zu Sender D richtig sind."
                 if (document.getElementById("slider4").value===document.getElementById("slider4").max) {
                     document.getElementById("label_slider4").innerHTML= document.getElementById("label_slider4").innerHTML.replace("mindestens", "");
                 }
@@ -582,16 +598,16 @@ document.addEventListener('keypress', function (e) {
 
             function update5(value){
                 check5 = 1
-                document.getElementById("label_slider5").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + (js_vars.n_rec_signals_sender_5 - (js_vars.n_rec_signals_sender_5-value)) + " von " + js_vars.n_rec_signals_sender_1 +
-                        "</b> meiner Angaben zu Sender A richtig sind."
+                document.getElementById("label_slider5").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + value + " von " + js_vars.n_rec_signals_sender_5 +
+                        "</b> meiner Angaben zu Sender E richtig sind."
                 if (document.getElementById("slider5").value===document.getElementById("slider5").max) {
                     document.getElementById("label_slider5").innerHTML= document.getElementById("label_slider5").innerHTML.replace("mindestens", "");
                 }
             }
             function update6(value){
                 check6 = 1
-                document.getElementById("label_slider6").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + (js_vars.n_rec_signals_sender_6 - (js_vars.n_rec_signals_sender_6-value)) + " von " + js_vars.n_rec_signals_sender_1 +
-                        "</b> meiner Angaben zu Sender A richtig sind."
+                document.getElementById("label_slider6").innerHTML = "Ich bin mir sicher, dass mindestens <b>" + value + " von " + js_vars.n_rec_signals_sender_6 +
+                        "</b> meiner Angaben zu Sender F richtig sind."
                 if (document.getElementById("slider6").value===document.getElementById("slider6").max) {
                     document.getElementById("label_slider6").innerHTML= document.getElementById("label_slider6").innerHTML.replace("mindestens", "");
                 }

@@ -57,7 +57,8 @@ class Instructions_sender(Page):
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
-            participation_fee=player.session.config['participation_fee']
+            participation_fee=player.session.config['participation_fee'],
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
         )
 
 class Instructions_receiver(Page):
@@ -68,7 +69,8 @@ class Instructions_receiver(Page):
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
-            participation_fee=player.session.config['participation_fee']
+            participation_fee=player.session.config['participation_fee'],
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
         )
 
 

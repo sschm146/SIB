@@ -411,16 +411,17 @@ def payout_calc_final(subsession: Subsession):
             payoff_urn = [SIM_payoff, GuessingTask_payoff, Trust_payoff]
             p.payoff_urn = str(payoff_urn)
             p.payoff_ball = random.choice([0, 1, 2])
-            p.payoff = payoff_urn[p.payoff_ball]
+            p.payoff = payoff_urn[p.payoff_ball] + p.session.config['Questionnaire_payoff']
             participant.total_payoff = p.payoff
             participant.chosen_payoff = p.payoff_ball
         if participant.Role == 'sender' or participant.Role == 'prior_sender':
             payoff_urn = [SIM_payoff, GuessingTask_payoff]
             p.payoff_urn = str(payoff_urn)
             p.payoff_ball = random.choice([0, 1])
-            p.payoff = payoff_urn[p.payoff_ball]
+            p.payoff = payoff_urn[p.payoff_ball] + p.session.config['Questionnaire_payoff']
             participant.total_payoff = p.payoff
             participant.chosen_payoff = p.payoff_ball
+
 
 
 page_sequence = [Instructions_Trust_in_Senders, Trust_in_Senders, Confidence, ThirdWaitPage, Payout_calc, Payout_calc_final]

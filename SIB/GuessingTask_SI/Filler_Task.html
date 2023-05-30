@@ -15,7 +15,10 @@
     <div class="card-body">
 <br>
         Dieser Teil der Studie besteht aus einem Fragebogen.
-        Bitte geben Sie Antworten auf die folgenden Fragen.
+        {{ if participant.Role != "receiver" }}
+        <b>Für die Beantwortung der Fragen in den Teilen 3, 4 und 5 erhalten Sie insgesamt {{ Questionnaire_payoff }}€.</b>
+        {{ endif }}
+        Bitte beantworten Sie die folgenden Fragen.
         <br><br>
 
         <strong>1. An wie viel Studien im BonnEconLab oder dem Decision Lab haben Sie bereits teilgenommen (abzüglich dieser Studie)? (Wenn Sie sich nicht sicher sind, schätzen Sie.)</strong>

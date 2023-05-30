@@ -607,15 +607,15 @@ class Filler_Task(Page):
     form_model = "player"
     form_fields = ["q"+str(i) for i in range(1, 26)]
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
 
     @staticmethod
     def is_displayed(player):
         return (player.Role == "receiver" and player.round_number == 1) or (player.Role == "sender" and player.round_number == Constants.num_rounds/2 + 1)
-
-
-
-
-
 
 # the receiver observes all the signals sent by senders and states a guess/posterior
 # Receivers see signals sent by senders in a random order and with known group identity

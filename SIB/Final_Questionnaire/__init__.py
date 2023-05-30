@@ -102,6 +102,11 @@ class SI(Page):
     def is_displayed(player):
         return player.round_number == 1 and "SI" not in player.session.config['name']
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
     form_model = 'player'
     form_fields = ["si"]
 
@@ -111,6 +116,11 @@ class SI_in1(Page):
     def is_displayed(player):
         return player.round_number == 1 and player.random == 1 and "SI" in player.session.config['name']
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
     form_model = 'player'
     form_fields = ["si_in"]
 
@@ -120,6 +130,11 @@ class SI_out1(Page):
     def is_displayed(player):
         return player.round_number == 1 and player.random == 1 and "SI" in player.session.config['name']
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
     form_model = 'player'
     form_fields = ["si_out"]
 
@@ -129,6 +144,11 @@ class SI_in2(Page):
     def is_displayed(player):
         return player.round_number == 1 and player.random == 2 and "SI" in player.session.config['name']
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
     form_model = 'player'
     form_fields = ["si_in"]
 
@@ -138,6 +158,11 @@ class SI_out2(Page):
     def is_displayed(player):
         return player.round_number == 1 and player.random == 2 and "SI" in player.session.config['name']
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
     form_model = 'player'
     form_fields = ["si_out"]
 

@@ -22,10 +22,16 @@
 
 <div class="card bg-light instructions">
         <div class="card-header bg-transparent mainheader" >
- <h3 class="card-title font-weight-bold"> Teil 3 </h3>
+ <h3 class="card-title font-weight-bold"> Teil 4 </h3>
         </div>
     <div class="card-body">
-
+    <p>
+        Dieser Teil der Studie besteht aus einem Fragebogen.
+        {{ if participant.Role != "receiver" }}
+        <b>Für die Beantwortung der Fragen in den Teilen 3, 4 und 5 erhalten Sie insgesamt {{ Questionnaire_payoff }}€.</b>
+        {{ endif }}
+        Bitte beantworten Sie die folgenden Fragen.
+        </p>
     <p>
         Im Folgenden finden Sie eine Reihe von Beschreibungen, die auf Sie zutreffen können oder nicht. Trifft es beispielsweise zu, dass Sie jemand sind, der gerne Zeit mit anderen verbringt?
         Bitte verwenden Sie eine Skala von 1 bis 5, um anzuzeigen, wie sehr diese Aussage auf Sie zutreffen oder nicht zutreffen. 1 bedeutet "trifft überhaupt nicht zu" und 5 "trifft sehr gut zu".

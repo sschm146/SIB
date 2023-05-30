@@ -30,15 +30,22 @@ color: #322b7b!important;
  </h3>
         </div>
     <div class="card-body">
-        In Teil 5 bitten wir Sie, mehrere kurze Fragebögen und Aufgaben zu bearbeiten. Bitte füllen Sie diese aus.
-        <br><br>
+        In Teil 5 bitten wir Sie, mehrere kurze Fragebögen und Aufgaben zu bearbeiten.
+        {{ if participant.Role != "receiver" }}
+        <b>Für die Beantwortung der Fragen in den Teilen 3, 4 und 5 erhalten Sie insgesamt {{ Questionnaire_payoff }}€.</b>
+        {{ endif }}
+        {{ if participant.Role == "receiver" }}
+        <b>Für die Beantwortung der Fragen in Teil 5 erhalten Sie {{ Questionnaire_payoff }}€.</b>
+        {{ endif }}
+        Ihre Auszahlung in diesem Teil ist unabhängig von den Antworten, die Sie geben werden.
+        <br><br><hr><br>
         {{ if player.participant.identity == "Gelb" }}
-        <strong>Bitte bewerten Sie auf einer Skala von 1 bis 10, wie eng Sie sich während des Experiments mit der anderen <span class="text-primary" id="fadeIn">Gruppe Blau</span> verbunden gefühlt haben,
-            wobei 1 "überhaupt nicht verbunden" bedeutet."</strong>
+        <strong>Bitte bewerten Sie unten auf einer Skala von 1 bis 10, wie eng Sie sich während des Experiments mit der anderen <span class="text-primary" id="fadeIn">Gruppe Blau</span> verbunden gefühlt haben,
+            wobei 1 "überhaupt nicht verbunden" und 10 "sehr verbunden" bedeutet.</strong>
         {{ endif }}
         {{ if player.participant.identity == "Blau" }}
-        <strong>Bitte bewerten Sie auf einer Skala von 1 bis 10, wie eng Sie sich während des Experiments mit der anderen <span class="text-warning" id="fadeIn">Gruppe Gelb</span> verbunden gefühlt haben,
-            wobei 1 "überhaupt nicht verbunden" bedeutet."</strong>
+        <strong>Bitte bewerten Sie unten auf einer Skala von 1 bis 10, wie eng Sie sich während des Experiments mit der anderen <span class="text-warning" id="fadeIn">Gruppe Gelb</span> verbunden gefühlt haben,
+            wobei 1 "überhaupt nicht verbunden" und 10 "sehr verbunden" bedeutet.</strong>
         {{ endif }}
         <br><br><br>
                 <div style="display: flex">
