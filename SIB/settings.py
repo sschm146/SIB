@@ -37,8 +37,8 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 SESSION_CONFIGS = [
     dict(
-        name="version_300523",
-        display_name="version_300523",
+        name="version_150623",
+        display_name="version_150623",
         num_demo_participants=1,
         app_sequence=["Intro_noSI_all"],
         prior_sender=False
@@ -114,9 +114,14 @@ SESSION_FIELDS = []
 
 ROOMS = [
     dict(
-        name="lab",
-        display_name="Lab Experiment",
+        name="dlab",
+        display_name="dlab",
         participant_label_file='_rooms/lab.txt',
+    ),
+dict(
+        name="CLER",
+        display_name="CLER",
+        participant_label_file='_rooms/lab_cler.txt',
     ),
 ]
 # ISO-639 code

@@ -38,6 +38,8 @@ class Player(BasePlayer):
     SB_received_signal_2 = models.IntegerField()  # saving received signals across rounds for analyses
     SB_received_signal_3 = models.IntegerField()  # saving received signals across rounds for analyses
     SB_received_signal_4 = models.IntegerField()  # saving received signals across rounds for analyses
+    diff_high_mid = models.IntegerField()
+    diff_high_low = models.IntegerField()
     comprq1 = models.IntegerField(choices=[[1,
                                             'Die Schätzung eines zufällig gezogenen Schätzgeräts kann mit gleicher Wahrscheinlichkeit der Zahl x oder einer andere Zahl entsprechen.'],
                                            [2,
@@ -79,20 +81,22 @@ class Player(BasePlayer):
                                            [3, ' Jeder Sender hat die Schätzungen von 3 zufällig gezogenen Schätzgeräten beobachtet.']],
                                   widget=widgets.RadioSelect,
                                   label='')
-    comprq8 = models.IntegerField(choices=[[1, 'Ich werde die Schätzungen von 4 Sendern beobachten. '
-                                               'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die niedrigste Schätzung der folgenden 3 Sender betrachten: '
-                                               'Sender D, Sender E und Sender F. '
-                                               'Die niedrigste der drei Schätzungen ist im Durchschnitt y niedriger als die zweitniedrigste und x niedriger als die höchste.'],
-                                           [2, 'Ich werde die Schätzungen von 4 Sendern beobachten. '
-                                               'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die höchste Schätzung der folgenden 3 Sender sehen: '
-                                               'Sender D, Sender E und Sender F. '
-                                               'Die zweithöchste Schätzung ist im Durchschnitt y niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt x niedriger als die höchste.'],
-                                           [3, ' Ich werde die Schätzungen von 4 Sendern beobachten. '
-                                               'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die höchste Schätzung der folgenden 3 Sender sehen: '
-                                               'Sender D, Sender E und Sender F. '
-                                               'Die zweithöchste Schätzung ist im Durchschnitt y+2 niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt x+2 niedriger als die höchste.']],
-                                  widget=widgets.RadioSelect,
+    comprq8 = models.IntegerField(widget=widgets.RadioSelect,
                                   label='')
+    #comprq8 = models.IntegerField(choices=[[1, 'Ich werde die Schätzungen von 4 Sendern beobachten. '
+     #                                          'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die niedrigste Schätzung der folgenden 3 Sender betrachten: '
+      #                                         'Sender D, Sender E und Sender F. '
+       #                                        'Die niedrigste der drei Schätzungen ist im Durchschnitt y niedriger als die zweitniedrigste und x niedriger als die höchste.'],
+        #                                   [2, 'Ich werde die Schätzungen von 4 Sendern beobachten. '
+         #                                      'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die höchste Schätzung der folgenden 3 Sender sehen: '
+          #                                     'Sender D, Sender E und Sender F. '
+           #                                    'Die zweithöchste Schätzung ist im Durchschnitt {{ diff_high_mid }} niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt {{ diff_high_low }} niedriger als die höchste.'],
+            #                               [3, ' Ich werde die Schätzungen von 4 Sendern beobachten. '
+             #                                  'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die höchste Schätzung der folgenden 3 Sender sehen: '
+              #                                 'Sender D, Sender E und Sender F. '
+               #                                'Die zweithöchste Schätzung ist im Durchschnitt y+2 niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt x+2 niedriger als die höchste.']],
+                #                  widget=widgets.RadioSelect,
+                 #                 label='')
     comprq9 = models.IntegerField(choices=[[1, 'Die Schätzung eines zufällig gezogenen Schätzgeräts ist mit gleicher Wahrscheinlichkeit die tatsächliche Zahl x oder eine andere Zahl.'],
                                            [2, 'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der tatsächlichen Zahl als jeder anderen Zahl. '
                                                'Je weiter man sich von Zahl x entfernt, desto wahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung meldet.'],
@@ -288,14 +292,14 @@ def creating_session(subsession: Subsession):
 
 
 def comprq8_choices(player):
-    if player.round_number == 11:
+    if player.round_number == 12:
         subsession = player.subsession
         players = subsession.get_players()
         all = [0, 0, 0, 0, 0, 0]
         highest = []
         mid = []
         lowest = []
-        for i in list(range(1, int(Constants.num_rounds/2), 1)):
+        for i in list(range(1, int(Constants.num_rounds / 2) + 1, 1)):
             all_signals = []
             for p in players:
                 prev_player = p.in_round(i)
@@ -304,27 +308,38 @@ def comprq8_choices(player):
             all = np.vstack([all, all_signals])
             if i == 1:
                 all = np.delete(all, 0, 0)
-        for i in list(range(0, 10, 1)):
+        for i in list(range(0, 11, 1)):
             highest.append(sorted(all[i, :], reverse=True)[0])
             mid.append(sorted(all[i, :], reverse=True)[1])
             lowest.append(sorted(all[i, :], reverse=True)[2])
-        diff_high_mid = int(round(sum(highest) / len(highest) - sum(mid) / len(mid), 0))
-        diff_high_low = int(round(sum(highest) / len(highest) - sum(lowest) / len(lowest), 0))
-
+        player.diff_high_mid = int(round(sum(highest) / len(highest) - sum(mid) / len(mid), 0))
+        player.diff_high_low = int(round(sum(highest) / len(highest) - sum(lowest) / len(lowest), 0))
+        for i in list(range(13, int(Constants.num_rounds) + 1, 1)):
+            for p in players:
+                if p.Role == 'receiver':
+                    fut_player = p.in_round(i)
+                    fut_player.diff_high_mid = player.diff_high_mid
+                    fut_player.diff_high_low = player.diff_high_low
         choice_1 = 'Ich werde die Schätzungen von 4 Sendern beobachten. ' \
                    'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die niedrigste Schätzung der folgenden 3 Sender betrachten: ' \
                    'Sender D, Sender E und Sender F. ' \
-                   'Die niedrigste der drei Schätzungen ist im Durchschnitt ' + str(diff_high_low) + ' niedriger als die zweitniedrigste und ' + str(diff_high_mid) + ' niedriger als die höchste.'
+                   'Die niedrigste der drei Schätzungen ist im Durchschnitt ' + str(
+            player.diff_high_low) + ' niedriger als die zweitniedrigste und ' + str(
+            player.diff_high_mid) + ' niedriger als die höchste.'
         choice_2 = 'Ich werde die Schätzungen von 4 Sendern beobachten. ' \
                    'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die höchste Schätzung der folgenden 3 Sender sehen: ' \
                    'Sender D, Sender E und Sender F. ' \
-                   'Die zweithöchste Schätzung ist im Durchschnitt ' + str(diff_high_mid) + ' niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt ' + str(diff_high_low) + ' niedriger als die höchste.'
-        diff_high_low += 2
-        diff_high_mid += 2
+                   'Die zweithöchste Schätzung ist im Durchschnitt ' + str(
+            player.diff_high_mid) + ' niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt ' + str(
+            player.diff_high_low) + ' niedriger als die höchste.'
+        diff_high_low_new = player.diff_high_low + 2
+        diff_high_mid_new = player.diff_high_mid + 2
         choice_3 = 'Ich werde die Schätzungen von 4 Sendern beobachten. ' \
                    'Ich werde die Schätzungen von Sender A, Sender B, Sender C und die höchste Schätzung der folgenden 3 Sender sehen: ' \
                    'Sender D, Sender E und Sender F. ' \
-                   'Die zweithöchste Schätzung ist im Durchschnitt ' + str(diff_high_mid) + ' niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt ' + str(diff_high_low) + ' niedriger als die höchste.'
+                   'Die zweithöchste Schätzung ist im Durchschnitt ' + str(
+            diff_high_mid_new) + ' niedriger als die höchste, und die niedrigste Schätzung ist im Durchschnitt ' + str(
+            diff_high_low_new) + ' niedriger als die höchste.'
 
         choices = [[1, choice_1],
                    [2, choice_2],
@@ -444,30 +459,30 @@ class Instructions_GT_receivers(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        subsession = player.subsession
-        players = subsession.get_players()
-        all = [0, 0, 0, 0, 0, 0]
-        highest = []
-        mid = []
-        lowest = []
-        for i in list(range(1, int(Constants.num_rounds/2) + 1, 1)):
-            all_signals = []
-            for p in players:
-                prev_player = p.in_round(i)
-                prev_players = prev_player.group.get_players()
-                all_signals = [prev.sent_signal for prev in prev_players if prev.Role == 'sender']
-            all = np.vstack([all, all_signals])
-            if i == 1:
-                all = np.delete(all, 0, 0)
-        for i in list(range(0,11,1)):
-            highest.append(sorted(all[i, :], reverse=True)[0])
-            mid.append(sorted(all[i, :], reverse=True)[1])
-            lowest.append(sorted(all[i, :], reverse=True)[2])
-        diff_high_mid = round(sum(highest) / len(highest) - sum(mid) / len(mid), 0)
-        diff_high_low = round(sum(highest) / len(highest) - sum(lowest) / len(lowest), 0)
+        # subsession = player.subsession
+        # players = subsession.get_players()
+        # all = [0, 0, 0, 0, 0, 0]
+        # highest = []
+        # mid = []
+        # lowest = []
+        # for i in list(range(1, int(Constants.num_rounds/2) + 1, 1)):
+        #     all_signals = []
+        #     for p in players:
+        #         prev_player = p.in_round(i)
+        #         prev_players = prev_player.group.get_players()
+        #         all_signals = [prev.sent_signal for prev in prev_players if prev.Role == 'sender']
+        #     all = np.vstack([all, all_signals])
+        #     if i == 1:
+        #         all = np.delete(all, 0, 0)
+        # for i in list(range(0,11,1)):
+        #     highest.append(sorted(all[i, :], reverse=True)[0])
+        #     mid.append(sorted(all[i, :], reverse=True)[1])
+        #     lowest.append(sorted(all[i, :], reverse=True)[2])
+        # diff_high_mid = round(sum(highest) / len(highest) - sum(mid) / len(mid), 0)
+        # diff_high_low = round(sum(highest) / len(highest) - sum(lowest) / len(lowest), 0)
         return dict(
-            diff_high_mid=int(diff_high_mid),
-            diff_high_low=int(diff_high_low),
+            diff_high_mid=player.diff_high_mid,
+            diff_high_low=player.diff_high_low,
             GT_receiver_payoff = player.session.config['GT_receiver_payoff'],
             GT_sender_payoff = player.session.config['GT_sender_payoff'],
             GT_guess_time=int(player.session.config['GT_guess_time']/60)
@@ -475,7 +490,6 @@ class Instructions_GT_receivers(Page):
 
     form_model = "player"
     form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq12", "comprq13", "comprq15"]
-
 
 
 
