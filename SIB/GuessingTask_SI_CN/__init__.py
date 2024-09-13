@@ -2,7 +2,6 @@ from otree.api import *
 import numpy as np
 import random
 
-
 c = Currency
 
 doc = """
@@ -102,10 +101,9 @@ class Player(BasePlayer):
                  [2, 'Die Sender A und B beobachteten die Schätzung von jeweils 1 zufällig gezogenen Schätzgerät. '
                      'Die Sender C, D, E und F beobachteten den Durchschnitt der Schätzungen von zwei Schätzgeräten: '
                      'Die Schätzung des jeweils ihnen zugeordneten Schätzgerätes und die Schätzung des Schätzgerätes von Sender B'],
-                 [3,
-                  'Die Sender A, B, C und D beobachteten die Schätzung von jeweils 1 zufällig gezogenen Schätzgerät. '
-                  'Die Sender E und F beobachteten den Durchschnitt der Schätzungen von zwei Schätzgeräten: '
-                  'Die Schätzung des jeweils ihnen zugeordneten Schätzgerätes und die Schätzung des Schätzgerätes von Sender D.']],
+                 [3, 'Die Sender A, B, C und D beobachteten die Schätzung von jeweils 1 zufällig gezogenen Schätzgerät. '
+                     'Die Sender E und F beobachteten den Durchschnitt der Schätzungen von zwei Schätzgeräten: '
+                     'Die Schätzung des jeweils ihnen zugeordneten Schätzgerätes und die Schätzung des Schätzgerätes von Sender D.']],
         widget=widgets.RadioSelect,
         label='')
     comprq8 = models.IntegerField(choices=[[1, '307'],
@@ -117,8 +115,7 @@ class Player(BasePlayer):
     comprq9 = models.IntegerField(
         choices=[[1, 'Ich werde die Schätzung von 1 zufällig gezogenen Schätzgerät beobachten.'],
                  [2, 'Ich werde die Schätzungen von 6 zufällig gezogenen Schätzgeräten beobachten.'],
-                 [3,
-                  'Ich werde die Schätzungen von 6 Sendern beobachten: Sender A, Sender B, Sender C, Sender D, Sender E, und Sender F.']],
+                 [3, 'Ich werde die Schätzungen von 6 Sendern beobachten: Sender A, Sender B, Sender C, Sender D, Sender E, und Sender F.']],
         widget=widgets.RadioSelect,
         label='')
     comprq10 = models.IntegerField(
@@ -152,12 +149,13 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
         label='')
     comprq13 = models.IntegerField(label='')
-    comprq14 = models.IntegerField(choices=[[1, '0%'],
-                                            [2, '50%'],
-                                            [3, '67%'],
-                                            [4, '100%']],
-                                   widget=widgets.RadioSelect,
-                                   label='')
+    comprq14 = models.IntegerField(
+        choices=[[1, '0%'],
+                 [2, '50%'],
+                 [3, '67%'],
+                 [4, '100%']],
+        widget=widgets.RadioSelect,
+        label='')
     comprq15 = models.IntegerField(
         choices=[[1, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von allen vorherigen Schätzaufgaben. '
                      'Zahlen aus allen vorherigen Schätzaufgaben sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
@@ -178,7 +176,6 @@ class Player(BasePlayer):
                      'Die Zahl x und die Schätzungen der Schätzgeräte sind ausschließlich für die jeweils aktuelle Schätzaufgabe von Bedeutung.']],
         widget=widgets.RadioSelect,
         label='')
-    error_comprq15_sender = models.IntegerField(initial=0)
     error_comprq1 = models.IntegerField(initial=0)
     error_comprq2 = models.IntegerField(initial=0)
     error_comprq3 = models.IntegerField(initial=0)
@@ -196,6 +193,7 @@ class Player(BasePlayer):
     error_comprq13 = models.IntegerField(initial=0)
     error_comprq14 = models.IntegerField(initial=0)
     error_comprq15 = models.IntegerField(initial=0)
+    error_comprq15_sender = models.IntegerField(initial=0)
     q1 = models.IntegerField(label='')
     q2 = models.IntegerField(label='')
     q3 = models.IntegerField(
@@ -312,9 +310,6 @@ class Player(BasePlayer):
     q24 = models.LongStringField(label='', blank=True)
     q25 = models.LongStringField(label='', blank=True)
 
-
-
-
 # FUNCTIONS
 
 #roles allocation and mu_signals (true) simulation for each sender
@@ -334,7 +329,6 @@ def creating_session(subsession: Subsession):
                     p.estimate = p.session.config['Signals'][p.id_in_group - 1][p.round_number - 1]
                 p.true_state = p.session.config['True_state'][p.round_number - 1]
         p.identity = participant.identity
-
 
 # PAGES
 class Next_Round(Page):
@@ -398,10 +392,11 @@ class Signals(Page):
 class Instructions_GT_senders_CN(Page):
     @staticmethod
     def is_displayed(player):
-        return player.Role == "sender" and player.round_number == 1 and (player.id_in_group in [Constants.num_senders, Constants.num_senders-1])
+        return player.Role == "sender" and player.round_number == 1 and (
+                player.id_in_group in [Constants.num_senders, Constants.num_senders - 1])
 
     form_model = "player"
-    form_fields = ["comprq1", "comprq2", "comprq3_CN","comprq5_CN", "comprq6_CN", "comprq15_sender"]
+    form_fields = ["comprq1", "comprq2", "comprq3_CN", "comprq5_CN", "comprq6_CN", "comprq15_sender"]
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -432,11 +427,11 @@ class Instructions_GT_senders_CN(Page):
                 if field_name == "comprq2":
                     player.error_comprq2 += 1
                 if field_name == "comprq3_CN":
-                    player.error_comprq3 += 1
+                    player.error_comprq3_CN += 1
                 if field_name == "comprq5_CN":
-                    player.error_comprq5 += 1
+                    player.error_comprq5_CN += 1
                 if field_name == "comprq6_CN":
-                    player.error_comprq6 += 1
+                    player.error_comprq6_CN += 1
                 if field_name == "comprq15_sender":
                     player.error_comprq15_sender += 1
         return error_messages
@@ -445,7 +440,8 @@ class Instructions_GT_senders_CN(Page):
 class Instructions_GT_senders_noCN(Page):
     @staticmethod
     def is_displayed(player):
-        return player.Role == "sender" and player.round_number == 1 and (player.id_in_group not in [Constants.num_senders, Constants.num_senders-1])
+        return player.Role == "sender" and player.round_number == 1 and (
+                player.id_in_group not in [Constants.num_senders, Constants.num_senders - 1])
 
     form_model = "player"
     form_fields = ["comprq1", "comprq2", "comprq3", "comprq5", "comprq6", "comprq15_sender"]
@@ -578,7 +574,6 @@ def set_signals(subsession: Subsession):
             all = np.vstack([all, all_identities])
             if i == 1:
                 all = np.delete(all, 0, 0)
-
         for p in players:
             if p.Role == "receiver":
                 orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'],
@@ -651,13 +646,12 @@ class Guess(Page):
     @staticmethod
     def js_vars(player: Player):
         return dict(
-            round=player.round_number - Constants.num_rounds / 2,
+            round=player.round_number - Constants.num_rounds/2,
         )
 
 class SecondWaitPage(WaitPage):
     wait_for_all_groups = True
     after_all_players_arrive = 'save_signals_payoff'
-
     @staticmethod
     def is_displayed(player):
         return player.round_number == Constants.num_rounds
@@ -700,7 +694,5 @@ def save_signals_payoff(subsession: Subsession):
             prev_player = p.in_round(i)
             prev_player.payoff = 0
 
-
-
-page_sequence = [Instructions_GT_senders_CN, Instructions_GT_senders_noCN, Next_Round, Signals, Filler_Task, Instructions_GT_receivers,
-                  StartWaitPage, Guess, SecondWaitPage]
+page_sequence = [Instructions_GT_senders_CN, Instructions_GT_senders_noCN, Next_Round, Signals, Filler_Task,
+                 Instructions_GT_receivers, StartWaitPage, Guess, SecondWaitPage]

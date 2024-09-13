@@ -65,8 +65,17 @@
 </div>
 
         <div class="alert alert-warning" role="alert" id="entry_warning" style="visibility: hidden" align="center">
-  <b>Achtung!</b> Sie haben eine Schätzung angegeben, die um mehr als {{ border }} von der Schätzung des zufällig gezogenen Schätzgerätes abweicht.
-            Je weiter Ihre Schätzung von der Schätzung des zufällig gezogenen Schätzgerätes abweicht, desto geringer ist die Wahrscheinlichkeit, dass Sie nahe an der Zahl x liegen und damit die zusätzliche Zahlung von {{ GT_sender_payoff}} € verdienen. Bitte klicken Sie auf "Verstanden!", wenn Sie das verstanden haben.
+
+            {{ if player.id_in_group < 5 }}
+            <b>Achtung!</b> Sie haben eine Schätzung angegeben, die um mehr als {{ border }} von der Schätzung des zufällig gezogenen Schätzgerätes abweicht.
+            Je weiter Ihre Schätzung von der Schätzung des zufällig gezogenen Schätzgerätes abweicht, desto geringer ist die Wahrscheinlichkeit, dass Sie nahe an der Zahl x liegen und damit die zusätzliche Zahlung von {{ GT_sender_payoff}} € verdienen.
+            Bitte klicken Sie auf "Verstanden!", wenn Sie das verstanden haben.
+                {{ endif }}
+            {{ if player.id_in_group > 4 }}
+            <b>Achtung!</b> Sie haben eine Schätzung angegeben, die um mehr als {{ border }} von dem Durchschnitt der Schätzungen der beiden zufällig gezogenen Schätzgeräte abweicht.
+            Je weiter Ihre Schätzung von dem Durchschnitt der Schätzungen der beiden zufällig gezogenen Schätzgeräte abweicht, desto geringer ist die Wahrscheinlichkeit, dass Sie nahe an der Zahl x liegen und damit die zusätzliche Zahlung von {{ GT_sender_payoff}} € verdienen.
+            Bitte klicken Sie auf "Verstanden!", wenn Sie das verstanden haben.
+                {{ endif }}
             <br><br>
             <button type="button" class="btn btn-warning" id="entry_warning_button">
                 Verstanden!

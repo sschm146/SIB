@@ -52,8 +52,7 @@ class Player(BasePlayer):
                                   widget=widgets.RadioSelect,
                                   label='')
     comprq2 = models.IntegerField(choices=[
-        [1,
-         'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht mit gleicher Wahrscheinlichkeit entweder der Zahl x oder jeder beliebigen anderen Zahl.'],
+        [1, 'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht mit gleicher Wahrscheinlichkeit entweder der Zahl x oder jeder beliebigen anderen Zahl.'],
         [2, 'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht genau (oder fast genau) der Zahl x.'],
         [3, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer größer als die Zahl x.'],
         [4, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer kleiner als die Zahl x.']],
@@ -78,8 +77,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
         label='')
     comprq7 = models.IntegerField(
-        choices=[[1,
-                  'Der Sender, dessen Schätzung ich zuerst beobachtet habe, sah die Schätzungen von 6 Schätzgeräten. '
+        choices=[[1,'Der Sender, dessen Schätzung ich zuerst beobachtet habe, sah die Schätzungen von 6 Schätzgeräten. '
                   'Die anderen 6 Sender sahen jeweils die Schätzung von 1 Schätzgerät.'],
                  [2,'Alle 7 Sender haben die Schätzung von jeweils einem Schätzgerät beobachtet. '
                   'Zudem haben alle 7 Sender die gleiche Aufgabe bearbeitet und vorher identische Anweisungen gelesen.'],
@@ -112,8 +110,7 @@ class Player(BasePlayer):
                                    label='')
     comprq11 = models.IntegerField(choices=[
         [1, 'Der Durchschnitt der Schätzungen aller Schätzgeräte kann mit gleicher Wahrscheinlichkeit eine beliebige Zahl sein.'],
-        [2,
-         'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht genau (oder fast genau) der Zahl x.'],
+        [2, 'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht genau (oder fast genau) der Zahl x.'],
         [3, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer größer als die Zahl x.'],
         [4, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer kleiner als die Zahl x.']],
         widget=widgets.RadioSelect,
@@ -284,11 +281,11 @@ class Player(BasePlayer):
 
 # FUNCTIONS
 
-#roles allocation and mu_signals (true) simulaion for each sender
+#roles allocation and mu_signals (true) simulation for each sender
 def creating_session(subsession: Subsession):
     players = subsession.get_players()
     for p in players:
-        subsession.x = random.randint(0, p.session.config['QSR_cutoff']) #Senders (in rounds 1-10) see a randomly drawn signal from a normal distribution with given mean and sd
+        subsession.x = random.randint(0, p.session.config['QSR_cutoff'])
         participant = p.participant
         p.Role = participant.Role
         if p.Role == "sender" or p.Role == "prior_sender":
@@ -319,8 +316,45 @@ class Next_Round(Page):
                 last_round=player.round_number - 1 - int(Constants.num_rounds/2),
                 role=player.Role
             )
-    
-    
+
+# senders see estimate and send signal
+class Signals(Page):
+    form_model = "player"
+    form_fields = ["sent_signal"]
+
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        diff = pow((player.true_state  - player.sent_signal), 2)
+        if diff <= player.subsession.x:
+            player.payoff = player.session.config['GT_sender_payoff']
+        else:
+            player.payoff = 0
+
+    @staticmethod
+    def is_displayed(player):
+        return (player.Role == "sender" or player.Role == "prior_sender") and player.round_number <= Constants.num_rounds/2
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        estimate = player.estimate
+        round = player.round_number
+        return dict(
+            estimate=estimate,
+            round=round,
+            border=player.session.config['entry_warning_border'],
+            GT_sender_payoff=player.session.config['GT_sender_payoff']
+        )
+
+    @staticmethod
+    def js_vars(player: Player):
+        estimate = player.estimate
+        return dict(
+            round=player.round_number,
+            estimate=estimate,
+            entry_warning_border=player.session.config['entry_warning_border']
+        )
+
+
 class Instructions_GT_senders(Page):
     @staticmethod
     def is_displayed(player):
@@ -348,7 +382,6 @@ class Instructions_GT_senders(Page):
         )
 
         error_messages = dict()
-
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 error_messages[
@@ -365,7 +398,6 @@ class Instructions_GT_senders(Page):
                     player.error_comprq6 += 1
                 if field_name == "comprq15_sender":
                     player.error_comprq15_sender += 1
-
         return error_messages
 
 
@@ -452,9 +484,8 @@ def set_signals(subsession: Subsession):
 
         for p in players:
             if p.Role == "receiver":
-                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'],
-                          p.session.config['signal_order_3']]
-                temp = [1, 2, 3] * 100
+                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'], p.session.config['signal_order_3']]
+                temp = [1, 2, 3]*100
                 p.signal_order = temp[p.id_in_group - 1]
                 signal_order = orders[p.signal_order - 1]
                 for i in list(range(0, 11, 1)):
@@ -470,46 +501,57 @@ def set_signals(subsession: Subsession):
                     fut_player.true_state = p.session.config['True_state'][signal_order[i]]
 
 
-# senders see estimate and send signal
-class Signals(Page):
+class Filler_Task(Page):
     form_model = "player"
-    form_fields = ["sent_signal"]
-
-
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        diff = pow((player.true_state  - player.sent_signal), 2)
-        if diff <= player.subsession.x:
-            player.payoff = player.session.config['GT_sender_payoff']
-        else:
-            player.payoff = 0
-
-
-    @staticmethod
-    def is_displayed(player):
-        return (player.Role == "sender" or player.Role == "prior_sender") and player.round_number <= Constants.num_rounds/2
-
+    form_fields = ["q"+str(i) for i in range(1, 26)]
 
     @staticmethod
     def vars_for_template(player: Player):
-        estimate = player.estimate
-        round = player.round_number
         return dict(
-            estimate=estimate,
-            round=round,
-            border=player.session.config['entry_warning_border'],
-            GT_sender_payoff=player.session.config['GT_sender_payoff']
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
         )
 
     @staticmethod
-    def js_vars(player: Player):
-        estimate = player.estimate
+    def is_displayed(player):
+        return (player.Role == "receiver" and player.round_number == 1) or ((player.Role == "sender" or player.Role == "prior_sender") and player.round_number == Constants.num_rounds/2 + 1)
+
+
+# the receiver observes all the signals sent by senders and states a guess/posterior
+# Receivers see signals sent by senders in a random order and with known group identity
+class Guess(Page):
+    timeout_seconds = 240
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        diff = pow((player.true_state - player.posterior), 2)
+        if diff <= player.subsession.x:
+            player.payoff = player.session.config['GT_receiver_payoff']
+        else:
+            player.payoff = 0
+
+    @staticmethod
+    def vars_for_template(player: Player):
         return dict(
-            round=player.round_number,
-            estimate=estimate,
-            entry_warning_border=player.session.config['entry_warning_border']
+            signal_1=player.received_signal_1,
+            signal_2=player.received_signal_2,
+            signal_3=player.received_signal_3,
+            signal_4=player.received_signal_4,
+            signal_5=player.received_signal_5,
+            signal_6=player.received_signal_6,
+            round=player.round_number - int(Constants.num_rounds/2)
         )
 
+    form_model = "player"
+    form_fields = ["posterior"]
+
+    @staticmethod
+    def is_displayed(player):
+        return player.Role == "receiver" and player.round_number > Constants.num_rounds/2
+
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(
+            round=player.round_number - Constants.num_rounds/2,
+        )
 
 class Prior(Page):
     timeout_seconds = 240
@@ -521,14 +563,14 @@ class Prior(Page):
     def vars_for_template(player: Player):
         return dict(
             prior_estimate=player.received_signal_0,
-            round=player.round_number -int(Constants.num_rounds/2),
+            round=player.round_number - int(Constants.num_rounds/2),
             border=player.session.config['entry_warning_border'],
             GT_sender_payoff=player.session.config['GT_sender_payoff']
         )
 
     @staticmethod
     def js_vars(player: Player):
-        prior_estimate=player.received_signal_0,
+        prior_estimate = player.received_signal_0,
         return dict(
             round=player.round_number,
             prior_estimate=prior_estimate,
@@ -538,12 +580,9 @@ class Prior(Page):
     form_model = "player"
     form_fields = ["prior"]
 
-
-
 class SecondWaitPage(WaitPage):
     wait_for_all_groups = True
     after_all_players_arrive = 'save_signals_payoff'
-
     @staticmethod
     def is_displayed(player):
         return player.round_number == Constants.num_rounds
@@ -552,7 +591,6 @@ class SecondWaitPage(WaitPage):
     def app_after_this_page(player, upcoming_apps):
         if player.Role == "receiver":
             return upcoming_apps[1]
-
 
 def save_signals_payoff(subsession: Subsession):
     players = subsession.get_players()
@@ -586,59 +624,6 @@ def save_signals_payoff(subsession: Subsession):
         for i in list(range(1, int(Constants.num_rounds + 1))):
             prev_player = p.in_round(i)
             prev_player.payoff = 0
-
-class Filler_Task(Page):
-    form_model = "player"
-    form_fields = ["q"+str(i) for i in range(1, 26)]
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(
-            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
-        )
-
-    @staticmethod
-    def is_displayed(player):
-        return (player.Role == "receiver" and player.round_number == 1) or ((player.Role == "sender" or player.Role == "prior_sender") and player.round_number == Constants.num_rounds/2 + 1)
-
-
-# the receiver observes all the signals sent by senders and states a guess/posterior
-# Receivers see signals sent by senders in a random order and with known group identity
-class Guess(Page):
-    timeout_seconds = 240
-
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        diff = pow((player.true_state  - player.posterior), 2)
-        if diff <= player.subsession.x:
-            player.payoff = player.session.config['GT_receiver_payoff']
-        else:
-            player.payoff = 0
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(
-            signal_1=player.received_signal_1,
-            signal_2=player.received_signal_2,
-            signal_3=player.received_signal_3,
-            signal_4=player.received_signal_4,
-            signal_5=player.received_signal_5,
-            signal_6=player.received_signal_6,
-            round=player.round_number -int(Constants.num_rounds/2)
-        )
-
-    form_model = "player"
-    form_fields = ["posterior"]
-
-    @staticmethod
-    def is_displayed(player):
-        return player.Role == "receiver" and player.round_number > Constants.num_rounds/2
-
-    @staticmethod
-    def js_vars(player: Player):
-        return dict(
-            round=player.round_number - Constants.num_rounds / 2,
-        )
 
 page_sequence = [Instructions_GT_senders, Next_Round, Signals, Filler_Task,Instructions_GT_receivers, Prior, StartWaitPage,
                  Guess, SecondWaitPage]

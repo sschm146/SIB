@@ -101,13 +101,10 @@ class Player(BasePlayer):
                  [3, 'Sender A, Sender B und Sender C sind Mitglieder der Gruppe Blau, während Sender D, Sender E und Sender F Mitglieder der Gruppe Gelb sind.']],
         widget=widgets.RadioSelect,
         label='')
-    comprq9 = models.IntegerField(choices=[[1,
-                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts kann mit gleicher Wahrscheinlichkeit der Zahl x oder einer andere Zahl entsprechen.'],
-                                           [2,
-                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der Zahl x als jeder anderen Zahl. '
+    comprq9 = models.IntegerField(choices=[[1, 'Die Schätzung eines zufällig gezogenen Schätzgeräts kann mit gleicher Wahrscheinlichkeit der Zahl x oder einer andere Zahl entsprechen.'],
+                                           [2, 'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit geringerer Wahrscheinlichkeit der Zahl x als jeder anderen Zahl. '
                                             'Je weiter man sich von der Zahl x entfernt, desto wahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.'],
-                                           [3,
-                                            'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der Zahl x als jeder anderen Zahl. '
+                                           [3, 'Die Schätzung eines zufällig gezogenen Schätzgeräts entspricht mit größerer Wahrscheinlichkeit der Zahl x als jeder anderen Zahl. '
                                             'Je weiter man sich von der Zahl x entfernt, desto unwahrscheinlicher ist es, dass ein Schätzgerät eine solche Schätzung angibt.']],
                                   widget=widgets.RadioSelect,
                                   label='')
@@ -295,8 +292,6 @@ class Player(BasePlayer):
     q25 = models.LongStringField(label='', blank=True)
 
 
-
-
 # FUNCTIONS
 
 #roles allocation and mu_signals (true) simulation for each sender
@@ -373,7 +368,6 @@ class Signals(Page):
             entry_warning_border=player.session.config['entry_warning_border']
         )
 
-
 class Instructions_GT_senders(Page):
     @staticmethod
     def is_displayed(player):
@@ -381,8 +375,6 @@ class Instructions_GT_senders(Page):
 
     form_model = "player"
     form_fields = ["comprq1", "comprq2", "comprq3", "comprq5", "comprq6", "comprq15_sender"]
-
-
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -553,9 +545,6 @@ class Filler_Task(Page):
         return (player.Role == "receiver" and player.round_number == 1) or (player.Role == "sender" and player.round_number == Constants.num_rounds/2 + 1)
 
 
-
-
-
 # the receiver observes all the signals sent by senders and states a guess/posterior
 # Receivers see signals sent by senders in a random order and with known group identity
 class Guess(Page):
@@ -567,7 +556,6 @@ class Guess(Page):
             player.payoff = player.session.config['GT_receiver_payoff']
         else:
             player.payoff = 0
-
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -640,7 +628,6 @@ def save_signals_payoff(subsession: Subsession):
         for i in list(range(1, int(Constants.num_rounds + 1))):
             prev_player = p.in_round(i)
             prev_player.payoff = 0
-
 
 
 page_sequence = [Instructions_GT_senders, Next_Round, Signals, Filler_Task, Instructions_GT_receivers, StartWaitPage,

@@ -145,7 +145,7 @@ class Player(BasePlayer):
     error_comprq12 = models.IntegerField(initial=0)
     error_comprq13 = models.IntegerField(initial=0)
     error_comprq14 = models.IntegerField(initial=0)
-    error_comprq15= models.IntegerField(initial=0)
+    error_comprq15 = models.IntegerField(initial=0)
     error_comprq15_sender = models.IntegerField(initial=0)
     q1 = models.IntegerField(label='')
     q2 = models.IntegerField(label='')
@@ -172,43 +172,43 @@ class Player(BasePlayer):
     q5 = models.IntegerField(
         choices=[[0, "Weiblich"],
                  [1, "Männlich"],
-                  [2, "Divers"]],
+                 [2, "Divers"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q6 = models.IntegerField(
         choices=[[0, "Nein"],
                  [1, "Ja"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q7 = models.StringField(label='', blank=True)
     q8 = models.IntegerField(label='')
     q9 = models.IntegerField(min=0, label='')
     q10 = models.IntegerField(
         choices=[[1, "Schlecht"],
                  [2, "Durchschnittlich"],
-                  [3, "Gut"],
+                 [3, "Gut"],
                  [4, "Ausgezeichnet"]],
         widget=widgets.RadioSelect, label=''
-        )
-    q11 =  models.IntegerField(
+    )
+    q11 = models.IntegerField(
         choices=[[1, "Schlecht"],
                  [2, "Durchschnittlich"],
-                  [3, "Gut"],
+                 [3, "Gut"],
                  [4, "Ausgezeichnet"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q12 = models.IntegerField(
         choices=[[1, "Ja"],
                  [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
-        )
-    q13 =  models.IntegerField(
+    )
+    q13 = models.IntegerField(
         choices=[[1, "Ich habe schon immer gewusst, wie man haushaltet."],
                  [2, "Ich musste während meines Studiums lernen, mit Geld umzugehen."],
                  [3, "Ich habe Mühe, lebensnotwendige Dinge zu kaufen"],
                  [4, "Ich kann mir alles leisten, ich haushalte nicht."]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q14 = models.IntegerField(
         choices=[[1, "Ich habe keine Schwierigkeiten"],
                  [2, "Keine Haushaltsplanung"],
@@ -218,38 +218,38 @@ class Player(BasePlayer):
                  [6, "Ich bin gut im Haushalten"],
                  [7, "Ich weiß es nicht"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q15 = models.LongStringField(label='')
     q16 = models.IntegerField(
         choices=[[1, "Ja"],
                  [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q17 = models.IntegerField(
         choices=[[1, "Ja"],
                  [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q18 = models.IntegerField(
         choices=[[1, "Ja"],
                  [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q19 = models.IntegerField(
         choices=[[1, "Ja"],
                  [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q20 = models.IntegerField(
         choices=[[1, "Ja"],
                  [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q21 = models.IntegerField(
         choices=[[1, "Ja"],
                  [2, "Nein"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q22 = models.IntegerField(
         choices=[[1, "Studentenwerk"],
                  [2, "Eltern"],
@@ -258,12 +258,10 @@ class Player(BasePlayer):
                  [5, "Finanzberatung"],
                  [6, "Sonstige"]],
         widget=widgets.RadioSelect, label=''
-        )
+    )
     q23 = models.LongStringField(label='', blank=True)
     q24 = models.LongStringField(label='', blank=True)
     q25 = models.LongStringField(label='', blank=True)
-
-
 
 # FUNCTIONS
 
@@ -278,6 +276,8 @@ def creating_session(subsession: Subsession):
             if p.round_number <= Constants.num_rounds / 2:
                 p.estimate = p.session.config['Signals'][p.id_in_group - 1][p.round_number - 1]
                 p.true_state = p.session.config['True_state'][p.round_number - 1]
+            else:
+                p.true_state = p.session.config['True_state'][int(p.round_number - Constants.num_rounds / 2) - 1]
 
 
 # PAGES
@@ -340,10 +340,12 @@ class Signals(Page):
 
 
 class Instructions_GT_senders(Page):
-
     @staticmethod
     def is_displayed(player):
         return player.Role == "sender" and player.round_number == 1
+
+    form_model = "player"
+    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5", "comprq6", "comprq15_sender"]
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -351,9 +353,6 @@ class Instructions_GT_senders(Page):
             GT_receiver_payoff=player.session.config['GT_receiver_payoff'],
             GT_sender_payoff=player.session.config['GT_sender_payoff']
         )
-
-    form_model = "player"
-    form_fields = ["comprq1", "comprq2", "comprq3", "comprq5", "comprq6", "comprq15_sender"]
 
     @staticmethod
     def error_message(player, values):
@@ -369,20 +368,20 @@ class Instructions_GT_senders(Page):
         error_messages = dict()
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
-                    error_messages[
+                error_messages[
                     field_name] = 'Falsche Antwort - Bitte korrigieren Sie Ihre Angabe oder heben Sie Ihre Hand zur Klärung mit dem Laborpersonal.'
-                    if field_name == "comprq1":
-                        player.error_comprq1 += 1
-                    if field_name == "comprq2":
-                        player.error_comprq2 += 1
-                    if field_name == "comprq3":
-                        player.error_comprq3 += 1
-                    if field_name == "comprq5":
-                        player.error_comprq5 += 1
-                    if field_name == "comprq6":
-                        player.error_comprq6 += 1
-                    if field_name == "comprq15_sender":
-                        player.error_comprq15_sender += 1
+                if field_name == "comprq1":
+                    player.error_comprq1 += 1
+                if field_name == "comprq2":
+                    player.error_comprq2 += 1
+                if field_name == "comprq3":
+                    player.error_comprq3 += 1
+                if field_name == "comprq5":
+                    player.error_comprq5 += 1
+                if field_name == "comprq6":
+                    player.error_comprq6 += 1
+                if field_name == "comprq15_sender":
+                    player.error_comprq15_sender += 1
 
         return error_messages
 
@@ -392,6 +391,9 @@ class Instructions_GT_receivers(Page):
     def is_displayed(player):
         return player.Role == "receiver" and player.round_number == (Constants.num_rounds / 2) + 1
 
+    form_model = "player"
+    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq12", "comprq13", "comprq15"]
+
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
@@ -399,9 +401,6 @@ class Instructions_GT_receivers(Page):
             GT_sender_payoff=player.session.config['GT_sender_payoff'],
             GT_guess_time=int(player.session.config['GT_guess_time']/60)
         )
-    form_model = "player"
-    form_fields = ["comprq7", "comprq8", "comprq9", "comprq10", "comprq12", "comprq13", "comprq15"]
-
 
     @staticmethod
     def error_message(player, values):
@@ -412,7 +411,7 @@ class Instructions_GT_receivers(Page):
             comprq10=2,
             comprq12=190,
             comprq13=4,
-            comprq15=3,
+            comprq15=3
         )
 
         error_messages = dict()

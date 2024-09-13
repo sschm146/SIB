@@ -17,7 +17,6 @@ class Constants(BaseConstants):
     num_senders = 6
 
 
-
 class Subsession(BaseSubsession):
     x = models.IntegerField()
 
@@ -60,8 +59,7 @@ class Player(BasePlayer):
                                   widget=widgets.RadioSelect,
                                   label='')
     comprq2 = models.IntegerField(choices=[
-        [1,
-         'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht mit gleicher Wahrscheinlichkeit entweder der Zahl x oder jeder beliebigen anderen Zahl.'],
+        [1, 'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht mit gleicher Wahrscheinlichkeit entweder der Zahl x oder jeder beliebigen anderen Zahl.'],
         [2, 'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht genau (oder fast genau) der Zahl x.'],
         [3, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer größer als die Zahl x.'],
         [4, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer kleiner als die Zahl x.']],
@@ -86,8 +84,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
         label='')
     comprq7 = models.IntegerField(
-        choices=[[1,
-                  'Der Sender, dessen Schätzung ich zuerst beobachtet habe, sah die Schätzungen von 6 Schätzgeräten. '
+        choices=[[1,'Der Sender, dessen Schätzung ich zuerst beobachtet habe, sah die Schätzungen von 6 Schätzgeräten. '
                   'Die anderen 6 Sender sahen jeweils die Schätzung von 1 Schätzgerät.'],
                  [2, 'Alle 7 Sender haben die Schätzung von jeweils einem Schätzgerät beobachtet. '
                      'Zudem haben alle 7 Sender die gleiche Aufgabe bearbeitet und vorher identische Anweisungen gelesen.'],
@@ -96,26 +93,19 @@ class Player(BasePlayer):
                      'Allerdings waren die Anweisungen des Senders, dessen Schätzung ich zuerst sehen werde, detaillierter.']],
         widget=widgets.RadioSelect,
         label='')
-    comprq8 = models.IntegerField(choices=[[1,
-                                            'Bei jeder Schätzaufgabe sehe ich zuerst die Schätzung von Sender 1 und mache meine erste Schätzung der Zahl x. '
-                                            'Dann sehe ich nur eine der Schätzungen von Sender A, Sender B, Sender C, Sender D, Sender E und Sender F und mache meine zweite Schätzung der Zahl x.'],
-                                           [2,
-                                            ' Bei jeder Schätzaufgabe sehe ich zunächst die Schätzung von 1 Schätzgerät und mache meine erste Schätzung der Zahl x. '
-                                            'Dann sehe ich die Schätzungen von 6 weiteren Schätzgeräten und mache meine zweite Schätzung der Zahl x.'],
-                                           [3,
-                                            ' In jeder Schätzaufgabe sehe ich zuerst die Schätzung von Sender 1 und mache meine erste Schätzung der Zahl x. '
-                                            'Dann sehe ich die Schätzungen von Sender A, Sender B, Sender C, Sender D, Sender E und Sender F und mache meine zweite Schätzung der Zahl x']],
+    comprq8 = models.IntegerField(choices=[[1, 'Bei jeder Schätzaufgabe sehe ich zuerst die Schätzung von Sender 1 und mache meine erste Schätzung der Zahl x. '
+                                               'Dann sehe ich nur eine der Schätzungen von Sender A, Sender B, Sender C, Sender D, Sender E und Sender F und mache meine zweite Schätzung der Zahl x.'],
+                                           [2, ' Bei jeder Schätzaufgabe sehe ich zunächst die Schätzung von 1 Schätzgerät und mache meine erste Schätzung der Zahl x. '
+                                               'Dann sehe ich die Schätzungen von 6 weiteren Schätzgeräten und mache meine zweite Schätzung der Zahl x.'],
+                                           [3, ' In jeder Schätzaufgabe sehe ich zuerst die Schätzung von Sender 1 und mache meine erste Schätzung der Zahl x. '
+                                               'Dann sehe ich die Schätzungen von Sender A, Sender B, Sender C, Sender D, Sender E und Sender F und mache meine zweite Schätzung der Zahl x']],
                                   widget=widgets.RadioSelect,
                                   label='')
-    comprq8_2 = models.IntegerField(
-        choices=[[1,
-                  'Sender A, Sender E, Sender F und Sender 1 sind Mitglieder der Gruppe Blau, während Sender D, Sender B und Sender C Mitglieder der Gruppe Gelb sind.'],
-                 [2,
-                  'Sender D, Sender B und Sender F sind Mitglieder der Gruppe Blau, während Sender A, Sender E und Sender C Mitglieder der Gruppe Gelb sind. Sender 1 gehört zu keiner Gruppe.'],
-                 [3,
-                  'Sender A, Sender B und Sender C sind Mitglieder der Gruppe Blau, während Sender D, Sender E und Sender F Mitglieder der Gruppe Gelb sind. Sender 1 gehört zu keiner Gruppe.']],
-        widget=widgets.RadioSelect,
-        label='')
+    comprq8_2 = models.IntegerField(choices=[[1,'Sender A, Sender E, Sender F und Sender 1 sind Mitglieder der Gruppe Blau, während Sender D, Sender B und Sender C Mitglieder der Gruppe Gelb sind.'],
+                                             [2, 'Sender D, Sender B und Sender F sind Mitglieder der Gruppe Blau, während Sender A, Sender E und Sender C Mitglieder der Gruppe Gelb sind. Sender 1 gehört zu keiner Gruppe.'],
+                                             [3, 'Sender A, Sender B und Sender C sind Mitglieder der Gruppe Blau, während Sender D, Sender E und Sender F Mitglieder der Gruppe Gelb sind. Sender 1 gehört zu keiner Gruppe.']],
+                                    widget=widgets.RadioSelect,
+                                    label='')
     comprq9 = models.IntegerField(
         choices=[[1, 'Die Zahl, die ich als zweite Schätzung der Zahl x angebe, kann eine beliebige Zahl sein.'],
                  [2, 'Die Zahl, die ich als zweite Schätzung der Zahl x angebe, sollte 91 betragen.'],
@@ -132,10 +122,8 @@ class Player(BasePlayer):
                                    widget=widgets.RadioSelect,
                                    label='')
     comprq11 = models.IntegerField(choices=[
-        [1,
-         'Der Durchschnitt der Schätzungen aller Schätzgeräte kann mit gleicher Wahrscheinlichkeit eine beliebige Zahl sein.'],
-        [2,
-         'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht genau (oder fast genau) der Zahl x.'],
+        [1, 'Der Durchschnitt der Schätzungen aller Schätzgeräte kann mit gleicher Wahrscheinlichkeit eine beliebige Zahl sein.'],
+        [2,'Der Durchschnitt der Schätzungen aller Schätzgeräte entspricht genau (oder fast genau) der Zahl x.'],
         [3, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer größer als die Zahl x.'],
         [4, 'Der Durchschnitt der Schätzungen aller Schätzgeräte ist immer kleiner als die Zahl x.']],
         widget=widgets.RadioSelect,
@@ -304,7 +292,6 @@ class Player(BasePlayer):
     q24 = models.LongStringField(label='', blank=True)
     q25 = models.LongStringField(label='', blank=True)
 
-
 # FUNCTIONS
 
 #roles allocation and mu_signals (true) simulation for each sender
@@ -318,11 +305,12 @@ def creating_session(subsession: Subsession):
             if p.round_number <= Constants.num_rounds / 2:
                 p.estimate = p.session.config['Signals'][p.id_in_group - 1][p.round_number - 1]
                 p.true_state = p.session.config['True_state'][p.round_number - 1]
+            else:
+                p.true_state = p.session.config['True_state'][int(p.round_number - Constants.num_rounds / 2) - 1]
         p.identity = participant.identity
 
 
 # PAGES
-
 class Next_Round(Page):
     @staticmethod
     def is_displayed(player):
@@ -342,6 +330,7 @@ class Next_Round(Page):
                 last_round=player.round_number - 1 - int(Constants.num_rounds/2),
                 role=player.Role
             )
+
 # senders see estimate and send signal
 class Signals(Page):
     form_model = "player"
@@ -357,7 +346,7 @@ class Signals(Page):
 
     @staticmethod
     def is_displayed(player):
-        return (player.Role == "sender" or player.Role =="prior_sender") and player.round_number <= Constants.num_rounds/2
+        return (player.Role == "sender" or player.Role == "prior_sender") and player.round_number <= Constants.num_rounds/2
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -382,14 +371,17 @@ class Signals(Page):
 class Instructions_GT_senders(Page):
     @staticmethod
     def is_displayed(player):
-        return (player.Role == "sender" or player.Role =="prior_sender") and player.round_number == 1
+        return (player.Role == "sender" or player.Role == "prior_sender") and player.round_number == 1
 
     form_model = "player"
     form_fields = ["comprq1", "comprq2", "comprq3", "comprq5", "comprq6", "comprq15_sender"]
 
     @staticmethod
     def vars_for_template(player: Player):
+        participant = player.participant
+        identity = participant.identity
         return dict(
+            identity=identity,
             GT_receiver_payoff=player.session.config['GT_receiver_payoff'],
             GT_sender_payoff=player.session.config['GT_sender_payoff']
         )
@@ -406,7 +398,6 @@ class Instructions_GT_senders(Page):
         )
 
         error_messages = dict()
-
         for field_name in solutions:
             if values[field_name] != solutions[field_name]:
                 error_messages[
@@ -503,6 +494,7 @@ def set_signals(subsession: Subsession):
         for i in list(range(1, 12, 1)):
             all_signals = []
             all_senders = []
+            all_identities = []
             for p in players:
                 prev_player = p.in_round(i)
                 prev_players = prev_player.group.get_players()
@@ -517,9 +509,8 @@ def set_signals(subsession: Subsession):
 
         for p in players:
             if p.Role == "receiver":
-                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'],
-                          p.session.config['signal_order_3']]
-                temp = [1, 2, 3] * 100
+                orders = [p.session.config['signal_order_1'], p.session.config['signal_order_2'], p.session.config['signal_order_3']]
+                temp = [1, 2, 3]*100
                 p.signal_order = temp[p.id_in_group - 1]
                 signal_order = orders[p.signal_order - 1]
                 for i in list(range(0, 11, 1)):
@@ -532,7 +523,66 @@ def set_signals(subsession: Subsession):
                     fut_player.received_signal_5 = int(all[3 * signal_order[i]][4])
                     fut_player.received_signal_6 = int(all[3 * signal_order[i]][5])
                     fut_player.received_signal_0 = int(all[3 * signal_order[i]][6])
+                    fut_player.received_signal_1_identity = all[3 * signal_order[i] + 2][0]
+                    fut_player.received_signal_2_identity = all[3 * signal_order[i] + 2][1]
+                    fut_player.received_signal_3_identity = all[3 * signal_order[i] + 2][2]
+                    fut_player.received_signal_4_identity = all[3 * signal_order[i] + 2][3]
+                    fut_player.received_signal_5_identity = all[3 * signal_order[i] + 2][4]
+                    fut_player.received_signal_6_identity = all[3 * signal_order[i] + 2][5]
                     fut_player.true_state = p.session.config['True_state'][signal_order[i]]
+
+
+class Filler_Task(Page):
+    form_model = "player"
+    form_fields = ["q"+str(i) for i in range(1, 26)]
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
+        )
+
+    @staticmethod
+    def is_displayed(player):
+        return (player.Role == "receiver" and player.round_number == 1) or ((player.Role == "sender" or player.Role == "prior_sender") and player.round_number == Constants.num_rounds/2 + 1)
+
+
+# the receiver observes all the signals sent by senders and states a guess/posterior
+# Receivers see signals sent by senders in a random order and with known group identity
+class Guess(Page):
+    timeout_seconds = 240
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        diff = pow((player.true_state - player.posterior), 2)
+        if diff <= player.subsession.x:
+            player.payoff = player.session.config['GT_receiver_payoff']
+        else:
+            player.payoff = 0
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            signal_1=player.received_signal_1,
+            signal_2=player.received_signal_2,
+            signal_3=player.received_signal_3,
+            signal_4=player.received_signal_4,
+            signal_5=player.received_signal_5,
+            signal_6=player.received_signal_6,
+            round=player.round_number - int(Constants.num_rounds/2)
+        )
+
+    form_model = "player"
+    form_fields = ["posterior"]
+
+    @staticmethod
+    def is_displayed(player):
+        return player.Role == "receiver" and player.round_number > Constants.num_rounds/2
+
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(
+            round=player.round_number - Constants.num_rounds/2,
+        )
 
 class Prior(Page):
     timeout_seconds = 240
@@ -544,7 +594,7 @@ class Prior(Page):
     def vars_for_template(player: Player):
         return dict(
             prior_estimate=player.received_signal_0,
-            round=player.round_number -int(Constants.num_rounds/2),
+            round=player.round_number - int(Constants.num_rounds/2),
             border=player.session.config['entry_warning_border'],
             GT_sender_payoff=player.session.config['GT_sender_payoff']
         )
@@ -558,22 +608,12 @@ class Prior(Page):
             entry_warning_border=player.session.config['entry_warning_border']
         )
 
-
     form_model = "player"
     form_fields = ["prior"]
-
-
-# wait for all senders to send a signal
-class FirstWaitPage(WaitPage):
-    wait_for_all_groups = True
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == 1
 
 class SecondWaitPage(WaitPage):
     wait_for_all_groups = True
     after_all_players_arrive = 'save_signals_payoff'
-
     @staticmethod
     def is_displayed(player):
         return player.round_number == Constants.num_rounds
@@ -582,7 +622,6 @@ class SecondWaitPage(WaitPage):
     def app_after_this_page(player, upcoming_apps):
         if player.Role == "receiver":
             return upcoming_apps[1]
-
 
 def save_signals_payoff(subsession: Subsession):
     players = subsession.get_players()
@@ -616,66 +655,6 @@ def save_signals_payoff(subsession: Subsession):
         for i in list(range(1, int(Constants.num_rounds + 1))):
             prev_player = p.in_round(i)
             prev_player.payoff = 0
-
-
-class ThirdWaitPage(WaitPage):
-    wait_for_all_groups = True
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == Constants.num_rounds
-
-
-class Filler_Task(Page):
-    form_model = "player"
-    form_fields = ["q"+str(i) for i in range(1, 26)]
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(
-            Questionnaire_payoff=player.session.config['Questionnaire_payoff']
-        )
-
-    @staticmethod
-    def is_displayed(player):
-        return (player.Role == "receiver" and player.round_number == 1) or ((player.Role == "sender" or player.Role == "prior_sender") and player.round_number == Constants.num_rounds/2 + 1)
-
-
-# the receiver observes all the signals sent by senders and states a guess/posterior
-# Receivers see signals sent by senders in a random order and with known group identity
-class Guess(Page):
-    timeout_seconds = 240
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        diff = pow((player.true_state  - player.posterior), 2)
-        if diff <= player.subsession.x:
-            player.payoff = player.session.config['GT_receiver_payoff']
-        else:
-            player.payoff = 0
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(
-            signal_1=player.received_signal_1,
-            signal_2=player.received_signal_2,
-            signal_3=player.received_signal_3,
-            signal_4=player.received_signal_4,
-            signal_5=player.received_signal_5,
-            signal_6=player.received_signal_6,
-            round=player.round_number -int(Constants.num_rounds/2)
-        )
-
-    form_model = "player"
-    form_fields = ["posterior"]
-
-    @staticmethod
-    def is_displayed(player):
-        return player.Role == "receiver" and player.round_number > Constants.num_rounds/2
-
-    @staticmethod
-    def js_vars(player: Player):
-        return dict(
-            round=player.round_number - Constants.num_rounds / 2,
-        )
 
 page_sequence = [Instructions_GT_senders, Next_Round, Signals, Filler_Task, Instructions_GT_receivers, StartWaitPage,
                  Prior, Guess, SecondWaitPage]
