@@ -8,16 +8,16 @@ from os import environ
 
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=1.00, participation_fee=7, doc="",
-    SIM_payoff=16, #Payoff for winning the Klee/Kandinsky contest in SIM
+    real_world_currency_per_point=1.00, participation_fee=9,#7, doc="",
+    SIM_payoff=20,#16, #Payoff for winning the Klee/Kandinsky contest in SIM
     SIM_labelled_time=240, #Time for Paintings_labelled
     SIM_guess_time=120, #Time for Paintings_guess
-    GT_sender_payoff=13, #Payoff for precision of sent signal (QSR)
-    GT_receiver_payoff=13, #Payoff for precision of submitted estimate (QSR)
+    GT_sender_payoff=16,#13, #Payoff for precision of sent signal (QSR)
+    GT_receiver_payoff=16,#13, #Payoff for precision of submitted estimate (QSR)
     GT_guess_time=240, #Time to submit a guess on the Signals page
-    Trust_in_Senders_payoff=14, #Payoff for receivers based on precision TiS
+    Trust_in_Senders_payoff=16,#14, #Payoff for receivers based on precision TiS
     Confidence_payoff=2, #Fixed Payoff for receivers based on Confidence_3_new
-    Questionnaire_payoff=4,
+    Questionnaire_payoff=5,#4,
     True_state=[369, 860, 624, 492, 528, 257, 137, 649, 486, 491, 162],
     Signals=[[327, 861, 607, 456, 568, 345, 230, 680, 453, 592, 99], # Signals for Sender A
              [293, 813, 572, 473, 617, 267, 168, 743, 570, 451, 216], # Signals for Sender B
@@ -34,11 +34,13 @@ SESSION_CONFIG_DEFAULTS = dict(
     QSR_cutoff=5000
 )
 
+## ATTENTION for 2025 sessions:
+# Update from 17.09. changed payoffs by +25% for all. Needs testing in lab (done on local machine)! Check whether payouts are calculated correctly!
 
 SESSION_CONFIGS = [
     dict(
-        name="version_131224",
-        display_name="version_131224",
+        name="version_170925",
+        display_name="version_170925",
         num_demo_participants=1,
         app_sequence=["Intro_noSI_all"],
         prior_sender=False

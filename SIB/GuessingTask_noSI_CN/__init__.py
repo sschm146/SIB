@@ -78,15 +78,15 @@ class Player(BasePlayer):
         label='')
     comprq5_CN = models.IntegerField(label='')
     comprq6_CN = models.IntegerField(
-        choices=[[1, 'Meine Chancen auf die zusätzliche Auszahlung von 13€ sind so am höchsten. '],
+        choices=[[1, 'Meine Chancen auf die zusätzliche Auszahlung von 16€ sind so am höchsten. '],
                  [2, 'Dies hat keinen Einfluss auf meine Auszahlung.'],
-                 [3, 'Meine Chancen auf die zusätzliche Auszahlung von 13€ sind sehr gering.']],
+                 [3, 'Meine Chancen auf die zusätzliche Auszahlung von 16€ sind sehr gering.']],
         widget=widgets.RadioSelect,
         label='')
     comprq6 = models.IntegerField(
-        choices=[[1, 'Meine Chancen auf die zusätzliche Auszahlung von 13€ sind so am höchsten. '],
+        choices=[[1, 'Meine Chancen auf die zusätzliche Auszahlung von 16€ sind so am höchsten. '],
                  [2, 'Dies hat keinen Einfluss auf meine Auszahlung.'],
-                 [3, 'Meine Chancen auf die zusätzliche Auszahlung von 13€ sind sehr gering.']],
+                 [3, 'Meine Chancen auf die zusätzliche Auszahlung von 16€ sind sehr gering.']],
         widget=widgets.RadioSelect,
         label='')
     comprq7 = models.IntegerField(
