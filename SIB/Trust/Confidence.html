@@ -9,6 +9,21 @@
 background-color: #322b7b!important;
 color: white;
 }
+tr {
+  border: solid;
+  border-width: 1px 0;
+}
+table tr {
+  border-bottom: 1px solid black;
+}
+
+table tr:last-child {
+  border: 0;
+}
+
+th {
+    text-align: center;
+    }
 
    input[type=range] {
   height: 26px;
@@ -116,7 +131,7 @@ input[type=range]:focus::-ms-fill-upper {
         {{ endif }}
         {{ if CN_treatment == True }}
         <p>
-            In Frage 1 haben Sie erraten, bei welcher der 11 Schätzaufgaben jeder der Sender die genaue Zahl angegeben hat, die er gesehen hat (d.h., die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde (für die Sender A, B, C und D) oder den Durchschnitt von zwei davon (für die Sender E und F)). </p>
+            In Frage 1 haben Sie erraten, bei welcher der 11 Schätzaufgaben jeder der Sender die genaue Zahl angegeben hat, die er gesehen hat (d. h., die Zahl, die von einem zufällig gezogenen Schätzgerät angegeben wurde (für die Sender A, B, C und D) oder den Durchschnitt von zwei davon (für die Sender E und F)). </p>
         {{ endif }}
 
 <!--        <div class="row row-cols-md-6 g-2 " align="center">
@@ -232,7 +247,12 @@ input[type=range]:focus::-ms-fill-upper {
             Nun bitten wir Sie um folgende Einschätzung: Wie sicher sind Sie sich, dass Ihre Angaben aus Frage 1 stimmen?
             Benutzen Sie dazu bitte die Schieberegler, um die folgenden Aussagen zu vervollständigen.
             Oberhalb der Schieberegler für jeden Sender sehen Sie ihre Angaben aus Frage 1 zusammengefasst.
+            </p>
+        <p>
             Wenn Sie sich die Angaben der Sender in allen 11 Schätzaufgaben nochmal in Erinnerung rufen möchten, können Sie sich die Tabelle am unteren Bildschirmrand ansehen.
+            Die Tabelle zeigt die Schätzungen aller Sender in den 11 Schätzaufgaben.
+            Jede Zeile enthält die Schätzungen der Sender für eine bestimmte Schätzaufgabe.
+            Bitte beachten Sie, dass die Reihenfolge der Zeilen nicht unbedingt der tatsächlichen Reihenfolge der Schätzaufgaben aus Teil 3 entspricht.
         </p>
 
         <h4> Auszahlung </h4>
@@ -410,8 +430,8 @@ input[type=range]:focus::-ms-fill-upper {
 <table class="table table-hover table-striped ">
   <thead>
     <tr>
+        <th></th>
         {{ if SI_treatment == True }}
-      <th scope="col">Schätzaufgabe</th>
       <th scope="col" class="bg-primary">Sender A</th>
       <th scope="col" class="bg-primary">Sender B</th>
       <th scope="col" class="bg-primary">Sender C</th>
@@ -420,7 +440,6 @@ input[type=range]:focus::-ms-fill-upper {
       <th scope="col" class="bg-warning">Sender F</th>
         {{ endif }}
         {{ if SI_treatment == False }}
-      <th scope="col">Schätzaufgabe</th>
       <th scope="col">Sender A</th>
       <th scope="col">Sender B</th>
       <th scope="col">Sender C</th>
@@ -430,74 +449,68 @@ input[type=range]:focus::-ms-fill-upper {
         {{ endif }}
     </tr>
   </thead>
-  <tbody>
+  <tr>
+    <th scope="row" rowspan="12" colspan="1" style=" height: 10%; writing-mode: vertical-rl; text-align: center; vertical-align: middle; width:10%; pointer-events: none">
+            Schätzaufgaben
+        </th>
+    </tr>
+
     <tr>
-      <th scope="row">1</th>
     {{ for p in signals_round_1 }}
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
       <tr>
-      <th scope="row">2</th>
     {{ for p in signals_round_2 }}
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
         <tr>
-      <th scope="row">3</th>
     {{ for p in signals_round_3 }}
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
         <tr>
-      <th scope="row">4</th>
     {{ for p in signals_round_4 }}
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
         <tr>
-      <th scope="row">5</th>
     {{ for p in signals_round_5 }}
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
         <tr>
-      <th scope="row">6</th>
     {{ for p in signals_round_6 }}
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
           <tr>
-      <th scope="row">7</th>
     {{ for p in signals_round_7 }}
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
           <tr>
-      <th scope="row">8</th>
     {{ for p in signals_round_8 }}
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
           <tr>
-      <th scope="row">9</th>
     {{ for p in signals_round_9 }}
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
           <tr>
-      <th scope="row">10</th>
     {{ for p in signals_round_10 }}
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
   <tr>
-      <th scope="row">11</th>
     {{ for p in signals_round_11 }}
               <td> {{ p  }}</td>
             {{ endfor }}
           </tr>
-  </tbody>
+
 </table>
         {{ if n_rec_signals_sender_4 == 0}}
         <input type="hidden" name="mistrust_sender_4_conf">

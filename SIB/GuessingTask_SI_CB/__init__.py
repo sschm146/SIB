@@ -143,9 +143,9 @@ class Player(BasePlayer):
                                    label='')
     comprq15 = models.IntegerField(
         choices=[[1, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von allen vorherigen Schätzaufgaben. '
-                     'Zahlen aus allen vorherigen Schätzaufgaben sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                     'Zahlen aus allen vorherigen Schätzaufgaben sollte ich daher in meinen Entscheidungsprozess miteinfließen lassen.'],
                  [2, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von der letzten Schätzaufgabe. '
-                     'Zahlen aus der letzten Schätzaufgabe sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                     'Zahlen aus der letzten Schätzaufgabe sollte ich daher in meinen Entscheidungsprozess miteinfließen lassen.'],
                  [3, 'Alle 11 Schätzaufgaben haben zwar die gleiche Struktur, sind aber völlig unabhängig voneinander. '
                      'Das bedeutet, dass die Zahl x, die Schätzungen der Schätzgeräte und die Schätzungen der Sender über die 11 Schätzaufgaben hinweg in keiner Weise miteinander verbunden sind. '
                      'Die Zahl x, die Schätzungen der Schätzgeräte und die Schätzungen der Sender sind ausschließlich für die jeweils aktuelle Schätzaufgabe von Bedeutung.']],
@@ -153,9 +153,9 @@ class Player(BasePlayer):
         label='')
     comprq15_sender = models.IntegerField(
         choices=[[1, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von allen vorherigen Schätzaufgaben. '
-                     'Zahlen aus allen vorherigen Schätzaufgaben sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                     'Zahlen aus allen vorherigen Schätzaufgaben sollte ich daher in meinen Entscheidungsprozess miteinfließen lassen.'],
                  [2, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von der letzten Schätzaufgabe. '
-                     'Zahlen aus der letzten Schätzaufgabe sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                     'Zahlen aus der letzten Schätzaufgabe sollte ich daher in meinen Entscheidungsprozess miteinfließen lassen.'],
                  [3, 'Alle 11 Schätzaufgaben haben zwar die gleiche Struktur, sind aber völlig unabhängig voneinander. '
                      'Das bedeutet, dass die Zahl x und die Schätzungen der Schätzgeräte über die 11 Schätzaufgaben hinweg in keiner Weise miteinander verbunden sind. '
                      'Die Zahl x und die Schätzungen der Schätzgeräte sind ausschließlich für die jeweils aktuelle Schätzaufgabe von Bedeutung.']],

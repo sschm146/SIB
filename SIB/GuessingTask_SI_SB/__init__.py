@@ -135,9 +135,9 @@ class Player(BasePlayer):
                                    label='')
     comprq15 = models.IntegerField(
         choices=[[1, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von allen vorherigen Schätzaufgaben. '
-                     'Zahlen aus allen vorherigen Schätzaufgaben sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                     'Zahlen aus allen vorherigen Schätzaufgaben sollte ich daher in meinen Entscheidungsprozess miteinfließen lassen.'],
                  [2, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von der letzten Schätzaufgabe. '
-                     'Zahlen aus der letzten Schätzaufgabe sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                     'Zahlen aus der letzten Schätzaufgabe sollte ich daher in meinen Entscheidungsprozess miteinfließen lassen.'],
                  [3, 'Alle 11 Schätzaufgaben haben zwar die gleiche Struktur, sind aber völlig unabhängig voneinander. '
                      'Das bedeutet, dass die Zahl x, die Schätzungen der Schätzgeräte und die Schätzungen der Sender über die 11 Schätzaufgaben hinweg in keiner Weise miteinander verbunden sind. '
                      'Die Zahl x, die Schätzungen der Schätzgeräte und die Schätzungen der Sender sind ausschließlich für die jeweils aktuelle Schätzaufgabe von Bedeutung.']],
@@ -145,9 +145,9 @@ class Player(BasePlayer):
         label='')
     comprq15_sender = models.IntegerField(
         choices=[[1, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von allen vorherigen Schätzaufgaben. '
-                     'Zahlen aus allen vorherigen Schätzaufgaben sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                     'Zahlen aus allen vorherigen Schätzaufgaben sollte ich daher in meinen Entscheidungsprozess miteinfließen lassen.'],
                  [2, 'Die Zahlen aus der aktuellen Schätzaufgaben sind abhängig von der letzten Schätzaufgabe. '
-                     'Zahlen aus der letzten Schätzaufgabe sollte ich daher in meinen Entscheidungsprozess miteinfliesen lassen.'],
+                     'Zahlen aus der letzten Schätzaufgabe sollte ich daher in meinen Entscheidungsprozess miteinfließen lassen.'],
                  [3, 'Alle 11 Schätzaufgaben haben zwar die gleiche Struktur, sind aber völlig unabhängig voneinander. '
                      'Das bedeutet, dass die Zahl x und die Schätzungen der Schätzgeräte über die 11 Schätzaufgaben hinweg in keiner Weise miteinander verbunden sind. '
                      'Die Zahl x und die Schätzungen der Schätzgeräte sind ausschließlich für die jeweils aktuelle Schätzaufgabe von Bedeutung.']],
@@ -664,7 +664,7 @@ class SecondWaitPage(WaitPage):
         if player.Role == "receiver":
             return upcoming_apps[1]
 
-def save_signals_payoff(subsession: Subsession): # Difficulty for SB: Every player saw different sets of signals
+def save_signals_payoff(subsession: Subsession): 
     players = subsession.get_players()
     estimates_all_rounds = []
     for p in players:
@@ -677,22 +677,16 @@ def save_signals_payoff(subsession: Subsession): # Difficulty for SB: Every play
             if p.Role == 'receiver':
                 signals_1_3 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group <= 3]
                 pre_signals_4_6 = [prev.sent_signal for prev in prev_players if prev.Role == 'sender' and prev.id_in_group > 3]
-                prev_receiver = p.in_round(i + 11)
-                max_signal_sender = prev_receiver.SB_sender_4
+                max_signal_sender = pre_signals_4_6.index(max(pre_signals_4_6))
                 signals_4_6 = ['-', '-', '-']
-                signals_4_6[int(max_signal_sender) - 3 - 1] = pre_signals_4_6[int(max_signal_sender) - 3 - 1]
+                signals_4_6[int(max_signal_sender)] = pre_signals_4_6[int(max_signal_sender)]
                 pre = signals_1_3 + signals_4_6
                 signals_all_rounds.extend(pre)
         participant = p.participant
         participant.signals_all_rounds = signals_all_rounds
         participant.estimates_all_rounds = estimates_all_rounds
-
-
     # Payoff calculation
     for p in players:
-        participant = p.participant
-        participant.estimates_all_rounds = estimates_all_rounds
-        participant.signals_all_rounds = signals_all_rounds
         if p.Role == "sender":
             i = random.randint(1, int(Constants.num_rounds / 2))
             p.chosen_round = i

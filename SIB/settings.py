@@ -37,8 +37,8 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 SESSION_CONFIGS = [
     dict(
-        name="version_130924",
-        display_name="version_130924",
+        name="version_131224",
+        display_name="version_131224",
         num_demo_participants=1,
         app_sequence=["Intro_noSI_all"],
         prior_sender=False
@@ -47,7 +47,7 @@ SESSION_CONFIGS = [
         name="testing",
         display_name="testing",
         num_demo_participants=10,
-        app_sequence=["Intro_noSI_all", "Trust"],
+        app_sequence=["Intro_noSI_all"],
         prior_sender=False
     ),
     dict(
@@ -114,8 +114,8 @@ SESSION_FIELDS = []
 
 ROOMS = [
     dict(
-        name="dlab",
-        display_name="dlab",
+        name="lab",
+        display_name="lab",
         participant_label_file='_rooms/lab.txt',
     ),
 dict(

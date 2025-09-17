@@ -23,7 +23,6 @@ color: white;
 </style>
 
 {{ endblock }}
-
 {% block content %}
 <div class="card bg-light instructions">
     <div class="card-header bg-transparent mainheader" >
@@ -31,8 +30,6 @@ color: white;
         </div>
     <div class="card-body">
 <h3 style="text-align: center">Schätzaufgabe <b id="fadeIn">{{ round }} von 11</b></h3>
-<br>
-<br>
 <br>
 <br>
         <div style="text-align: center">Im Folgenden sehen Sie die Schätzungen der Sender.
@@ -91,8 +88,6 @@ color: white;
     </div>
     <br>
 <br>
-
-</div>
 <div class="alert alert-warning" role="alert" id="timer_warning" style="visibility: hidden" align="center">
     <b>Die vorgegebene Zeit läuft ab!</b> Bitte machen Sie nun Ihre Eingabe und bestätigen Sie mit "Weiter".
     </div>
@@ -103,7 +98,6 @@ color: white;
     {{ formfield 'posterior' label=""}}
     <br>
 <br>
-
 </div>
    </div>
     </div>
@@ -123,14 +117,12 @@ document.addEventListener('keypress', function (e) {
             return false;
         }});
 </script>
-<!--
-<script>
+<!--<script>
 window.onload = function progressbar_update() {
     bar = document.getElementById("progress");
         bar.style.width = parseInt(js_vars.round)*10 + "%";
     bar.innerHTML = "<big><b> Round " + parseInt(js_vars.round) + " of 10</b></big>";
 }
-</script>
--->
+</script>-->
 
 {% endblock %}
